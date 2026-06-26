@@ -1,0 +1,140 @@
+/*
+Theme Name: BlogPress
+Theme URI: https://example.com/my-singlepage-theme
+Author: Nitya
+Author URI: https://example.com
+Description: A custom single page blog theme.
+Version: 1.0
+License: GNU General Public License v2 or later
+Text Domain: blogpress
+*/
+
+
+
+
+/* Basic Reset & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    color: #333;
+    background-color: #fff;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background: #fff;
+    padding: 20px 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+header a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Navigation */
+nav {
+    margin-top: 10px;
+}
+
+#primary-menu {
+    list-style: none;
+}
+
+#primary-menu li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#primary-menu li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+#primary-menu li a:hover {
+    color: #0073aa;
+}
+
+/* Content Area */
+.content {
+    padding: 40px 0;
+}
+
+/* Blog Archive */
+.blog-archive article {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 20px;
+}
+
+.blog-archive h3 {
+    margin-bottom: 10px;
+    font-size: 1.75em;
+}
+
+.blog-archive .post-meta {
+    color: #777;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.blog-archive .post-excerpt {
+    font-size: 1em;
+    line-height: 1.8;
+}
+
+/* Single Post */
+.post-content {
+    margin-top: 20px;
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+/* Footer */
+footer {
+    background: #f9f9f9;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #eaeaea;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+    
+    #primary-menu li {
+        display: block;
+        margin-bottom: 10px;
+    }
+    
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+}
