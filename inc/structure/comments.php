@@ -73,7 +73,8 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 									echo '</a>';
 								}
 
-								edit_comment_link( __( 'Edit', 'blogpress' ), '<span class="edit-link">| ', '</span>' );
+								// The separator before the link is added in CSS.
+								edit_comment_link( __( 'Edit', 'blogpress' ), '<span class="edit-link">', '</span>' );
 								?>
 							</div>
 							<?php
