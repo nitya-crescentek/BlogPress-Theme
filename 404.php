@@ -1,11 +1,28 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying 404 pages (Not Found).
+ *
+ * @package BlogPress
+ */
 
-<div class="content">
-    <div class="container">
-        <h1>Page Not Found</h1>
-        <p>Sorry, but the page you are looking for does not exist.</p>
-        <?php get_search_form(); ?>
-    </div>
-</div>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
-<?php get_footer(); ?>
+get_header(); ?>
+
+	<div <?php blogpress_do_attr( 'content' ); ?>>
+		<main <?php blogpress_do_attr( 'main' ); ?>>
+			<?php
+
+			blogpress_do_template_part( '404' );
+
+			?>
+		</main>
+	</div>
+
+	<?php
+
+	blogpress_construct_sidebars();
+
+	get_footer();

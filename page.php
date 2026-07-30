@@ -1,20 +1,41 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying all pages.
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site will use a
+ * different template.
+ *
+ * @package BlogPress
+ */
 
-<div class="content">
-    <div class="container">
-        <?php if ( have_posts() ) : ?>
-            <?php while ( have_posts() ) : the_post(); ?>
-                <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                    <h1><?php the_title(); ?></h1>
-                    <div class="entry">
-                        <?php the_content(); ?>
-                    </div>
-                </article>
-            <?php endwhile; ?>
-        <?php else : ?>
-            <p>Page not found.</p>
-        <?php endif; ?>
-    </div>
-</div>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
-<?php get_footer(); ?>
+get_header(); ?>
+
+	<div <?php blogpress_do_attr( 'content' ); ?>>
+		<main <?php blogpress_do_attr( 'main' ); ?>>
+			<?php
+
+			if ( blogpress_has_default_loop() ) {
+				while ( have_posts() ) :
+
+					the_post();
+
+					blogpress_do_template_part( 'page' );
+
+				endwhile;
+			}
+
+			?>
+		</main>
+	</div>
+
+	<?php
+
+	blogpress_construct_sidebars();
+
+	get_footer();

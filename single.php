@@ -1,25 +1,36 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The Template for displaying all single posts.
+ *
+ * @package BlogPress
+ */
 
-<div class="content">
-    <div class="container">
-        <?php
-            if (have_posts()) :
-                while (have_posts()) : the_post(); ?>
-                    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                        <h2><?php the_title(); ?></h2>
-                        <div class="post-meta">
-                            <span><?php echo get_the_date(); ?></span>
-                        </div>
-                        <div class="post-content">
-                            <?php the_content(); ?>
-                        </div>
-                    </article>
-                <?php endwhile;
-            else :
-                echo '<p>No content found.</p>';
-            endif;
-        ?>
-    </div>
-</div>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
-<?php get_footer(); ?>
+get_header(); ?>
+
+	<div <?php blogpress_do_attr( 'content' ); ?>>
+		<main <?php blogpress_do_attr( 'main' ); ?>>
+			<?php
+
+			if ( blogpress_has_default_loop() ) {
+				while ( have_posts() ) :
+
+					the_post();
+
+					blogpress_do_template_part( 'single' );
+
+				endwhile;
+			}
+
+			?>
+		</main>
+	</div>
+
+	<?php
+
+	blogpress_construct_sidebars();
+
+	get_footer();

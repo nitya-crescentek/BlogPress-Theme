@@ -1,0 +1,226 @@
+<?php
+/**
+ * This file handles the customizer fields for the Body.
+ *
+ * @package BlogPress
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // No direct access, please.
+}
+
+BlogPress_Customize_Field::add_title(
+	'blogpress_forms_colors_title',
+	array(
+		'section' => 'blogpress_colors_section',
+		'title' => __( 'Forms', 'blogpress' ),
+		'choices' => array(
+			'toggleId' => 'form-colors',
+		),
+	)
+);
+
+BlogPress_Customize_Field::add_wrapper(
+	'blogpress_forms_background_wrapper',
+	array(
+		'section' => 'blogpress_colors_section',
+		'choices' => array(
+			'type' => 'color',
+			'toggleId' => 'form-colors',
+			'items' => array(
+				'form_background_color',
+				'form_background_color_focus',
+			),
+		),
+	)
+);
+
+$forms_selector = 'input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"], input[type="number"], input[type="tel"], textarea, select';
+$forms_focus_selector = 'input[type="text"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="number"]:focus, input[type="tel"]:focus, textarea:focus, select:focus';
+
+BlogPress_Customize_Field::add_field(
+	'blogpress_settings[form_background_color]',
+	'BlogPress_Customize_Color_Control',
+	array(
+		'default' => $color_defaults['form_background_color'],
+		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'transport' => 'postMessage',
+	),
+	array(
+		'label' => __( 'Background', 'blogpress' ),
+		'section' => 'blogpress_colors_section',
+		'choices' => array(
+			'alpha' => true,
+			'toggleId' => 'form-colors',
+			'wrapper' => 'form_background_color',
+			'tooltip' => __( 'Choose Initial Color', 'blogpress' ),
+		),
+		'output' => array(
+			array(
+				'element'  => $forms_selector,
+				'property' => 'background-color',
+			),
+		),
+	)
+);
+
+BlogPress_Customize_Field::add_field(
+	'blogpress_settings[form_background_color_focus]',
+	'BlogPress_Customize_Color_Control',
+	array(
+		'default' => $color_defaults['form_background_color_focus'],
+		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'transport' => 'postMessage',
+	),
+	array(
+		'label' => __( 'Background Focus', 'blogpress' ),
+		'section' => 'blogpress_colors_section',
+		'choices' => array(
+			'alpha' => true,
+			'toggleId' => 'form-colors',
+			'wrapper' => 'form_background_color_focus',
+			'tooltip' => __( 'Choose Focus Color', 'blogpress' ),
+			'hideLabel' => true,
+		),
+		'output' => array(
+			array(
+				'element'  => $forms_focus_selector,
+				'property' => 'background-color',
+			),
+		),
+	)
+);
+
+BlogPress_Customize_Field::add_wrapper(
+	'blogpress_forms_text_wrapper',
+	array(
+		'section' => 'blogpress_colors_section',
+		'choices' => array(
+			'type' => 'color',
+			'toggleId' => 'form-colors',
+			'items' => array(
+				'form_text_color',
+				'form_text_color_focus',
+			),
+		),
+	)
+);
+
+BlogPress_Customize_Field::add_field(
+	'blogpress_settings[form_text_color]',
+	'BlogPress_Customize_Color_Control',
+	array(
+		'default' => $color_defaults['form_text_color'],
+		'sanitize_callback' => 'blogpress_sanitize_hex_color',
+		'transport' => 'postMessage',
+	),
+	array(
+		'label' => __( 'Text', 'blogpress' ),
+		'section' => 'blogpress_colors_section',
+		'choices' => array(
+			'toggleId' => 'form-colors',
+			'wrapper' => 'form_text_color',
+			'tooltip' => __( 'Choose Initial Color', 'blogpress' ),
+		),
+		'output' => array(
+			array(
+				'element'  => $forms_selector,
+				'property' => 'color',
+			),
+		),
+	)
+);
+
+BlogPress_Customize_Field::add_field(
+	'blogpress_settings[form_text_color_focus]',
+	'BlogPress_Customize_Color_Control',
+	array(
+		'default' => $color_defaults['form_text_color_focus'],
+		'sanitize_callback' => 'blogpress_sanitize_hex_color',
+		'transport' => 'postMessage',
+	),
+	array(
+		'label' => __( 'Text Focus', 'blogpress' ),
+		'section' => 'blogpress_colors_section',
+		'choices' => array(
+			'toggleId' => 'form-colors',
+			'wrapper' => 'form_text_color_focus',
+			'tooltip' => __( 'Choose Focus Color', 'blogpress' ),
+			'hideLabel' => true,
+		),
+		'output' => array(
+			array(
+				'element'  => $forms_focus_selector,
+				'property' => 'color',
+			),
+		),
+	)
+);
+
+BlogPress_Customize_Field::add_wrapper(
+	'blogpress_forms_border_wrapper',
+	array(
+		'section' => 'blogpress_colors_section',
+		'choices' => array(
+			'type' => 'color',
+			'toggleId' => 'form-colors',
+			'items' => array(
+				'form_border_color',
+				'form_border_color_focus',
+			),
+		),
+	)
+);
+
+BlogPress_Customize_Field::add_field(
+	'blogpress_settings[form_border_color]',
+	'BlogPress_Customize_Color_Control',
+	array(
+		'default' => $color_defaults['form_border_color'],
+		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'transport' => 'postMessage',
+	),
+	array(
+		'label' => __( 'Border', 'blogpress' ),
+		'section' => 'blogpress_colors_section',
+		'choices' => array(
+			'alpha' => true,
+			'toggleId' => 'form-colors',
+			'wrapper' => 'form_border_color',
+			'tooltip' => __( 'Choose Initial Color', 'blogpress' ),
+		),
+		'output' => array(
+			array(
+				'element'  => $forms_selector,
+				'property' => 'border-color',
+			),
+		),
+	)
+);
+
+BlogPress_Customize_Field::add_field(
+	'blogpress_settings[form_border_color_focus]',
+	'BlogPress_Customize_Color_Control',
+	array(
+		'default' => $color_defaults['form_border_color_focus'],
+		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'transport' => 'postMessage',
+	),
+	array(
+		'label' => __( 'Border Focus', 'blogpress' ),
+		'section' => 'blogpress_colors_section',
+		'choices' => array(
+			'alpha' => true,
+			'toggleId' => 'form-colors',
+			'wrapper' => 'form_border_color_focus',
+			'tooltip' => __( 'Choose Focus Color', 'blogpress' ),
+			'hideLabel' => true,
+		),
+		'output' => array(
+			array(
+				'element'  => $forms_focus_selector,
+				'property' => 'border-color',
+			),
+		),
+	)
+);

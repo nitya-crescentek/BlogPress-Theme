@@ -1,26 +1,50 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying Archive pages.
+ *
+ * @package BlogPress
+ */
 
-<div class="content">
-    <div class="container">
-        <h1><?php the_archive_title(); ?></h1>
-        <?php if ( have_posts() ) : ?>
-            <?php while ( have_posts() ) : the_post(); ?>
-                <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                    <h2>
-                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                    </h2>
-                    <div class="post-meta">
-                        <span><?php echo get_the_date(); ?></span>
-                    </div>
-                    <div class="entry">
-                        <?php the_excerpt(); ?>
-                    </div>
-                </article>
-            <?php endwhile; ?>
-        <?php else : ?>
-            <p>No posts found.</p>
-        <?php endif; ?>
-    </div>
-</div>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
-<?php get_footer(); ?>
+get_header(); ?>
+
+	<div <?php blogpress_do_attr( 'content' ); ?>>
+		<main <?php blogpress_do_attr( 'main' ); ?>>
+			<?php
+
+			if ( blogpress_has_default_loop() ) {
+				if ( have_posts() ) :
+
+					blogpress_archive_title();
+
+					blogpress_do_search_results_title( 'archive' );
+
+					while ( have_posts() ) :
+
+						the_post();
+
+						blogpress_do_template_part( 'archive' );
+
+					endwhile;
+
+					blogpress_do_post_navigation( 'archive' );
+
+				else :
+
+					blogpress_do_template_part( 'none' );
+
+				endif;
+			}
+
+			?>
+		</main>
+	</div>
+
+	<?php
+
+	blogpress_construct_sidebars();
+
+	get_footer();
