@@ -1741,3 +1741,42 @@ select {
 		scroll-behavior: smooth;
 	}
 }
+
+/* Sticky footer: keep the footer at the bottom when a page is shorter than the viewport. */
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+/*
+ * A flex item with auto side margins (.grid-container) is never stretched by
+ * the container, it shrinks to fit its content instead. The layout wrappers
+ * therefore need an explicit width to stay full width.
+ */
+body > .site-header,
+body > #page,
+body > .site-footer {
+	width: 100%;
+}
+
+body > #page {
+	flex: 1 0 auto;
+}
+
+body > .site-footer {
+	flex-shrink: 0;
+}
+
+/* Account for the admin bar so short pages don't gain a scrollbar. */
+@media screen and (min-width: 783px) {
+	body.admin-bar {
+		min-height: calc(100vh - 32px);
+	}
+}
+
+@media screen and (max-width: 782px) {
+	body.admin-bar {
+		min-height: calc(100vh - 46px);
+	}
+}

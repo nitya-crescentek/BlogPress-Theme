@@ -25,6 +25,24 @@ function blogpress_setup_woocommerce() {
 	add_theme_support( 'wc-product-gallery-lightbox' );
 	add_theme_support( 'wc-product-gallery-slider' );
 
+	/**
+	 * Image sizes and grid defaults so a fresh install looks right without
+	 * any setup. Runs after blogpress_setup(), so these arguments are added
+	 * to the existing woocommerce support.
+	 */
+	add_theme_support(
+		'woocommerce',
+		array(
+			'thumbnail_image_width' => 400,
+			'single_image_width' => 800,
+			'product_grid' => array(
+				'default_columns' => 3,
+				'min_columns' => 1,
+				'max_columns' => 6,
+			),
+		)
+	);
+
 	// Remove default WooCommerce wrappers.
 	remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 	remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
@@ -148,6 +166,107 @@ if ( ! function_exists( 'blogpress_woocommerce_css' ) ) {
 
 		$css = str_replace( array( "\r", "\n", "\t" ), '', $css );
 		wp_add_inline_style( 'woocommerce-general', $css );
+	}
+}
+
+if ( ! function_exists( 'blogpress_woocommerce_loop_toolbar_open' ) ) {
+	add_action( 'woocommerce_before_shop_loop', 'blogpress_woocommerce_loop_toolbar_open', 19 );
+	/**
+	 * Open a wrapper around the result count and catalog ordering.
+	 *
+	 * WooCommerce floats those two elements. Wrapping them lets us lay the row
+	 * out with flexbox instead, which keeps them aligned on any screen size.
+	 *
+	 * @since 3.6.1
+	 */
+	function blogpress_woocommerce_loop_toolbar_open() {
+		echo '<div class="blogpress-shop-toolbar">';
+	}
+}
+
+if ( ! function_exists( 'blogpress_woocommerce_loop_toolbar_close' ) ) {
+	add_action( 'woocommerce_before_shop_loop', 'blogpress_woocommerce_loop_toolbar_close', 31 );
+	/**
+	 * Close the result count and catalog ordering wrapper.
+	 *
+	 * @since 3.6.1
+	 */
+	function blogpress_woocommerce_loop_toolbar_close() {
+		echo '</div>';
+	}
+}
+
+if ( ! function_exists( 'blogpress_woocommerce_theme_css' ) ) {
+	add_action( 'wp_enqueue_scripts', 'blogpress_woocommerce_theme_css', 100 );
+	/**
+	 * Enqueue our WooCommerce stylesheet and the colors it can't know about.
+	 *
+	 * WooCommerce ships its own button colors, and its selectors are more
+	 * specific than ours, so the theme's form button settings are re-applied
+	 * to the matching WooCommerce selectors here.
+	 *
+	 * @since 3.6.1
+	 */
+	function blogpress_woocommerce_theme_css() {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return;
+		}
+
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+		// Load after WooCommerce so we can override it without !important.
+		$deps = wp_style_is( 'woocommerce-general', 'registered' )
+			? array( 'woocommerce-general' )
+			: array();
+
+		wp_enqueue_style(
+			'blogpress-woocommerce',
+			get_template_directory_uri() . "/assets/css/components/woocommerce{$suffix}.css",
+			$deps,
+			BLOGPRESS_VERSION,
+			'all'
+		);
+
+		$settings = wp_parse_args(
+			get_option( 'blogpress_settings', array() ),
+			blogpress_get_color_defaults()
+		);
+
+		$buttons = array(
+			'.woocommerce a.button',
+			'.woocommerce button.button',
+			'.woocommerce input.button',
+			'.woocommerce a.button.alt',
+			'.woocommerce button.button.alt',
+			'.woocommerce input.button.alt',
+			'.woocommerce #respond input#submit',
+			'.woocommerce #respond input#submit.alt',
+			'.woocommerce .widget_shopping_cart a.button',
+			'.woocommerce .widget_price_filter .price_slider_amount .button',
+			// Block cart and checkout, excluding the outlined/link variants.
+			'.woocommerce-page .wc-block-components-button:not(.is-link):not(.is-style-outline):not(.outlined)',
+		);
+
+		$buttons_hover = array();
+
+		foreach ( $buttons as $button ) {
+			$buttons_hover[] = $button . ':hover';
+			$buttons_hover[] = $button . ':focus';
+		}
+
+		$css = new BlogPress_CSS();
+
+		$css->set_selector( implode( ',', $buttons ) );
+		$css->add_property( 'color', $settings['form_button_text_color'] );
+		$css->add_property( 'background-color', $settings['form_button_background_color'] );
+
+		$css->set_selector( implode( ',', $buttons_hover ) );
+		$css->add_property( 'color', $settings['form_button_text_color_hover'] );
+		$css->add_property( 'background-color', $settings['form_button_background_color_hover'] );
+
+		if ( $css->css_output() ) {
+			wp_add_inline_style( 'blogpress-woocommerce', $css->css_output() );
+		}
 	}
 }
 
