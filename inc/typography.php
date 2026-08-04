@@ -14,7 +14,7 @@ if ( ! function_exists( 'blogpress_enqueue_google_fonts' ) ) {
 	/**
 	 * Add Google Fonts to wp_head if needed.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_enqueue_google_fonts() {
 		if ( blogpress_is_using_dynamic_typography() ) {
@@ -106,7 +106,7 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 	/**
 	 * Build our Typography options
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 *
 	 * @param std_Class $wp_customize The Customize class.
 	 */

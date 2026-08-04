@@ -13,7 +13,7 @@ if ( ! function_exists( 'blogpress_construct_sidebars' ) ) {
 	/**
 	 * Construct the sidebars.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_construct_sidebars() {
 		$layout = blogpress_get_layout();

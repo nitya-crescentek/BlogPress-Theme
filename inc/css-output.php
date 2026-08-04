@@ -13,7 +13,7 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 	/**
 	 * Blogpress the CSS in the <head> section using the Theme Customizer.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_base_css() {
 		$settings = wp_parse_args(
@@ -108,14 +108,18 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 		}
 
 		if ( blogpress_get_option( 'back_to_top' ) ) {
+			$back_to_top_size = absint( blogpress_get_option( 'back_to_top_size' ) );
+			$back_to_top_offset = absint( blogpress_get_option( 'back_to_top_offset' ) );
+			$back_to_top_side = 'left' === blogpress_get_option( 'back_to_top_position' ) ? 'left' : 'right';
+
 			$css->set_selector( '.blogpress-back-to-top' );
-			$css->add_property( 'font-size', '20px' );
-			$css->add_property( 'border-radius', '3px' );
+			$css->add_property( 'font-size', round( $back_to_top_size / 2 ), false, 'px' );
+			$css->add_property( 'border-radius', absint( blogpress_get_option( 'back_to_top_border_radius' ) ), false, 'px' );
 			$css->add_property( 'position', 'fixed' );
-			$css->add_property( 'bottom', '30px' );
-			$css->add_property( 'right', '30px' );
-			$css->add_property( 'line-height', '40px' );
-			$css->add_property( 'width', '40px' );
+			$css->add_property( 'bottom', $back_to_top_offset, false, 'px' );
+			$css->add_property( $back_to_top_side, $back_to_top_offset, false, 'px' );
+			$css->add_property( 'line-height', $back_to_top_size, false, 'px' );
+			$css->add_property( 'width', $back_to_top_size, false, 'px' );
 			$css->add_property( 'text-align', 'center' );
 			$css->add_property( 'z-index', '10' );
 			$css->add_property( 'transition', 'opacity 300ms ease-in-out' );
@@ -224,7 +228,7 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 			$css->add_property( 'right', '0' );
 			$css->add_property( 'left', '0' );
 
-			$css->set_selector( '.dropdown-click .sfHover > a > .dropdown-menu-toggle > .gp-icon svg' );
+			$css->set_selector( '.dropdown-click .sfHover > a > .dropdown-menu-toggle > .bp-icon svg' );
 			$css->add_property( 'transform', 'rotate(180deg)' );
 
 			if ( 'click' === blogpress_get_option( 'nav_dropdown_type' ) ) {
@@ -266,7 +270,7 @@ if ( ! function_exists( 'blogpress_advanced_css' ) ) {
 	/**
 	 * Blogpress the CSS in the <head> section using the Theme Customizer.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_advanced_css() {
 		$settings = wp_parse_args(
@@ -470,9 +474,9 @@ if ( ! function_exists( 'blogpress_advanced_css' ) ) {
 		$css->add_property( 'color', $settings['back_to_top_text_color_hover'] );
 
 		$css->set_selector( ':root' );
-		$css->add_property( '--gp-search-modal-bg-color', $settings['search_modal_bg_color'] );
-		$css->add_property( '--gp-search-modal-text-color', $settings['search_modal_text_color'] );
-		$css->add_property( '--gp-search-modal-overlay-bg-color', $settings['search_modal_overlay_bg_color'] );
+		$css->add_property( '--bp-search-modal-bg-color', $settings['search_modal_bg_color'] );
+		$css->add_property( '--bp-search-modal-text-color', $settings['search_modal_text_color'] );
+		$css->add_property( '--bp-search-modal-overlay-bg-color', $settings['search_modal_overlay_bg_color'] );
 
 		$css->start_media_query( blogpress_get_media_query( 'mobile-menu' ) );
 		$css->set_selector( '.main-navigation .menu-bar-item:hover > a, .main-navigation .menu-bar-item.sfHover > a' );
@@ -488,7 +492,7 @@ if ( ! function_exists( 'blogpress_spacing_css' ) ) {
 	/**
 	 * Write our dynamic CSS.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_spacing_css() {
 		$settings = wp_parse_args(
@@ -935,16 +939,16 @@ function blogpress_do_modal_css( $css ) {
 		return;
 	}
 
-	$css->set_selector( '.gp-modal:not(.gp-modal--open):not(.gp-modal--transition)' );
+	$css->set_selector( '.bp-modal:not(.bp-modal--open):not(.bp-modal--transition)' );
 	$css->add_property( 'display', 'none' );
 
-	$css->set_selector( '.gp-modal--transition:not(.gp-modal--open)' );
+	$css->set_selector( '.bp-modal--transition:not(.bp-modal--open)' );
 	$css->add_property( 'pointer-events', 'none' );
 
-	$css->set_selector( '.gp-modal-overlay:not(.gp-modal-overlay--open):not(.gp-modal--transition)' );
+	$css->set_selector( '.bp-modal-overlay:not(.bp-modal-overlay--open):not(.bp-modal--transition)' );
 	$css->add_property( 'display', 'none' );
 
-	$css->set_selector( '.gp-modal__overlay' );
+	$css->set_selector( '.bp-modal__overlay' );
 	$css->add_property( 'display', 'none' );
 	$css->add_property( 'position', 'fixed' );
 	$css->add_property( 'top', '0' );
@@ -960,17 +964,17 @@ function blogpress_do_modal_css( $css ) {
 	$css->add_property( 'transition', 'opacity 500ms ease' );
 	$css->add_property( 'opacity', 0 );
 
-	$css->set_selector( '.gp-modal--open:not(.gp-modal--transition) .gp-modal__overlay' );
+	$css->set_selector( '.bp-modal--open:not(.bp-modal--transition) .bp-modal__overlay' );
 	$css->add_property( 'opacity', 1 );
 
-	$css->set_selector( '.gp-modal__container' );
+	$css->set_selector( '.bp-modal__container' );
 	$css->add_property( 'max-width', '100%' );
 	$css->add_property( 'max-height', '100vh' );
 	$css->add_property( 'transform', 'scale(0.9)' );
 	$css->add_property( 'transition', 'transform 500ms ease' );
 	$css->add_property( 'padding', '0 10px' );
 
-	$css->set_selector( '.gp-modal--open:not(.gp-modal--transition) .gp-modal__container' );
+	$css->set_selector( '.bp-modal--open:not(.bp-modal--transition) .bp-modal__container' );
 	$css->add_property( 'transform', 'scale(1)' );
 
 	return $css;

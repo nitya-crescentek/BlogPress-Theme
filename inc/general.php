@@ -107,7 +107,7 @@ if ( ! function_exists( 'blogpress_scripts' ) ) {
 			wp_enqueue_script( 'blogpress-back-to-top', $dir_uri . "/assets/js/back-to-top{$suffix}.js", array(), BLOGPRESS_VERSION, true );
 
 			$back_to_top_args = array(
-				'smooth' => true,
+				'smooth' => (bool) blogpress_get_option( 'back_to_top_smooth_scroll' ),
 			);
 
 			blogpress_add_inline_script(
@@ -189,7 +189,7 @@ if ( ! function_exists( 'blogpress_page_menu_args' ) ) {
 	/**
 	 * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 *
 	 * @param array $args The existing menu args.
 	 * @return array Menu args.

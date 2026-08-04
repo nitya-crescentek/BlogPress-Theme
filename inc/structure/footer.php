@@ -55,7 +55,7 @@ if ( ! function_exists( 'blogpress_add_footer_info' ) ) {
 	/**
 	 * Add the copyright to the footer
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_add_footer_info() {
 		$copyright = sprintf(
@@ -182,12 +182,11 @@ if ( ! function_exists( 'blogpress_back_to_top' ) ) {
 
 		echo sprintf(
 			'<a title="%1$s" aria-label="%1$s" rel="nofollow" href="#" class="blogpress-back-to-top" data-scroll-speed="%2$s" data-start-scroll="%3$s" role="button">
-				%5$s
+				%4$s
 			</a>',
 			esc_attr__( 'Scroll back to top', 'blogpress' ),
-			absint( 400 ),
-			absint( 300 ),
-			esc_attr( 'fa-angle-up' ),
+			absint( blogpress_get_option( 'back_to_top_scroll_speed' ) ),
+			absint( blogpress_get_option( 'back_to_top_scroll_start' ) ),
 			blogpress_get_svg_icon( 'arrow-up' )
 		);
 	}

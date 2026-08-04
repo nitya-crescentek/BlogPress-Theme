@@ -34,11 +34,11 @@
 	cursor: pointer;
 }
 
-.gp-range-title-area {
+.bp-range-title-area {
 	display: flex;
 }
 
-.gp-range-slider-controls {
+.bp-range-slider-controls {
 	margin-left: auto;
 }
 
@@ -112,7 +112,7 @@
     width: calc(100% - 30px);
 }
 
-.customize-control-blogpress-range-slider .gp-range-title-area .dashicons {
+.customize-control-blogpress-range-slider .bp-range-title-area .dashicons {
 	cursor: pointer;
 	font-size: 11px;
 	width: 20px;
@@ -124,16 +124,16 @@
 	top: 2px;
 }
 
-.customize-control-blogpress-range-slider .gp-range-title-area .dashicons:hover {
+.customize-control-blogpress-range-slider .bp-range-title-area .dashicons:hover {
 	background: #fafafa;
 }
 
-.customize-control-blogpress-range-slider .gp-range-title-area .dashicons.selected {
+.customize-control-blogpress-range-slider .bp-range-title-area .dashicons.selected {
 	background: #fff;
 	color: #222;
 }
 
-.customize-control-blogpress-range-slider .gp-device-controls > span:first-child:last-child {
+.customize-control-blogpress-range-slider .bp-device-controls > span:first-child:last-child {
 	display: none;
 }
 

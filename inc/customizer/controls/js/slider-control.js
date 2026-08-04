@@ -41,7 +41,7 @@ wp.customize.controlConstructor['blogpress-range-slider'] = wp.customize.Control
 		// Handle the reset button
 		jQuery( controlClass + ' .blogpress-reset' ).on( 'click', function() {
 			var icon = jQuery( this ),
-				visible_area = icon.closest( '.gp-range-title-area' ).next( '.gp-range-slider-areas' ).children( 'label:visible' ),
+				visible_area = icon.closest( '.bp-range-title-area' ).next( '.bp-range-slider-areas' ).children( 'label:visible' ),
 				input = visible_area.find( 'input[type=number]' ),
 				slider_value = visible_area.find( '.blogpress-slider' ),
 				visual_value = visible_area.find( '.gp_range_value' ),
@@ -61,15 +61,15 @@ wp.customize.controlConstructor['blogpress-range-slider'] = wp.customize.Control
 		// Figure out which device icon to make active on load
 		jQuery( controlClass + ' .blogpress-range-slider-control' ).each( function() {
 			var _this = jQuery( this );
-			_this.find( '.gp-device-controls' ).children( 'span:first-child' ).addClass( 'selected' );
+			_this.find( '.bp-device-controls' ).children( 'span:first-child' ).addClass( 'selected' );
 			_this.find( '.range-option-area:first-child' ).show();
 		});
 		
 		// Do stuff when device icons are clicked
-		jQuery( controlClass + ' .gp-device-controls > span' ).on( 'click', function( event ) {
+		jQuery( controlClass + ' .bp-device-controls > span' ).on( 'click', function( event ) {
 			var device = jQuery( this ).data( 'option' );
 			
-			jQuery( controlClass + ' .gp-device-controls span' ).each( function() {
+			jQuery( controlClass + ' .bp-device-controls span' ).each( function() {
 				var _this = jQuery( this );
 				if ( device == _this.attr( 'data-option' ) ) {
 					_this.addClass( 'selected' );
@@ -77,7 +77,7 @@ wp.customize.controlConstructor['blogpress-range-slider'] = wp.customize.Control
 				}
 			});
 			
-			jQuery( controlClass + ' .gp-range-slider-areas label' ).each( function() {
+			jQuery( controlClass + ' .bp-range-slider-areas label' ).each( function() {
 				var _this = jQuery( this );
 				if ( device == _this.attr( 'data-option' ) ) {
 					_this.show();
@@ -92,7 +92,7 @@ wp.customize.controlConstructor['blogpress-range-slider'] = wp.customize.Control
 		// Set the selected devices in our control when the Customizer devices are clicked
 		footerActions.find( '.devices button' ).on( 'click', function() {
 			var device = jQuery( this ).data( 'device' );
-			jQuery( controlClass + ' .gp-device-controls span' ).each( function() {
+			jQuery( controlClass + ' .bp-device-controls span' ).each( function() {
 				var _this = jQuery( this );
 				if ( device == _this.attr( 'data-option' ) ) {
 					_this.addClass( 'selected' );
@@ -100,7 +100,7 @@ wp.customize.controlConstructor['blogpress-range-slider'] = wp.customize.Control
 				}
 			});
 			
-			jQuery( controlClass + ' .gp-range-slider-areas label' ).each( function() {
+			jQuery( controlClass + ' .bp-range-slider-areas label' ).each( function() {
 				var _this = jQuery( this );
 				if ( device == _this.attr( 'data-option' ) ) {
 					_this.show();

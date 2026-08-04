@@ -44,7 +44,7 @@ BlogPress_Customize_Field::add_field(
 		'output' => array(
 			array(
 				'element'  => ':root',
-				'property' => '--gp-search-modal-bg-color',
+				'property' => '--bp-search-modal-bg-color',
 			),
 		),
 	)
@@ -67,7 +67,7 @@ BlogPress_Customize_Field::add_field(
 		'output' => array(
 			array(
 				'element'  => ':root',
-				'property' => '--gp-search-modal-text-color',
+				'property' => '--bp-search-modal-text-color',
 			),
 		),
 	)
@@ -90,7 +90,7 @@ BlogPress_Customize_Field::add_field(
 		'output' => array(
 			array(
 				'element'  => ':root',
-				'property' => '--gp-search-modal-overlay-bg-color',
+				'property' => '--bp-search-modal-overlay-bg-color',
 			),
 		),
 	)

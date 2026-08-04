@@ -250,7 +250,7 @@ if ( ! function_exists( 'blogpress_add_viewport' ) ) {
 	/**
 	 * Add viewport to wp_head.
 	 *
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 */
 	function blogpress_add_viewport() {
 		echo '<meta name="viewport" content="width=device-width, initial-scale=1">';  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

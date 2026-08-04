@@ -18,9 +18,9 @@ function blogpress_do_search_modal() {
 		return;
 	}
 	?>
-	<div class="gp-modal gp-search-modal" id="gp-search" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e( 'Search', 'blogpress' ); ?>">
-		<div class="gp-modal__overlay" tabindex="-1" data-gpmodal-close>
-			<div class="gp-modal__container">
+	<div class="bp-modal bp-search-modal" id="bp-search" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e( 'Search', 'blogpress' ); ?>">
+		<div class="bp-modal__overlay" tabindex="-1" data-bpmodal-close>
+			<div class="bp-modal__container">
 				<?php blogpress_do_search_fields();
 ?>
 			</div>
@@ -38,7 +38,7 @@ function blogpress_do_search_modal_trigger() {
 	}
 	?>
 	<span class="menu-bar-item">
-		<a href="#" role="button" aria-label="<?php _e( 'Open search', 'blogpress' ); ?>" aria-haspopup="dialog" aria-controls="gp-search" data-gpmodal-trigger="gp-search"><?php echo blogpress_get_svg_icon( 'search', true ); // phpcs:ignore -- Escaped in function. ?></a>
+		<a href="#" role="button" aria-label="<?php _e( 'Open search', 'blogpress' ); ?>" aria-haspopup="dialog" aria-controls="bp-search" data-bpmodal-trigger="bp-search"><?php echo blogpress_get_svg_icon( 'search', true ); // phpcs:ignore -- Escaped in function. ?></a>
 	</span>
 	<?php
 }
@@ -56,16 +56,16 @@ function blogpress_do_search_modal_css( $css ) {
 	$css->set_selector( '.search-modal-fields' );
 	$css->add_property( 'display', 'flex' );
 
-	$css->set_selector( '.gp-search-modal .gp-modal__overlay' );
+	$css->set_selector( '.bp-search-modal .bp-modal__overlay' );
 	$css->add_property( 'align-items', 'flex-start' );
 	$css->add_property( 'padding-top', '25vh' );
-	$css->add_property( 'background', 'var(--gp-search-modal-overlay-bg-color)' );
+	$css->add_property( 'background', 'var(--bp-search-modal-overlay-bg-color)' );
 
 	$css->set_selector( '.search-modal-form' );
 	$css->add_property( 'width', '500px' );
 	$css->add_property( 'max-width', '100%' );
-	$css->add_property( 'background-color', 'var(--gp-search-modal-bg-color)' );
-	$css->add_property( 'color', 'var(--gp-search-modal-text-color)' );
+	$css->add_property( 'background-color', 'var(--bp-search-modal-bg-color)' );
+	$css->add_property( 'color', 'var(--bp-search-modal-text-color)' );
 
 	$css->set_selector( '.search-modal-form .search-field, .search-modal-form .search-field:focus' );
 	$css->add_property( 'width', '100%' );

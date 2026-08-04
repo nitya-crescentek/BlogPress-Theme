@@ -13,7 +13,7 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 	/**
 	 * Build the navigation.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_navigation_position() {
 		blogpress_do_header_mobile_menu_toggle();
@@ -119,7 +119,7 @@ if ( ! function_exists( 'blogpress_menu_fallback' ) ) {
 	/**
 	 * Menu fallback.
 	 *
-	 * @since 1.1.4
+	 * @since 1.0.0
 	 *
 	 * @param array $args Existing menu args.
 	 */
@@ -154,7 +154,7 @@ if ( ! function_exists( 'blogpress_add_navigation_after_header' ) ) {
 	 * are kept this way to maintain backward compatibility for people
 	 * un-hooking and moving the navigation/changing the priority.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_add_navigation_after_header() {
 		if ( 'nav-below-header' === blogpress_get_navigation_location() ) {
@@ -171,7 +171,7 @@ if ( ! function_exists( 'blogpress_add_navigation_before_header' ) ) {
 	 * are kept this way to maintain backward compatibility for people
 	 * un-hooking and moving the navigation/changing the priority.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_add_navigation_before_header() {
 		if ( 'nav-above-header' === blogpress_get_navigation_location() ) {
@@ -188,7 +188,7 @@ if ( ! function_exists( 'blogpress_add_navigation_float_right' ) ) {
 	 * are kept this way to maintain backward compatibility for people
 	 * un-hooking and moving the navigation/changing the priority.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_add_navigation_float_right() {
 		if ( 'nav-float-right' === blogpress_get_navigation_location() || 'nav-float-left' === blogpress_get_navigation_location() ) {
@@ -205,7 +205,7 @@ if ( ! function_exists( 'blogpress_add_navigation_before_right_sidebar' ) ) {
 	 * are kept this way to maintain backward compatibility for people
 	 * un-hooking and moving the navigation/changing the priority.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_add_navigation_before_right_sidebar() {
 		if ( 'nav-right-sidebar' === blogpress_get_navigation_location() ) {
@@ -224,7 +224,7 @@ if ( ! function_exists( 'blogpress_add_navigation_before_left_sidebar' ) ) {
 	 * are kept this way to maintain backward compatibility for people
 	 * un-hooking and moving the navigation/changing the priority.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_add_navigation_before_left_sidebar() {
 		if ( 'nav-left-sidebar' === blogpress_get_navigation_location() ) {
@@ -402,7 +402,7 @@ if ( ! function_exists( 'blogpress_navigation_search' ) ) {
 	/**
 	 * Add the search bar to the navigation.
 	 *
-	 * @since 1.1.4
+	 * @since 1.0.0
 	 */
 	function blogpress_navigation_search() {
 		$blogpress_settings = wp_parse_args(

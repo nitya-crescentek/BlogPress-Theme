@@ -36,7 +36,7 @@ if ( ! function_exists( 'blogpress_get_layout' ) ) {
 	/**
 	 * Get the layout for the current page.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 *
 	 * @return string The sidebar layout location.
 	 */
@@ -67,7 +67,7 @@ if ( ! function_exists( 'blogpress_get_footer_widgets' ) ) {
 	/**
 	 * Get the footer widgets for the current page
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 *
 	 * @return int The number of footer widgets.
 	 */
@@ -142,7 +142,7 @@ if ( ! function_exists( 'blogpress_padding_css' ) ) {
 	/**
 	 * Shorten our padding/margin values into shorthand form.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 *
 	 * @param int $top Top spacing.
 	 * @param int $right Right spacing.
@@ -274,7 +274,7 @@ function blogpress_get_svg_icon( $icon, $replace = false ) {
 	}
 
 	$classes = array(
-		'gp-icon',
+		'bp-icon',
 		'icon-' . $icon,
 	);
 

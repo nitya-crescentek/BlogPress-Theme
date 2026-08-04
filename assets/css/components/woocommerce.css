@@ -221,10 +221,15 @@
 /*--------------------------------------------------------------
 # Product grid
 --------------------------------------------------------------*/
+/*
+ * Fixed track counts on purpose. A percentage inside repeat(auto-fill, ...)
+ * resolves to auto when the container size isn't definite while tracks are
+ * sized, which collapses every column to min-content.
+ */
 .woocommerce ul.products,
 .woocommerce-page ul.products {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 30px 26px;
 	margin: 0 0 2em;
 	padding: 0;
@@ -237,8 +242,21 @@
 	content: none;
 }
 
+@media (max-width: 480px) {
+	.woocommerce ul.products,
+	.woocommerce-page ul.products {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
 /* Honour the "products per row" Customizer setting on larger screens. */
 @media (min-width: 769px) {
+	/* Default when WooCommerce doesn't add a columns-* class to the list. */
+	.woocommerce ul.products,
+	.woocommerce-page ul.products {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
 	.woocommerce ul.products.columns-1 {
 		grid-template-columns: minmax(0, 1fr);
 	}
@@ -281,6 +299,10 @@
 	border: 1px solid var(--bp-wc-border);
 	border-radius: var(--blogpress-radius, 12px);
 	transition: box-shadow var(--blogpress-transition, 0.2s ease), transform var(--blogpress-transition, 0.2s ease);
+}
+
+.woocommerce ul.products.columns-3 li.product, .woocommerce-page ul.products.columns-3 li.product {
+    width: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {

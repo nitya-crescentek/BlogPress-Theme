@@ -50,6 +50,10 @@
 			// Show the button when scrolling down.
 			window.addEventListener( 'scroll', trackScroll );
 
+			// Evaluate once on load, in case the page opens already scrolled
+			// (anchor link, or the browser restoring the scroll position).
+			trackScroll();
+
 			// Scroll back to top when clicked.
 			goTopBtn.addEventListener( 'click', function( e ) {
 				e.preventDefault();

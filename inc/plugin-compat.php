@@ -177,7 +177,7 @@ if ( ! function_exists( 'blogpress_woocommerce_loop_toolbar_open' ) ) {
 	 * WooCommerce floats those two elements. Wrapping them lets us lay the row
 	 * out with flexbox instead, which keeps them aligned on any screen size.
 	 *
-	 * @since 3.6.1
+	 * @since 1.0.0
 	 */
 	function blogpress_woocommerce_loop_toolbar_open() {
 		echo '<div class="blogpress-shop-toolbar">';
@@ -189,7 +189,7 @@ if ( ! function_exists( 'blogpress_woocommerce_loop_toolbar_close' ) ) {
 	/**
 	 * Close the result count and catalog ordering wrapper.
 	 *
-	 * @since 3.6.1
+	 * @since 1.0.0
 	 */
 	function blogpress_woocommerce_loop_toolbar_close() {
 		echo '</div>';
@@ -205,7 +205,7 @@ if ( ! function_exists( 'blogpress_woocommerce_theme_css' ) ) {
 	 * specific than ours, so the theme's form button settings are re-applied
 	 * to the matching WooCommerce selectors here.
 	 *
-	 * @since 3.6.1
+	 * @since 1.0.0
 	 */
 	function blogpress_woocommerce_theme_css() {
 		if ( ! class_exists( 'WooCommerce' ) ) {

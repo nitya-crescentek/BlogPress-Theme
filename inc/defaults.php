@@ -13,7 +13,7 @@ if ( ! function_exists( 'blogpress_get_defaults' ) ) {
 	/**
 	 * Set default options
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_get_defaults() {
 		return array(
@@ -48,7 +48,14 @@ if ( ! function_exists( 'blogpress_get_defaults' ) ) {
 			'footer_inner_width' => 'contained',
 			'footer_widget_setting' => '3',
 			'footer_bar_alignment' => 'right',
-			'back_to_top' => '',
+			'back_to_top' => 'enable',
+			'back_to_top_position' => 'right',
+			'back_to_top_size' => '40',
+			'back_to_top_border_radius' => '8',
+			'back_to_top_offset' => '30',
+			'back_to_top_scroll_start' => '300',
+			'back_to_top_scroll_speed' => '400',
+			'back_to_top_smooth_scroll' => true,
 			'background_color' => 'var(--base-2)',
 			'text_color' => 'var(--contrast)',
 			'link_color' => 'var(--accent)',
@@ -191,7 +198,7 @@ if ( ! function_exists( 'blogpress_get_default_fonts' ) ) {
 	/**
 	 * Set default options.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 *
 	 * @param bool $filter Whether to return the filtered values or original values.
 	 * @return array Option defaults.
@@ -315,7 +322,7 @@ if ( ! function_exists( 'blogpress_spacing_get_defaults' ) ) {
 	/**
 	 * Set the default options.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 *
 	 * @param bool $filter Whether to return the filtered values or original values.
 	 * @return array Option defaults.

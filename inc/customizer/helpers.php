@@ -243,8 +243,13 @@ function blogpress_do_control_inline_scripts() {
 	wp_localize_script( 'blogpress-customizer-controls', 'blogpress_typography_defaults', blogpress_get_default_fonts() );
 	wp_localize_script( 'blogpress-customizer-controls', 'blogpress_spacing_defaults', blogpress_spacing_get_defaults() );
 
+	/*
+	 * This is a separate handle from blogpress-customizer-controls above. They are
+	 * two different scripts, and re-using a registered handle is a silent no-op --
+	 * the React app would never load and the Colors/Typography panels render empty.
+	 */
 	wp_enqueue_script(
-		'blogpress-customizer-controls',
+		'blogpress-customizer-app',
 		trailingslashit( get_template_directory_uri() ) . 'assets/dist/customizer.js',
 		// We're including wp-color-picker for localized strings, nothing more.
 		array( 'lodash', 'react', 'react-dom', 'wp-components', 'wp-element', 'wp-hooks', 'wp-i18n', 'wp-polyfill', 'jquery', 'customize-base', 'customize-controls', 'wp-color-picker' ),
@@ -253,7 +258,7 @@ function blogpress_do_control_inline_scripts() {
 	);
 
 	if ( function_exists( 'wp_set_script_translations' ) ) {
-		wp_set_script_translations( 'blogpress-customizer-controls', 'blogpress' );
+		wp_set_script_translations( 'blogpress-customizer-app', 'blogpress' );
 	}
 
 	$color_palette = get_theme_support( 'editor-color-palette' );
@@ -271,7 +276,7 @@ function blogpress_do_control_inline_scripts() {
 	}
 
 	wp_localize_script(
-		'blogpress-customizer-controls',
+		'blogpress-customizer-app',
 		'blogpressCustomizerControls',
 		array(
 			'palette' => $colors,
@@ -283,7 +288,7 @@ function blogpress_do_control_inline_scripts() {
 	);
 
 	wp_enqueue_style(
-		'blogpress-customizer-controls',
+		'blogpress-customizer-app',
 		trailingslashit( get_template_directory_uri() ) . 'assets/dist/style-customizer.css',
 		array( 'wp-components' ),
 		BLOGPRESS_VERSION
@@ -300,7 +305,7 @@ function blogpress_do_control_inline_scripts() {
 
 	$global_colors_css .= '}';
 
-	wp_add_inline_style( 'blogpress-customizer-controls', $global_colors_css );
+	wp_add_inline_style( 'blogpress-customizer-app', $global_colors_css );
 }
 
 if ( ! function_exists( 'blogpress_customizer_live_preview' ) ) {
@@ -308,7 +313,7 @@ if ( ! function_exists( 'blogpress_customizer_live_preview' ) ) {
 	/**
 	 * Add our live preview scripts
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_customizer_live_preview() {
 		$spacing_settings = wp_parse_args(

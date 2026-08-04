@@ -13,7 +13,7 @@ if ( ! function_exists( 'blogpress_content_nav' ) ) {
 	/**
 	 * Display navigation to next/previous pages when applicable.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 *
 	 * @param string $nav_id The id of our navigation.
 	 */
@@ -320,7 +320,7 @@ if ( ! function_exists( 'blogpress_posted_on' ) ) {
 	/**
 	 * Prints HTML with meta information for the current post-date/time and author.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_posted_on() {
 		$items = blogpress_get_header_entry_meta_items();
@@ -351,7 +351,7 @@ if ( ! function_exists( 'blogpress_excerpt_more' ) ) {
 	/**
 	 * Prints the read more HTML to post excerpts.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 *
 	 * @param string $more The string shown within the more link.
 	 * @return string The HTML for the more link.
@@ -372,7 +372,7 @@ if ( ! function_exists( 'blogpress_content_more' ) ) {
 	/**
 	 * Prints the read more HTML to post content using the more tag.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 *
 	 * @param string $more The string shown within the more link.
 	 * @return string The HTML for the more link

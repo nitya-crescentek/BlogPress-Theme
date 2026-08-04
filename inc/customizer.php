@@ -1269,6 +1269,139 @@ if ( ! function_exists( 'blogpress_customize_register' ) ) {
 			)
 		);
 
+		// The options below only make sense once the button is switched on.
+		$back_to_top_is_active = function() {
+			return 'enable' === blogpress_get_option( 'back_to_top' );
+		};
+
+		$back_to_top_options = array(
+			'back_to_top_position' => array(
+				'label' => __( 'Button Position', 'blogpress' ),
+				'type' => 'select',
+				'sanitize' => 'blogpress_sanitize_choices',
+				'choices' => array(
+					'right' => __( 'Bottom Right', 'blogpress' ),
+					'left' => __( 'Bottom Left', 'blogpress' ),
+				),
+				'priority' => 51,
+			),
+			'back_to_top_size' => array(
+				'label' => __( 'Button Size', 'blogpress' ),
+				'description' => __( 'Width and height of the button, in pixels.', 'blogpress' ),
+				'type' => 'number',
+				'sanitize' => 'blogpress_sanitize_integer',
+				'input_attrs' => array(
+					'min' => 20,
+					'max' => 100,
+					'step' => 1,
+				),
+				'priority' => 52,
+			),
+			'back_to_top_border_radius' => array(
+				'label' => __( 'Border Radius', 'blogpress' ),
+				'description' => __( 'Use half the button size for a circle.', 'blogpress' ),
+				'type' => 'number',
+				'sanitize' => 'blogpress_sanitize_integer',
+				'input_attrs' => array(
+					'min' => 0,
+					'max' => 50,
+					'step' => 1,
+				),
+				'priority' => 53,
+			),
+			'back_to_top_offset' => array(
+				'label' => __( 'Distance From Edge', 'blogpress' ),
+				'description' => __( 'Space between the button and the edge of the screen, in pixels.', 'blogpress' ),
+				'type' => 'number',
+				'sanitize' => 'blogpress_sanitize_integer',
+				'input_attrs' => array(
+					'min' => 0,
+					'max' => 200,
+					'step' => 1,
+				),
+				'priority' => 54,
+			),
+			'back_to_top_scroll_start' => array(
+				'label' => __( 'Show After Scrolling', 'blogpress' ),
+				'description' => __( 'How far down the page the visitor must scroll before the button appears, in pixels.', 'blogpress' ),
+				'type' => 'number',
+				'sanitize' => 'blogpress_sanitize_integer',
+				'input_attrs' => array(
+					'min' => 0,
+					'step' => 50,
+				),
+				'priority' => 55,
+			),
+			'back_to_top_scroll_speed' => array(
+				'label' => __( 'Scroll Speed', 'blogpress' ),
+				'description' => __( 'Duration of the scroll animation, in milliseconds.', 'blogpress' ),
+				'type' => 'number',
+				'sanitize' => 'blogpress_sanitize_integer',
+				'input_attrs' => array(
+					'min' => 0,
+					'max' => 3000,
+					'step' => 50,
+				),
+				'priority' => 56,
+			),
+		);
+
+		foreach ( $back_to_top_options as $option => $args ) {
+			$wp_customize->add_setting(
+				'blogpress_settings[' . $option . ']',
+				array(
+					'default' => $defaults[ $option ],
+					'type' => 'option',
+					'sanitize_callback' => $args['sanitize'],
+				)
+			);
+
+			$control_args = array(
+				'type' => $args['type'],
+				'label' => $args['label'],
+				'section' => 'blogpress_layout_footer',
+				'settings' => 'blogpress_settings[' . $option . ']',
+				'priority' => $args['priority'],
+				'active_callback' => $back_to_top_is_active,
+			);
+
+			if ( isset( $args['description'] ) ) {
+				$control_args['description'] = $args['description'];
+			}
+
+			if ( isset( $args['choices'] ) ) {
+				$control_args['choices'] = $args['choices'];
+			}
+
+			if ( isset( $args['input_attrs'] ) ) {
+				$control_args['input_attrs'] = $args['input_attrs'];
+			}
+
+			$wp_customize->add_control( 'blogpress_settings[' . $option . ']', $control_args );
+		}
+
+		$wp_customize->add_setting(
+			'blogpress_settings[back_to_top_smooth_scroll]',
+			array(
+				'default' => $defaults['back_to_top_smooth_scroll'],
+				'type' => 'option',
+				'sanitize_callback' => 'blogpress_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			'blogpress_settings[back_to_top_smooth_scroll]',
+			array(
+				'type' => 'checkbox',
+				'label' => __( 'Smooth Scrolling', 'blogpress' ),
+				'description' => __( 'Animate the scroll instead of jumping straight to the top.', 'blogpress' ),
+				'section' => 'blogpress_layout_footer',
+				'settings' => 'blogpress_settings[back_to_top_smooth_scroll]',
+				'priority' => 57,
+				'active_callback' => $back_to_top_is_active,
+			)
+		);
+
 		$wp_customize->add_section(
 			'blogpress_blog_section',
 			array(

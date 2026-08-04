@@ -15,7 +15,7 @@ if ( ! function_exists( 'blogpress_body_classes' ) ) {
 	 * Adds custom classes to the array of body classes.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_body_classes( $classes ) {
 		$sidebar_layout       = blogpress_get_layout();
@@ -92,7 +92,7 @@ if ( ! function_exists( 'blogpress_top_bar_classes' ) ) {
 	 * Adds custom classes to the header.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_top_bar_classes( $classes ) {
 		$classes[] = 'top-bar';
@@ -112,7 +112,7 @@ if ( ! function_exists( 'blogpress_right_sidebar_classes' ) ) {
 	 * Adds custom classes to the right sidebar.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_right_sidebar_classes( $classes ) {
 		$classes[] = 'widget-area';
@@ -128,7 +128,7 @@ if ( ! function_exists( 'blogpress_left_sidebar_classes' ) ) {
 	 * Adds custom classes to the left sidebar.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_left_sidebar_classes( $classes ) {
 		$classes[] = 'widget-area';
@@ -144,7 +144,7 @@ if ( ! function_exists( 'blogpress_content_classes' ) ) {
 	 * Adds custom classes to the content container.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_content_classes( $classes ) {
 		$classes[] = 'content-area';
@@ -158,7 +158,7 @@ if ( ! function_exists( 'blogpress_header_classes' ) ) {
 	 * Adds custom classes to the header.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_header_classes( $classes ) {
 		$classes[] = 'site-header';
@@ -180,7 +180,7 @@ if ( ! function_exists( 'blogpress_inside_header_classes' ) ) {
 	 * Adds custom classes to inside the header.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_inside_header_classes( $classes ) {
 		$classes[] = 'inside-header';
@@ -198,7 +198,7 @@ if ( ! function_exists( 'blogpress_navigation_classes' ) ) {
 	 * Adds custom classes to the navigation.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_navigation_classes( $classes ) {
 		$classes[] = 'main-navigation';
@@ -276,7 +276,7 @@ if ( ! function_exists( 'blogpress_menu_classes' ) ) {
 	 * Adds custom classes to the menu.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_menu_classes( $classes ) {
 		$classes[] = 'menu';
@@ -291,7 +291,7 @@ if ( ! function_exists( 'blogpress_footer_classes' ) ) {
 	 * Adds custom classes to the footer.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_footer_classes( $classes ) {
 		$classes[] = 'site-footer';
@@ -314,7 +314,7 @@ if ( ! function_exists( 'blogpress_inside_footer_classes' ) ) {
 	 * Adds custom classes to the footer.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_inside_footer_classes( $classes ) {
 		$classes[] = 'footer-widgets-container';
@@ -332,7 +332,7 @@ if ( ! function_exists( 'blogpress_main_classes' ) ) {
 	 * Adds custom classes to the <main> element
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 */
 	function blogpress_main_classes( $classes ) {
 		$classes[] = 'site-main';

@@ -12,14 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Set our theme version.
-define( 'BLOGPRESS_VERSION', '3.6.1' );
+define( 'BLOGPRESS_VERSION', '1.0.0' );
 
 if ( ! function_exists( 'blogpress_setup' ) ) {
 	add_action( 'after_setup_theme', 'blogpress_setup' );
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 */
 	function blogpress_setup() {
 		// Make theme available for translation.

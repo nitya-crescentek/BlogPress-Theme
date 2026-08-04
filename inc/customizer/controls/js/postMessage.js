@@ -27,8 +27,8 @@ var gpPostMessage = {
 		 */
 		add( id ) {
 			id = id.replace( /[^\w\s]/gi, '-' );
-			if ( null === document.getElementById( 'gp-postmessage-' + id ) || 'undefined' === typeof document.getElementById( 'gp-postmessage-' + id ) ) {
-				jQuery( 'head' ).append( '<style id="gp-postmessage-' + id + '"></style>' );
+			if ( null === document.getElementById( 'bp-postmessage-' + id ) || 'undefined' === typeof document.getElementById( 'bp-postmessage-' + id ) ) {
+				jQuery( 'head' ).append( '<style id="bp-postmessage-' + id + '"></style>' );
 			}
 		},
 
@@ -46,7 +46,7 @@ var gpPostMessage = {
 		addData( id, styles ) {
 			id = id.replace( '[', '-' ).replace( ']', '' );
 			gpPostMessage.styleTag.add( id );
-			jQuery( '#gp-postmessage-' + id ).text( styles );
+			jQuery( '#bp-postmessage-' + id ).text( styles );
 		},
 	},
 

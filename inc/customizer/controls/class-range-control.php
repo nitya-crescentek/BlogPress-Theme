@@ -114,9 +114,9 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_
 		protected function content_template() {
 			?>
 			<div class="blogpress-range-slider-control">
-				<div class="gp-range-title-area">
+				<div class="bp-range-title-area">
 					<# if ( data.label || data.description ) { #>
-						<div class="gp-range-title-info">
+						<div class="bp-range-title-info">
 							<# if ( data.label ) { #>
 								<span class="customize-control-title">{{{ data.label }}}</span>
 							<# } #>
@@ -127,8 +127,8 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_
 						</div>
 					<# } #>
 
-					<div class="gp-range-slider-controls">
-						<span class="gp-device-controls">
+					<div class="bp-range-slider-controls">
+						<span class="bp-device-controls">
 							<# if ( 'undefined' !== typeof ( data.desktop ) ) { #>
 								<span class="blogpress-device-desktop dashicons dashicons-desktop" data-option="desktop" title="{{ data.desktop_label }}"></span>
 							<# } #>
@@ -146,7 +146,7 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_
 					</div>
 				</div>
 
-				<div class="gp-range-slider-areas">
+				<div class="bp-range-slider-areas">
 					<# if ( 'undefined' !== typeof ( data.desktop ) ) { #>
 						<label class="range-option-area" data-option="desktop" style="display: none;">
 							<div class="wrapper <# if ( '' !== data.choices['desktop']['unit'] ) { #>has-unit<# } #>">
