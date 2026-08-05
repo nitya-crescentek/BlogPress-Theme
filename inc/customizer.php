@@ -14,7 +14,7 @@ add_action( 'customize_register', 'blogpress_set_customizer_helpers', 1 );
  * Set up helpers early so they're always available.
  * Other modules might need access to them at some point.
  *
- * @since 2.0
+ * @since 1.0.0
  */
 function blogpress_set_customizer_helpers() {
 	require_once trailingslashit( get_template_directory() ) . 'inc/customizer/customizer-helpers.php';

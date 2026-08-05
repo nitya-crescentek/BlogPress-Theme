@@ -104,7 +104,7 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 /**
  * Add our comment reply link after the comment text.
  *
- * @since 2.4
+ * @since 1.0.0
  * @param object $comment The comment object.
  * @param array  $args The existing args.
  * @param int    $depth The thread depth.
@@ -128,7 +128,7 @@ add_filter( 'comment_form_defaults', 'blogpress_set_comment_form_defaults' );
 /**
  * Set the default settings for our comments.
  *
- * @since 2.3
+ * @since 1.0.0
  *
  * @param array $defaults The existing defaults.
  * @return array
@@ -153,7 +153,7 @@ add_filter( 'comment_form_default_fields', 'blogpress_filter_comment_fields' );
 /**
  * Customizes the existing comment fields.
  *
- * @since 2.1.2
+ * @since 1.0.0
  * @param array $fields The existing fields.
  * @return array
  */
@@ -189,7 +189,7 @@ function blogpress_filter_comment_fields( $fields ) {
 /**
  * Add the comments template to pages and single posts.
  *
- * @since 3.0.0
+ * @since 1.0.0
  * @param string $template The template we're targeting.
  */
 function blogpress_do_comments_template( $template ) {

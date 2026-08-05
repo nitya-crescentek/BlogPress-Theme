@@ -52,7 +52,7 @@ if ( ! function_exists( 'blogpress_featured_page_header_area' ) ) {
 	/**
 	 * Build the page header.
 	 *
-	 * @since 1.0.7
+	 * @since 1.0.0
 	 *
 	 * @param string $class The featured image container class.
 	 */
@@ -91,7 +91,7 @@ if ( ! function_exists( 'blogpress_featured_page_header' ) ) {
 	/**
 	 * Add page header above content.
 	 *
-	 * @since 1.0.2
+	 * @since 1.0.0
 	 */
 	function blogpress_featured_page_header() {
 		if ( function_exists( 'blogpress_page_header' ) ) {
@@ -109,7 +109,7 @@ if ( ! function_exists( 'blogpress_featured_page_header_inside_single' ) ) {
 	 * Add post header inside content.
 	 * Only add to single post.
 	 *
-	 * @since 1.0.7
+	 * @since 1.0.0
 	 */
 	function blogpress_featured_page_header_inside_single() {
 		if ( function_exists( 'blogpress_page_header' ) ) {

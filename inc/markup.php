@@ -258,7 +258,7 @@ if ( ! function_exists( 'blogpress_inside_navigation_classes' ) ) {
 	 * Adds custom classes to the inner navigation.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 1.3.41
+	 * @since 1.0.0
 	 */
 	function blogpress_inside_navigation_classes( $classes ) {
 		$classes[] = 'inside-navigation';
@@ -345,7 +345,7 @@ if ( ! function_exists( 'blogpress_main_classes' ) ) {
  * Adds custom classes to the #page element
  *
  * @param array $classes The existing classes.
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_do_page_container_classes( $classes ) {
 	$classes[] = 'site';
@@ -363,7 +363,7 @@ function blogpress_do_page_container_classes( $classes ) {
  * Adds custom classes to the comment author element
  *
  * @param array $classes The existing classes.
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_do_comment_author_classes( $classes ) {
 	$classes[] = 'comment-author';
@@ -382,7 +382,7 @@ if ( ! function_exists( 'blogpress_post_classes' ) ) {
 	 * Remove .hentry class from pages to comply with structural data guidelines.
 	 *
 	 * @param array $classes The existing classes.
-	 * @since 1.3.39
+	 * @since 1.0.0
 	 */
 	function blogpress_post_classes( $classes ) {
 		if ( 'page' === get_post_type() || ! blogpress_is_using_hatom() ) {

@@ -13,7 +13,7 @@ add_action( 'after_setup_theme', 'blogpress_setup_woocommerce' );
 /**
  * Set up WooCommerce
  *
- * @since 1.3.47
+ * @since 1.0.0
  */
 function blogpress_setup_woocommerce() {
 	if ( ! class_exists( 'WooCommerce' ) ) {
@@ -53,7 +53,7 @@ function blogpress_setup_woocommerce() {
 /**
  * Get the tag name for our WooCommerce wrappers.
  *
- * @since 3.2.0
+ * @since 1.0.0
  */
 function blogpress_get_woocommerce_wrapper_tagname() {
 	echo is_singular()
@@ -66,7 +66,7 @@ if ( ! function_exists( 'blogpress_woocommerce_start' ) ) {
 	/**
 	 * Add WooCommerce starting wrappers
 	 *
-	 * @since 1.3.22
+	 * @since 1.0.0
 	 */
 	function blogpress_woocommerce_start() {
 		?>
@@ -95,7 +95,7 @@ if ( ! function_exists( 'blogpress_woocommerce_end' ) ) {
 	/**
 	 * Add WooCommerce ending wrappers
 	 *
-	 * @since 1.3.22
+	 * @since 1.0.0
 	 */
 	function blogpress_woocommerce_end() {
 		?>
@@ -117,7 +117,7 @@ if ( ! function_exists( 'blogpress_woocommerce_css' ) ) {
 	/**
 	 * Add WooCommerce CSS
 	 *
-	 * @since 1.3.45
+	 * @since 1.0.0
 	 */
 	function blogpress_woocommerce_css() {
 		if ( ! class_exists( 'WooCommerce' ) ) {
@@ -275,7 +275,7 @@ if ( ! function_exists( 'blogpress_bbpress_css' ) ) {
 	/**
 	 * Add bbPress CSS
 	 *
-	 * @since 1.3.45
+	 * @since 1.0.0
 	 */
 	function blogpress_bbpress_css() {
 		if ( ! class_exists( 'bbPress' ) ) {
@@ -318,7 +318,7 @@ if ( ! function_exists( 'blogpress_buddypress_css' ) ) {
 	/**
 	 * Add BuddyPress CSS
 	 *
-	 * @since 1.3.45
+	 * @since 1.0.0
 	 */
 	function blogpress_buddypress_css() {
 		if ( ! class_exists( 'BuddyPress' ) ) {
@@ -349,7 +349,7 @@ if ( ! function_exists( 'blogpress_beaver_builder_css' ) ) {
 	 *
 	 * So instead, we only apply this CSS to posts older than the date of this update.
 	 *
-	 * @since 1.3.45
+	 * @since 1.0.0
 	 */
 	function blogpress_beaver_builder_css() {
 		return;
@@ -386,7 +386,7 @@ add_action( 'wp_enqueue_scripts', 'blogpress_do_third_party_plugin_css', 50 );
 /**
  * Add CSS for third-party plugins.
  *
- * @since 3.0.1
+ * @since 1.0.0
  */
 function blogpress_do_third_party_plugin_css() {
 	$css = new BlogPress_CSS();

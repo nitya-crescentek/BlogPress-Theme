@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * A wrapper function to get our options.
  *
- * @since 2.2
+ * @since 1.0.0
  *
  * @param string $option The option name to look up.
  * @return string The option value.
@@ -90,7 +90,7 @@ if ( ! function_exists( 'blogpress_show_excerpt' ) ) {
 	/**
 	 * Figure out if we should show the blog excerpts or full posts
 	 *
-	 * @since 1.3.15
+	 * @since 1.0.0
 	 */
 	function blogpress_show_excerpt() {
 		global $post;
@@ -116,7 +116,7 @@ if ( ! function_exists( 'blogpress_show_title' ) ) {
 	/**
 	 * Check to see if we should show our page/post title or not.
 	 *
-	 * @since 1.3.18
+	 * @since 1.0.0
 	 *
 	 * @return bool Whether to show the content title.
 	 */
@@ -132,7 +132,7 @@ if ( ! function_exists( 'blogpress_show_title' ) ) {
 /**
  * Check whether we should display the entry header or not.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_show_entry_header() {
 	return blogpress_show_title();
@@ -170,7 +170,7 @@ if ( ! function_exists( 'blogpress_get_link_url' ) ) {
 	 *
 	 * Falls back to the post permalink if no URL is found in the post.
 	 *
-	 * @since 1.2.5
+	 * @since 1.0.0
 	 *
 	 * @see get_url_in_content()
 	 * @return string The Link format URL.
@@ -187,7 +187,7 @@ if ( ! function_exists( 'blogpress_get_navigation_location' ) ) {
 	/**
 	 * Get the location of the navigation and filter it.
 	 *
-	 * @since 1.3.41
+	 * @since 1.0.0
 	 *
 	 * @return string The primary menu location.
 	 */
@@ -199,7 +199,7 @@ if ( ! function_exists( 'blogpress_get_navigation_location' ) ) {
 /**
  * Check if the logo and site branding are active.
  *
- * @since 2.3
+ * @since 1.0.0
  */
 function blogpress_has_logo_site_branding() {
 	$has_site_title = ! blogpress_get_option( 'hide_title' ) && get_bloginfo( 'title' );
@@ -215,7 +215,7 @@ function blogpress_has_logo_site_branding() {
 /**
  * Create SVG icons.
  *
- * @since 2.3
+ * @since 1.0.0
  *
  * @param string $icon The icon to get.
  * @param bool   $replace Whether we're replacing an icon on action (click).
@@ -290,7 +290,7 @@ function blogpress_get_svg_icon( $icon, $replace = false ) {
 /**
  * Out our icon HTML.
  *
- * @since 2.3
+ * @since 1.0.0
  *
  * @param string $icon The icon to print.
  * @param bool   $replace Whether to include the close icon to be shown using JS.
@@ -302,7 +302,7 @@ function blogpress_do_svg_icon( $icon, $replace = false ) {
 /**
  * Get our media queries.
  *
- * @since 2.4
+ * @since 1.0.0
  *
  * @param string $name Name of the media query.
  * @return string The full media query.
@@ -327,7 +327,7 @@ function blogpress_get_media_query( $name ) {
 /**
  * Display HTML classes for an element.
  *
- * @since 2.2
+ * @since 1.0.0
  *
  * @param string       $context The element we're targeting.
  * @param string|array $class One or more classes to add to the class list.
@@ -345,7 +345,7 @@ function blogpress_do_element_classes( $context, $class = '' ) {
 /**
  * Retrieve HTML classes for an element.
  *
- * @since 2.2
+ * @since 1.0.0
  *
  * @param string       $context The element we're targeting.
  * @param string|array $class One or more classes to add to the class list.
@@ -414,7 +414,7 @@ function blogpress_get_element_classes( $context, $class = '' ) {
 /**
  * Get the kind of schema we're using.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_get_schema_type() {
 	return 'microdata';
@@ -423,7 +423,7 @@ function blogpress_get_schema_type() {
 /**
  * Get any necessary microdata.
  *
- * @since 2.2
+ * @since 1.0.0
  *
  * @param string $context The element to target.
  * @return string Our final attribute to add to the element.
@@ -497,7 +497,7 @@ function blogpress_get_microdata( $context ) {
 /**
  * Output our microdata for an element.
  *
- * @since 2.2
+ * @since 1.0.0
  *
  * @param string $context The element to target.
  */
@@ -508,7 +508,7 @@ function blogpress_do_microdata( $context ) {
 /**
  * Whether to print hAtom output or not.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_is_using_hatom() {
 	return true;
@@ -517,7 +517,7 @@ function blogpress_is_using_hatom() {
 /**
  * Check if we have any menu bar items.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_has_menu_bar_items() {
 	if ( 'enable' === blogpress_get_option( 'nav_search' ) ) {
@@ -530,7 +530,7 @@ function blogpress_has_menu_bar_items() {
 /**
  * Check if we should include the default template part.
  *
- * @since 3.0.0
+ * @since 1.0.0
  * @param string $template The template to get.
  */
 function blogpress_do_template_part( $template ) {
@@ -548,7 +548,7 @@ function blogpress_do_template_part( $template ) {
 /**
  * Check if we should use inline mobile navigation.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_has_inline_mobile_toggle() {
 	$has_inline_mobile_toggle = 'nav-float-right' === blogpress_get_navigation_location() || 'nav-float-left' === blogpress_get_navigation_location();
@@ -559,7 +559,7 @@ function blogpress_has_inline_mobile_toggle() {
 /**
  * Build our the_title() parameters.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_get_the_title_parameters() {
 	$params = array(
@@ -598,7 +598,7 @@ function blogpress_get_the_title_parameters() {
 /**
  * Check whether we should display the default loop or not.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_has_default_loop() {
 	return true;
@@ -607,7 +607,7 @@ function blogpress_has_default_loop() {
 /**
  * Detemine whether to output site branding container.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_needs_site_branding_container() {
 	$container = false;
@@ -624,7 +624,7 @@ function blogpress_needs_site_branding_container() {
  *
  * The contextual filter is of the form `blogpress_attr_{context}`.
  *
- * @since 3.1.0
+ * @since 1.0.0
  *
  * @param string $context    The context, to build filter name.
  * @param array  $attributes Optional. Extra attributes to merge with defaults.
@@ -653,7 +653,7 @@ function blogpress_parse_attr( $context, $attributes = array(), $settings = arra
  *
  * The contextual filter is of the form `blogpress_attr_{context}_output`.
  *
- * @since 3.1.0
+ * @since 1.0.0
  *
  * @param string $context    The context, to build filter name.
  * @param array  $attributes Optional. Extra attributes to merge with defaults.
@@ -700,7 +700,7 @@ function blogpress_get_attr( $context, $attributes = array(), $settings = array(
 /**
  * Output our string of HTML attributes.
  *
- * @since 3.1.0
+ * @since 1.0.0
  *
  * @param string $context    The context, to build filter name.
  * @param array  $attributes Optional. Extra attributes to merge with defaults.
@@ -713,7 +713,7 @@ function blogpress_do_attr( $context, $attributes = array(), $settings = array()
 /**
  * Build our editor color palette based on our global colors.
  *
- * @since 3.1.0
+ * @since 1.0.0
  */
 function blogpress_get_editor_color_palette() {
 	$global_colors = blogpress_get_option( 'global_colors' );
@@ -736,7 +736,7 @@ function blogpress_get_editor_color_palette() {
 /**
  * Get our global colors.
  *
- * @since 3.1.0
+ * @since 1.0.0
  */
 function blogpress_get_global_colors() {
 	$global_colors = blogpress_get_option( 'global_colors' );
@@ -757,7 +757,7 @@ function blogpress_get_global_colors() {
 /**
  * Get our system default font.
  *
- * @since 3.1.0
+ * @since 1.0.0
  */
 function blogpress_get_system_default_font() {
 	return '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
@@ -767,7 +767,7 @@ function blogpress_get_system_default_font() {
  * Check to see if we have a GP menu active.
  * This is primarily used to know whether we need to enqueue menu.js or not.
  *
- * @since 3.1.0
+ * @since 1.0.0
  */
 function blogpress_has_active_menu() {
 	$has_active_menu = true;

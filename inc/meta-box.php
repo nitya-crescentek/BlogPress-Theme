@@ -13,7 +13,7 @@ add_action( 'admin_enqueue_scripts', 'blogpress_enqueue_meta_box_scripts' );
 /**
  * Adds any scripts for this meta box.
  *
- * @since 2.0
+ * @since 1.0.0
  *
  * @param string $hook The current admin page.
  */
@@ -33,7 +33,7 @@ add_action( 'add_meta_boxes', 'blogpress_register_layout_meta_box' );
 /**
  * Blogpress the layout metabox
  *
- * @since 2.0
+ * @since 1.0.0
  */
 function blogpress_register_layout_meta_box() {
 	if ( ! current_user_can( 'edit_theme_options' ) ) {
@@ -71,7 +71,7 @@ function blogpress_register_layout_meta_box() {
 /**
  * Build our meta box.
  *
- * @since 2.0
+ * @since 1.0.0
  *
  * @param object $post All post information.
  */
@@ -202,7 +202,7 @@ add_action( 'save_post', 'blogpress_save_layout_meta_data' );
 /**
  * Saves the sidebar layout meta data.
  *
- * @since 2.0
+ * @since 1.0.0
  * @param int $post_id Post ID.
  */
 function blogpress_save_layout_meta_data( $post_id ) {

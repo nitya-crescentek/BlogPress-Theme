@@ -13,7 +13,7 @@ if ( ! function_exists( 'blogpress_construct_footer' ) ) {
 	/**
 	 * Build our footer.
 	 *
-	 * @since 1.3.42
+	 * @since 1.0.0
 	 */
 	function blogpress_construct_footer() {
 		?>
@@ -37,7 +37,7 @@ if ( ! function_exists( 'blogpress_footer_bar' ) ) {
 	/**
 	 * Build our footer bar
 	 *
-	 * @since 1.3.42
+	 * @since 1.0.0
 	 */
 	function blogpress_footer_bar() {
 		if ( ! is_active_sidebar( 'footer-bar' ) ) {
@@ -74,7 +74,7 @@ if ( ! function_exists( 'blogpress_add_footer_info' ) ) {
  * Build our individual footer widgets.
  * Displays a sample widget if no widget is found in the area.
  *
- * @since 2.0
+ * @since 1.0.0
  *
  * @param int $widget_width The width class of our widget.
  * @param int $widget The ID of our widget.
@@ -96,7 +96,7 @@ if ( ! function_exists( 'blogpress_construct_footer_widgets' ) ) {
 	/**
 	 * Build our footer widgets.
 	 *
-	 * @since 1.3.42
+	 * @since 1.0.0
 	 */
 	function blogpress_construct_footer_widgets() {
 		// Get how many widgets to show.
@@ -168,7 +168,7 @@ if ( ! function_exists( 'blogpress_back_to_top' ) ) {
 	/**
 	 * Build the back to top button
 	 *
-	 * @since 1.3.24
+	 * @since 1.0.0
 	 */
 	function blogpress_back_to_top() {
 		$blogpress_settings = wp_parse_args(

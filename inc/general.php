@@ -206,7 +206,7 @@ if ( ! function_exists( 'blogpress_resource_hints' ) ) {
 	/**
 	 * Add resource hints to our Google fonts call.
 	 *
-	 * @since 1.3.42
+	 * @since 1.0.0
 	 *
 	 * @param array  $urls           URLs to print for resource hints.
 	 * @param string $relation_type  The relation type the URLs are printed.
@@ -288,7 +288,7 @@ if ( ! function_exists( 'blogpress_categorized_blog' ) ) {
 	/**
 	 * Determine whether blog/site has more than one category.
 	 *
-	 * @since 1.2.5
+	 * @since 1.0.0
 	 *
 	 * @return bool True of there is more than one category, false otherwise.
 	 */
@@ -327,7 +327,7 @@ if ( ! function_exists( 'blogpress_category_transient_flusher' ) ) {
 	/**
 	 * Flush out the transients used in {@see blogpress_categorized_blog()}.
 	 *
-	 * @since 1.2.5
+	 * @since 1.0.0
 	 */
 	function blogpress_category_transient_flusher() {
 		// Like, beat it. Dig?
@@ -339,7 +339,7 @@ if ( ! function_exists( 'blogpress_get_default_color_palettes' ) ) {
 	/**
 	 * Set up our colors for the color picker palettes and filter them so you can change them.
 	 *
-	 * @since 1.3.42
+	 * @since 1.0.0
 	 */
 	function blogpress_get_default_color_palettes() {
 		$palettes = array(
@@ -363,7 +363,7 @@ add_filter( 'wp_headers', 'blogpress_set_wp_headers' );
  *
  * @param array $headers The existing headers.
  *
- * @since 2.3
+ * @since 1.0.0
  */
 function blogpress_set_wp_headers( $headers ) {
 	$headers['X-UA-Compatible'] = 'IE=edge';
@@ -374,7 +374,7 @@ function blogpress_set_wp_headers( $headers ) {
 /**
  * Adds microdata to elements.
  *
- * @since 3.0.0
+ * @since 1.0.0
  * @param string $output The existing output after the class attribute.
  * @param string $context What element we're targeting.
  */
@@ -404,7 +404,7 @@ add_action( 'wp_footer', 'blogpress_do_a11y_scripts' );
 /**
  * Enqueue scripts in the footer.
  *
- * @since 3.1.0
+ * @since 1.0.0
  */
 function blogpress_do_a11y_scripts() {
 	if ( true && function_exists( 'wp_print_inline_script_tag' ) ) {

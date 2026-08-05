@@ -24,7 +24,7 @@ class BlogPress_Customize_Field {
 	/**
 	 * Initiator.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 * @return object initialized object of class.
 	 */
 	public static function get_instance() {

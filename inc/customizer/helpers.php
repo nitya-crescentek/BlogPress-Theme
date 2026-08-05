@@ -13,7 +13,7 @@ if ( ! function_exists( 'blogpress_is_footer_bar_active' ) ) {
 	/**
 	 * Check to see if we're using our footer bar widget
 	 *
-	 * @since 1.3.42
+	 * @since 1.0.0
 	 */
 	function blogpress_is_footer_bar_active() {
 		return ( is_active_sidebar( 'footer-bar' ) ) ? true : false;
@@ -24,7 +24,7 @@ if ( ! function_exists( 'blogpress_is_top_bar_active' ) ) {
 	/**
 	 * Check to see if the top bar is active
 	 *
-	 * @since 1.3.45
+	 * @since 1.0.0
 	 */
 	function blogpress_is_top_bar_active() {
 		$top_bar = is_active_sidebar( 'top-bar' ) ? true : false;
@@ -36,7 +36,7 @@ if ( ! function_exists( 'blogpress_customize_partial_blogname' ) ) {
 	/**
 	 * Render the site title for the selective refresh partial.
 	 *
-	 * @since 1.3.41
+	 * @since 1.0.0
 	 */
 	function blogpress_customize_partial_blogname() {
 		bloginfo( 'name' );
@@ -47,7 +47,7 @@ if ( ! function_exists( 'blogpress_customize_partial_blogdescription' ) ) {
 	/**
 	 * Render the site tagline for the selective refresh partial.
 	 *
-	 * @since 1.3.41
+	 * @since 1.0.0
 	 */
 	function blogpress_customize_partial_blogdescription() {
 		bloginfo( 'description' );
@@ -59,7 +59,7 @@ if ( ! function_exists( 'blogpress_enqueue_color_palettes' ) ) {
 	/**
 	 * Add our custom color palettes to the color pickers in the Customizer.
 	 *
-	 * @since 1.3.42
+	 * @since 1.0.0
 	 */
 	function blogpress_enqueue_color_palettes() {
 		// Old versions of WP don't get nice things.
@@ -93,7 +93,7 @@ if ( ! function_exists( 'blogpress_sanitize_integer' ) ) {
 /**
  * Sanitize a positive number, but allow an empty value.
  *
- * @since 2.2
+ * @since 1.0.0
  * @param string $input The value to check.
  */
 function blogpress_sanitize_empty_absint( $input ) {
@@ -144,7 +144,7 @@ if ( ! function_exists( 'blogpress_sanitize_hex_color' ) ) {
 	 * Sanitize colors.
 	 * Allow blank value.
 	 *
-	 * @since 1.2.9.6
+	 * @since 1.0.0
 	 * @param string $color The color to check.
 	 */
 	function blogpress_sanitize_hex_color( $color ) {
@@ -186,7 +186,7 @@ if ( ! function_exists( 'blogpress_sanitize_hex_color' ) ) {
 /**
  * Sanitize RGBA colors.
  *
- * @since 2.2
+ * @since 1.0.0
  * @param string $color The color to check.
  */
 function blogpress_sanitize_rgba_color( $color ) {
@@ -208,7 +208,7 @@ if ( ! function_exists( 'blogpress_sanitize_choices' ) ) {
 	/**
 	 * Sanitize choices.
 	 *
-	 * @since 1.3.24
+	 * @since 1.0.0
 	 * @param string $input The value to check.
 	 * @param object $setting The setting object.
 	 */
@@ -234,7 +234,7 @@ add_action( 'customize_controls_enqueue_scripts', 'blogpress_do_control_inline_s
  * We don't want to add these to the controls themselves, as they will be repeated
  * each time the control is initialized.
  *
- * @since 2.0
+ * @since 1.0.0
  */
 function blogpress_do_control_inline_scripts() {
 	wp_enqueue_script( 'blogpress-customizer-controls', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/controls/js/customizer-controls.js', array( 'customize-controls', 'jquery' ), BLOGPRESS_VERSION, true );
@@ -356,7 +356,7 @@ if ( ! function_exists( 'blogpress_customizer_live_preview' ) ) {
  * Used as an active callback. Calling has_custom_logo creates a PHP notice for
  * multisite users.
  *
- * @since 2.0.1
+ * @since 1.0.0
  */
 function blogpress_has_custom_logo_callback() {
 	if ( get_theme_mod( 'custom_logo' ) ) {
@@ -369,7 +369,7 @@ function blogpress_has_custom_logo_callback() {
 /**
  * Save our preset layout controls. These should always save to be "current".
  *
- * @since 2.2
+ * @since 1.0.0
  */
 function blogpress_sanitize_preset_layout() {
 	return 'current';

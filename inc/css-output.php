@@ -783,7 +783,7 @@ if ( ! function_exists( 'blogpress_spacing_css' ) ) {
 /**
  * Blogpresss any CSS that can't be cached (can change from page to page).
  *
- * @since 2.0
+ * @since 1.0.0
  */
 function blogpress_no_cache_dynamic_css() {
 	$css = new BlogPress_CSS();
@@ -860,7 +860,7 @@ function blogpress_no_cache_dynamic_css() {
 /**
  * Get all of our dynamic CSS to be cached/added to a file.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_get_dynamic_css() {
 	$typography_css = BlogPress_Typography::get_css();
@@ -874,7 +874,7 @@ add_action( 'wp_enqueue_scripts', 'blogpress_enqueue_dynamic_css', 50 );
 /**
  * Enqueue our dynamic CSS.
  *
- * @since 2.0
+ * @since 1.0.0
  */
 function blogpress_enqueue_dynamic_css() {
 	if ( false ) {
@@ -896,7 +896,7 @@ add_action( 'init', 'blogpress_set_dynamic_css_cache' );
  *
  * If the theme version changed, bust the cache.
  *
- * @since 2.0
+ * @since 1.0.0
  */
 function blogpress_set_dynamic_css_cache() {
 	if ( ! blogpress_get_option( 'dynamic_css_cache' ) ) {
@@ -918,7 +918,7 @@ add_action( 'customize_save_after', 'blogpress_update_dynamic_css_cache' );
 /**
  * Update our CSS cache when done saving Customizer options.
  *
- * @since 2.0
+ * @since 1.0.0
  */
 function blogpress_update_dynamic_css_cache() {
 	if ( ! blogpress_get_option( 'dynamic_css_cache' ) ) {

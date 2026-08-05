@@ -25,7 +25,7 @@ class BlogPress_Customize_Color_Control extends WP_Customize_Color_Control {
 	/**
 	 * Refresh the parameters passed to the JavaScript via JSON.
 	 *
-	 * @since 3.4.0
+	 * @since 1.0.0
 	 * @uses WP_Customize_Control::to_json()
 	 */
 	public function to_json() {

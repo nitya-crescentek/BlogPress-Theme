@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	/**
 	 * wp_body_open hook.
 	 *
-	 * @since 2.3
+	 * @since 1.0.0
 	 */
 	do_action( 'wp_body_open' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- core WP hook.
 

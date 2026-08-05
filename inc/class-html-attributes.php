@@ -40,7 +40,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Parse the attributes.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array  $attributes The current attributes.
 	 * @param string $context The context in which attributes are applied.
 	 * @param array  $settings Custom settings passed to the filter.
@@ -126,7 +126,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our top bar.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function top_bar( $attributes ) {
@@ -142,7 +142,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our inside top bar container.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function inside_top_bar( $attributes ) {
@@ -158,7 +158,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our site header.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function site_header( $attributes ) {
@@ -171,7 +171,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our inside site header container.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function inside_site_header( $attributes ) {
@@ -187,7 +187,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our menu toggle.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function menu_toggle( $attributes ) {
@@ -201,7 +201,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our main navigation.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function primary_navigation( $attributes ) {
@@ -214,7 +214,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our main navigation.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function primary_inner_navigation( $attributes ) {
@@ -230,7 +230,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our main navigation.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function mobile_menu_control_wrapper( $attributes ) {
@@ -244,7 +244,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our footer element.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function site_info( $attributes ) {
@@ -257,7 +257,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our inside site info container.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function inside_site_info( $attributes ) {
@@ -273,7 +273,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our entry headers.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function entry_header( $attributes ) {
@@ -285,7 +285,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our page headers.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function page_header( $attributes ) {
@@ -298,7 +298,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our entry headers.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function post_navigation( $attributes ) {
@@ -316,7 +316,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our page container.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function page( $attributes ) {
@@ -328,7 +328,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our site content container.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function site_content( $attributes ) {
@@ -341,7 +341,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our primary content container.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function content( $attributes ) {
@@ -353,7 +353,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our primary content container.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function main( $attributes ) {
@@ -365,7 +365,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our left sidebar.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function left_sidebar( $attributes ) {
@@ -383,7 +383,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our right sidebar.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function right_sidebar( $attributes ) {
@@ -401,7 +401,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our footer widget inner container.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function footer_widgets_container( $attributes ) {
@@ -417,7 +417,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our footer widget inner container.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 * @param array $settings Settings passed through the function.
 	 */
@@ -431,7 +431,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our comment meta.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function comment_meta( $attributes ) {
@@ -444,7 +444,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our footer entry meta.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function footer_entry_meta( $attributes ) {
@@ -457,7 +457,7 @@ class BlogPress_HTML_Attributes {
 	/**
 	 * Add attributes to our WooCommerce content container.
 	 *
-	 * @since 3.2.0
+	 * @since 1.0.0
 	 * @param array $attributes The existing attributes.
 	 */
 	public function woocommerce_content( $attributes ) {

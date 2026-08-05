@@ -13,7 +13,7 @@ if ( ! function_exists( 'blogpress_archive_title' ) ) {
 	/**
 	 * Build the archive title
 	 *
-	 * @since 1.3.24
+	 * @since 1.0.0
 	 */
 	function blogpress_archive_title() {
 		if ( ! function_exists( 'the_archive_title' ) ) {
@@ -41,7 +41,7 @@ if ( ! function_exists( 'blogpress_filter_the_archive_title' ) ) {
 	/**
 	 * Alter the_archive_title() function to match our original archive title function
 	 *
-	 * @since 1.3.45
+	 * @since 1.0.0
 	 *
 	 * @param string $title The archive title.
 	 * @return string The altered archive title
@@ -79,7 +79,7 @@ if ( ! function_exists( 'blogpress_filter_the_archive_title' ) ) {
 /**
  * Output the archive description.
  *
- * @since 2.3
+ * @since 1.0.0
  */
 function blogpress_do_archive_description() {
 	$term_description = get_the_archive_description();
@@ -96,7 +96,7 @@ function blogpress_do_archive_description() {
 /**
  * Add the search results title to the search results page.
  *
- * @since 3.1.0
+ * @since 1.0.0
  * @param string $template The template we're targeting.
  */
 function blogpress_do_search_results_title( $template ) {

@@ -119,7 +119,7 @@ if ( ! function_exists( 'blogpress_modify_posts_pagination_template' ) ) {
 	 * Remove the container and screen reader text from the_posts_pagination()
 	 * We add this in ourselves in blogpress_content_nav()
 	 *
-	 * @since 1.3.45
+	 * @since 1.0.0
 	 *
 	 * @param string $template The default template.
 	 * @param string $class The class passed by the calling function.
@@ -137,7 +137,7 @@ if ( ! function_exists( 'blogpress_modify_posts_pagination_template' ) ) {
 /**
  * Output requested post meta.
  *
- * @since 2.3
+ * @since 1.0.0
  *
  * @param string $item The post meta item we're requesting.
  */
@@ -238,7 +238,7 @@ function blogpress_do_post_meta_item( $item ) {
 /**
  * Add svg icons or text to our post meta output.
  *
- * @since 2.4
+ * @since 1.0.0
  * @param string $output The existing output.
  * @param string $item The item to target.
  */
@@ -265,7 +265,7 @@ function blogpress_do_post_meta_prefix( $output, $item ) {
 /**
  * Remove post meta items that shouldn't display in the current context.
  *
- * @since 3.0.0
+ * @since 1.0.0
  * @param array $items The post meta items.
  */
 function blogpress_disable_post_meta_items( $items ) {
@@ -279,7 +279,7 @@ function blogpress_disable_post_meta_items( $items ) {
 /**
  * Get the post meta items in the header entry meta.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_get_header_entry_meta_items() {
 	$items = array(
@@ -296,7 +296,7 @@ function blogpress_get_header_entry_meta_items() {
 /**
  * Get the post meta items in the footer entry meta.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_get_footer_entry_meta_items() {
 	$items = array(
@@ -335,7 +335,7 @@ if ( ! function_exists( 'blogpress_entry_meta' ) ) {
 	/**
 	 * Prints HTML with meta information for the categories, tags.
 	 *
-	 * @since 1.2.5
+	 * @since 1.0.0
 	 */
 	function blogpress_entry_meta() {
 		$items = blogpress_get_footer_entry_meta_items();
@@ -392,7 +392,7 @@ add_action( 'wp', 'blogpress_add_post_meta', 5 );
 /**
  * Add our post meta items to the page.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_add_post_meta() {
 	$header_items = blogpress_get_header_entry_meta_items();
@@ -418,7 +418,7 @@ if ( ! function_exists( 'blogpress_post_meta' ) ) {
 	/**
 	 * Build the post meta.
 	 *
-	 * @since 1.3.29
+	 * @since 1.0.0
 	 */
 	function blogpress_post_meta() {
 		?>
@@ -433,7 +433,7 @@ if ( ! function_exists( 'blogpress_footer_meta' ) ) {
 	/**
 	 * Build the footer post meta.
 	 *
-	 * @since 1.3.30
+	 * @since 1.0.0
 	 */
 	function blogpress_footer_meta() {
 		?>
@@ -447,7 +447,7 @@ if ( ! function_exists( 'blogpress_footer_meta' ) ) {
 /**
  * Add our post navigation after post loops.
  *
- * @since 3.0.0
+ * @since 1.0.0
  * @param string $template The template of the current action.
  */
 function blogpress_do_post_navigation( $template ) {
@@ -465,7 +465,7 @@ function blogpress_do_post_navigation( $template ) {
 /**
  * Returns the read more text for our posts.
  *
- * @since 3.4.0
+ * @since 1.0.0
  */
 function blogpress_get_read_more_text() {
 	return __( 'Read more', 'blogpress' );
@@ -474,7 +474,7 @@ function blogpress_get_read_more_text() {
 /**
  * Returns the read more `aria-label` for our posts.
  *
- * @since 3.4.0
+ * @since 1.0.0
  */
 function blogpress_get_read_more_aria_label() {
 	return sprintf(

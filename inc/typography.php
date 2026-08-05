@@ -737,7 +737,7 @@ if ( ! function_exists( 'blogpress_get_all_google_fonts' ) ) {
 	/**
 	 * Return an array of all of our Google Fonts.
 	 *
-	 * @since 1.3.0
+	 * @since 1.0.0
 	 * @param string $amount How many fonts to return.
 	 * @return array The list of Google Fonts.
 	 */
@@ -782,7 +782,7 @@ if ( ! function_exists( 'blogpress_get_all_google_fonts_ajax' ) ) {
 	/**
 	 * Return an array of all of our Google Fonts.
 	 *
-	 * @since 1.3.0
+	 * @since 1.0.0
 	 */
 	function blogpress_get_all_google_fonts_ajax() {
 		if ( blogpress_is_using_dynamic_typography() ) {
@@ -812,7 +812,7 @@ if ( ! function_exists( 'blogpress_get_google_font_variants' ) ) {
 	 * Wrapper function to find variants for chosen Google Fonts
 	 * Example: blogpress_get_google_font_variation( 'Open Sans' )
 	 *
-	 * @since 1.3.0
+	 * @since 1.0.0
 	 *
 	 * @param string $font The font to look up.
 	 * @param string $key The option to look up.
@@ -866,7 +866,7 @@ if ( ! function_exists( 'blogpress_get_google_font_category' ) ) {
 	 * Wrapper function to find the category for chosen Google Font
 	 * Example: blogpress_get_google_font_category( 'Open Sans' )
 	 *
-	 * @since 1.3.0
+	 * @since 1.0.0
 	 *
 	 * @param string $font The name of our font.
 	 * @param string $key The ID of the font setting.
@@ -915,7 +915,7 @@ if ( ! function_exists( 'blogpress_get_font_family_css' ) ) {
 	/**
 	 * Wrapper function to create font-family value for CSS.
 	 *
-	 * @since 1.3.0
+	 * @since 1.0.0
 	 *
 	 * @param string $font The name of our font.
 	 * @param string $settings The ID of the settings we're looking up.
@@ -975,7 +975,7 @@ if ( ! function_exists( 'blogpress_add_to_font_customizer_list' ) ) {
 	 * Why wouldn't it? Originally, all 800+ fonts were in each list. This has been reduced to 200.
 	 * This functions makes sure that if you were using a font that is now not included in the 200, you won't lose it.
 	 *
-	 * @since 1.3.40
+	 * @since 1.0.0
 	 *
 	 * @param array $fonts The existing fonts.
 	 */
@@ -1053,7 +1053,7 @@ if ( ! function_exists( 'blogpress_typography_set_font_data' ) ) {
 	 * Generally, set_theme_mod isn't best practice, but this is here for migration purposes for a set amount of time only
 	 * Any time a user saves a font in the Customizer from now on, the category and variants are saved as theme_mods, so this function won't be necessary.
 	 *
-	 * @since 1.3.40
+	 * @since 1.0.0
 	 */
 	function blogpress_typography_set_font_data() {
 		if ( blogpress_is_using_dynamic_typography() ) {

@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * We need this function as the post meta in blogpress_get_layout() only runs
  * on is_singular()
  *
- * @since 2.2
+ * @since 1.0.0
  *
  * @param bool $meta Check for post meta.
  * @return string The saved sidebar layout.
@@ -48,7 +48,7 @@ function blogpress_get_block_editor_sidebar_layout( $meta = true ) {
 /**
  * Get the content width for this post.
  *
- * @since 2.2
+ * @since 1.0.0
  */
 function blogpress_get_block_editor_content_width() {
 	$container_width = blogpress_get_option( 'container_width' );
@@ -108,7 +108,7 @@ add_action( 'enqueue_block_editor_assets', 'blogpress_enqueue_backend_block_edit
 /**
  * Add CSS to the admin side of the block editor.
  *
- * @since 2.2
+ * @since 1.0.0
  */
 function blogpress_enqueue_backend_block_editor_assets() {
 	// Our global colors belong on every block editor screen.
@@ -175,7 +175,7 @@ function blogpress_enqueue_backend_block_editor_assets() {
 /**
  * Write our CSS for the block editor.
  *
- * @since 2.2
+ * @since 1.0.0
  * @param string $for Define whether this CSS for the block content or the block editor.
  */
 function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {

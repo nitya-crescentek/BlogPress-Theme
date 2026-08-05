@@ -13,7 +13,7 @@ if ( ! function_exists( 'blogpress_construct_header' ) ) {
 	/**
 	 * Build the header.
 	 *
-	 * @since 1.3.42
+	 * @since 1.0.0
 	 */
 	function blogpress_construct_header() {
 		?>
@@ -36,7 +36,7 @@ if ( ! function_exists( 'blogpress_construct_logo' ) ) {
 	/**
 	 * Build the logo
 	 *
-	 * @since 1.3.28
+	 * @since 1.0.0
 	 */
 	function blogpress_construct_logo() {
 		$logo_url = ( function_exists( 'the_custom_logo' ) && get_theme_mod( 'custom_logo' ) ) ? wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' ) : false;
@@ -98,7 +98,7 @@ if ( ! function_exists( 'blogpress_construct_site_title' ) ) {
 	/**
 	 * Build the site title and tagline.
 	 *
-	 * @since 1.3.28
+	 * @since 1.0.0
 	 */
 	function blogpress_construct_site_title() {
 		$blogpress_settings = wp_parse_args(
@@ -164,7 +164,7 @@ if ( ! function_exists( 'blogpress_construct_header_widget' ) ) {
 	/**
 	 * Build the header widget.
 	 *
-	 * @since 1.3.28
+	 * @since 1.0.0
 	 */
 	function blogpress_construct_header_widget() {
 		if ( is_active_sidebar( 'header' ) ) :
@@ -181,7 +181,7 @@ if ( ! function_exists( 'blogpress_construct_header_widget' ) ) {
  * Add the site logo to our header.
  * Only added if we aren't using floats to preserve backwards compatibility.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_do_site_logo() {
 	if ( blogpress_needs_site_branding_container() ) {
@@ -195,7 +195,7 @@ function blogpress_do_site_logo() {
  * Add the site branding to our header.
  * Only added if we aren't using floats to preserve backwards compatibility.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_do_site_branding() {
 	blogpress_construct_site_title();
@@ -205,7 +205,7 @@ function blogpress_do_site_branding() {
  * Add the header widget to our header.
  * Only used when grid isn't using floats to preserve backwards compatibility.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_do_header_widget() {
 	blogpress_construct_header_widget();
@@ -215,7 +215,7 @@ if ( ! function_exists( 'blogpress_top_bar' ) ) {
 	/**
 	 * Build our top bar.
 	 *
-	 * @since 1.3.45
+	 * @since 1.0.0
 	 */
 	function blogpress_top_bar() {
 		if ( ! is_active_sidebar( 'top-bar' ) ) {
@@ -236,7 +236,7 @@ if ( ! function_exists( 'blogpress_pingback_header' ) ) {
 	/**
 	 * Add a pingback url auto-discovery header for singularly identifiable articles.
 	 *
-	 * @since 1.3.42
+	 * @since 1.0.0
 	 */
 	function blogpress_pingback_header() {
 		if ( is_singular() && pings_open() ) {
@@ -260,7 +260,7 @@ if ( ! function_exists( 'blogpress_add_viewport' ) ) {
 /**
  * Add skip to content link before the header.
  *
- * @since 2.0
+ * @since 1.0.0
  */
 function blogpress_do_skip_to_content_link() {
 	printf(

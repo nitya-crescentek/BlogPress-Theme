@@ -48,7 +48,7 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 				/**
 				 * blogpress_after_mobile_menu_button hook
 				 *
-				 * @since 3.0.0
+				 * @since 1.0.0
 				 */
 
 				wp_nav_menu(
@@ -74,7 +74,7 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 /**
  * Build the mobile menu toggle in the header.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_do_header_mobile_menu_toggle() {
 	if ( ! blogpress_has_inline_mobile_toggle() ) {
@@ -240,7 +240,7 @@ if ( ! class_exists( 'Blogpress_Page_Walker' ) && class_exists( 'Walker_Page' ) 
 	 * Add current-menu-item to the current item if no theme location is set
 	 * This means we don't have to duplicate CSS properties for current_page_item and current-menu-item
 	 *
-	 * @since 1.3.21
+	 * @since 1.0.0
 	 */
 	class Blogpress_Page_Walker extends Walker_Page {
 		function start_el( &$output, $page, $depth = 0, $args = array(), $current_page = 0 ) { // phpcs:ignore
@@ -292,7 +292,7 @@ if ( ! function_exists( 'blogpress_dropdown_icon_to_menu_link' ) ) {
 	/**
 	 * Add dropdown icon if menu item has children.
 	 *
-	 * @since 1.3.42
+	 * @since 1.0.0
 	 *
 	 * @param string   $title The menu item title.
 	 * @param WP_Post  $item All of our menu item data.
@@ -371,7 +371,7 @@ add_filter( 'nav_menu_link_attributes', 'blogpress_set_menu_item_link_attributes
 /**
  * Add attributes to the menu item link when using the Click - Menu Item option.
  *
- * @since 3.5.0
+ * @since 1.0.0
  *
  * @param array    $atts The menu item attributes.
  * @param WP_Post  $item The current menu item.
@@ -428,7 +428,7 @@ if ( ! function_exists( 'blogpress_navigation_search' ) ) {
 /**
  * Add a container for menu bar items.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_do_menu_bar_item_container() {
 	if ( blogpress_has_menu_bar_items() ) {
@@ -442,7 +442,7 @@ function blogpress_do_menu_bar_item_container() {
 /**
  * Add the navigation search button.
  *
- * @since 3.0.0
+ * @since 1.0.0
  */
 function blogpress_do_navigation_search_button() {
 	if ( 'enable' !== blogpress_get_option( 'nav_search' ) ) {
@@ -464,7 +464,7 @@ if ( ! function_exists( 'blogpress_menu_search_icon' ) ) {
 	 * Add search icon to primary menu if set.
 	 * Only used if using old float system.
 	 *
-	 * @since 1.2.9.7
+	 * @since 1.0.0
 	 *
 	 * @param string   $nav The HTML list content for the menu items.
 	 * @param stdClass $args An object containing wp_nav_menu() arguments.
@@ -505,7 +505,7 @@ if ( ! function_exists( 'blogpress_mobile_menu_search_icon' ) ) {
 	 * Add search icon to mobile menu bar.
 	 * Only used if using old float system.
 	 *
-	 * @since 1.3.12
+	 * @since 1.0.0
 	 */
 	function blogpress_mobile_menu_search_icon() {
 		$blogpress_settings = wp_parse_args(
@@ -541,7 +541,7 @@ add_action( 'wp_footer', 'blogpress_clone_sidebar_navigation' );
  * We're not using wp_add_inline_script() as this needs to happens
  * before menu.js is enqueued.
  *
- * @since 2.0
+ * @since 1.0.0
  */
 function blogpress_clone_sidebar_navigation() {
 	if ( 'nav-left-sidebar' !== blogpress_get_navigation_location() && 'nav-right-sidebar' !== blogpress_get_navigation_location() ) {
