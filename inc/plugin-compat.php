@@ -73,6 +73,8 @@ if ( ! function_exists( 'blogpress_woocommerce_start' ) ) {
 		<div <?php blogpress_do_attr( 'content' ); ?>>
 			<main <?php blogpress_do_attr( 'main' ); ?>>
 				<?php
+				/** This action is documented in content.php */
+				do_action( 'blogpress_before_content', 'woocommerce' );
 				?>
 				<<?php blogpress_get_woocommerce_wrapper_tagname(); ?> <?php blogpress_do_attr( 'woocommerce-content' ); ?>>
 					<div class="inside-article">
@@ -85,7 +87,7 @@ if ( ! function_exists( 'blogpress_woocommerce_start' ) ) {
 							$itemprop = ' itemprop="text"';
 						}
 						?>
-						<div class="entry-content"<?php echo $itemprop; // phpcs:ignore -- No escaping needed. ?>>
+						<div class="entry-content"<?php echo $itemprop; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Literal attribute string built above; escaping would break the markup. ?>>
 		<?php
 	}
 }
@@ -101,10 +103,14 @@ if ( ! function_exists( 'blogpress_woocommerce_end' ) ) {
 		?>
 						</div>
 						<?php
+						/** This action is documented in content.php */
+						do_action( 'blogpress_after_entry_content', 'woocommerce' );
 						?>
 					</div>
 				</<?php blogpress_get_woocommerce_wrapper_tagname(); ?>>
 				<?php
+				/** This action is documented in content.php */
+				do_action( 'blogpress_after_content', 'woocommerce' );
 				?>
 			</main>
 		</div>
@@ -214,10 +220,19 @@ if ( ! function_exists( 'blogpress_woocommerce_theme_css' ) ) {
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-		// Load after WooCommerce so we can override it without !important.
-		$deps = wp_style_is( 'woocommerce-general', 'registered' )
-			? array( 'woocommerce-general' )
-			: array();
+		/*
+		 * Load after WooCommerce so we can override it without !important.
+		 * woocommerce-layout carries the 48% float columns on the single
+		 * product template, so it has to be listed too — depending on
+		 * woocommerce-general alone left the ordering to chance.
+		 */
+		$deps = array();
+
+		foreach ( array( 'woocommerce-layout', 'woocommerce-smallscreen', 'woocommerce-general' ) as $handle ) {
+			if ( wp_style_is( $handle, 'registered' ) ) {
+				$deps[] = $handle;
+			}
+		}
 
 		wp_enqueue_style(
 			'blogpress-woocommerce',

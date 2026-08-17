@@ -30,7 +30,7 @@ wp.customize.controlConstructor['blogpress-range-slider'] = wp.customize.Control
 		});
 		
 		// Update the range value based on the input value
-		jQuery( controlClass + ' .gp_range_value input[type=number]' ).on( 'input', function() {
+		jQuery( controlClass + ' .blogpress_range_value input[type=number]' ).on( 'input', function() {
 			value = jQuery( this ).attr( 'value' );
 			if ( '' == value ) {
 				value = -1;
@@ -44,7 +44,7 @@ wp.customize.controlConstructor['blogpress-range-slider'] = wp.customize.Control
 				visible_area = icon.closest( '.bp-range-title-area' ).next( '.bp-range-slider-areas' ).children( 'label:visible' ),
 				input = visible_area.find( 'input[type=number]' ),
 				slider_value = visible_area.find( '.blogpress-slider' ),
-				visual_value = visible_area.find( '.gp_range_value' ),
+				visual_value = visible_area.find( '.blogpress_range_value' ),
 				reset_value = input.attr( 'data-reset_value' );
 			
 			input.val( reset_value ).change();

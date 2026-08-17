@@ -38,14 +38,47 @@ class BlogPress_HTML_Attributes {
 	}
 
 	/**
-	 * Parse the attributes.
+	 * Parse the attributes and apply the contextual filter.
 	 *
 	 * @since 1.0.0
 	 * @param array  $attributes The current attributes.
 	 * @param string $context The context in which attributes are applied.
 	 * @param array  $settings Custom settings passed to the filter.
+	 * @return array The filtered attributes.
 	 */
 	public function parse_attributes( $attributes, $context, $settings ) {
+		$attributes = $this->apply_context_attributes( $attributes, $context, $settings );
+
+		/**
+		 * Filters the parsed HTML attributes for a given element.
+		 *
+		 * The dynamic portion of the hook name, `$context`, refers to the element
+		 * being built — for example `blogpress_attr_header` or
+		 * `blogpress_attr_entry-header`. Note that contexts use hyphens.
+		 *
+		 * Fires after the theme's own classes and microdata have been added, so
+		 * callbacks see the final attribute set.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array  $attributes The parsed attributes, keyed by attribute name.
+		 * @param string $context    The element context.
+		 * @param array  $settings   Custom data passed to the attribute builder.
+		 * @return array The attributes to build the element with.
+		 */
+		return apply_filters( "blogpress_attr_{$context}", $attributes, $context, $settings );
+	}
+
+	/**
+	 * Run the per-context attribute builder for an element.
+	 *
+	 * @since 1.0.0
+	 * @param array  $attributes The current attributes.
+	 * @param string $context The context in which attributes are applied.
+	 * @param array  $settings Custom settings passed to the builder.
+	 * @return array The built attributes, unfiltered.
+	 */
+	protected function apply_context_attributes( $attributes, $context, $settings ) {
 		switch ( $context ) {
 			case 'top-bar':
 				return $this->top_bar( $attributes );

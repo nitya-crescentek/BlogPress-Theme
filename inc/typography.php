@@ -96,7 +96,7 @@ if ( ! function_exists( 'blogpress_enqueue_google_fonts' ) ) {
 		$fonts_url = add_query_arg( $font_args, '//fonts.googleapis.com/css' );
 
 		if ( $google_fonts ) {
-			wp_enqueue_style( 'blogpress-fonts', $fonts_url, array(), null, 'all' ); // phpcs:ignore
+			wp_enqueue_style( 'blogpress-fonts', $fonts_url, array(), null, 'all' ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Remote Google Fonts URL is already versioned by the API.
 		}
 	}
 }
@@ -115,7 +115,7 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 			return;
 		}
 
-		require_once trailingslashit( get_template_directory() ) . 'inc/customizer/customizer-helpers.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
+		require_once trailingslashit( get_template_directory() ) . 'inc/customizer/customizer-helpers.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound -- Loading a theme partial, not external code.
 
 		$defaults = blogpress_get_default_fonts();
 
@@ -789,11 +789,7 @@ if ( ! function_exists( 'blogpress_get_all_google_fonts_ajax' ) ) {
 			wp_die();
 		}
 
-		if ( ! isset( $_POST['gp_customize_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['gp_customize_nonce'] ), 'gp_customize_nonce' ) ) {
-			wp_die();
-		}
-
-		check_ajax_referer( 'gp_customize_nonce', 'gp_customize_nonce' );
+		check_ajax_referer( 'blogpress_customize_nonce', 'blogpress_customize_nonce' );
 
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			wp_die();
@@ -1070,7 +1066,7 @@ if ( ! function_exists( 'blogpress_typography_set_font_data' ) ) {
 		);
 
 		// We don't need to do this if we're using the default font, as these values have defaults already.
-		if ( $defaults['font_body'] == $blogpress_settings['font_body'] ) { // phpcs:ignore
+		if ( $defaults['font_body'] == $blogpress_settings['font_body'] ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- Values may differ in type; loose compare is intentional.
 			return;
 		}
 

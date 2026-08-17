@@ -38,7 +38,7 @@ function blogpress_do_search_modal_trigger() {
 	}
 	?>
 	<span class="menu-bar-item">
-		<a href="#" role="button" aria-label="<?php _e( 'Open search', 'blogpress' ); ?>" aria-haspopup="dialog" aria-controls="bp-search" data-bpmodal-trigger="bp-search"><?php echo blogpress_get_svg_icon( 'search', true ); // phpcs:ignore -- Escaped in function. ?></a>
+		<a href="#" role="button" aria-label="<?php esc_attr_e( 'Open search', 'blogpress' ); ?>" aria-haspopup="dialog" aria-controls="bp-search" data-bpmodal-trigger="bp-search"><?php echo blogpress_get_svg_icon( 'search', true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns a hardcoded SVG string built in the theme. ?></a>
 	</span>
 	<?php
 }
@@ -90,12 +90,19 @@ function blogpress_do_search_modal_css( $css ) {
 function blogpress_do_search_fields() {
 	?>
 	<form role="search" method="get" class="search-modal-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-		<label for="search-modal-input" class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'blogpress' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
+		<label for="search-modal-input" class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'blogpress' ); ?></label>
 		<div class="search-modal-fields">
-			<input id="search-modal-input" type="search" class="search-field" placeholder="<?php echo esc_attr( _x( 'Search &hellip;', 'placeholder', 'blogpress' ) ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
-			<button aria-label="<?php echo esc_attr( _x( 'Search', 'submit button', 'blogpress' ) ); ?>"><?php echo blogpress_get_svg_icon( 'search' ); // phpcs:ignore -- Escaped in function. ?></button>
+			<input id="search-modal-input" type="search" class="search-field" placeholder="<?php echo esc_attr( _x( 'Search &hellip;', 'placeholder', 'blogpress' ) ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s" />
+			<button aria-label="<?php echo esc_attr( _x( 'Search', 'submit button', 'blogpress' ) ); ?>"><?php echo blogpress_get_svg_icon( 'search' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns a hardcoded SVG string built in the theme. ?></button>
 		</div>
-		<?php?>
+		<?php
+		/**
+		 * Fires inside the search modal form, after the search fields.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'blogpress_inside_search_modal_form' );
+		?>
 	</form>
 	<?php
 }

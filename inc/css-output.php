@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! function_exists( 'blogpress_base_css' ) ) {
 	/**
-	 * Blogpress the CSS in the <head> section using the Theme Customizer.
+	 * Output the CSS in the <head> section using the Theme Customizer.
 	 *
 	 * @since 1.0.0
 	 */
@@ -175,7 +175,7 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 			$css->set_selector( '.navigation-search input::-webkit-search-decoration, .navigation-search input::-webkit-search-cancel-button, .navigation-search input::-webkit-search-results-button, .navigation-search input::-webkit-search-results-decoration' );
 			$css->add_property( 'display', 'none' );
 
-			$css->set_selector( '.gen-sidebar-nav .navigation-search' );
+			$css->set_selector( '.blogpress-sidebar-nav .navigation-search' );
 			$css->add_property( 'top', 'auto' );
 			$css->add_property( 'bottom', '0' );
 		}
@@ -268,7 +268,7 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 
 if ( ! function_exists( 'blogpress_advanced_css' ) ) {
 	/**
-	 * Blogpress the CSS in the <head> section using the Theme Customizer.
+	 * Output the CSS in the <head> section using the Theme Customizer.
 	 *
 	 * @since 1.0.0
 	 */
@@ -824,7 +824,7 @@ function blogpress_no_cache_dynamic_css() {
 	$css->set_selector( '.main-navigation .menu-toggle,.sidebar-nav-mobile:not(#sticky-placeholder)' );
 	$css->add_property( 'display', 'block' );
 
-	$css->set_selector( '.main-navigation ul,.gen-sidebar-nav,.main-navigation:not(.slideout-navigation):not(.toggled) .main-nav > ul,.has-inline-mobile-toggle #site-navigation .inside-navigation > *:not(.navigation-search):not(.main-nav)' );
+	$css->set_selector( '.main-navigation ul,.blogpress-sidebar-nav,.main-navigation:not(.slideout-navigation):not(.toggled) .main-nav > ul,.has-inline-mobile-toggle #site-navigation .inside-navigation > *:not(.navigation-search):not(.main-nav)' );
 	$css->add_property( 'display', 'none' );
 
 	$css->set_selector( '.nav-align-right .inside-navigation,.nav-align-center .inside-navigation' );

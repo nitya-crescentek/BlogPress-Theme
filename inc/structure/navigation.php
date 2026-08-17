@@ -17,10 +17,24 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 	 */
 	function blogpress_navigation_position() {
 		blogpress_do_header_mobile_menu_toggle();
+
+		/**
+		 * Fires before the primary navigation element is output.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'blogpress_before_navigation' );
 		?>
 		<nav <?php blogpress_do_attr( 'navigation' ); ?>>
 			<div <?php blogpress_do_attr( 'inside-navigation' ); ?>>
 				<?php
+				/**
+				 * Fires inside the navigation container, before the menu.
+				 *
+				 * @since 1.0.0
+				 */
+				do_action( 'blogpress_inside_navigation' );
+
 				blogpress_navigation_search();
 				blogpress_mobile_menu_search_icon();
 				?>
@@ -30,6 +44,9 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 					blogpress_do_svg_icon( 'menu-bars', true );
 
 					$mobile_menu_label = __( 'Menu', 'blogpress' );
+
+					/** This filter is documented in inc/structure/navigation.php */
+					$mobile_menu_label = apply_filters( 'blogpress_mobile_menu_label', $mobile_menu_label );
 
 					if ( $mobile_menu_label ) {
 						printf(
@@ -46,10 +63,11 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 				</button>
 				<?php
 				/**
-				 * blogpress_after_mobile_menu_button hook
+				 * Fires immediately after the mobile menu toggle button.
 				 *
 				 * @since 1.0.0
 				 */
+				do_action( 'blogpress_after_mobile_menu_button' );
 
 				wp_nav_menu(
 					array(
@@ -68,6 +86,12 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 			</div>
 		</nav>
 		<?php
+		/**
+		 * Fires after the primary navigation element is output.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'blogpress_after_navigation' );
 	}
 }
 
@@ -96,7 +120,18 @@ function blogpress_do_header_mobile_menu_toggle() {
 				$mobile_menu_label = '';
 			}
 
-			$mobile_menu_label = $mobile_menu_label;
+			/**
+			 * Filters the visible label on the mobile menu toggle button.
+			 *
+			 * Return an empty string to show only the icon, with the label moved
+			 * into a screen-reader-only span.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $mobile_menu_label The button label. HTML is allowed.
+			 * @return string The label to display.
+			 */
+			$mobile_menu_label = apply_filters( 'blogpress_mobile_menu_label', $mobile_menu_label );
 
 			if ( $mobile_menu_label ) {
 				printf(
@@ -148,11 +183,11 @@ if ( ! function_exists( 'blogpress_menu_fallback' ) ) {
 
 if ( ! function_exists( 'blogpress_add_navigation_after_header' ) ) {
 	/**
-	 * Blogpress the navigation based on settings
+	 * Output the navigation below the header, if that is the chosen location.
 	 *
-	 * It would be better to have all of these inside one action, but these
-	 * are kept this way to maintain backward compatibility for people
-	 * un-hooking and moving the navigation/changing the priority.
+	 * Each navigation location has its own function rather than one shared
+	 * callback, so a child theme can un-hook or re-prioritise a single
+	 * location without affecting the others.
 	 *
 	 * @since 1.0.0
 	 */
@@ -165,11 +200,11 @@ if ( ! function_exists( 'blogpress_add_navigation_after_header' ) ) {
 
 if ( ! function_exists( 'blogpress_add_navigation_before_header' ) ) {
 	/**
-	 * Blogpress the navigation based on settings
+	 * Output the navigation above the header, if that is the chosen location.
 	 *
-	 * It would be better to have all of these inside one action, but these
-	 * are kept this way to maintain backward compatibility for people
-	 * un-hooking and moving the navigation/changing the priority.
+	 * Each navigation location has its own function rather than one shared
+	 * callback, so a child theme can un-hook or re-prioritise a single
+	 * location without affecting the others.
 	 *
 	 * @since 1.0.0
 	 */
@@ -182,11 +217,12 @@ if ( ! function_exists( 'blogpress_add_navigation_before_header' ) ) {
 
 if ( ! function_exists( 'blogpress_add_navigation_float_right' ) ) {
 	/**
-	 * Blogpress the navigation based on settings
+	 * Output the navigation floated beside the site branding, if that is the
+	 * chosen location. Covers both the float-right and float-left settings.
 	 *
-	 * It would be better to have all of these inside one action, but these
-	 * are kept this way to maintain backward compatibility for people
-	 * un-hooking and moving the navigation/changing the priority.
+	 * Each navigation location has its own function rather than one shared
+	 * callback, so a child theme can un-hook or re-prioritise a single
+	 * location without affecting the others.
 	 *
 	 * @since 1.0.0
 	 */
@@ -199,17 +235,18 @@ if ( ! function_exists( 'blogpress_add_navigation_float_right' ) ) {
 
 if ( ! function_exists( 'blogpress_add_navigation_before_right_sidebar' ) ) {
 	/**
-	 * Blogpress the navigation based on settings
+	 * Output the navigation inside the right sidebar, if that is the chosen
+	 * location.
 	 *
-	 * It would be better to have all of these inside one action, but these
-	 * are kept this way to maintain backward compatibility for people
-	 * un-hooking and moving the navigation/changing the priority.
+	 * Each navigation location has its own function rather than one shared
+	 * callback, so a child theme can un-hook or re-prioritise a single
+	 * location without affecting the others.
 	 *
 	 * @since 1.0.0
 	 */
 	function blogpress_add_navigation_before_right_sidebar() {
 		if ( 'nav-right-sidebar' === blogpress_get_navigation_location() ) {
-			echo '<div class="gen-sidebar-nav">';
+			echo '<div class="blogpress-sidebar-nav">';
 				blogpress_navigation_position();
 			echo '</div>';
 		}
@@ -218,17 +255,18 @@ if ( ! function_exists( 'blogpress_add_navigation_before_right_sidebar' ) ) {
 
 if ( ! function_exists( 'blogpress_add_navigation_before_left_sidebar' ) ) {
 	/**
-	 * Blogpress the navigation based on settings
+	 * Output the navigation inside the left sidebar, if that is the chosen
+	 * location.
 	 *
-	 * It would be better to have all of these inside one action, but these
-	 * are kept this way to maintain backward compatibility for people
-	 * un-hooking and moving the navigation/changing the priority.
+	 * Each navigation location has its own function rather than one shared
+	 * callback, so a child theme can un-hook or re-prioritise a single
+	 * location without affecting the others.
 	 *
 	 * @since 1.0.0
 	 */
 	function blogpress_add_navigation_before_left_sidebar() {
 		if ( 'nav-left-sidebar' === blogpress_get_navigation_location() ) {
-			echo '<div class="gen-sidebar-nav">';
+			echo '<div class="blogpress-sidebar-nav">';
 				blogpress_navigation_position();
 			echo '</div>';
 		}
@@ -243,7 +281,16 @@ if ( ! class_exists( 'Blogpress_Page_Walker' ) && class_exists( 'Walker_Page' ) 
 	 * @since 1.0.0
 	 */
 	class Blogpress_Page_Walker extends Walker_Page {
-		function start_el( &$output, $page, $depth = 0, $args = array(), $current_page = 0 ) { // phpcs:ignore
+		/**
+		 * Start the element output.
+		 *
+		 * @param string  $output       Used to append additional content. Passed by reference.
+		 * @param WP_Post $page         Page data object.
+		 * @param int     $depth        Depth of page. Used for padding.
+		 * @param array   $args         An array of arguments.
+		 * @param int     $current_page ID of the current page.
+		 */
+		public function start_el( &$output, $page, $depth = 0, $args = array(), $current_page = 0 ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Signature inherited from Walker_Page.
 			$css_class = array( 'page_item', 'page-item-' . $page->ID );
 			$button = '';
 
@@ -259,12 +306,12 @@ if ( ! class_exists( 'Blogpress_Page_Walker' ) && class_exists( 'Walker_Page' ) 
 					$css_class[] = 'current-menu-ancestor';
 				}
 
-				if ( $page->ID == $current_page ) { // phpcs:ignore
+				if ( $page->ID == $current_page ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- $current_page may be a numeric string; loose compare is intentional.
 					$css_class[] = 'current-menu-item';
-				} elseif ( $_current_page && $page->ID == $_current_page->post_parent ) { // phpcs:ignore
+				} elseif ( $_current_page && $page->ID == $_current_page->post_parent ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- IDs may be numeric strings; loose compare is intentional.
 					$css_class[] = 'current-menu-parent';
 				}
-			} elseif ( $page->ID == get_option( 'page_for_posts' ) ) { // phpcs:ignore
+			} elseif ( $page->ID == get_option( 'page_for_posts' ) ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual,WordPress.PHP.YodaConditions.NotYoda -- Option returns a numeric string; loose compare is intentional.
 				$css_class[] = 'current-menu-parent';
 			}
 
@@ -349,7 +396,17 @@ if ( ! function_exists( 'blogpress_dropdown_icon_to_menu_link' ) ) {
 						}
 					}
 
-					$arrow_direction = $arrow_direction;
+					/**
+					 * Filters the direction of the dropdown arrow on a menu item.
+					 *
+					 * @since 1.0.0
+					 *
+					 * @param string $arrow_direction One of 'down', 'right' or 'left'.
+					 * @param int    $depth           Depth of the current menu item.
+					 * @param WP_Post $item           The current menu item.
+					 * @return string The arrow direction to use.
+					 */
+					$arrow_direction = apply_filters( 'blogpress_dropdown_arrow_direction', $arrow_direction, $depth, $item );
 
 					if ( 'down' === $arrow_direction ) {
 						$arrow_direction = '';
@@ -435,6 +492,16 @@ function blogpress_do_menu_bar_item_container() {
 		echo '<div class="menu-bar-items">';
 			blogpress_do_navigation_search_button();
 			blogpress_do_search_modal_trigger();
+
+			/**
+			 * Fires inside the menu bar items container, after the built-in items.
+			 *
+			 * Does not fire when no menu bar items are enabled, as the container
+			 * itself is not output in that case.
+			 *
+			 * @since 1.0.0
+			 */
+			do_action( 'blogpress_menu_bar_items' );
 		echo '</div>';
 	}
 }
@@ -538,8 +605,9 @@ add_action( 'wp_footer', 'blogpress_clone_sidebar_navigation' );
  * Clone our sidebar navigation and place it below the header.
  * This places our mobile menu in a more user-friendly location.
  *
- * We're not using wp_add_inline_script() as this needs to happens
- * before menu.js is enqueued.
+ * This must run before menu.js, which is enqueued in the footer and therefore
+ * printed by wp_print_footer_scripts() on wp_footer at priority 20. Printing
+ * here at the default priority 10 guarantees the clone exists first.
  *
  * @since 1.0.0
  */
@@ -547,21 +615,28 @@ function blogpress_clone_sidebar_navigation() {
 	if ( 'nav-left-sidebar' !== blogpress_get_navigation_location() && 'nav-right-sidebar' !== blogpress_get_navigation_location() ) {
 		return;
 	}
-	?>
-	<script>
-		var target, nav, clone;
-		nav = document.getElementById( 'site-navigation' );
+
+	$script = sprintf(
+		'var target, nav, clone;
+		nav = document.getElementById( "site-navigation" );
 		if ( nav ) {
 			clone = nav.cloneNode( true );
-			clone.className += ' sidebar-nav-mobile';
-			clone.setAttribute( 'aria-label', '<?php esc_attr_e( 'Mobile Menu', 'blogpress' ); ?>' );
-			target = document.getElementById( 'masthead' );
+			clone.className += " sidebar-nav-mobile";
+			clone.setAttribute( "aria-label", %s );
+			target = document.getElementById( "masthead" );
 			if ( target ) {
-				target.insertAdjacentHTML( 'afterend', clone.outerHTML );
+				target.insertAdjacentHTML( "afterend", clone.outerHTML );
 			} else {
-				document.body.insertAdjacentHTML( 'afterbegin', clone.outerHTML )
+				document.body.insertAdjacentHTML( "afterbegin", clone.outerHTML );
 			}
-		}
-	</script>
-	<?php
+		}',
+		wp_json_encode( __( 'Mobile Menu', 'blogpress' ) )
+	);
+
+	wp_print_inline_script_tag(
+		$script,
+		array(
+			'id' => 'blogpress-clone-sidebar-navigation',
+		)
+	);
 }

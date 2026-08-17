@@ -45,7 +45,7 @@ class BlogPress_Typography {
 	}
 
 	/**
-	 * Blogpress our Google Fonts URI.
+	 * Build our Google Fonts URI.
 	 */
 	public static function get_google_fonts_uri() {
 		$fonts = blogpress_get_option( 'font_manager' );
@@ -72,7 +72,16 @@ class BlogPress_Typography {
 				$variants = explode( ',', $variants );
 			}
 
-			$variants = $variants;
+			/**
+			 * Filters the weight and style variants requested for a Google Font.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $variants The variants to request, e.g. array( '400', '700italic' ).
+			 * @param array $font     The full font definition being processed.
+			 * @return array The variants to request.
+			 */
+			$variants = apply_filters( 'blogpress_google_font_variants', $variants, $font );
 
 			$name = str_replace( ' ', '+', $font['fontFamily'] );
 			$name = str_replace( '"', '', $name );
@@ -94,7 +103,18 @@ class BlogPress_Typography {
 			$google_fonts_uri = add_query_arg( $font_args, 'https://fonts.googleapis.com/css' );
 		}
 
-		return $google_fonts_uri;
+		/**
+		 * Filters the Google Fonts stylesheet URI before it is enqueued.
+		 *
+		 * Return an empty string to prevent the remote request entirely, or swap
+		 * in a locally hosted stylesheet.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $google_fonts_uri The fonts URI, or an empty string if no Google Fonts are in use.
+		 * @return string The URI to enqueue.
+		 */
+		return apply_filters( 'blogpress_google_fonts_uri', $google_fonts_uri );
 	}
 
 	/**

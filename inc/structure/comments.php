@@ -34,7 +34,7 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 			<article <?php blogpress_do_attr( 'comment-body', array(), array( 'comment-id' => get_comment_ID() ) ); ?>>
 				<footer <?php blogpress_do_attr( 'comment-meta' ); ?>>
 					<?php
-					if ( 0 != $args['avatar_size'] ) { // phpcs:ignore
+					if ( 0 != $args['avatar_size'] ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual -- Arg may be string or int; loose compare is intentional.
 						echo get_avatar( $comment, $args['avatar_size'] );
 					}
 					?>
@@ -45,8 +45,26 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 
 						<?php
 
-						if ( true ) :
-							$has_comment_date_link = true;
+						/**
+						 * Filters whether the comment date is shown in the comment meta.
+						 *
+						 * @since 1.0.0
+						 *
+						 * @param bool       $show    Whether to show the comment date. Default true.
+						 * @param WP_Comment $comment The comment being rendered.
+						 * @return bool Whether to show the comment date.
+						 */
+						if ( apply_filters( 'blogpress_show_comment_date', true, $comment ) ) :
+							/**
+							 * Filters whether the comment date links to the comment permalink.
+							 *
+							 * @since 1.0.0
+							 *
+							 * @param bool       $link    Whether to link the date. Default true.
+							 * @param WP_Comment $comment The comment being rendered.
+							 * @return bool Whether to link the date.
+							 */
+							$has_comment_date_link = apply_filters( 'blogpress_show_comment_date_link', true, $comment );
 
 							?>
 							<div class="entry-meta comment-metadata">
@@ -62,9 +80,9 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 										<?php
 											printf(
 												/* translators: 1: date, 2: time */
-												_x( '%1$s at %2$s', '1: date, 2: time', 'blogpress' ), // phpcs:ignore
-												get_comment_date(), // phpcs:ignore
-												get_comment_time() // phpcs:ignore
+												esc_html_x( '%1$s at %2$s', '1: date, 2: time', 'blogpress' ),
+												esc_html( get_comment_date() ),
+												esc_html( get_comment_time() )
 											);
 										?>
 									</time>
@@ -82,7 +100,7 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 						?>
 					</div>
 
-					<?php if ( '0' == $comment->comment_approved ) : // phpcs:ignore ?>
+					<?php if ( '0' == $comment->comment_approved ) : // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- comment_approved may be string or int; loose compare is intentional. ?>
 						<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'blogpress' ); ?></p>
 					<?php endif; ?>
 				</footer>
@@ -195,7 +213,7 @@ function blogpress_filter_comment_fields( $fields ) {
 function blogpress_do_comments_template( $template ) {
 	if ( 'single' === $template || 'page' === $template ) {
 		// If comments are open or we have at least one comment, load up the comment template.
-		// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison -- Intentionally loose.
+		// phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual -- Intentionally loose.
 		if ( comments_open() || '0' != get_comments_number() ) :
 			?>
 

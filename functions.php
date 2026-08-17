@@ -100,7 +100,7 @@ require $theme_dir . '/inc/class-rest.php';
 
 if ( is_admin() ) {
 	require $theme_dir . '/inc/meta-box.php';
-	require $theme_dir . '/inc/class-dashboard.php';
+	// require $theme_dir . '/inc/class-dashboard.php';
 }
 
 /**

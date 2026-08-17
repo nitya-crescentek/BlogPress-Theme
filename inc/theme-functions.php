@@ -82,7 +82,17 @@ if ( ! function_exists( 'blogpress_get_footer_widgets' ) ) {
 			}
 		}
 
-		return $widgets;
+		/**
+		 * Filters the number of footer widget columns to display.
+		 *
+		 * Applied after any per-post override, so this is the final say.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param int|string $widgets The number of footer widget areas to show.
+		 * @return int|string The number of footer widget areas to show.
+		 */
+		return apply_filters( 'blogpress_footer_widgets', $widgets );
 	}
 }
 
@@ -108,7 +118,15 @@ if ( ! function_exists( 'blogpress_show_excerpt' ) ) {
 
 		$show_excerpt = ( is_search() ) ? true : $show_excerpt;
 
-		return $show_excerpt;
+		/**
+		 * Filters whether the loop shows excerpts instead of full content.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param bool $show_excerpt Whether to show the excerpt.
+		 * @return bool Whether to show the excerpt.
+		 */
+		return apply_filters( 'blogpress_show_excerpt', $show_excerpt );
 	}
 }
 
@@ -121,11 +139,24 @@ if ( ! function_exists( 'blogpress_show_title' ) ) {
 	 * @return bool Whether to show the content title.
 	 */
 	function blogpress_show_title() {
+		$show_title = true;
+
 		if ( is_singular() && get_post_meta( get_the_ID(), '_blogpress-disable-headline', true ) ) {
-			return false;
+			$show_title = false;
 		}
 
-		return true;
+		/**
+		 * Filters whether the content title is displayed.
+		 *
+		 * Applied after the per-post "disable headline" meta, so a callback can
+		 * override that choice in either direction.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param bool $show_title Whether to show the title.
+		 * @return bool Whether to show the title.
+		 */
+		return apply_filters( 'blogpress_show_title', $show_title );
 	}
 }
 
@@ -267,7 +298,20 @@ function blogpress_get_svg_icon( $icon, $replace = false ) {
 		$output = '<svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M305.863 314.916c0 2.266-1.133 4.815-2.832 6.514l-14.157 14.163c-1.699 1.7-3.964 2.832-6.513 2.832-2.265 0-4.813-1.133-6.512-2.832L164.572 224.276 53.295 335.593c-1.699 1.7-4.247 2.832-6.512 2.832-2.265 0-4.814-1.133-6.513-2.832L26.113 321.43c-1.699-1.7-2.831-4.248-2.831-6.514s1.132-4.816 2.831-6.515L158.06 176.408c1.699-1.7 4.247-2.833 6.512-2.833 2.265 0 4.814 1.133 6.513 2.833L303.03 308.4c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg>';
 	}
 
-	$output = $output;
+	/**
+	 * Filters the raw SVG markup for a single icon.
+	 *
+	 * Fires before the optional close icon is appended and before the icon is
+	 * wrapped in its `.bp-icon` span.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $output  The SVG markup, or an empty string for an unknown icon.
+	 * @param string $icon    The icon name being requested.
+	 * @param bool   $replace Whether a close icon will be appended for JS toggling.
+	 * @return string The SVG markup to use.
+	 */
+	$output = apply_filters( 'blogpress_svg_icon', $output, $icon, $replace );
 
 	if ( $replace ) {
 		$output .= '<svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M71.029 71.029c9.373-9.372 24.569-9.372 33.942 0L256 222.059l151.029-151.03c9.373-9.372 24.569-9.372 33.942 0 9.372 9.373 9.372 24.569 0 33.942L289.941 256l151.03 151.029c9.372 9.373 9.372 24.569 0 33.942-9.373 9.372-24.569 9.372-33.942 0L256 289.941l-151.029 151.03c-9.373 9.372-24.569 9.372-33.942 0-9.372-9.373-9.372-24.569 0-33.942L222.059 256 71.029 104.971c-9.372-9.373-9.372-24.569 0-33.942z" /></svg>';
@@ -446,7 +490,18 @@ function blogpress_get_microdata( $context ) {
 			$type = 'SearchResultsPage';
 		}
 
-		$type = $type;
+		/**
+		 * Filters the schema.org type used for the body element.
+		 *
+		 * Note this is the schema *type* (Blog, WebPage, SearchResultsPage), not
+		 * the schema format returned by blogpress_get_schema_type().
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $type The schema.org type name, without the URL prefix.
+		 * @return string The schema.org type to output.
+		 */
+		$type = apply_filters( 'blogpress_schema_type', $type );
 
 		$data = sprintf(
 			'itemtype="https://schema.org/%s" itemscope',
@@ -599,9 +654,22 @@ function blogpress_get_the_title_parameters() {
  * Check whether we should display the default loop or not.
  *
  * @since 1.0.0
+ *
+ * @return bool Whether the default loop should run.
  */
 function blogpress_has_default_loop() {
-	return true;
+	/**
+	 * Filters whether the default post loop should run.
+	 *
+	 * Page builders and single-page plugins return false here to suppress the
+	 * theme's own loop while rendering their own content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool $has_default_loop Whether to run the default loop. Default true.
+	 * @return bool Whether to run the default loop.
+	 */
+	return apply_filters( 'blogpress_default_loop', true );
 }
 
 /**
@@ -692,7 +760,20 @@ function blogpress_get_attr( $context, $attributes = array(), $settings = array(
 
 	$output .= $after;
 
-	$output = $output;
+	/**
+	 * Filters the assembled HTML attribute string for a given context.
+	 *
+	 * The dynamic portion of the hook name, `$context`, refers to the element
+	 * being built — for example `blogpress_attr_header_output`.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $output     The built attribute string, before trimming.
+	 * @param string $context    The element context.
+	 * @param array  $settings   Custom data passed to the attribute builder.
+	 * @return string The attribute string to output.
+	 */
+	$output = apply_filters( "blogpress_attr_{$context}_output", $output, $context, $settings );
 
 	return trim( $output );
 }
@@ -707,7 +788,7 @@ function blogpress_get_attr( $context, $attributes = array(), $settings = array(
  * @param array  $settings   Optional. Custom data to pass to filter.
  */
 function blogpress_do_attr( $context, $attributes = array(), $settings = array() ) {
-	echo blogpress_get_attr( $context, $attributes, $settings ); // phpcs:ignore -- Escaping done in function.
+	echo blogpress_get_attr( $context, $attributes, $settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_get_attr() escapes every name and value.
 }
 
 /**

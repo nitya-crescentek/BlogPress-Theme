@@ -1,6 +1,6 @@
-/* global gpPostMessageFields */
+/* global blogpressPostMessageFields */
 /* eslint max-depth: off */
-var gpPostMessage = {
+var blogpressPostMessage = {
 
 	/**
 	 * The fields.
@@ -45,7 +45,7 @@ var gpPostMessage = {
 		 */
 		addData( id, styles ) {
 			id = id.replace( '[', '-' ).replace( ']', '' );
-			gpPostMessage.styleTag.add( id );
+			blogpressPostMessage.styleTag.add( id );
 			jQuery( '#bp-postmessage-' + id ).text( styles );
 		},
 	},
@@ -154,8 +154,8 @@ var gpPostMessage = {
 				value = window[ output.js_callback[ 0 ] ]( value, output.js_callback[ 1 ] );
 			}
 
-			// Apply the gpPostMessageStylesOutput filter.
-			styles = wp.hooks.applyFilters( 'gpPostMessageStylesOutput', styles, value, output, controlType );
+			// Apply the blogpressPostMessageStylesOutput filter.
+			styles = wp.hooks.applyFilters( 'blogpressPostMessageStylesOutput', styles, value, output, controlType );
 
 			if ( '' === styles ) {
 				switch ( controlType ) {
@@ -166,7 +166,7 @@ var gpPostMessage = {
 							if ( output.choice && key !== output.choice ) {
 								return;
 							}
-							processedValue = gpPostMessage.util.processValue( output, val );
+							processedValue = blogpressPostMessage.util.processValue( output, val );
 
 							if ( '' === processedValue ) {
 								if ( 'background-color' === output.property ) {
@@ -184,7 +184,7 @@ var gpPostMessage = {
 						break;
 					default:
 						if ( 'kirki-image' === controlType ) {
-							value = ( ! _.isUndefined( value.url ) ) ? gpPostMessage.util.backgroundImageValue( value.url ) : gpPostMessage.util.backgroundImageValue( value );
+							value = ( ! _.isUndefined( value.url ) ) ? blogpressPostMessage.util.backgroundImageValue( value.url ) : blogpressPostMessage.util.backgroundImageValue( value );
 						}
 						if ( _.isObject( value ) ) {
 							styles += output.element + '{';
@@ -193,7 +193,7 @@ var gpPostMessage = {
 								if ( output.choice && key !== output.choice ) {
 									return;
 								}
-								processedValue = gpPostMessage.util.processValue( output, val );
+								processedValue = blogpressPostMessage.util.processValue( output, val );
 								property = output.property ? output.property : key;
 
 								if ( '' === processedValue ) {
@@ -210,7 +210,7 @@ var gpPostMessage = {
 							} );
 							styles += '}';
 						} else {
-							processedValue = gpPostMessage.util.processValue( output, value );
+							processedValue = blogpressPostMessage.util.processValue( output, value );
 							if ( '' === processedValue ) {
 								if ( 'background-color' === output.property ) {
 									processedValue = 'unset';
@@ -278,7 +278,7 @@ var gpPostMessage = {
 					value = val;
 				} );
 			}
-			value = gpPostMessage.util.processValue( output, value );
+			value = blogpressPostMessage.util.processValue( output, value );
 
 			if ( output.attr ) {
 				jQuery( output.element ).attr( output.attr, value );
@@ -320,21 +320,21 @@ var gpPostMessage = {
 
 jQuery( document ).ready( function() {
 	var styles;
-	_.each( gpPostMessageFields, function( field ) {
+	_.each( blogpressPostMessageFields, function( field ) {
 		wp.customize( field.settings, function( value ) {
 			value.bind( function( newVal ) {
 				styles = '';
 				_.each( field.js_vars, function( output ) {
-					output.function = ( ! output.function || 'undefined' === typeof gpPostMessage[ output.function ] ) ? 'css' : output.function;
+					output.function = ( ! output.function || 'undefined' === typeof blogpressPostMessage[ output.function ] ) ? 'css' : output.function;
 					field.type = ( field.choices && field.choices.parent_type ) ? field.choices.parent_type : field.type;
 
 					if ( 'css' === output.function ) {
-						styles += gpPostMessage.css.fromOutput( output, newVal, field.type );
+						styles += blogpressPostMessage.css.fromOutput( output, newVal, field.type );
 					} else {
-						gpPostMessage[ output.function ].fromOutput( output, newVal, field.type );
+						blogpressPostMessage[ output.function ].fromOutput( output, newVal, field.type );
 					}
 				} );
-				gpPostMessage.styleTag.addData( field.settings, styles );
+				blogpressPostMessage.styleTag.addData( field.settings, styles );
 			} );
 		} );
 	} );

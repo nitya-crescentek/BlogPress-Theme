@@ -1,0 +1,77 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.6/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": true,
+		"useRootPaddingAwareAlignments": false,
+		"color": {
+			"custom": true,
+			"customDuotone": false,
+			"customGradient": true,
+			"defaultDuotone": false,
+			"defaultGradients": false,
+			"defaultPalette": false,
+			"duotone": [],
+			"palette": [
+				{
+					"name": "Contrast",
+					"slug": "contrast",
+					"color": "#222222"
+				},
+				{
+					"name": "Contrast 2",
+					"slug": "contrast-2",
+					"color": "#575760"
+				},
+				{
+					"name": "Contrast 3",
+					"slug": "contrast-3",
+					"color": "#b2b2be"
+				},
+				{
+					"name": "Base",
+					"slug": "base",
+					"color": "#f0f0f0"
+				},
+				{
+					"name": "Base 2",
+					"slug": "base-2",
+					"color": "#f7f8f9"
+				},
+				{
+					"name": "Base 3",
+					"slug": "base-3",
+					"color": "#ffffff"
+				},
+				{
+					"name": "Accent",
+					"slug": "accent",
+					"color": "#1e73be"
+				}
+			]
+		},
+		"layout": {
+			"contentSize": "1200px",
+			"wideSize": "1200px"
+		},
+		"spacing": {
+			"padding": true,
+			"margin": true,
+			"blockGap": true,
+			"units": [ "px", "em", "rem", "%", "vw", "vh" ]
+		},
+		"typography": {
+			"customFontSize": true,
+			"defaultFontSizes": true,
+			"dropCap": true,
+			"lineHeight": true,
+			"fontFamilies": [
+				{
+					"name": "System Stack",
+					"slug": "system-stack",
+					"fontFamily": "-apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+				}
+			]
+		}
+	}
+}

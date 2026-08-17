@@ -352,7 +352,7 @@
 }
 
 .woocommerce ul.products li.product .star-rating {
-	margin: 0 0 8px;
+	margin: 0 18px 8px 18px;
 	font-size: 13px;
 }
 
@@ -396,15 +396,56 @@
 	grid-row: 1;
 }
 
+/**
+ * WooCommerce's woocommerce-layout.css floats these two columns at 48% each.
+ * The theme lays the product out with CSS grid instead, so both children must
+ * fill their own grid column. `width: 100%` is stated explicitly rather than
+ * left at `auto` so the declaration reliably beats WooCommerce's 48% — the two
+ * selectors have identical specificity, and this stylesheet only wins because
+ * it is enqueued after woocommerce-layout.
+ */
 .woocommerce div.product div.images,
-.woocommerce div.product div.summary {
+.woocommerce div.product div.summary,
+.woocommerce-page div.product div.images,
+.woocommerce-page div.product div.summary,
+.woocommerce #content div.product div.images,
+.woocommerce #content div.product div.summary {
 	float: none;
-	width: auto;
+	width: 100%;
+	clear: none;
 	margin-bottom: 2em;
 }
 
 .woocommerce div.product div.summary > *:last-child {
 	margin-bottom: 0;
+}
+
+/* Tighten the vertical rhythm of the summary column. */
+.woocommerce div.product div.summary .woocommerce-product-rating {
+	margin-bottom: 0.75em;
+}
+
+.woocommerce div.product div.summary .woocommerce-product-details__short-description {
+	margin-bottom: 1.5em;
+	color: var(--bp-wc-muted);
+}
+
+/* Stack the gallery above the summary on narrower screens. */
+@media (max-width: 768px) {
+	.woocommerce div.product {
+		grid-template-columns: minmax(0, 1fr);
+		column-gap: 0;
+	}
+
+	.woocommerce div.product > div.images,
+	.woocommerce div.product > div.summary {
+		grid-column: 1;
+		grid-row: auto;
+	}
+
+	.woocommerce div.product > div.images {
+		margin-bottom: 1.5em;
+	}
 }
 
 .woocommerce div.product p.price,
@@ -459,17 +500,63 @@
 /*--------------------------------------------------------------
 # Product gallery
 --------------------------------------------------------------*/
+
+/**
+ * The gallery, its slider wrapper and the slide all need to fill the grid
+ * column. WooCommerce sizes the slider inline via flexslider, so without this
+ * a product photo narrower than the column floats in whitespace.
+ */
+.woocommerce div.product div.images.woocommerce-product-gallery {
+	position: relative;
+	width: 100%;
+	margin-bottom: 0;
+}
+
+.woocommerce div.product div.images .woocommerce-product-gallery__wrapper {
+	margin: 0;
+}
+
+.woocommerce div.product div.images .woocommerce-product-gallery__image,
+.woocommerce div.product div.images .woocommerce-product-gallery__image > a {
+	display: block;
+}
+
+/* Main image: fills the column and sits in a consistent frame. */
 .woocommerce div.product div.images .woocommerce-product-gallery__wrapper img,
 .woocommerce div.product div.images img {
+	display: block;
+	width: 100%;
+	height: auto;
 	border-radius: var(--blogpress-radius, 12px);
 	background-color: var(--bp-wc-surface);
 }
 
+.woocommerce div.product div.images .woocommerce-product-gallery__image > a {
+	overflow: hidden;
+	border: 1px solid var(--bp-wc-border);
+	border-radius: var(--blogpress-radius, 12px);
+	background-color: var(--bp-wc-surface);
+}
+
+/**
+ * Thumbnails. WooCommerce sets the column count on the gallery element, so
+ * follow it rather than hard-coding four.
+ */
 .woocommerce div.product div.images .flex-control-thumbs {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
 	gap: 12px;
-	margin-top: 12px;
+	margin: 12px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.woocommerce div.product div.images.woocommerce-product-gallery--columns-3 .flex-control-thumbs {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.woocommerce div.product div.images.woocommerce-product-gallery--columns-5 .flex-control-thumbs {
+	grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .woocommerce div.product div.images .flex-control-thumbs li {
@@ -479,17 +566,27 @@
 }
 
 .woocommerce div.product div.images .flex-control-thumbs li img {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	cursor: pointer;
+	border: 1px solid var(--bp-wc-border);
 	border-radius: var(--blogpress-radius-sm, 8px);
-	opacity: 0.6;
-	transition: opacity var(--blogpress-transition, 0.2s ease);
+	opacity: 0.55;
+	transition: opacity var(--blogpress-transition, 0.2s ease), border-color var(--blogpress-transition, 0.2s ease);
 }
 
 .woocommerce div.product div.images .flex-control-thumbs li img.flex-active,
-.woocommerce div.product div.images .flex-control-thumbs li img:hover {
+.woocommerce div.product div.images .flex-control-thumbs li img:hover,
+.woocommerce div.product div.images .flex-control-thumbs li img:focus-visible {
 	opacity: 1;
+	border-color: var(--bp-wc-accent);
 }
 
+/* Zoom / lightbox trigger. */
 .woocommerce div.product .woocommerce-product-gallery__trigger {
+	z-index: 2;
 	top: 14px;
 	right: 14px;
 	width: 38px;
@@ -499,6 +596,17 @@
 	border-radius: 50%;
 	background-color: var(--bp-wc-card);
 	box-shadow: var(--blogpress-shadow, 0 4px 12px rgba(0, 0, 0, 0.05));
+	transition: background-color var(--blogpress-transition, 0.2s ease);
+}
+
+.woocommerce div.product .woocommerce-product-gallery__trigger:hover,
+.woocommerce div.product .woocommerce-product-gallery__trigger:focus-visible {
+	background-color: var(--bp-wc-surface);
+}
+
+/* Placeholder when a product has no image at all. */
+.woocommerce div.product div.images .woocommerce-product-gallery__image--placeholder img {
+	border: 1px dashed var(--bp-wc-border);
 }
 
 /*--------------------------------------------------------------

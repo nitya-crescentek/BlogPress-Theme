@@ -20,6 +20,13 @@ if ( ! function_exists( 'blogpress_construct_footer' ) ) {
 		<footer <?php blogpress_do_attr( 'site-info' ); ?>>
 			<div <?php blogpress_do_attr( 'inside-site-info' ); ?>>
 				<?php
+				/**
+				 * Fires inside the site info footer, before the footer bar.
+				 *
+				 * @since 1.0.0
+				 */
+				do_action( 'blogpress_before_footer_content' );
+
 				blogpress_footer_bar();
 				?>
 				<div class="copyright-bar">
@@ -27,6 +34,14 @@ if ( ! function_exists( 'blogpress_construct_footer' ) ) {
 					blogpress_add_footer_info();
 					?>
 				</div>
+				<?php
+				/**
+				 * Fires inside the site info footer, after the copyright bar.
+				 *
+				 * @since 1.0.0
+				 */
+				do_action( 'blogpress_after_footer_content' );
+				?>
 			</div>
 		</footer>
 		<?php
@@ -60,13 +75,27 @@ if ( ! function_exists( 'blogpress_add_footer_info' ) ) {
 	function blogpress_add_footer_info() {
 		$copyright = sprintf(
 			'<span class="copyright">&copy; %1$s %2$s</span> &bull; %3$s %4$s',
-			date( 'Y' ), // phpcs:ignore
-			get_bloginfo( 'name' ),
-			_x( 'Built with', 'BlogPress', 'blogpress' ),
-			__( 'BlogPress', 'blogpress' )
+			esc_html( gmdate( 'Y' ) ),
+			esc_html( get_bloginfo( 'name' ) ),
+			esc_html_x( 'Built with', 'BlogPress', 'blogpress' ),
+			esc_html__( 'BlogPress', 'blogpress' )
 		);
 
-		echo $copyright; // phpcs:ignore
+		/**
+		 * Filters the copyright line in the site footer.
+		 *
+		 * Post-level HTML is allowed; the return value is passed through
+		 * wp_kses_post() before output.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $copyright The copyright markup.
+		 * @return string The copyright markup to output.
+		 */
+		$copyright = apply_filters( 'blogpress_copyright', $copyright );
+
+		// The blogpress_copyright filter is documented as HTML-capable, so allow post-level markup.
+		echo wp_kses_post( $copyright );
 	}
 }
 
@@ -86,7 +115,7 @@ function blogpress_do_footer_widget( $widget_width, $widget ) {
 	);
 
 	?>
-	<div class="<?php echo $widget_classes; // phpcs:ignore ?>">
+	<div class="<?php echo esc_attr( $widget_classes ); ?>">
 		<?php dynamic_sidebar( 'footer-' . absint( $widget ) ); ?>
 	</div>
 	<?php
@@ -187,7 +216,7 @@ if ( ! function_exists( 'blogpress_back_to_top' ) ) {
 			esc_attr__( 'Scroll back to top', 'blogpress' ),
 			absint( blogpress_get_option( 'back_to_top_scroll_speed' ) ),
 			absint( blogpress_get_option( 'back_to_top_scroll_start' ) ),
-			blogpress_get_svg_icon( 'arrow-up' )
+			blogpress_get_svg_icon( 'arrow-up' ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_get_svg_icon() returns a hardcoded SVG string built in the theme.
 		);
 	}
 }

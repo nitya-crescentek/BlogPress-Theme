@@ -20,6 +20,13 @@ if ( ! function_exists( 'blogpress_construct_header' ) ) {
 		<header <?php blogpress_do_attr( 'header' ); ?>>
 			<div <?php blogpress_do_attr( 'inside-header' ); ?>>
 				<?php
+				/**
+				 * Fires inside the header container, before the site branding.
+				 *
+				 * @since 1.0.0
+				 */
+				do_action( 'blogpress_inside_site_header' );
+
 				blogpress_do_site_logo();
 				blogpress_do_site_branding();
 
@@ -52,7 +59,7 @@ if ( ! function_exists( 'blogpress_construct_logo' ) ) {
 
 		$attr = array(
 			'class' => 'header-image is-logo-image',
-			'alt'   => esc_attr( get_bloginfo( 'name', 'display' ) ),
+			'alt'   => get_bloginfo( 'name', 'display' ),
 			'src'   => $logo_url,
 		);
 
@@ -74,23 +81,41 @@ if ( ! function_exists( 'blogpress_construct_logo' ) ) {
 			}
 		}
 
-		$attr = array_map( 'esc_attr', $attr );
-
+		/*
+		 * Build the attribute string, escaping each name and value exactly once.
+		 * Values must not be pre-escaped above or they would be double-encoded.
+		 */
 		$html_attr = '';
 		foreach ( $attr as $name => $value ) {
-			$html_attr .= " $name=" . '"' . $value . '"';
+			$html_attr .= sprintf( ' %1$s="%2$s"', esc_html( $name ), esc_attr( $value ) );
 		}
 
-		// Print our HTML.
-		echo sprintf(
+		/**
+		 * Fires before the site logo is output.
+		 *
+		 * Does not fire when no logo is set, as this function bails earlier.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'blogpress_before_logo' );
+
+		// Print our HTML. $html_attr is assembled from esc_html()/esc_attr() parts above.
+		printf(
 			'<div class="site-logo">
 				<a href="%1$s" rel="home">
 					<img %2$s />
 				</a>
 			</div>',
 			esc_url( home_url( '/' ) ),
-			$html_attr
+			$html_attr // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Each attribute name and value is escaped individually when $html_attr is built.
 		);
+
+		/**
+		 * Fires after the site logo is output.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'blogpress_after_logo' );
 	}
 }
 
@@ -111,10 +136,10 @@ if ( ! function_exists( 'blogpress_construct_site_title' ) ) {
 		$tagline = get_bloginfo( 'description' );
 
 		// If the disable title checkbox is checked, or the title field is empty, return true.
-		$disable_title = ( '1' == $blogpress_settings['hide_title'] || '' == $title ) ? true : false; // phpcs:ignore
+		$disable_title = ( '1' == $blogpress_settings['hide_title'] || '' == $title ) ? true : false; // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- Option may be stored as string or int; loose compare is intentional.
 
 		// If the disable tagline checkbox is checked, or the tagline field is empty, return true.
-		$disable_tagline = ( '1' == $blogpress_settings['hide_tagline'] || '' == $tagline ) ? true : false;  // phpcs:ignore
+		$disable_tagline = ( '1' == $blogpress_settings['hide_tagline'] || '' == $tagline ) ? true : false; // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- Option may be stored as string or int; loose compare is intentional.
 
 		$schema_type = blogpress_get_schema_type();
 
@@ -125,14 +150,14 @@ if ( ! function_exists( 'blogpress_construct_site_title' ) ) {
 			</%1$s>',
 			( is_front_page() && is_home() ) ? 'h1' : 'p',
 			esc_url( home_url( '/' ) ),
-			get_bloginfo( 'name' ),
+			esc_html( get_bloginfo( 'name' ) ),
 			'microdata' === blogpress_get_schema_type() ? ' itemprop="headline"' : ''
 		);
 
 		// Build our tagline.
 		$site_tagline = sprintf(
 			'<p class="site-description"%2$s>%1$s</p>',
-			html_entity_decode( get_bloginfo( 'description', 'display' ) ), // phpcs:ignore
+			esc_html( html_entity_decode( get_bloginfo( 'description', 'display' ), ENT_QUOTES, get_bloginfo( 'charset' ) ) ),
 			'microdata' === blogpress_get_schema_type() ? ' itemprop="description"' : ''
 		);
 
@@ -143,15 +168,29 @@ if ( ! function_exists( 'blogpress_construct_site_title' ) ) {
 				blogpress_construct_logo();
 			}
 
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- outputting site title and tagline. False positive.
-			echo sprintf(
+			/**
+			 * Fires before the site title and tagline are output.
+			 *
+			 * @since 1.0.0
+			 */
+			do_action( 'blogpress_before_site_title' );
+
+			// $site_title and $site_tagline are assembled from esc_html()/esc_url() parts above.
+			printf(
 				'<div class="site-branding">
 					%1$s
 					%2$s
 				</div>',
-				( ! $disable_title ) ? $site_title : '',
-				( ! $disable_tagline ) ? $site_tagline : ''
+				( ! $disable_title ) ? $site_title : '', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built above.
+				( ! $disable_tagline ) ? $site_tagline : '' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built above.
 			);
+
+			/**
+			 * Fires after the site title and tagline are output.
+			 *
+			 * @since 1.0.0
+			 */
+			do_action( 'blogpress_after_site_title' );
 
 			if ( blogpress_needs_site_branding_container() ) {
 				echo '</div>';
@@ -221,6 +260,15 @@ if ( ! function_exists( 'blogpress_top_bar' ) ) {
 		if ( ! is_active_sidebar( 'top-bar' ) ) {
 			return;
 		}
+
+		/**
+		 * Fires before the top bar is output.
+		 *
+		 * Does not fire when the top-bar widget area is empty.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'blogpress_before_top_bar' );
 		?>
 		<div <?php blogpress_do_attr( 'top-bar' ); ?>>
 			<div <?php blogpress_do_attr( 'inside-top-bar' ); ?>>
@@ -228,6 +276,12 @@ if ( ! function_exists( 'blogpress_top_bar' ) ) {
 			</div>
 		</div>
 		<?php
+		/**
+		 * Fires after the top bar is output.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'blogpress_after_top_bar' );
 	}
 }
 

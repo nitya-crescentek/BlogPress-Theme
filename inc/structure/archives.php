@@ -101,13 +101,12 @@ function blogpress_do_archive_description() {
  */
 function blogpress_do_search_results_title( $template ) {
 	if ( 'search' === $template ) {
-		// phpcs:ignore -- No escaping needed.
 		echo sprintf(
 			'<header %s><h1 class="page-title">%s</h1></header>',
-			blogpress_get_attr( 'page-header' ),
+			blogpress_get_attr( 'page-header' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_get_attr() escapes every attribute name and value.
 			sprintf(
 				/* translators: 1: Search query name */
-				__( 'Search Results for: %s', 'blogpress' ),
+				__( 'Search Results for: %s', 'blogpress' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme-controlled translatable string; the search term is escaped by get_search_query().
 				'<span>' . get_search_query() . '</span>'
 			)
 		);

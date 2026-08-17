@@ -15,11 +15,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		blogpress_featured_page_header_inside_single();
 
+		/** This action is documented in content.php */
+		do_action( 'blogpress_before_content', 'page' );
+
 		if ( blogpress_show_entry_header() ) :
 			?>
 
 			<header <?php blogpress_do_attr( 'entry-header' ); ?>>
 				<?php
+				/** This action is documented in content.php */
+				do_action( 'blogpress_before_entry_title', 'page' );
 
 				if ( blogpress_show_title() ) {
 					$params = blogpress_get_the_title_parameters();
@@ -27,11 +32,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 					the_title( $params['before'], $params['after'] );
 				}
 
+				/** This action is documented in content.php */
+				do_action( 'blogpress_after_entry_title', 'page' );
+
 				?>
 			</header>
 
 			<?php
 		endif;
+
+		/** This action is documented in content.php */
+		do_action( 'blogpress_after_entry_header', 'page' );
 
 		blogpress_post_image();
 
@@ -42,8 +53,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 		?>
 
-		<div class="entry-content"<?php echo $itemprop; // phpcs:ignore -- No escaping needed. ?>>
+		<div class="entry-content"<?php echo $itemprop; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Literal attribute string built above; escaping would break the markup. ?>>
 			<?php
+			/** This action is documented in content.php */
+			do_action( 'blogpress_before_content_output', 'page' );
+
 			the_content();
 
 			wp_link_pages(
@@ -56,6 +70,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 
 		<?php
+		/** This action is documented in content.php */
+		do_action( 'blogpress_after_entry_content', 'page' );
+
+		/** This action is documented in content.php */
+		do_action( 'blogpress_after_content', 'page' );
 		?>
 	</div>
 </article>

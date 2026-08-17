@@ -31,7 +31,7 @@ function blogpress_enqueue_meta_box_scripts( $hook ) {
 
 add_action( 'add_meta_boxes', 'blogpress_register_layout_meta_box' );
 /**
- * Blogpress the layout metabox
+ * Register the layout metabox.
  *
  * @since 1.0.0
  */
@@ -190,9 +190,27 @@ function blogpress_do_layout_meta_box( $post ) {
 					</div>
 				<?php endif; ?>
 
-				<?php?>
+				<?php
+				/**
+				 * Fires inside the Disable Elements section of the layout metabox.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param WP_Post $post The post being edited.
+				 */
+				do_action( 'blogpress_layout_meta_box_disable_elements', $post );
+				?>
 			</div>
-			<?php?>
+			<?php
+			/**
+			 * Fires after the built-in sections of the layout metabox.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param WP_Post $post The post being edited.
+			 */
+			do_action( 'blogpress_layout_meta_box_settings', $post );
+			?>
 		</div>
 	</div>
 	<?php

@@ -66,7 +66,7 @@ class BlogPress_Customize_Wrapper_Control extends WP_Customize_Control {
 
 		$this->toggleIdScript();
 		?>
-		<div <?php echo $attributes_string; // phpcs:ignore -- Escaped above. ?>>
+		<div <?php echo $attributes_string; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Built from esc_attr() parts above. ?>>
 			<?php
 			foreach ( $this->choices['items'] as $wrapper ) {
 				?>

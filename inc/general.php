@@ -18,7 +18,7 @@ if ( ! function_exists( 'blogpress_scripts' ) ) {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$dir_uri = get_template_directory_uri();
 
-		// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison -- Intentionally loose.
+		// phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual -- Intentionally loose.
 		if ( is_singular() && ( comments_open() || '0' != get_comments_number() ) ) {
 			wp_enqueue_style( 'blogpress-comments', $dir_uri . "/assets/css/components/comments{$suffix}.css", array(), BLOGPRESS_VERSION, 'all' );
 		}
@@ -49,7 +49,18 @@ if ( ! function_exists( 'blogpress_scripts' ) ) {
 			wp_enqueue_style( 'blogpress-rtl', $dir_uri . "/assets/css/main-rtl{$suffix}.css", array(), BLOGPRESS_VERSION, 'all' );
 		}
 
-		if ( is_child_theme() && true ) {
+		/**
+		 * Filters whether the child theme's style.css is enqueued automatically.
+		 *
+		 * Only consulted when a child theme is active. Return false to manage the
+		 * child stylesheet yourself.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param bool $load Whether to enqueue the child theme stylesheet. Default true.
+		 * @return bool Whether to enqueue it.
+		 */
+		if ( is_child_theme() && apply_filters( 'blogpress_load_child_theme_stylesheet', true ) ) {
 			wp_enqueue_style( 'blogpress-child', get_stylesheet_uri(), array( 'blogpress-style' ), filemtime( get_stylesheet_directory() . '/style.css' ), 'all' );
 		}
 
@@ -275,7 +286,7 @@ if ( ! function_exists( 'blogpress_enhanced_image_navigation' ) ) {
 		}
 
 		$image = get_post( $id );
-		// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison -- Intentially loose.
+		// phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual -- Intentionally loose.
 		if ( ! empty( $image->post_parent ) && $image->post_parent != $id ) {
 			$url .= '#main';
 		}
@@ -293,7 +304,9 @@ if ( ! function_exists( 'blogpress_categorized_blog' ) ) {
 	 * @return bool True of there is more than one category, false otherwise.
 	 */
 	function blogpress_categorized_blog() {
-		if ( false === ( $all_the_cool_cats = get_transient( 'blogpress_categories' ) ) ) { // phpcs:ignore
+		$all_the_cool_cats = get_transient( 'blogpress_categories' );
+
+		if ( false === $all_the_cool_cats ) {
 			// Create an array of all the categories that are attached to posts.
 			$all_the_cool_cats = get_categories(
 				array(
@@ -357,20 +370,6 @@ if ( ! function_exists( 'blogpress_get_default_color_palettes' ) ) {
 	}
 }
 
-add_filter( 'wp_headers', 'blogpress_set_wp_headers' );
-/**
- * Set any necessary headers.
- *
- * @param array $headers The existing headers.
- *
- * @since 1.0.0
- */
-function blogpress_set_wp_headers( $headers ) {
-	$headers['X-UA-Compatible'] = 'IE=edge';
-
-	return $headers;
-}
-
 /**
  * Adds microdata to elements.
  *
@@ -407,7 +406,18 @@ add_action( 'wp_footer', 'blogpress_do_a11y_scripts' );
  * @since 1.0.0
  */
 function blogpress_do_a11y_scripts() {
-	if ( true && function_exists( 'wp_print_inline_script_tag' ) ) {
+	/**
+	 * Filters whether the accessibility helper script is printed in the footer.
+	 *
+	 * The script toggles a `using-mouse` body class so focus outlines are shown
+	 * for keyboard users only.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool $load Whether to print the a11y script. Default true.
+	 * @return bool Whether to print it.
+	 */
+	if ( apply_filters( 'blogpress_load_a11y_script', true ) && function_exists( 'wp_print_inline_script_tag' ) ) {
 		wp_print_inline_script_tag(
 			'!function(){"use strict";if("querySelector"in document&&"addEventListener"in window){var e=document.body;e.addEventListener("pointerdown",(function(){e.classList.add("using-mouse")}),{passive:!0}),e.addEventListener("keydown",(function(){e.classList.remove("using-mouse")}),{passive:!0})}}();',
 			array(

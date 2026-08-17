@@ -14,7 +14,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		blogpress_add_navigation_before_right_sidebar();
 
+		/**
+		 * Fires inside the right sidebar, before its widgets.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $sidebar_id The widget area ID being output.
+		 */
+		do_action( 'blogpress_before_right_sidebar_content', 'sidebar-1' );
+
 		dynamic_sidebar( 'sidebar-1' );
+
+		/**
+		 * Fires inside the right sidebar, after its widgets.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $sidebar_id The widget area ID being output.
+		 */
+		do_action( 'blogpress_after_right_sidebar_content', 'sidebar-1' );
 
 		?>
 	</div>

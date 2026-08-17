@@ -45,7 +45,6 @@ if ( post_password_required() ) {
 			get_the_title()
 		);
 
-		// phpcs:ignore -- Title escaped in output.
 		echo sprintf(
 			'<h2 class="comments-title">%s</h2>',
 			esc_html( $comments_title )
@@ -90,7 +89,7 @@ if ( post_password_required() ) {
 
 	endif;
 
-	// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+	// phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual
 	if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
 		?>
 		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'blogpress' ); ?></p>

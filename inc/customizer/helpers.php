@@ -97,7 +97,7 @@ if ( ! function_exists( 'blogpress_sanitize_integer' ) ) {
  * @param string $input The value to check.
  */
 function blogpress_sanitize_empty_absint( $input ) {
-	// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison -- Intentially loose.
+	// phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- Intentionally loose.
 	if ( '' == $input ) {
 		return '';
 	}
@@ -113,7 +113,7 @@ if ( ! function_exists( 'blogpress_sanitize_checkbox' ) ) {
 	 * @param string $checked The value to check.
 	 */
 	function blogpress_sanitize_checkbox( $checked ) {
-		// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison -- Intentially loose.
+		// phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- Intentionally loose.
 		return ( ( isset( $checked ) && true == $checked ) ? true : false );
 	}
 }
@@ -148,7 +148,6 @@ if ( ! function_exists( 'blogpress_sanitize_hex_color' ) ) {
 	 * @param string $color The color to check.
 	 */
 	function blogpress_sanitize_hex_color( $color ) {
-		// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison -- Intentially loose.
 		if ( '' === $color ) {
 			return '';
 		}
@@ -282,8 +281,8 @@ function blogpress_do_control_inline_scripts() {
 			'palette' => $colors,
 			'showGoogleFonts' => true,
 			'colorPickerShouldShift' => function_exists( 'did_filter' ),
-			'gpFontLibrary' => array(),
-			'gpFontLibraryURI' => '',
+			'blogpressFontLibrary' => array(),
+			'blogpressFontLibraryURI' => '',
 		)
 	);
 
@@ -346,7 +345,7 @@ if ( ! function_exists( 'blogpress_customizer_live_preview' ) ) {
 		);
 
 		global $blogpress_customize_fields;
-		wp_localize_script( 'blogpress-postMessage', 'gpPostMessageFields', $blogpress_customize_fields );
+		wp_localize_script( 'blogpress-postMessage', 'blogpressPostMessageFields', $blogpress_customize_fields );
 	}
 }
 

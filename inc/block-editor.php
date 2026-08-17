@@ -30,8 +30,19 @@ function blogpress_get_block_editor_sidebar_layout( $meta = true ) {
 		}
 	}
 
-	// Add in our default filter in case people have adjusted it.
-	$layout = $layout;
+	/**
+	 * Filters the sidebar layout used by the block editor.
+	 *
+	 * Applied to the saved default before any per-post meta override, so a
+	 * callback here changes the default while leaving explicit per-post choices
+	 * intact.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $layout The sidebar layout slug.
+	 * @return string The sidebar layout to use.
+	 */
+	$layout = apply_filters( 'blogpress_sidebar_layout', $layout );
 
 	if ( $meta ) {
 		$layout_meta = get_post_meta( get_the_ID(), '_blogpress-sidebar-layout-meta', true );
@@ -379,4 +390,64 @@ function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {
 	}
 
 	return $css->css_output();
+}
+
+add_filter( 'wp_theme_json_data_theme', 'blogpress_sync_theme_json_with_customizer' );
+/**
+ * Keep theme.json in step with the Customizer.
+ *
+ * theme.json is a static file, but the global colours and container width are
+ * user-editable in the Customizer. Without this the block editor would keep
+ * showing the shipped defaults after a user changed them.
+ *
+ * The Customizer stays the source of truth; theme.json supplies the defaults
+ * that this overlays.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Theme_JSON_Data $theme_json The theme.json data object.
+ * @return WP_Theme_JSON_Data The updated data object.
+ */
+function blogpress_sync_theme_json_with_customizer( $theme_json ) {
+	$new_data = array(
+		'version'  => 3,
+		'settings' => array(),
+	);
+
+	$global_colors = blogpress_get_option( 'global_colors' );
+
+	if ( ! empty( $global_colors ) && is_array( $global_colors ) ) {
+		$palette = array();
+
+		foreach ( $global_colors as $color ) {
+			if ( empty( $color['slug'] ) || empty( $color['color'] ) ) {
+				continue;
+			}
+
+			$palette[] = array(
+				'name'  => ! empty( $color['name'] ) ? $color['name'] : $color['slug'],
+				'slug'  => $color['slug'],
+				'color' => $color['color'],
+			);
+		}
+
+		if ( $palette ) {
+			$new_data['settings']['color']['palette'] = $palette;
+		}
+	}
+
+	$container_width = absint( blogpress_get_option( 'container_width' ) );
+
+	if ( $container_width ) {
+		$new_data['settings']['layout'] = array(
+			'contentSize' => $container_width . 'px',
+			'wideSize'    => $container_width . 'px',
+		);
+	}
+
+	if ( empty( $new_data['settings'] ) ) {
+		return $theme_json;
+	}
+
+	return $theme_json->update_with( $new_data );
 }
