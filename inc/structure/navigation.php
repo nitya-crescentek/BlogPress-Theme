@@ -95,59 +95,61 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 	}
 }
 
-/**
- * Build the mobile menu toggle in the header.
- *
- * @since 1.0.0
- */
-function blogpress_do_header_mobile_menu_toggle() {
-	if ( ! blogpress_has_inline_mobile_toggle() ) {
-		return;
-	}
-	?>
-	<nav <?php blogpress_do_attr( 'mobile-menu-control-wrapper' ); ?>>
-		<?php
-		blogpress_do_menu_bar_item_container();
+if ( ! function_exists( 'blogpress_do_header_mobile_menu_toggle' ) ) {
+	/**
+	 * Build the mobile menu toggle in the header.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_do_header_mobile_menu_toggle() {
+		if ( ! blogpress_has_inline_mobile_toggle() ) {
+			return;
+		}
 		?>
-		<button <?php blogpress_do_attr( 'menu-toggle', array( 'data-nav' => 'site-navigation' ) ); ?>>
+		<nav <?php blogpress_do_attr( 'mobile-menu-control-wrapper' ); ?>>
 			<?php
-
-			blogpress_do_svg_icon( 'menu-bars', true );
-
-			$mobile_menu_label = __( 'Menu', 'blogpress' );
-
-			if ( 'nav-float-right' === blogpress_get_navigation_location() || 'nav-float-left' === blogpress_get_navigation_location() ) {
-				$mobile_menu_label = '';
-			}
-
-			/**
-			 * Filters the visible label on the mobile menu toggle button.
-			 *
-			 * Return an empty string to show only the icon, with the label moved
-			 * into a screen-reader-only span.
-			 *
-			 * @since 1.0.0
-			 *
-			 * @param string $mobile_menu_label The button label. HTML is allowed.
-			 * @return string The label to display.
-			 */
-			$mobile_menu_label = apply_filters( 'blogpress_mobile_menu_label', $mobile_menu_label );
-
-			if ( $mobile_menu_label ) {
-				printf(
-					'<span class="mobile-menu">%s</span>',
-					$mobile_menu_label // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML allowed in filter.
-				);
-			} else {
-				printf(
-					'<span class="screen-reader-text">%s</span>',
-					esc_html__( 'Menu', 'blogpress' )
-				);
-			}
+			blogpress_do_menu_bar_item_container();
 			?>
-		</button>
-	</nav>
-	<?php
+			<button <?php blogpress_do_attr( 'menu-toggle', array( 'data-nav' => 'site-navigation' ) ); ?>>
+				<?php
+
+				blogpress_do_svg_icon( 'menu-bars', true );
+
+				$mobile_menu_label = __( 'Menu', 'blogpress' );
+
+				if ( 'nav-float-right' === blogpress_get_navigation_location() || 'nav-float-left' === blogpress_get_navigation_location() ) {
+					$mobile_menu_label = '';
+				}
+
+				/**
+				 * Filters the visible label on the mobile menu toggle button.
+				 *
+				 * Return an empty string to show only the icon, with the label moved
+				 * into a screen-reader-only span.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $mobile_menu_label The button label. HTML is allowed.
+				 * @return string The label to display.
+				 */
+				$mobile_menu_label = apply_filters( 'blogpress_mobile_menu_label', $mobile_menu_label );
+
+				if ( $mobile_menu_label ) {
+					printf(
+						'<span class="mobile-menu">%s</span>',
+						$mobile_menu_label // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML allowed in filter.
+					);
+				} else {
+					printf(
+						'<span class="screen-reader-text">%s</span>',
+						esc_html__( 'Menu', 'blogpress' )
+					);
+				}
+				?>
+			</button>
+		</nav>
+		<?php
+	}
 }
 
 if ( ! function_exists( 'blogpress_menu_fallback' ) ) {
@@ -482,47 +484,51 @@ if ( ! function_exists( 'blogpress_navigation_search' ) ) {
 	}
 }
 
-/**
- * Add a container for menu bar items.
- *
- * @since 1.0.0
- */
-function blogpress_do_menu_bar_item_container() {
-	if ( blogpress_has_menu_bar_items() ) {
-		echo '<div class="menu-bar-items">';
-			blogpress_do_navigation_search_button();
-			blogpress_do_search_modal_trigger();
+if ( ! function_exists( 'blogpress_do_menu_bar_item_container' ) ) {
+	/**
+	 * Add a container for menu bar items.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_do_menu_bar_item_container() {
+		if ( blogpress_has_menu_bar_items() ) {
+			echo '<div class="menu-bar-items">';
+				blogpress_do_navigation_search_button();
+				blogpress_do_search_modal_trigger();
 
-			/**
-			 * Fires inside the menu bar items container, after the built-in items.
-			 *
-			 * Does not fire when no menu bar items are enabled, as the container
-			 * itself is not output in that case.
-			 *
-			 * @since 1.0.0
-			 */
-			do_action( 'blogpress_menu_bar_items' );
-		echo '</div>';
+				/**
+				 * Fires inside the menu bar items container, after the built-in items.
+				 *
+				 * Does not fire when no menu bar items are enabled, as the container
+				 * itself is not output in that case.
+				 *
+				 * @since 1.0.0
+				 */
+				do_action( 'blogpress_menu_bar_items' );
+			echo '</div>';
+		}
 	}
 }
 
-/**
- * Add the navigation search button.
- *
- * @since 1.0.0
- */
-function blogpress_do_navigation_search_button() {
-	if ( 'enable' !== blogpress_get_option( 'nav_search' ) ) {
-		return;
+if ( ! function_exists( 'blogpress_do_navigation_search_button' ) ) {
+	/**
+	 * Add the navigation search button.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_do_navigation_search_button() {
+		if ( 'enable' !== blogpress_get_option( 'nav_search' ) ) {
+			return;
+		}
+
+		$search_item = sprintf(
+			'<span class="menu-bar-item search-item"><a aria-label="%1$s" href="#">%2$s</a></span>',
+			esc_attr__( 'Open Search Bar', 'blogpress' ),
+			blogpress_get_svg_icon( 'search', true ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
+		);
+
+		echo $search_item; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- No escaping needed.
 	}
-
-	$search_item = sprintf(
-		'<span class="menu-bar-item search-item"><a aria-label="%1$s" href="#">%2$s</a></span>',
-		esc_attr__( 'Open Search Bar', 'blogpress' ),
-		blogpress_get_svg_icon( 'search', true ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
-	);
-
-	echo $search_item; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- No escaping needed.
 }
 
 if ( ! function_exists( 'blogpress_menu_search_icon' ) ) {

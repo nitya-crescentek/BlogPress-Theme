@@ -1,0 +1,14 @@
+body .block-editor-block-list__block blockquote {
+	border-left: 0;
+	border-right: 5px solid rgba(0, 0, 0, 0.05);
+}
+
+body .wp-block-quote:not(.is-large):not(.is-style-large) {
+	border-left: 0;
+	border-right: 5px solid rgba(0, 0, 0, 0.05);
+}
+
+button.content-title-visibility {
+	right: auto;
+	left: 0;
+}

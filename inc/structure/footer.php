@@ -75,7 +75,7 @@ if ( ! function_exists( 'blogpress_add_footer_info' ) ) {
 	function blogpress_add_footer_info() {
 		$copyright = sprintf(
 			'<span class="copyright">&copy; %1$s %2$s</span> &bull; %3$s %4$s',
-			esc_html( gmdate( 'Y' ) ),
+			esc_html( date_i18n( 'Y' ) ),
 			esc_html( get_bloginfo( 'name' ) ),
 			esc_html_x( 'Built with', 'BlogPress', 'blogpress' ),
 			esc_html__( 'BlogPress', 'blogpress' )
@@ -99,26 +99,28 @@ if ( ! function_exists( 'blogpress_add_footer_info' ) ) {
 	}
 }
 
-/**
- * Build our individual footer widgets.
- * Displays a sample widget if no widget is found in the area.
- *
- * @since 1.0.0
- *
- * @param int $widget_width The width class of our widget.
- * @param int $widget The ID of our widget.
- */
-function blogpress_do_footer_widget( $widget_width, $widget ) {
-	$widget_classes = sprintf(
-		'footer-widget-%s',
-		absint( $widget )
-	);
+if ( ! function_exists( 'blogpress_do_footer_widget' ) ) {
+	/**
+	 * Build our individual footer widgets.
+	 * Displays a sample widget if no widget is found in the area.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $widget_width The width class of our widget.
+	 * @param int $widget The ID of our widget.
+	 */
+	function blogpress_do_footer_widget( $widget_width, $widget ) {
+		$widget_classes = sprintf(
+			'footer-widget-%s',
+			absint( $widget )
+		);
 
-	?>
-	<div class="<?php echo esc_attr( $widget_classes ); ?>">
-		<?php dynamic_sidebar( 'footer-' . absint( $widget ) ); ?>
-	</div>
-	<?php
+		?>
+		<div class="<?php echo esc_attr( $widget_classes ); ?>">
+			<?php dynamic_sidebar( 'footer-' . absint( $widget ) ); ?>
+		</div>
+		<?php
+	}
 }
 
 if ( ! function_exists( 'blogpress_construct_footer_widgets' ) ) {

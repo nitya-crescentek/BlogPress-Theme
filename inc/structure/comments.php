@@ -119,27 +119,29 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 	}
 }
 
-/**
- * Add our comment reply link after the comment text.
- *
- * @since 1.0.0
- * @param object $comment The comment object.
- * @param array  $args The existing args.
- * @param int    $depth The thread depth.
- */
-function blogpress_do_comment_reply_link( $comment, $args, $depth ) {
-	comment_reply_link(
-		array_merge(
-			$args,
-			array(
-				'add_below' => 'div-comment',
-				'depth'     => $depth,
-				'max_depth' => $args['max_depth'],
-				'before'    => '<span class="reply">',
-				'after'     => '</span>',
+if ( ! function_exists( 'blogpress_do_comment_reply_link' ) ) {
+	/**
+	 * Add our comment reply link after the comment text.
+	 *
+	 * @since 1.0.0
+	 * @param object $comment The comment object.
+	 * @param array  $args The existing args.
+	 * @param int    $depth The thread depth.
+	 */
+	function blogpress_do_comment_reply_link( $comment, $args, $depth ) {
+		comment_reply_link(
+			array_merge(
+				$args,
+				array(
+					'add_below' => 'div-comment',
+					'depth'     => $depth,
+					'max_depth' => $args['max_depth'],
+					'before'    => '<span class="reply">',
+					'after'     => '</span>',
+				)
 			)
-		)
-	);
+		);
+	}
 }
 
 add_filter( 'comment_form_defaults', 'blogpress_set_comment_form_defaults' );
@@ -204,24 +206,26 @@ function blogpress_filter_comment_fields( $fields ) {
 	return $fields;
 }
 
-/**
- * Add the comments template to pages and single posts.
- *
- * @since 1.0.0
- * @param string $template The template we're targeting.
- */
-function blogpress_do_comments_template( $template ) {
-	if ( 'single' === $template || 'page' === $template ) {
-		// If comments are open or we have at least one comment, load up the comment template.
-		// phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual -- Intentionally loose.
-		if ( comments_open() || '0' != get_comments_number() ) :
-			?>
+if ( ! function_exists( 'blogpress_do_comments_template' ) ) {
+	/**
+	 * Add the comments template to pages and single posts.
+	 *
+	 * @since 1.0.0
+	 * @param string $template The template we're targeting.
+	 */
+	function blogpress_do_comments_template( $template ) {
+		if ( 'single' === $template || 'page' === $template ) {
+			// If comments are open or we have at least one comment, load up the comment template.
+			// phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual -- Intentionally loose.
+			if ( comments_open() || '0' != get_comments_number() ) :
+				?>
 
-			<div class="comments-area">
-				<?php comments_template(); ?>
-			</div>
+				<div class="comments-area">
+					<?php comments_template(); ?>
+				</div>
 
-			<?php
-		endif;
+				<?php
+			endif;
+		}
 	}
 }

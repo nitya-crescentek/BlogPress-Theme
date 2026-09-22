@@ -1359,3 +1359,387 @@ msgstr ""
 #: no-results.php:69
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
+
+#. Color name in theme.json
+#: theme.json
+msgctxt "Color name"
+msgid "Accent"
+msgstr ""
+
+#. Color name in theme.json
+#: theme.json
+msgctxt "Color name"
+msgid "Base"
+msgstr ""
+
+#. Color name in theme.json
+#: theme.json
+msgctxt "Color name"
+msgid "Base 2"
+msgstr ""
+
+#. Color name in theme.json
+#: theme.json
+msgctxt "Color name"
+msgid "Base 3"
+msgstr ""
+
+#. Color name in theme.json
+#: theme.json
+msgctxt "Color name"
+msgid "Contrast"
+msgstr ""
+
+#. Color name in theme.json
+#: theme.json
+msgctxt "Color name"
+msgid "Contrast 2"
+msgstr ""
+
+#. Color name in theme.json
+#: theme.json
+msgctxt "Color name"
+msgid "Contrast 3"
+msgstr ""
+
+#. Font family name in theme.json
+#: theme.json
+msgctxt "Font family name"
+msgid "System Stack"
+msgstr ""
+
+#: assets/dist/customizer.js:2
+msgid "%s Preview"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "-- Select --"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Add Font"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Add Global Color"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Add Typography"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "All Headings"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Archive Content Title (H2)"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Bold"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Bottom Margin"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "CSS Variable Name"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Capitalize"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Category"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Changing this name will break styles that are using it to define its color."
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Changing this name will remove its color from elements already using it."
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Close"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Custom"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Delete Color"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Delete Font Family"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Delete Typography Element"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Enter custom CSS selector."
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Finish re-ordering"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Font Family"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Font Library"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Font Style"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Font Weight"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Font already selected"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Font family name"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Google Fonts"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Heading 4 (H4)"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Heading 5 (H5)"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Heading 6 (H6)"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Inherit"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Initial"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Italic"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Learn more about units"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Letter Spacing"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Line Height"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Lowercase"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "None"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Normal"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Oblique"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Open %s Settings"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Open Font Family Settings"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Open Typography Settings"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Other"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Paragraph Bottom Margin"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Primary Menu Items"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Primary Mobile Menu Toggle"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Primary Sub-Menu Items"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Re-order colors"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Search elements…"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Search fonts…"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Select Units"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Select a unit"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Single Content Title (H1)"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Site Description"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "System Default"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "System fonts"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Target Element"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Text Decoration"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Text Transform"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "This will permanently delete this color. Doing so will break styles that are using it to define their color."
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "This will permanently delete this font family. Doing so will stop elements from displaying it as their font."
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "This will permanently delete this typography element."
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Underline"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Uppercase"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Use Google Fonts API"
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Variable name already used."
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Variable name will be converted to kebab-case."
+msgstr ""
+
+#: assets/dist/customizer.js:3
+msgid "Variants"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Widget Titles"
+msgstr ""
+
+#: assets/dist/customizer.js:1
+msgid "Widgets"
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "Color Options"
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "Layout Options"
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "Open options"
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "Reset your customizer settings."
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "Set options like your site title, description, logo, logo width, and more."
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "Set up the layout of your overall site elements."
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "Set up your global colors and stylize your site to match your brand."
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "Set up your site typography by using our dynamic typography system."
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "Site Identity"
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "Start Customizing"
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "This will delete all of your customizer settings. It cannot be undone."
+msgstr ""
+
+#: assets/dist/dashboard.js:1
+msgid "Typography System"
+msgstr ""

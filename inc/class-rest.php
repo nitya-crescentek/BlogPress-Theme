@@ -93,6 +93,10 @@ class BlogPress_Rest extends WP_REST_Controller {
 		delete_option( 'blogpress_dynamic_css_output' );
 		delete_option( 'blogpress_dynamic_css_cached_version' );
 
+		// The dynamic CSS is cached per text direction.
+		delete_option( 'blogpress_dynamic_css_output_rtl' );
+		delete_option( 'blogpress_dynamic_css_cached_version_rtl' );
+
 		return $this->success( __( 'Settings reset.', 'blogpress' ) );
 	}
 

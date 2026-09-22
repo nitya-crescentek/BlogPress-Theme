@@ -164,7 +164,7 @@ class BlogPress_Dashboard {
 					true
 				);
 
-				wp_set_script_translations( 'blogpress-dashboard', 'blogpress' );
+				wp_set_script_translations( 'blogpress-dashboard', 'blogpress', get_template_directory() . '/languages' );
 
 				wp_localize_script(
 					'blogpress-dashboard',

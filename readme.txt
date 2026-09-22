@@ -73,11 +73,13 @@ with them automatically.
 
 = Translation and RTL =
 
-Fully internationalised with 282 translatable strings and a bundled .pot file, plus a right-to-left stylesheet.
+Fully internationalised with 373 translatable strings and a bundled .pot file, covering the PHP templates, the
+Customizer's React interface and the theme.json palette names. Ships with a right-to-left stylesheet for both the
+front end and the block editor.
 
 == Customizing BlogPress ==
 
-BlogPress is built to be extended from a child theme or a small plugin. It provides 35 action hooks and 19 filters,
+BlogPress is built to be extended from a child theme or a small plugin. It provides 35 action hooks and 29 filters,
 so in most cases you can add or change output without editing or copying a template file.
 
 A full reference with arguments and examples is coming. The most useful hooks are listed here.
@@ -173,8 +175,10 @@ Turn off the theme's microdata so an SEO plugin can supply JSON-LD instead:
 
     add_filter( 'blogpress_schema_type', '__return_empty_string' );
 
-Many of the theme's template functions are also wrapped in function_exists(), so a child theme can redefine them
-outright when a hook is not enough.
+The theme's template functions are also wrapped in function_exists(), so a child theme can redefine them outright
+when a hook is not enough. The default option, colour, typography and spacing arrays each have a filter
+( blogpress_option_defaults, blogpress_color_option_defaults, blogpress_font_option_defaults and
+blogpress_spacing_option_defaults ), so you can change a single default without copying the whole array.
 
 == Installation ==
 
@@ -219,11 +223,11 @@ Yes. Each post and page has a Layout box in the editor sidebar where you can ove
 the number of footer widget columns.
 
 = How do I customize the theme without losing changes on update? =
-Use a child theme. BlogPress provides 35 action hooks and 19 filters, and wraps most template functions in
+Use a child theme. BlogPress provides 35 action hooks and 29 filters, and wraps its template functions in
 function_exists(), so most changes can be made without copying template files. See "Customizing BlogPress" above.
 
 = Is BlogPress translation ready? =
-Yes. It ships with a .pot file containing 282 strings in /languages/, and includes a right-to-left stylesheet.
+Yes. It ships with a .pot file containing 373 strings in /languages/, and includes a right-to-left stylesheet.
 
 == Copyright ==
 

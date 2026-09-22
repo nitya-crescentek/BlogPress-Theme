@@ -61,7 +61,12 @@ if ( ! function_exists( 'blogpress_scripts' ) ) {
 		 * @return bool Whether to enqueue it.
 		 */
 		if ( is_child_theme() && apply_filters( 'blogpress_load_child_theme_stylesheet', true ) ) {
-			wp_enqueue_style( 'blogpress-child', get_stylesheet_uri(), array( 'blogpress-style' ), filemtime( get_stylesheet_directory() . '/style.css' ), 'all' );
+			$child_stylesheet = get_stylesheet_directory() . '/style.css';
+
+			// A child theme may keep its CSS elsewhere, so don't assume style.css is on disk.
+			$child_version = file_exists( $child_stylesheet ) ? filemtime( $child_stylesheet ) : BLOGPRESS_VERSION;
+
+			wp_enqueue_style( 'blogpress-child', get_stylesheet_uri(), array( 'blogpress-style' ), $child_version, 'all' );
 		}
 
 		if ( blogpress_has_active_menu() ) {

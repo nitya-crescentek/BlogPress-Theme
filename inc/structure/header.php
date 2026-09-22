@@ -216,38 +216,44 @@ if ( ! function_exists( 'blogpress_construct_header_widget' ) ) {
 	}
 }
 
-/**
- * Add the site logo to our header.
- * Only added if we aren't using floats to preserve backwards compatibility.
- *
- * @since 1.0.0
- */
-function blogpress_do_site_logo() {
-	if ( blogpress_needs_site_branding_container() ) {
-		return;
+if ( ! function_exists( 'blogpress_do_site_logo' ) ) {
+	/**
+	 * Add the site logo to our header.
+	 * Only added if we aren't using floats to preserve backwards compatibility.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_do_site_logo() {
+		if ( blogpress_needs_site_branding_container() ) {
+			return;
+		}
+
+		blogpress_construct_logo();
 	}
-
-	blogpress_construct_logo();
 }
 
-/**
- * Add the site branding to our header.
- * Only added if we aren't using floats to preserve backwards compatibility.
- *
- * @since 1.0.0
- */
-function blogpress_do_site_branding() {
-	blogpress_construct_site_title();
+if ( ! function_exists( 'blogpress_do_site_branding' ) ) {
+	/**
+	 * Add the site branding to our header.
+	 * Only added if we aren't using floats to preserve backwards compatibility.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_do_site_branding() {
+		blogpress_construct_site_title();
+	}
 }
 
-/**
- * Add the header widget to our header.
- * Only used when grid isn't using floats to preserve backwards compatibility.
- *
- * @since 1.0.0
- */
-function blogpress_do_header_widget() {
-	blogpress_construct_header_widget();
+if ( ! function_exists( 'blogpress_do_header_widget' ) ) {
+	/**
+	 * Add the header widget to our header.
+	 * Only used when grid isn't using floats to preserve backwards compatibility.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_do_header_widget() {
+		blogpress_construct_header_widget();
+	}
 }
 
 if ( ! function_exists( 'blogpress_top_bar' ) ) {
@@ -311,15 +317,17 @@ if ( ! function_exists( 'blogpress_add_viewport' ) ) {
 	}
 }
 
-/**
- * Add skip to content link before the header.
- *
- * @since 1.0.0
- */
-function blogpress_do_skip_to_content_link() {
-	printf(
-		'<a class="screen-reader-text skip-link" href="#content" title="%1$s">%2$s</a>',
-		esc_attr__( 'Skip to content', 'blogpress' ),
-		esc_html__( 'Skip to content', 'blogpress' )
-	);
+if ( ! function_exists( 'blogpress_do_skip_to_content_link' ) ) {
+	/**
+	 * Add skip to content link before the header.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_do_skip_to_content_link() {
+		printf(
+			'<a class="screen-reader-text skip-link" href="#content" title="%1$s">%2$s</a>',
+			esc_attr__( 'Skip to content', 'blogpress' ),
+			esc_html__( 'Skip to content', 'blogpress' )
+		);
+	}
 }

@@ -76,39 +76,43 @@ if ( ! function_exists( 'blogpress_filter_the_archive_title' ) ) {
 	}
 }
 
-/**
- * Output the archive description.
- *
- * @since 1.0.0
- */
-function blogpress_do_archive_description() {
-	$term_description = get_the_archive_description();
+if ( ! function_exists( 'blogpress_do_archive_description' ) ) {
+	/**
+	 * Output the archive description.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_do_archive_description() {
+		$term_description = get_the_archive_description();
 
-	if ( ! empty( $term_description ) ) {
-		if ( is_author() ) {
-			printf( '<div class="author-info">%s</div>', $term_description ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		} else {
-			printf( '<div class="taxonomy-description">%s</div>', $term_description ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		if ( ! empty( $term_description ) ) {
+			if ( is_author() ) {
+				printf( '<div class="author-info">%s</div>', $term_description ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			} else {
+				printf( '<div class="taxonomy-description">%s</div>', $term_description ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
 		}
 	}
 }
 
-/**
- * Add the search results title to the search results page.
- *
- * @since 1.0.0
- * @param string $template The template we're targeting.
- */
-function blogpress_do_search_results_title( $template ) {
-	if ( 'search' === $template ) {
-		echo sprintf(
-			'<header %s><h1 class="page-title">%s</h1></header>',
-			blogpress_get_attr( 'page-header' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_get_attr() escapes every attribute name and value.
-			sprintf(
-				/* translators: 1: Search query name */
-				__( 'Search Results for: %s', 'blogpress' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme-controlled translatable string; the search term is escaped by get_search_query().
-				'<span>' . get_search_query() . '</span>'
-			)
-		);
+if ( ! function_exists( 'blogpress_do_search_results_title' ) ) {
+	/**
+	 * Add the search results title to the search results page.
+	 *
+	 * @since 1.0.0
+	 * @param string $template The template we're targeting.
+	 */
+	function blogpress_do_search_results_title( $template ) {
+		if ( 'search' === $template ) {
+			echo sprintf(
+				'<header %s><h1 class="page-title">%s</h1></header>',
+				blogpress_get_attr( 'page-header' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_get_attr() escapes every attribute name and value.
+				sprintf(
+					/* translators: 1: Search query name */
+					__( 'Search Results for: %s', 'blogpress' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme-controlled translatable string; the search term is escaped by get_search_query().
+					'<span>' . get_search_query() . '</span>'
+				)
+			);
+		}
 	}
 }

@@ -15,8 +15,8 @@ if ( ! function_exists( 'blogpress_get_defaults' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_get_defaults() {
-		return array(
+	function blogpress_get_defaults( $filter = true ) {
+		$defaults = array(
 			'hide_title' => '',
 			'hide_tagline' => true,
 			'logo' => '',
@@ -110,6 +110,24 @@ if ( ! function_exists( 'blogpress_get_defaults' ) ) {
 				),
 			),
 		);
+
+		if ( $filter ) {
+			/**
+			 * Filters the theme's default option values.
+			 *
+			 * Lets a child theme or plugin change a default without having to
+			 * redefine the whole array, so defaults added in later versions of
+			 * the theme are still picked up.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $defaults The default option values.
+			 * @return array The default option values to use.
+			 */
+			return apply_filters( 'blogpress_option_defaults', $defaults );
+		}
+
+		return $defaults;
 	}
 }
 
@@ -117,8 +135,8 @@ if ( ! function_exists( 'blogpress_get_color_defaults' ) ) {
 	/**
 	 * Set default options
 	 */
-	function blogpress_get_color_defaults() {
-		return array(
+	function blogpress_get_color_defaults( $filter = true ) {
+		$defaults = array(
 			'top_bar_background_color' => '#636363',
 			'top_bar_text_color' => '#ffffff',
 			'top_bar_link_color' => '#ffffff',
@@ -191,6 +209,20 @@ if ( ! function_exists( 'blogpress_get_color_defaults' ) ) {
 			'search_modal_text_color' => 'var(--contrast)',
 			'search_modal_overlay_bg_color' => 'rgba(0,0,0,0.2)',
 		);
+
+		if ( $filter ) {
+			/**
+			 * Filters the theme's default colour values.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $defaults The default colour values.
+			 * @return array The default colour values to use.
+			 */
+			return apply_filters( 'blogpress_color_option_defaults', $defaults );
+		}
+
+		return $defaults;
 	}
 }
 
@@ -311,7 +343,15 @@ if ( ! function_exists( 'blogpress_get_default_fonts' ) ) {
 		);
 
 		if ( $filter ) {
-			return $defaults;
+			/**
+			 * Filters the theme's default typography values.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $defaults The default typography values.
+			 * @return array The default typography values to use.
+			 */
+			return apply_filters( 'blogpress_font_option_defaults', $defaults );
 		}
 
 		return $defaults;
@@ -389,7 +429,15 @@ if ( ! function_exists( 'blogpress_spacing_get_defaults' ) ) {
 		);
 
 		if ( $filter ) {
-			return $defaults;
+			/**
+			 * Filters the theme's default spacing values.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $defaults The default spacing values.
+			 * @return array The default spacing values to use.
+			 */
+			return apply_filters( 'blogpress_spacing_option_defaults', $defaults );
 		}
 
 		return $defaults;

@@ -842,7 +842,7 @@ function blogpress_no_cache_dynamic_css() {
 
 		$css->set_selector( '.has-inline-mobile-toggle .inside-header' );
 		$css->add_property( 'flex-direction', 'row' );
-		$css->add_property( 'text-align', 'left' );
+		$css->add_property( 'text-align', is_rtl() ? 'right' : 'left' );
 		$css->add_property( 'flex-wrap', 'wrap' );
 
 		$css->set_selector( '.has-inline-mobile-toggle .header-widget,.has-inline-mobile-toggle #site-navigation' );
@@ -855,6 +855,32 @@ function blogpress_no_cache_dynamic_css() {
 	$css->stop_media_query();
 
 	return $css->css_output();
+}
+
+/**
+ * Get the option names used to cache the dynamic CSS.
+ *
+ * Some of the dynamic CSS is direction-aware, so left-to-right and
+ * right-to-left output cannot share one cache entry. On a multilingual site
+ * mixing both directions, a single entry would serve whichever direction
+ * happened to be cached first to every language.
+ *
+ * The left-to-right names are unchanged, so existing caches stay valid.
+ *
+ * @since 1.0.0
+ *
+ * @return array {
+ *     @type string $css     Option name holding the cached CSS.
+ *     @type string $version Option name holding the version it was cached at.
+ * }
+ */
+function blogpress_get_dynamic_css_cache_keys() {
+	$suffix = is_rtl() ? '_rtl' : '';
+
+	return array(
+		'css' => 'blogpress_dynamic_css_output' . $suffix,
+		'version' => 'blogpress_dynamic_css_cached_version' . $suffix,
+	);
 }
 
 /**
@@ -877,12 +903,12 @@ add_action( 'wp_enqueue_scripts', 'blogpress_enqueue_dynamic_css', 50 );
  * @since 1.0.0
  */
 function blogpress_enqueue_dynamic_css() {
-	if ( false ) {
-		$css = '';
-	} elseif ( ! get_option( 'blogpress_dynamic_css_output', false ) || is_customize_preview() || ! blogpress_get_option( 'dynamic_css_cache' ) ) {
+	$cache_keys = blogpress_get_dynamic_css_cache_keys();
+
+	if ( ! get_option( $cache_keys['css'], false ) || is_customize_preview() || ! blogpress_get_option( 'dynamic_css_cache' ) ) {
 		$css = blogpress_get_dynamic_css();
 	} else {
-		$css = get_option( 'blogpress_dynamic_css_output' ) . '/* End cached CSS */';
+		$css = get_option( $cache_keys['css'] ) . '/* End cached CSS */';
 	}
 
 	$css = $css . blogpress_no_cache_dynamic_css();
@@ -903,14 +929,15 @@ function blogpress_set_dynamic_css_cache() {
 		return;
 	}
 
-	$cached_css = get_option( 'blogpress_dynamic_css_output', false );
-	$cached_version = get_option( 'blogpress_dynamic_css_cached_version', '' );
+	$cache_keys = blogpress_get_dynamic_css_cache_keys();
+	$cached_css = get_option( $cache_keys['css'], false );
+	$cached_version = get_option( $cache_keys['version'], '' );
 
 	if ( ! $cached_css || BLOGPRESS_VERSION !== $cached_version ) {
 		$css = blogpress_get_dynamic_css();
 
-		update_option( 'blogpress_dynamic_css_output', wp_strip_all_tags( $css ) );
-		update_option( 'blogpress_dynamic_css_cached_version', esc_html( BLOGPRESS_VERSION ) );
+		update_option( $cache_keys['css'], wp_strip_all_tags( $css ) );
+		update_option( $cache_keys['version'], esc_html( BLOGPRESS_VERSION ) );
 	}
 }
 
@@ -925,8 +952,20 @@ function blogpress_update_dynamic_css_cache() {
 		return;
 	}
 
+	/*
+	 * Only the direction the Customizer was saved in can be regenerated here.
+	 * Drop the opposite direction's cache so it rebuilds on its next request
+	 * rather than serving pre-save CSS.
+	 */
+	$opposite = is_rtl() ? '' : '_rtl';
+	delete_option( 'blogpress_dynamic_css_output' . $opposite );
+	delete_option( 'blogpress_dynamic_css_cached_version' . $opposite );
+
+	$cache_keys = blogpress_get_dynamic_css_cache_keys();
 	$css = blogpress_get_dynamic_css();
-	update_option( 'blogpress_dynamic_css_output', wp_strip_all_tags( $css ) );
+
+	update_option( $cache_keys['css'], wp_strip_all_tags( $css ) );
+	update_option( $cache_keys['version'], esc_html( BLOGPRESS_VERSION ) );
 }
 
 /**

@@ -23,7 +23,7 @@ if ( ! function_exists( 'blogpress_setup' ) ) {
 	 */
 	function blogpress_setup() {
 		// Make theme available for translation.
-		load_theme_textdomain( 'blogpress' );
+		load_theme_textdomain( 'blogpress', get_template_directory() . '/languages' );
 
 		// Add theme support for various features.
 		add_theme_support( 'automatic-feed-links' );

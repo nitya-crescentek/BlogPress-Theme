@@ -134,132 +134,136 @@ if ( ! function_exists( 'blogpress_modify_posts_pagination_template' ) ) {
 	}
 }
 
-/**
- * Output requested post meta.
- *
- * @since 1.0.0
- *
- * @param string $item The post meta item we're requesting.
- */
-function blogpress_do_post_meta_item( $item ) {
-	if ( 'date' === $item ) {
-		$time_string = '<time class="entry-date published" datetime="%1$s"%5$s>%2$s</time>';
+if ( ! function_exists( 'blogpress_do_post_meta_item' ) ) {
+	/**
+	 * Output requested post meta.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $item The post meta item we're requesting.
+	 */
+	function blogpress_do_post_meta_item( $item ) {
+		if ( 'date' === $item ) {
+			$time_string = '<time class="entry-date published" datetime="%1$s"%5$s>%2$s</time>';
 
-		$updated_time = get_the_modified_time( 'U' );
-		$published_time = get_the_time( 'U' ) + 1800;
-		$schema_type = blogpress_get_schema_type();
+			$updated_time = get_the_modified_time( 'U' );
+			$published_time = get_the_time( 'U' ) + 1800;
+			$schema_type = blogpress_get_schema_type();
 
-		if ( $updated_time > $published_time ) {
-			$time_string = '<time class="updated" datetime="%3$s"%6$s>%4$s</time>' . $time_string;
-		}
+			if ( $updated_time > $published_time ) {
+				$time_string = '<time class="updated" datetime="%3$s"%6$s>%4$s</time>' . $time_string;
+			}
 
-		$time_string = sprintf(
-			$time_string,
-			esc_attr( get_the_date( 'c' ) ),
-			esc_html( get_the_date() ),
-			esc_attr( get_the_modified_date( 'c' ) ),
-			esc_html( get_the_modified_date() ),
-			'microdata' === $schema_type ? ' itemprop="datePublished"' : '',
-			'microdata' === $schema_type ? ' itemprop="dateModified"' : ''
-		);
+			$time_string = sprintf(
+				$time_string,
+				esc_attr( get_the_date( 'c' ) ),
+				esc_html( get_the_date() ),
+				esc_attr( get_the_modified_date( 'c' ) ),
+				esc_html( get_the_modified_date() ),
+				'microdata' === $schema_type ? ' itemprop="datePublished"' : '',
+				'microdata' === $schema_type ? ' itemprop="dateModified"' : ''
+			);
 
-		$posted_on = '<span class="posted-on">%1$s%4$s</span> ';
+			$posted_on = '<span class="posted-on">%1$s%4$s</span> ';
 
-		echo sprintf(
-			$posted_on, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_do_post_meta_prefix() returns theme-built markup.
-			blogpress_do_post_meta_prefix( '', 'date' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Format string is a theme literal defined above.
-			esc_url( get_permalink() ),
-			esc_attr( get_the_time() ),
-			$time_string // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $time_string is assembled from esc_attr()/esc_html() parts above.
-		);
-	}
-
-	if ( 'author' === $item ) {
-		$schema_type = blogpress_get_schema_type();
-
-		$byline = '<span class="byline">%1$s<span class="author%8$s" %5$s><a class="url fn n" href="%2$s" title="%3$s" rel="author"%6$s><span class="author-name"%7$s>%4$s</span></a></span></span> ';
-
-		echo sprintf(
-			$byline, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Format string is a theme literal defined above.
-			blogpress_do_post_meta_prefix( '', 'author' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_do_post_meta_prefix() returns theme-built markup.
-			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-			/* translators: 1: Author name */
-			esc_attr( sprintf( __( 'View all posts by %s', 'blogpress' ), get_the_author() ) ),
-			esc_html( get_the_author() ),
-			blogpress_get_microdata( 'post-author' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_get_microdata() returns a theme-built attribute string.
-			'microdata' === $schema_type ? ' itemprop="url"' : '',
-			'microdata' === $schema_type ? ' itemprop="name"' : '',
-			blogpress_is_using_hatom() ? ' vcard' : ''
-		);
-	}
-
-	if ( 'categories' === $item ) {
-		$term_separator = _x( ', ', 'Used between list items, there is a space after the comma.', 'blogpress' );
-		$categories_list = get_the_category_list( $term_separator );
-
-		if ( $categories_list ) {
 			echo sprintf(
-				'<span class="cat-links">%3$s<span class="screen-reader-text">%1$s </span>%2$s</span> ',
-				esc_html_x( 'Categories', 'Used before category names.', 'blogpress' ),
-				$categories_list, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Format string is a theme literal defined above.
-				blogpress_do_post_meta_prefix( '', 'categories' ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_the_category_list() returns core-escaped markup.
+				$posted_on, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_do_post_meta_prefix() returns theme-built markup.
+				blogpress_do_post_meta_prefix( '', 'date' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Format string is a theme literal defined above.
+				esc_url( get_permalink() ),
+				esc_attr( get_the_time() ),
+				$time_string // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $time_string is assembled from esc_attr()/esc_html() parts above.
 			);
 		}
-	}
 
-	if ( 'tags' === $item ) {
-		$term_separator = _x( ', ', 'Used between list items, there is a space after the comma.', 'blogpress' );
-		$tags_list = get_the_tag_list( '', $term_separator );
+		if ( 'author' === $item ) {
+			$schema_type = blogpress_get_schema_type();
 
-		if ( $tags_list ) {
+			$byline = '<span class="byline">%1$s<span class="author%8$s" %5$s><a class="url fn n" href="%2$s" title="%3$s" rel="author"%6$s><span class="author-name"%7$s>%4$s</span></a></span></span> ';
+
 			echo sprintf(
-				'<span class="tags-links">%3$s<span class="screen-reader-text">%1$s </span>%2$s</span> ',
-				esc_html_x( 'Tags', 'Used before tag names.', 'blogpress' ),
-				$tags_list, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Format string is a theme literal defined above.
-				blogpress_do_post_meta_prefix( '', 'tags' ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_the_tag_list() returns core-escaped markup.
+				$byline, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Format string is a theme literal defined above.
+				blogpress_do_post_meta_prefix( '', 'author' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_do_post_meta_prefix() returns theme-built markup.
+				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+				/* translators: 1: Author name */
+				esc_attr( sprintf( __( 'View all posts by %s', 'blogpress' ), get_the_author() ) ),
+				esc_html( get_the_author() ),
+				blogpress_get_microdata( 'post-author' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_get_microdata() returns a theme-built attribute string.
+				'microdata' === $schema_type ? ' itemprop="url"' : '',
+				'microdata' === $schema_type ? ' itemprop="name"' : '',
+				blogpress_is_using_hatom() ? ' vcard' : ''
 			);
 		}
-	}
 
-	if ( 'comments-link' === $item ) {
-		if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-			echo '<span class="comments-link">';
-				echo blogpress_do_post_meta_prefix( '', 'comments-link' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				comments_popup_link( __( 'Leave a comment', 'blogpress' ), __( '1 Comment', 'blogpress' ), __( '% Comments', 'blogpress' ) );
-			echo '</span> ';
+		if ( 'categories' === $item ) {
+			$term_separator = _x( ', ', 'Used between list items, there is a space after the comma.', 'blogpress' );
+			$categories_list = get_the_category_list( $term_separator );
+
+			if ( $categories_list ) {
+				echo sprintf(
+					'<span class="cat-links">%3$s<span class="screen-reader-text">%1$s </span>%2$s</span> ',
+					esc_html_x( 'Categories', 'Used before category names.', 'blogpress' ),
+					$categories_list, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Format string is a theme literal defined above.
+					blogpress_do_post_meta_prefix( '', 'categories' ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_the_category_list() returns core-escaped markup.
+				);
+			}
 		}
-	}
 
-	if ( 'post-navigation' === $item && is_single() ) {
-		blogpress_content_nav( 'nav-below' );
+		if ( 'tags' === $item ) {
+			$term_separator = _x( ', ', 'Used between list items, there is a space after the comma.', 'blogpress' );
+			$tags_list = get_the_tag_list( '', $term_separator );
+
+			if ( $tags_list ) {
+				echo sprintf(
+					'<span class="tags-links">%3$s<span class="screen-reader-text">%1$s </span>%2$s</span> ',
+					esc_html_x( 'Tags', 'Used before tag names.', 'blogpress' ),
+					$tags_list, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Format string is a theme literal defined above.
+					blogpress_do_post_meta_prefix( '', 'tags' ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_the_tag_list() returns core-escaped markup.
+				);
+			}
+		}
+
+		if ( 'comments-link' === $item ) {
+			if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+				echo '<span class="comments-link">';
+					echo blogpress_do_post_meta_prefix( '', 'comments-link' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					comments_popup_link( __( 'Leave a comment', 'blogpress' ), __( '1 Comment', 'blogpress' ), __( '% Comments', 'blogpress' ) );
+				echo '</span> ';
+			}
+		}
+
+		if ( 'post-navigation' === $item && is_single() ) {
+			blogpress_content_nav( 'nav-below' );
+		}
 	}
 }
 
-/**
- * Add svg icons or text to our post meta output.
- *
- * @since 1.0.0
- * @param string $output The existing output.
- * @param string $item The item to target.
- */
-function blogpress_do_post_meta_prefix( $output, $item ) {
-	if ( 'author' === $item ) {
-		$output = __( 'by', 'blogpress' ) . ' ';
-	}
+if ( ! function_exists( 'blogpress_do_post_meta_prefix' ) ) {
+	/**
+	 * Add svg icons or text to our post meta output.
+	 *
+	 * @since 1.0.0
+	 * @param string $output The existing output.
+	 * @param string $item The item to target.
+	 */
+	function blogpress_do_post_meta_prefix( $output, $item ) {
+		if ( 'author' === $item ) {
+			$output = __( 'by', 'blogpress' ) . ' ';
+		}
 
-	if ( 'categories' === $item ) {
-		$output = blogpress_get_svg_icon( 'categories' );
-	}
+		if ( 'categories' === $item ) {
+			$output = blogpress_get_svg_icon( 'categories' );
+		}
 
-	if ( 'tags' === $item ) {
-		$output = blogpress_get_svg_icon( 'tags' );
-	}
+		if ( 'tags' === $item ) {
+			$output = blogpress_get_svg_icon( 'tags' );
+		}
 
-	if ( 'comments-link' === $item ) {
-		$output = blogpress_get_svg_icon( 'comments' );
-	}
+		if ( 'comments-link' === $item ) {
+			$output = blogpress_get_svg_icon( 'comments' );
+		}
 
-	return $output;
+		return $output;
+	}
 }
 
 /**
@@ -276,44 +280,48 @@ function blogpress_disable_post_meta_items( $items ) {
 	return $items;
 }
 
-/**
- * Get the post meta items in the header entry meta.
- *
- * @since 1.0.0
- */
-function blogpress_get_header_entry_meta_items() {
-	$items = array(
-		'date',
-		'author',
-	);
+if ( ! function_exists( 'blogpress_get_header_entry_meta_items' ) ) {
+	/**
+	 * Get the post meta items in the header entry meta.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_get_header_entry_meta_items() {
+		$items = array(
+			'date',
+			'author',
+		);
 
-	// Disable post meta items based on their individual filters.
-	$items = blogpress_disable_post_meta_items( $items );
+		// Disable post meta items based on their individual filters.
+		$items = blogpress_disable_post_meta_items( $items );
 
-	return $items;
+		return $items;
+	}
 }
 
-/**
- * Get the post meta items in the footer entry meta.
- *
- * @since 1.0.0
- */
-function blogpress_get_footer_entry_meta_items() {
-	$items = array(
-		'categories',
-		'tags',
-		'comments-link',
-		'post-navigation',
-	);
+if ( ! function_exists( 'blogpress_get_footer_entry_meta_items' ) ) {
+	/**
+	 * Get the post meta items in the footer entry meta.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_get_footer_entry_meta_items() {
+		$items = array(
+			'categories',
+			'tags',
+			'comments-link',
+			'post-navigation',
+		);
 
-	if ( ! is_singular() ) {
-		$items = array_diff( (array) $items, array( 'post-navigation' ) );
+		if ( ! is_singular() ) {
+			$items = array_diff( (array) $items, array( 'post-navigation' ) );
+		}
+
+		// Disable post meta items based on their individual filters.
+		$items = blogpress_disable_post_meta_items( $items );
+
+		return $items;
 	}
-
-	// Disable post meta items based on their individual filters.
-	$items = blogpress_disable_post_meta_items( $items );
-
-	return $items;
 }
 
 if ( ! function_exists( 'blogpress_posted_on' ) ) {
@@ -444,51 +452,57 @@ if ( ! function_exists( 'blogpress_footer_meta' ) ) {
 	}
 }
 
-/**
- * Add our post navigation after post loops.
- *
- * @since 1.0.0
- * @param string $template The template of the current action.
- */
-function blogpress_do_post_navigation( $template ) {
-	$templates = array(
-		'index',
-		'archive',
-		'search',
-	);
-
+if ( ! function_exists( 'blogpress_do_post_navigation' ) ) {
 	/**
-	 * Filters whether the older/newer posts navigation is shown below a loop.
+	 * Add our post navigation after post loops.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param bool   $show     Whether to show the post navigation. Default true.
-	 * @param string $template The template calling the navigation, e.g. 'archive'.
-	 * @return bool Whether to show the post navigation.
+	 * @param string $template The template of the current action.
 	 */
-	if ( in_array( $template, $templates ) && apply_filters( 'blogpress_show_post_navigation', true, $template ) ) {
-		blogpress_content_nav( 'nav-below' );
+	function blogpress_do_post_navigation( $template ) {
+		$templates = array(
+			'index',
+			'archive',
+			'search',
+		);
+
+		/**
+		 * Filters whether the older/newer posts navigation is shown below a loop.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param bool   $show     Whether to show the post navigation. Default true.
+		 * @param string $template The template calling the navigation, e.g. 'archive'.
+		 * @return bool Whether to show the post navigation.
+		 */
+		if ( in_array( $template, $templates ) && apply_filters( 'blogpress_show_post_navigation', true, $template ) ) {
+			blogpress_content_nav( 'nav-below' );
+		}
 	}
 }
 
-/**
- * Returns the read more text for our posts.
- *
- * @since 1.0.0
- */
-function blogpress_get_read_more_text() {
-	return __( 'Read more', 'blogpress' );
+if ( ! function_exists( 'blogpress_get_read_more_text' ) ) {
+	/**
+	 * Returns the read more text for our posts.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_get_read_more_text() {
+		return __( 'Read more', 'blogpress' );
+	}
 }
 
-/**
- * Returns the read more `aria-label` for our posts.
- *
- * @since 1.0.0
- */
-function blogpress_get_read_more_aria_label() {
-	return sprintf(
-		/* translators: Aria-label describing the read more button */
-		_x( 'Read more about %s', 'read more about post title', 'blogpress' ),
-		the_title_attribute( 'echo=0' )
-	);
+if ( ! function_exists( 'blogpress_get_read_more_aria_label' ) ) {
+	/**
+	 * Returns the read more `aria-label` for our posts.
+	 *
+	 * @since 1.0.0
+	 */
+	function blogpress_get_read_more_aria_label() {
+		return sprintf(
+			/* translators: Aria-label describing the read more button */
+			_x( 'Read more about %s', 'read more about post title', 'blogpress' ),
+			the_title_attribute( 'echo=0' )
+		);
+	}
 }
