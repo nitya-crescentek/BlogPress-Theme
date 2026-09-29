@@ -85,8 +85,8 @@ nav ul ul .menu-item-has-children .dropdown-menu-toggle {
 	float: left;
 }
 
-.dropdown-click #blogpress-slideout-menu .slideout-menu .menu-item-has-children > a:first-child,
-.slideout-desktop.dropdown-hover #blogpress-slideout-menu .slideout-menu .menu-item-has-children > a:first-child {
+.dropdown-click #webpress-slideout-menu .slideout-menu .menu-item-has-children > a:first-child,
+.slideout-desktop.dropdown-hover #webpress-slideout-menu .slideout-menu .menu-item-has-children > a:first-child {
 	padding-left: 0;
 }
 

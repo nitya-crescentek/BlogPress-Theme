@@ -2,7 +2,7 @@
 /**
  * Load necessary Customizer controls and functions.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

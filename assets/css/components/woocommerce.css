@@ -1,8 +1,8 @@
 /**
- * WooCommerce styling for BlogPress.
+ * WooCommerce styling for WebPress.
  *
  * Built on the theme's global colors (--contrast, --base, --accent) and the
- * shared tokens in main.css (--blogpress-radius, --blogpress-shadow) so a shop
+ * shared tokens in main.css (--webpress-radius, --webpress-shadow) so a shop
  * inherits whatever palette the Customizer is set to.
  *
  * Button colors come from the Customizer form settings and are printed as
@@ -21,8 +21,8 @@
 	--bp-wc-accent: var(--accent, #1e73be);
 
 	/* Consumed by WooCommerce's own components where they support variables. */
-	--wc-form-border-radius: var(--blogpress-radius-sm, 8px);
-	--wc-card-border-radius: var(--blogpress-radius, 12px);
+	--wc-form-border-radius: var(--webpress-radius-sm, 8px);
+	--wc-card-border-radius: var(--webpress-radius, 12px);
 	--wc-primary: var(--accent, #1e73be);
 	--wc-highlight: var(--accent, #1e73be);
 	--wc-content-bg: var(--base-3, #ffffff);
@@ -126,8 +126,8 @@
 	font-weight: 600;
 	line-height: 1.4;
 	border: 1px solid transparent;
-	border-radius: var(--blogpress-radius-sm, 8px);
-	transition: background-color var(--blogpress-transition, 0.2s ease), color var(--blogpress-transition, 0.2s ease), box-shadow var(--blogpress-transition, 0.2s ease);
+	border-radius: var(--webpress-radius-sm, 8px);
+	transition: background-color var(--webpress-transition, 0.2s ease), color var(--webpress-transition, 0.2s ease), box-shadow var(--webpress-transition, 0.2s ease);
 }
 
 .woocommerce a.button.disabled,
@@ -165,7 +165,7 @@
 	background-color: var(--bp-wc-surface);
 	border-top: 0;
 	border-left: 3px solid var(--bp-wc-accent);
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 	line-height: 1.5;
 	list-style: none;
 }
@@ -194,7 +194,7 @@
 # Shop archive header
 --------------------------------------------------------------*/
 /* Wrapper added in inc/plugin-compat.php so the count and sorting share a row. */
-.blogpress-shop-toolbar {
+.webpress-shop-toolbar {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
@@ -203,8 +203,8 @@
 	margin-bottom: 26px;
 }
 
-.woocommerce .blogpress-shop-toolbar .woocommerce-result-count,
-.woocommerce .blogpress-shop-toolbar .woocommerce-ordering {
+.woocommerce .webpress-shop-toolbar .woocommerce-result-count,
+.woocommerce .webpress-shop-toolbar .woocommerce-ordering {
 	float: none;
 	margin: 0;
 }
@@ -297,8 +297,8 @@
 	overflow: hidden;
 	background-color: var(--bp-wc-card);
 	border: 1px solid var(--bp-wc-border);
-	border-radius: var(--blogpress-radius, 12px);
-	transition: box-shadow var(--blogpress-transition, 0.2s ease), transform var(--blogpress-transition, 0.2s ease);
+	border-radius: var(--webpress-radius, 12px);
+	transition: box-shadow var(--webpress-transition, 0.2s ease), transform var(--webpress-transition, 0.2s ease);
 }
 
 .woocommerce ul.products.columns-3 li.product, .woocommerce-page ul.products.columns-3 li.product {
@@ -307,7 +307,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
 	.woocommerce ul.products li.product:hover {
-		box-shadow: var(--blogpress-shadow-hover, 0 12px 28px rgba(0, 0, 0, 0.08));
+		box-shadow: var(--webpress-shadow-hover, 0 12px 28px rgba(0, 0, 0, 0.08));
 		transform: translateY(-2px);
 	}
 }
@@ -527,14 +527,14 @@
 	display: block;
 	width: 100%;
 	height: auto;
-	border-radius: var(--blogpress-radius, 12px);
+	border-radius: var(--webpress-radius, 12px);
 	background-color: var(--bp-wc-surface);
 }
 
 .woocommerce div.product div.images .woocommerce-product-gallery__image > a {
 	overflow: hidden;
 	border: 1px solid var(--bp-wc-border);
-	border-radius: var(--blogpress-radius, 12px);
+	border-radius: var(--webpress-radius, 12px);
 	background-color: var(--bp-wc-surface);
 }
 
@@ -572,9 +572,9 @@
 	object-fit: cover;
 	cursor: pointer;
 	border: 1px solid var(--bp-wc-border);
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 	opacity: 0.55;
-	transition: opacity var(--blogpress-transition, 0.2s ease), border-color var(--blogpress-transition, 0.2s ease);
+	transition: opacity var(--webpress-transition, 0.2s ease), border-color var(--webpress-transition, 0.2s ease);
 }
 
 .woocommerce div.product div.images .flex-control-thumbs li img.flex-active,
@@ -595,8 +595,8 @@
 	text-align: center;
 	border-radius: 50%;
 	background-color: var(--bp-wc-card);
-	box-shadow: var(--blogpress-shadow, 0 4px 12px rgba(0, 0, 0, 0.05));
-	transition: background-color var(--blogpress-transition, 0.2s ease);
+	box-shadow: var(--webpress-shadow, 0 4px 12px rgba(0, 0, 0, 0.05));
+	transition: background-color var(--webpress-transition, 0.2s ease);
 }
 
 .woocommerce div.product .woocommerce-product-gallery__trigger:hover,
@@ -647,7 +647,7 @@
 	font-weight: 600;
 	color: var(--bp-wc-muted);
 	border-bottom: 2px solid transparent;
-	transition: color var(--blogpress-transition, 0.2s ease), border-color var(--blogpress-transition, 0.2s ease);
+	transition: color var(--webpress-transition, 0.2s ease), border-color var(--webpress-transition, 0.2s ease);
 }
 
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
@@ -685,7 +685,7 @@
 	padding: 22px;
 	background-color: var(--bp-wc-surface);
 	border: 1px solid var(--bp-wc-border);
-	border-radius: var(--blogpress-radius, 12px);
+	border-radius: var(--webpress-radius, 12px);
 }
 
 .woocommerce #reviews #comments ol.commentlist li img.avatar {
@@ -722,7 +722,7 @@
 	padding: 24px;
 	background-color: var(--bp-wc-surface);
 	border: 1px solid var(--bp-wc-border);
-	border-radius: var(--blogpress-radius, 12px);
+	border-radius: var(--webpress-radius, 12px);
 }
 
 .woocommerce #review_form #respond .comment-form-rating label,
@@ -763,7 +763,7 @@
 	border: 1px solid var(--bp-wc-border);
 	border-collapse: separate;
 	border-spacing: 0;
-	border-radius: var(--blogpress-radius, 12px);
+	border-radius: var(--webpress-radius, 12px);
 	overflow: hidden;
 }
 
@@ -788,7 +788,7 @@
 
 .woocommerce table.shop_table img {
 	width: 60px;
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 }
 
 .woocommerce a.remove {
@@ -897,7 +897,7 @@
 	margin-bottom: 2em;
 	background-color: var(--bp-wc-surface);
 	border: 1px solid var(--bp-wc-border);
-	border-radius: var(--blogpress-radius, 12px);
+	border-radius: var(--webpress-radius, 12px);
 }
 
 .woocommerce-checkout h3 {
@@ -906,7 +906,7 @@
 
 .woocommerce-checkout #payment {
 	background-color: var(--bp-wc-surface);
-	border-radius: var(--blogpress-radius, 12px);
+	border-radius: var(--webpress-radius, 12px);
 }
 
 .woocommerce-checkout #payment ul.payment_methods {
@@ -924,7 +924,7 @@
 	padding: 14px 16px;
 	font-size: 14px;
 	background-color: var(--bp-wc-card);
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 }
 
 .woocommerce-checkout #payment div.payment_box::before {
@@ -949,7 +949,7 @@
 	padding: 12px;
 	background-color: var(--bp-wc-surface);
 	border: 1px solid var(--bp-wc-border);
-	border-radius: var(--blogpress-radius, 12px);
+	border-radius: var(--webpress-radius, 12px);
 }
 
 .woocommerce-account .woocommerce-MyAccount-navigation ul {
@@ -968,8 +968,8 @@
 	padding: 10px 14px;
 	font-size: 15px;
 	text-decoration: none;
-	border-radius: var(--blogpress-radius-sm, 8px);
-	transition: background-color var(--blogpress-transition, 0.2s ease);
+	border-radius: var(--webpress-radius-sm, 8px);
+	transition: background-color var(--webpress-transition, 0.2s ease);
 }
 
 .woocommerce-account .woocommerce-MyAccount-navigation li a:hover {
@@ -1022,7 +1022,7 @@
 	padding: 16px;
 	font-style: normal;
 	background-color: var(--bp-wc-surface);
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 }
 
 /*--------------------------------------------------------------
@@ -1046,9 +1046,9 @@
 .woocommerce nav.woocommerce-pagination ul li span {
 	min-width: 40px;
 	padding: 9px 14px;
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 	background-color: var(--bp-wc-surface);
-	transition: background-color var(--blogpress-transition, 0.2s ease);
+	transition: background-color var(--webpress-transition, 0.2s ease);
 }
 
 .woocommerce nav.woocommerce-pagination ul li span.current,
@@ -1083,7 +1083,7 @@
 	float: none;
 	width: 54px;
 	margin: 0;
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 }
 
 .woocommerce ul.cart_list li a,
@@ -1104,7 +1104,7 @@
 .woocommerce .widget_price_filter .ui-slider .ui-slider-handle {
 	background-color: var(--bp-wc-accent);
 	border: 2px solid var(--bp-wc-card);
-	box-shadow: var(--blogpress-shadow, 0 1px 2px rgba(0, 0, 0, 0.04));
+	box-shadow: var(--webpress-shadow, 0 1px 2px rgba(0, 0, 0, 0.04));
 }
 
 .woocommerce .widget_price_filter .price_slider_amount .button {
@@ -1156,7 +1156,7 @@
 	padding: 22px;
 	background-color: var(--bp-wc-surface);
 	border: 1px solid var(--bp-wc-border);
-	border-radius: var(--blogpress-radius, 12px);
+	border-radius: var(--webpress-radius, 12px);
 	font-size: 15px;
 }
 
@@ -1171,7 +1171,7 @@
 
 .woocommerce-page .wc-block-components-order-summary-item__image img,
 .woocommerce-page table.wc-block-cart-items .wc-block-cart-item__image img {
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 }
 
 .woocommerce-page table.wc-block-cart-items .wc-block-cart-items__header th {
@@ -1188,7 +1188,7 @@
 .woocommerce-page .wc-block-components-select .wc-block-components-select__container,
 .woocommerce-page .wc-block-components-combobox .wc-block-components-combobox-control input,
 .woocommerce-page .wc-block-components-quantity-selector {
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 	border-color: var(--bp-wc-border);
 }
 
@@ -1211,11 +1211,11 @@
 	padding: 13px 24px;
 	font-weight: 600;
 	line-height: 1.4;
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 }
 
 .woocommerce-page .wc-block-components-notice-banner {
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 }
 
 .woocommerce-page .wc-block-components-panel__button {

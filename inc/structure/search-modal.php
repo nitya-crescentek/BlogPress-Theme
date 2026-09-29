@@ -2,26 +2,26 @@
 /**
  * Post meta elements.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-add_action( 'wp_footer', 'blogpress_do_search_modal' );
+add_action( 'wp_footer', 'webpress_do_search_modal' );
 /**
  * Create the search modal HTML.
  */
-function blogpress_do_search_modal() {
-	if ( ! blogpress_get_option( 'nav_search_modal' ) ) {
+function webpress_do_search_modal() {
+	if ( ! webpress_get_option( 'nav_search_modal' ) ) {
 		return;
 	}
 	?>
-	<div class="bp-modal bp-search-modal" id="bp-search" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e( 'Search', 'blogpress' ); ?>">
+	<div class="bp-modal bp-search-modal" id="bp-search" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e( 'Search', 'webpress' ); ?>">
 		<div class="bp-modal__overlay" tabindex="-1" data-bpmodal-close>
 			<div class="bp-modal__container">
-				<?php blogpress_do_search_fields();
+				<?php webpress_do_search_fields();
 ?>
 			</div>
 		</div>
@@ -29,17 +29,17 @@ function blogpress_do_search_modal() {
 	<?php
 }
 
-if ( ! function_exists( 'blogpress_do_search_modal_trigger' ) ) {
+if ( ! function_exists( 'webpress_do_search_modal_trigger' ) ) {
 	/**
 	 * Create the search modal trigger.
 	 */
-	function blogpress_do_search_modal_trigger() {
-		if ( ! blogpress_get_option( 'nav_search_modal' ) || 'svg' !== blogpress_get_option( 'icons' ) ) {
+	function webpress_do_search_modal_trigger() {
+		if ( ! webpress_get_option( 'nav_search_modal' ) || 'svg' !== webpress_get_option( 'icons' ) ) {
 			return;
 		}
 		?>
 		<span class="menu-bar-item">
-			<a href="#" role="button" aria-label="<?php esc_attr_e( 'Open search', 'blogpress' ); ?>" aria-haspopup="dialog" aria-controls="bp-search" data-bpmodal-trigger="bp-search"><?php echo blogpress_get_svg_icon( 'search', true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns a hardcoded SVG string built in the theme. ?></a>
+			<a href="#" role="button" aria-label="<?php esc_attr_e( 'Open search', 'webpress' ); ?>" aria-haspopup="dialog" aria-controls="bp-search" data-bpmodal-trigger="bp-search"><?php echo webpress_get_svg_icon( 'search', true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns a hardcoded SVG string built in the theme. ?></a>
 		</span>
 		<?php
 	}
@@ -50,8 +50,8 @@ if ( ! function_exists( 'blogpress_do_search_modal_trigger' ) ) {
  *
  * @param Object $css The existing CSS object.
  */
-function blogpress_do_search_modal_css( $css ) {
-	if ( ! blogpress_get_option( 'nav_search_modal' ) ) {
+function webpress_do_search_modal_css( $css ) {
+	if ( ! webpress_get_option( 'nav_search_modal' ) ) {
 		return;
 	}
 
@@ -86,17 +86,17 @@ function blogpress_do_search_modal_css( $css ) {
 	return $css;
 }
 
-if ( ! function_exists( 'blogpress_do_search_fields' ) ) {
+if ( ! function_exists( 'webpress_do_search_fields' ) ) {
 	/**
 	 * Add our search fields to the modal.
 	 */
-	function blogpress_do_search_fields() {
+	function webpress_do_search_fields() {
 		?>
 		<form role="search" method="get" class="search-modal-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-			<label for="search-modal-input" class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'blogpress' ); ?></label>
+			<label for="search-modal-input" class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'webpress' ); ?></label>
 			<div class="search-modal-fields">
-				<input id="search-modal-input" type="search" class="search-field" placeholder="<?php echo esc_attr( _x( 'Search &hellip;', 'placeholder', 'blogpress' ) ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s" />
-				<button aria-label="<?php echo esc_attr( _x( 'Search', 'submit button', 'blogpress' ) ); ?>"><?php echo blogpress_get_svg_icon( 'search' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns a hardcoded SVG string built in the theme. ?></button>
+				<input id="search-modal-input" type="search" class="search-field" placeholder="<?php echo esc_attr( _x( 'Search &hellip;', 'placeholder', 'webpress' ) ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s" />
+				<button aria-label="<?php echo esc_attr( _x( 'Search', 'submit button', 'webpress' ) ); ?>"><?php echo webpress_get_svg_icon( 'search' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns a hardcoded SVG string built in the theme. ?></button>
 			</div>
 			<?php
 			/**
@@ -104,7 +104,7 @@ if ( ! function_exists( 'blogpress_do_search_fields' ) ) {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'blogpress_inside_search_modal_form' );
+			do_action( 'webpress_inside_search_modal_form' );
 			?>
 		</form>
 		<?php

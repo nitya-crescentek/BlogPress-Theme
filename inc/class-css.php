@@ -2,21 +2,21 @@
 /**
  * Builds our dynamic CSS.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! class_exists( 'BlogPress_CSS' ) ) {
+if ( ! class_exists( 'WebPress_CSS' ) ) {
 	/**
 	 * Creates minified css via PHP.
 	 *
 	 * @author  Carlos Rios
-	 * Modified by Tom Usborne for BlogPress
+	 * Modified by Tom Usborne for WebPress
 	 */
-	class BlogPress_CSS {
+	class WebPress_CSS {
 		/**
 		 * The css selector that you're currently adding rules to
 		 *

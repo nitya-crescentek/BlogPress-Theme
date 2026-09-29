@@ -2,7 +2,7 @@
 /**
  * The template for displaying 404 pages.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,33 +12,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="inside-article">
 
 	<?php
-	blogpress_featured_page_header_inside_single();
+	webpress_featured_page_header_inside_single();
 
 	/** This action is documented in content.php */
-	do_action( 'blogpress_before_content', '404' );
+	do_action( 'webpress_before_content', '404' );
 	?>
 
-	<header <?php blogpress_do_attr( 'entry-header' ); ?>>
+	<header <?php webpress_do_attr( 'entry-header' ); ?>>
 		<?php
 		/** This action is documented in content.php */
-		do_action( 'blogpress_before_entry_title', '404' );
+		do_action( 'webpress_before_entry_title', '404' );
 		?>
-		<h1 class="entry-title" itemprop="headline"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'blogpress' ); ?></h1>
+		<h1 class="entry-title" itemprop="headline"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'webpress' ); ?></h1>
 		<?php
 		/** This action is documented in content.php */
-		do_action( 'blogpress_after_entry_title', '404' );
+		do_action( 'webpress_after_entry_title', '404' );
 		?>
 	</header>
 
 	<?php
 	/** This action is documented in content.php */
-	do_action( 'blogpress_after_entry_header', '404' );
+	do_action( 'webpress_after_entry_header', '404' );
 
-	blogpress_post_image();
+	webpress_post_image();
 
 	$itemprop = '';
 
-	if ( 'microdata' === blogpress_get_schema_type() ) {
+	if ( 'microdata' === webpress_get_schema_type() ) {
 		$itemprop = ' itemprop="text"';
 	}
 	?>
@@ -46,11 +46,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="entry-content"<?php echo $itemprop; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Literal attribute string built above; escaping would break the markup. ?>>
 		<?php
 		/** This action is documented in content.php */
-		do_action( 'blogpress_before_content_output', '404' );
+		do_action( 'webpress_before_content_output', '404' );
 
 		printf(
 			'<p>%s</p>',
-			esc_html__( 'It looks like nothing was found at this location. Maybe try searching?', 'blogpress' )
+			esc_html__( 'It looks like nothing was found at this location. Maybe try searching?', 'webpress' )
 		);
 
 		get_search_form();
@@ -59,10 +59,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php
 	/** This action is documented in content.php */
-	do_action( 'blogpress_after_entry_content', '404' );
+	do_action( 'webpress_after_entry_content', '404' );
 
 	/** This action is documented in content.php */
-	do_action( 'blogpress_after_content', '404' );
+	do_action( 'webpress_after_content', '404' );
 	?>
 
 </div>

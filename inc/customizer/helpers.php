@@ -2,73 +2,73 @@
 /**
  * Helper functions for the Customizer.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! function_exists( 'blogpress_is_footer_bar_active' ) ) {
+if ( ! function_exists( 'webpress_is_footer_bar_active' ) ) {
 	/**
 	 * Check to see if we're using our footer bar widget
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_is_footer_bar_active() {
+	function webpress_is_footer_bar_active() {
 		return ( is_active_sidebar( 'footer-bar' ) ) ? true : false;
 	}
 }
 
-if ( ! function_exists( 'blogpress_is_top_bar_active' ) ) {
+if ( ! function_exists( 'webpress_is_top_bar_active' ) ) {
 	/**
 	 * Check to see if the top bar is active
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_is_top_bar_active() {
+	function webpress_is_top_bar_active() {
 		$top_bar = is_active_sidebar( 'top-bar' ) ? true : false;
 		return $top_bar;
 	}
 }
 
-if ( ! function_exists( 'blogpress_customize_partial_blogname' ) ) {
+if ( ! function_exists( 'webpress_customize_partial_blogname' ) ) {
 	/**
 	 * Render the site title for the selective refresh partial.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_customize_partial_blogname() {
+	function webpress_customize_partial_blogname() {
 		bloginfo( 'name' );
 	}
 }
 
-if ( ! function_exists( 'blogpress_customize_partial_blogdescription' ) ) {
+if ( ! function_exists( 'webpress_customize_partial_blogdescription' ) ) {
 	/**
 	 * Render the site tagline for the selective refresh partial.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_customize_partial_blogdescription() {
+	function webpress_customize_partial_blogdescription() {
 		bloginfo( 'description' );
 	}
 }
 
-if ( ! function_exists( 'blogpress_enqueue_color_palettes' ) ) {
-	add_action( 'customize_controls_enqueue_scripts', 'blogpress_enqueue_color_palettes' );
+if ( ! function_exists( 'webpress_enqueue_color_palettes' ) ) {
+	add_action( 'customize_controls_enqueue_scripts', 'webpress_enqueue_color_palettes' );
 	/**
 	 * Add our custom color palettes to the color pickers in the Customizer.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_enqueue_color_palettes() {
+	function webpress_enqueue_color_palettes() {
 		// Old versions of WP don't get nice things.
 		if ( ! function_exists( 'wp_add_inline_script' ) ) {
 			return;
 		}
 
 		// Grab our palette array and turn it into JS.
-		$palettes = wp_json_encode( blogpress_get_default_color_palettes() );
+		$palettes = wp_json_encode( webpress_get_default_color_palettes() );
 
 		// Add our custom palettes.
 		// json_encode takes care of escaping.
@@ -76,14 +76,14 @@ if ( ! function_exists( 'blogpress_enqueue_color_palettes' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_sanitize_integer' ) ) {
+if ( ! function_exists( 'webpress_sanitize_integer' ) ) {
 	/**
 	 * Sanitize integers.
 	 *
 	 * @since 1.0.8
 	 * @param string $input The value to check.
 	 */
-	function blogpress_sanitize_integer( $input ) {
+	function webpress_sanitize_integer( $input ) {
 		return absint( $input );
 	}
 }
@@ -96,7 +96,7 @@ if ( ! function_exists( 'blogpress_sanitize_integer' ) ) {
  * @since 1.0.0
  * @param string $input The value to check.
  */
-function blogpress_sanitize_empty_absint( $input ) {
+function webpress_sanitize_empty_absint( $input ) {
 	// phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- Intentionally loose.
 	if ( '' == $input ) {
 		return '';
@@ -105,27 +105,27 @@ function blogpress_sanitize_empty_absint( $input ) {
 	return absint( $input );
 }
 
-if ( ! function_exists( 'blogpress_sanitize_checkbox' ) ) {
+if ( ! function_exists( 'webpress_sanitize_checkbox' ) ) {
 	/**
 	 * Sanitize checkbox values.
 	 *
 	 * @since 1.0.8
 	 * @param string $checked The value to check.
 	 */
-	function blogpress_sanitize_checkbox( $checked ) {
+	function webpress_sanitize_checkbox( $checked ) {
 		// phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- Intentionally loose.
 		return ( ( isset( $checked ) && true == $checked ) ? true : false );
 	}
 }
 
-if ( ! function_exists( 'blogpress_sanitize_blog_excerpt' ) ) {
+if ( ! function_exists( 'webpress_sanitize_blog_excerpt' ) ) {
 	/**
 	 * Sanitize blog excerpt.
 	 *
 	 * @since 1.0.8
 	 * @param string $input The value to check.
 	 */
-	function blogpress_sanitize_blog_excerpt( $input ) {
+	function webpress_sanitize_blog_excerpt( $input ) {
 		$valid = array(
 			'full',
 			'excerpt',
@@ -139,7 +139,7 @@ if ( ! function_exists( 'blogpress_sanitize_blog_excerpt' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_sanitize_hex_color' ) ) {
+if ( ! function_exists( 'webpress_sanitize_hex_color' ) ) {
 	/**
 	 * Sanitize colors.
 	 * Allow blank value.
@@ -147,7 +147,7 @@ if ( ! function_exists( 'blogpress_sanitize_hex_color' ) ) {
 	 * @since 1.0.0
 	 * @param string $color The color to check.
 	 */
-	function blogpress_sanitize_hex_color( $color ) {
+	function webpress_sanitize_hex_color( $color ) {
 		if ( '' === $color ) {
 			return '';
 		}
@@ -188,13 +188,13 @@ if ( ! function_exists( 'blogpress_sanitize_hex_color' ) ) {
  * @since 1.0.0
  * @param string $color The color to check.
  */
-function blogpress_sanitize_rgba_color( $color ) {
+function webpress_sanitize_rgba_color( $color ) {
 	if ( '' === $color ) {
 		return '';
 	}
 
 	if ( false === strpos( $color, 'rgba' ) ) {
-		return blogpress_sanitize_hex_color( $color );
+		return webpress_sanitize_hex_color( $color );
 	}
 
 	$color = str_replace( ' ', '', $color );
@@ -203,7 +203,7 @@ function blogpress_sanitize_rgba_color( $color ) {
 	return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
 }
 
-if ( ! function_exists( 'blogpress_sanitize_choices' ) ) {
+if ( ! function_exists( 'webpress_sanitize_choices' ) ) {
 	/**
 	 * Sanitize choices.
 	 *
@@ -211,7 +211,7 @@ if ( ! function_exists( 'blogpress_sanitize_choices' ) ) {
 	 * @param string $input The value to check.
 	 * @param object $setting The setting object.
 	 */
-	function blogpress_sanitize_choices( $input, $setting ) {
+	function webpress_sanitize_choices( $input, $setting ) {
 		// Ensure input is a slug.
 		$input = sanitize_key( $input );
 
@@ -226,7 +226,7 @@ if ( ! function_exists( 'blogpress_sanitize_choices' ) ) {
 }
 
 
-add_action( 'customize_controls_enqueue_scripts', 'blogpress_do_control_inline_scripts', 100 );
+add_action( 'customize_controls_enqueue_scripts', 'webpress_do_control_inline_scripts', 100 );
 /**
  * Add misc inline scripts to our controls.
  *
@@ -235,29 +235,29 @@ add_action( 'customize_controls_enqueue_scripts', 'blogpress_do_control_inline_s
  *
  * @since 1.0.0
  */
-function blogpress_do_control_inline_scripts() {
-	wp_enqueue_script( 'blogpress-customizer-controls', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/controls/js/customizer-controls.js', array( 'customize-controls', 'jquery' ), BLOGPRESS_VERSION, true );
-	wp_localize_script( 'blogpress-customizer-controls', 'blogpress_defaults', blogpress_get_defaults() );
-	wp_localize_script( 'blogpress-customizer-controls', 'blogpress_color_defaults', blogpress_get_color_defaults() );
-	wp_localize_script( 'blogpress-customizer-controls', 'blogpress_typography_defaults', blogpress_get_default_fonts() );
-	wp_localize_script( 'blogpress-customizer-controls', 'blogpress_spacing_defaults', blogpress_spacing_get_defaults() );
+function webpress_do_control_inline_scripts() {
+	wp_enqueue_script( 'webpress-customizer-controls', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/controls/js/customizer-controls.js', array( 'customize-controls', 'jquery' ), WEBPRESS_VERSION, true );
+	wp_localize_script( 'webpress-customizer-controls', 'webpress_defaults', webpress_get_defaults() );
+	wp_localize_script( 'webpress-customizer-controls', 'webpress_color_defaults', webpress_get_color_defaults() );
+	wp_localize_script( 'webpress-customizer-controls', 'webpress_typography_defaults', webpress_get_default_fonts() );
+	wp_localize_script( 'webpress-customizer-controls', 'webpress_spacing_defaults', webpress_spacing_get_defaults() );
 
 	/*
-	 * This is a separate handle from blogpress-customizer-controls above. They are
+	 * This is a separate handle from webpress-customizer-controls above. They are
 	 * two different scripts, and re-using a registered handle is a silent no-op --
 	 * the React app would never load and the Colors/Typography panels render empty.
 	 */
 	wp_enqueue_script(
-		'blogpress-customizer-app',
+		'webpress-customizer-app',
 		trailingslashit( get_template_directory_uri() ) . 'assets/dist/customizer.js',
 		// We're including wp-color-picker for localized strings, nothing more.
 		array( 'lodash', 'react', 'react-dom', 'wp-components', 'wp-element', 'wp-hooks', 'wp-i18n', 'wp-polyfill', 'jquery', 'customize-base', 'customize-controls', 'wp-color-picker' ),
-		BLOGPRESS_VERSION,
+		WEBPRESS_VERSION,
 		true
 	);
 
 	if ( function_exists( 'wp_set_script_translations' ) ) {
-		wp_set_script_translations( 'blogpress-customizer-app', 'blogpress', get_template_directory() . '/languages' );
+		wp_set_script_translations( 'webpress-customizer-app', 'webpress', get_template_directory() . '/languages' );
 	}
 
 	$color_palette = get_theme_support( 'editor-color-palette' );
@@ -275,25 +275,25 @@ function blogpress_do_control_inline_scripts() {
 	}
 
 	wp_localize_script(
-		'blogpress-customizer-app',
-		'blogpressCustomizerControls',
+		'webpress-customizer-app',
+		'webpressCustomizerControls',
 		array(
 			'palette' => $colors,
 			'showGoogleFonts' => true,
 			'colorPickerShouldShift' => function_exists( 'did_filter' ),
-			'blogpressFontLibrary' => array(),
-			'blogpressFontLibraryURI' => '',
+			'webpressFontLibrary' => array(),
+			'webpressFontLibraryURI' => '',
 		)
 	);
 
 	wp_enqueue_style(
-		'blogpress-customizer-app',
+		'webpress-customizer-app',
 		trailingslashit( get_template_directory_uri() ) . 'assets/dist/style-customizer.css',
 		array( 'wp-components' ),
-		BLOGPRESS_VERSION
+		WEBPRESS_VERSION
 	);
 
-	$global_colors = blogpress_get_global_colors();
+	$global_colors = webpress_get_global_colors();
 	$global_colors_css = ':root {';
 
 	if ( ! empty( $global_colors ) ) {
@@ -304,31 +304,31 @@ function blogpress_do_control_inline_scripts() {
 
 	$global_colors_css .= '}';
 
-	wp_add_inline_style( 'blogpress-customizer-app', $global_colors_css );
+	wp_add_inline_style( 'webpress-customizer-app', $global_colors_css );
 }
 
-if ( ! function_exists( 'blogpress_customizer_live_preview' ) ) {
-	add_action( 'customize_preview_init', 'blogpress_customizer_live_preview', 100 );
+if ( ! function_exists( 'webpress_customizer_live_preview' ) ) {
+	add_action( 'customize_preview_init', 'webpress_customizer_live_preview', 100 );
 	/**
 	 * Add our live preview scripts
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_customizer_live_preview() {
+	function webpress_customizer_live_preview() {
 		$spacing_settings = wp_parse_args(
-			get_option( 'blogpress_spacing_settings', array() ),
-			blogpress_spacing_get_defaults()
+			get_option( 'webpress_spacing_settings', array() ),
+			webpress_spacing_get_defaults()
 		);
 
-		wp_enqueue_script( 'blogpress-themecustomizer', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/controls/js/customizer-live-preview.js', array( 'customize-preview' ), BLOGPRESS_VERSION, true );
+		wp_enqueue_script( 'webpress-themecustomizer', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/controls/js/customizer-live-preview.js', array( 'customize-preview' ), WEBPRESS_VERSION, true );
 
 		wp_localize_script(
-			'blogpress-themecustomizer',
-			'blogpress_live_preview',
+			'webpress-themecustomizer',
+			'webpress_live_preview',
 			array(
-				'mobile' => blogpress_get_media_query( 'mobile' ),
-				'tablet' => blogpress_get_media_query( 'tablet_only' ),
-				'desktop' => blogpress_get_media_query( 'desktop' ),
+				'mobile' => webpress_get_media_query( 'mobile' ),
+				'tablet' => webpress_get_media_query( 'tablet_only' ),
+				'desktop' => webpress_get_media_query( 'desktop' ),
 				'contentLeft' => absint( $spacing_settings['content_left'] ),
 				'contentRight' => absint( $spacing_settings['content_right'] ),
 				'isFlex' => true,
@@ -337,15 +337,15 @@ if ( ! function_exists( 'blogpress_customizer_live_preview' ) ) {
 		);
 
 		wp_enqueue_script(
-			'blogpress-postMessage',
+			'webpress-postMessage',
 			trailingslashit( get_template_directory_uri() ) . 'inc/customizer/controls/js/postMessage.js',
 			array( 'jquery', 'customize-preview', 'wp-hooks' ),
-			BLOGPRESS_VERSION,
+			WEBPRESS_VERSION,
 			true
 		);
 
-		global $blogpress_customize_fields;
-		wp_localize_script( 'blogpress-postMessage', 'blogpressPostMessageFields', $blogpress_customize_fields );
+		global $webpress_customize_fields;
+		wp_localize_script( 'webpress-postMessage', 'webpressPostMessageFields', $webpress_customize_fields );
 	}
 }
 
@@ -357,7 +357,7 @@ if ( ! function_exists( 'blogpress_customizer_live_preview' ) ) {
  *
  * @since 1.0.0
  */
-function blogpress_has_custom_logo_callback() {
+function webpress_has_custom_logo_callback() {
 	if ( get_theme_mod( 'custom_logo' ) ) {
 		return true;
 	}
@@ -370,6 +370,6 @@ function blogpress_has_custom_logo_callback() {
  *
  * @since 1.0.0
  */
-function blogpress_sanitize_preset_layout() {
+function webpress_sanitize_preset_layout() {
 	return 'current';
 }

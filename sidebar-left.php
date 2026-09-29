@@ -2,17 +2,17 @@
 /**
  * The Sidebar containing the main widget areas.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 ?>
-<div <?php blogpress_do_attr( 'left-sidebar' ); ?>>
+<div <?php webpress_do_attr( 'left-sidebar' ); ?>>
 	<div class="inside-left-sidebar">
 		<?php
-		blogpress_add_navigation_before_left_sidebar();
+		webpress_add_navigation_before_left_sidebar();
 
 		/**
 		 * Fires inside the left sidebar, before its widgets.
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 *
 		 * @param string $sidebar_id The widget area ID being output.
 		 */
-		do_action( 'blogpress_before_left_sidebar_content', 'sidebar-2' );
+		do_action( 'webpress_before_left_sidebar_content', 'sidebar-2' );
 
 		dynamic_sidebar( 'sidebar-2' );
 
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 *
 		 * @param string $sidebar_id The widget area ID being output.
 		 */
-		do_action( 'blogpress_after_left_sidebar_content', 'sidebar-2' );
+		do_action( 'webpress_after_left_sidebar_content', 'sidebar-2' );
 
 		?>
 	</div>

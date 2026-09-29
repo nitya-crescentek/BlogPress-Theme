@@ -2,7 +2,7 @@
 /**
  * Add HTML attributes to our theme elements.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * This class adds HTML attributes to various theme elements.
  */
-class BlogPress_HTML_Attributes {
+class WebPress_HTML_Attributes {
 	/**
 	 * Class instance.
 	 *
@@ -53,8 +53,8 @@ class BlogPress_HTML_Attributes {
 		 * Filters the parsed HTML attributes for a given element.
 		 *
 		 * The dynamic portion of the hook name, `$context`, refers to the element
-		 * being built — for example `blogpress_attr_header` or
-		 * `blogpress_attr_entry-header`. Note that contexts use hyphens.
+		 * being built — for example `webpress_attr_header` or
+		 * `webpress_attr_entry-header`. Note that contexts use hyphens.
 		 *
 		 * Fires after the theme's own classes and microdata have been added, so
 		 * callbacks see the final attribute set.
@@ -66,7 +66,7 @@ class BlogPress_HTML_Attributes {
 		 * @param array  $settings   Custom data passed to the attribute builder.
 		 * @return array The attributes to build the element with.
 		 */
-		return apply_filters( "blogpress_attr_{$context}", $attributes, $context, $settings );
+		return apply_filters( "webpress_attr_{$context}", $attributes, $context, $settings );
 	}
 
 	/**
@@ -163,7 +163,7 @@ class BlogPress_HTML_Attributes {
 	 * @param array $attributes The existing attributes.
 	 */
 	public function top_bar( $attributes ) {
-		$classes = blogpress_get_element_classes( 'top_bar' );
+		$classes = webpress_get_element_classes( 'top_bar' );
 
 		if ( $classes ) {
 			$attributes['class'] .= ' ' . join( ' ', $classes );
@@ -181,7 +181,7 @@ class BlogPress_HTML_Attributes {
 	public function inside_top_bar( $attributes ) {
 		$attributes['class'] .= ' inside-top-bar';
 
-		if ( 'contained' === blogpress_get_option( 'top_bar_inner_width' ) ) {
+		if ( 'contained' === webpress_get_option( 'top_bar_inner_width' ) ) {
 			$attributes['class'] .= ' grid-container';
 		}
 
@@ -196,7 +196,7 @@ class BlogPress_HTML_Attributes {
 	 */
 	public function site_header( $attributes ) {
 		$attributes['id'] = 'masthead';
-		$attributes['aria-label'] = esc_attr__( 'Site', 'blogpress' );
+		$attributes['aria-label'] = esc_attr__( 'Site', 'webpress' );
 
 		return $attributes;
 	}
@@ -208,7 +208,7 @@ class BlogPress_HTML_Attributes {
 	 * @param array $attributes The existing attributes.
 	 */
 	public function inside_site_header( $attributes ) {
-		$classes = blogpress_get_element_classes( 'inside_header' );
+		$classes = webpress_get_element_classes( 'inside_header' );
 
 		if ( $classes ) {
 			$attributes['class'] .= ' ' . join( ' ', $classes );
@@ -239,7 +239,7 @@ class BlogPress_HTML_Attributes {
 	 */
 	public function primary_navigation( $attributes ) {
 		$attributes['id'] = 'site-navigation';
-		$attributes['aria-label'] = esc_attr__( 'Primary', 'blogpress' );
+		$attributes['aria-label'] = esc_attr__( 'Primary', 'webpress' );
 
 		return $attributes;
 	}
@@ -251,7 +251,7 @@ class BlogPress_HTML_Attributes {
 	 * @param array $attributes The existing attributes.
 	 */
 	public function primary_inner_navigation( $attributes ) {
-		$classes = blogpress_get_element_classes( 'inside_navigation' );
+		$classes = webpress_get_element_classes( 'inside_navigation' );
 
 		if ( $classes ) {
 			$attributes['class'] .= ' ' . join( ' ', $classes );
@@ -269,7 +269,7 @@ class BlogPress_HTML_Attributes {
 	public function mobile_menu_control_wrapper( $attributes ) {
 		$attributes['id'] = 'mobile-menu-control-wrapper';
 		$attributes['class'] .= ' main-navigation mobile-menu-control-wrapper';
-		$attributes['aria-label'] = esc_attr__( 'Mobile Toggle', 'blogpress' );
+		$attributes['aria-label'] = esc_attr__( 'Mobile Toggle', 'webpress' );
 
 		return $attributes;
 	}
@@ -282,7 +282,7 @@ class BlogPress_HTML_Attributes {
 	 */
 	public function site_info( $attributes ) {
 		$attributes['class'] .= ' site-info';
-		$attributes['aria-label'] = esc_attr__( 'Site', 'blogpress' );
+		$attributes['aria-label'] = esc_attr__( 'Site', 'webpress' );
 
 		return $attributes;
 	}
@@ -296,7 +296,7 @@ class BlogPress_HTML_Attributes {
 	public function inside_site_info( $attributes ) {
 		$attributes['class'] .= ' inside-site-info';
 
-		if ( 'full-width' !== blogpress_get_option( 'footer_inner_width' ) ) {
+		if ( 'full-width' !== webpress_get_option( 'footer_inner_width' ) ) {
 			$attributes['class'] .= ' grid-container';
 		}
 
@@ -323,7 +323,7 @@ class BlogPress_HTML_Attributes {
 	 */
 	public function page_header( $attributes ) {
 		$attributes['class'] .= ' page-header';
-		$attributes['aria-label'] = esc_attr__( 'Page', 'blogpress' );
+		$attributes['aria-label'] = esc_attr__( 'Page', 'webpress' );
 
 		return $attributes;
 	}
@@ -337,10 +337,10 @@ class BlogPress_HTML_Attributes {
 	public function post_navigation( $attributes ) {
 		if ( is_single() ) {
 			$attributes['class'] .= ' post-navigation';
-			$attributes['aria-label'] = esc_attr__( 'Posts', 'blogpress' );
+			$attributes['aria-label'] = esc_attr__( 'Posts', 'webpress' );
 		} else {
 			$attributes['class'] .= ' paging-navigation';
-			$attributes['aria-label'] = esc_attr__( 'Archive Page', 'blogpress' );
+			$attributes['aria-label'] = esc_attr__( 'Archive Page', 'webpress' );
 		}
 
 		return $attributes;
@@ -402,7 +402,7 @@ class BlogPress_HTML_Attributes {
 	 * @param array $attributes The existing attributes.
 	 */
 	public function left_sidebar( $attributes ) {
-		$classes = blogpress_get_element_classes( 'left_sidebar' );
+		$classes = webpress_get_element_classes( 'left_sidebar' );
 
 		if ( $classes ) {
 			$attributes['class'] .= ' ' . join( ' ', $classes );
@@ -420,7 +420,7 @@ class BlogPress_HTML_Attributes {
 	 * @param array $attributes The existing attributes.
 	 */
 	public function right_sidebar( $attributes ) {
-		$classes = blogpress_get_element_classes( 'right_sidebar' );
+		$classes = webpress_get_element_classes( 'right_sidebar' );
 
 		if ( $classes ) {
 			$attributes['class'] .= ' ' . join( ' ', $classes );
@@ -438,7 +438,7 @@ class BlogPress_HTML_Attributes {
 	 * @param array $attributes The existing attributes.
 	 */
 	public function footer_widgets_container( $attributes ) {
-		$classes = blogpress_get_element_classes( 'inside_footer' );
+		$classes = webpress_get_element_classes( 'inside_footer' );
 
 		if ( $classes ) {
 			$attributes['class'] .= ' ' . join( ' ', $classes );
@@ -469,7 +469,7 @@ class BlogPress_HTML_Attributes {
 	 */
 	public function comment_meta( $attributes ) {
 		$attributes['class'] .= ' comment-meta';
-		$attributes['aria-label'] = esc_attr__( 'Comment meta', 'blogpress' );
+		$attributes['aria-label'] = esc_attr__( 'Comment meta', 'webpress' );
 
 		return $attributes;
 	}
@@ -482,7 +482,7 @@ class BlogPress_HTML_Attributes {
 	 */
 	public function footer_entry_meta( $attributes ) {
 		$attributes['class'] .= ' entry-meta';
-		$attributes['aria-label'] = esc_attr__( 'Entry meta', 'blogpress' );
+		$attributes['aria-label'] = esc_attr__( 'Entry meta', 'webpress' );
 
 		return $attributes;
 	}
@@ -498,7 +498,7 @@ class BlogPress_HTML_Attributes {
 			$attributes['id'] = 'post-' . get_the_ID();
 			$attributes['class'] = esc_attr( implode( ' ', get_post_class( '', get_the_ID() ) ) );
 
-			if ( 'microdata' === blogpress_get_schema_type() ) {
+			if ( 'microdata' === webpress_get_schema_type() ) {
 				$type = 'CreativeWork';
 
 				$attributes['itemtype'] = sprintf(
@@ -516,4 +516,4 @@ class BlogPress_HTML_Attributes {
 	}
 }
 
-BlogPress_HTML_Attributes::get_instance();
+WebPress_HTML_Attributes::get_instance();

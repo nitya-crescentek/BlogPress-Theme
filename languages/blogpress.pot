@@ -2,8 +2,8 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: BlogPress 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/blogpress\n"
+"Project-Id-Version: WebPress 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/webpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -12,24 +12,24 @@ msgstr ""
 "POT-Creation-Date: 2026-08-17T11:42:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
-"X-Domain: blogpress\n"
+"X-Domain: webpress\n"
 
 #. Theme Name of the theme
 #: style.css
 #: inc/class-dashboard.php:49
 #: inc/class-dashboard.php:50
 #: inc/structure/footer.php:81
-msgid "BlogPress"
+msgid "WebPress"
 msgstr ""
 
 #. Theme URI of the theme
 #: style.css
-msgid "https://blogpress.codesocials.com"
+msgid "https://webpress.codesocials.com"
 msgstr ""
 
 #. Description of the theme
 #: style.css
-msgid "A lightweight, classic blogging theme built around the Customizer. BlogPress gives you 71 colour controls, dynamic typography, six sidebar layouts, six positions for the primary menu, and ten widget areas — all without a page builder. Its front-end CSS and JavaScript total roughly 7 KB gzipped on a default install. Fully responsive, RTL-ready and internationalised."
+msgid "A lightweight, classic blogging theme built around the Customizer. WebPress gives you 71 colour controls, dynamic typography, six sidebar layouts, six positions for the primary menu, and ten widget areas — all without a page builder. Its front-end CSS and JavaScript total roughly 7 KB gzipped on a default install. Fully responsive, RTL-ready and internationalised."
 msgstr ""
 
 #. Author of the theme
@@ -690,7 +690,7 @@ msgid "Cache dynamic CSS"
 msgstr ""
 
 #: inc/customizer.php:1531
-msgid "Cache CSS blogpressd by your options to boost performance."
+msgid "Cache CSS webpressd by your options to boost performance."
 msgstr ""
 
 #: inc/customizer/controls/class-range-control.php:69
@@ -1174,7 +1174,7 @@ msgid "Website"
 msgstr ""
 
 #: inc/structure/footer.php:80
-msgctxt "BlogPress"
+msgctxt "WebPress"
 msgid "Built with"
 msgstr ""
 

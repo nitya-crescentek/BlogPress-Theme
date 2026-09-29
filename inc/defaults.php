@@ -2,20 +2,20 @@
 /**
  * Sets all of our theme defaults.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! function_exists( 'blogpress_get_defaults' ) ) {
+if ( ! function_exists( 'webpress_get_defaults' ) ) {
 	/**
 	 * Set default options
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_get_defaults( $filter = true ) {
+	function webpress_get_defaults( $filter = true ) {
 		$defaults = array(
 			'hide_title' => '',
 			'hide_tagline' => true,
@@ -70,41 +70,41 @@ if ( ! function_exists( 'blogpress_get_defaults' ) ) {
 			'google_font_display' => 'auto',
 			'global_colors' => array(
 				array(
-					'name' => __( 'Contrast', 'blogpress' ),
+					'name' => __( 'Contrast', 'webpress' ),
 					'slug' => 'contrast',
 					'color' => '#222222',
 				),
 				array(
 					/* translators: Contrast number */
-					'name' => sprintf( __( 'Contrast %s', 'blogpress' ), '2' ),
+					'name' => sprintf( __( 'Contrast %s', 'webpress' ), '2' ),
 					'slug' => 'contrast-2',
 					'color' => '#575760',
 				),
 				array(
 					/* translators: Contrast number */
-					'name' => sprintf( __( 'Contrast %s', 'blogpress' ), '3' ),
+					'name' => sprintf( __( 'Contrast %s', 'webpress' ), '3' ),
 					'slug' => 'contrast-3',
 					'color' => '#b2b2be',
 				),
 				array(
-					'name' => __( 'Base', 'blogpress' ),
+					'name' => __( 'Base', 'webpress' ),
 					'slug' => 'base',
 					'color' => '#f0f0f0',
 				),
 				array(
 					/* translators: Base number */
-					'name' => sprintf( __( 'Base %s', 'blogpress' ), '2' ),
+					'name' => sprintf( __( 'Base %s', 'webpress' ), '2' ),
 					'slug' => 'base-2',
 					'color' => '#f7f8f9',
 				),
 				array(
 					/* translators: Base number */
-					'name' => sprintf( __( 'Base %s', 'blogpress' ), '3' ),
+					'name' => sprintf( __( 'Base %s', 'webpress' ), '3' ),
 					'slug' => 'base-3',
 					'color' => '#ffffff',
 				),
 				array(
-					'name' => __( 'Accent', 'blogpress' ),
+					'name' => __( 'Accent', 'webpress' ),
 					'slug' => 'accent',
 					'color' => '#1e73be',
 				),
@@ -124,18 +124,18 @@ if ( ! function_exists( 'blogpress_get_defaults' ) ) {
 			 * @param array $defaults The default option values.
 			 * @return array The default option values to use.
 			 */
-			return apply_filters( 'blogpress_option_defaults', $defaults );
+			return apply_filters( 'webpress_option_defaults', $defaults );
 		}
 
 		return $defaults;
 	}
 }
 
-if ( ! function_exists( 'blogpress_get_color_defaults' ) ) {
+if ( ! function_exists( 'webpress_get_color_defaults' ) ) {
 	/**
 	 * Set default options
 	 */
-	function blogpress_get_color_defaults( $filter = true ) {
+	function webpress_get_color_defaults( $filter = true ) {
 		$defaults = array(
 			'top_bar_background_color' => '#636363',
 			'top_bar_text_color' => '#ffffff',
@@ -219,14 +219,14 @@ if ( ! function_exists( 'blogpress_get_color_defaults' ) ) {
 			 * @param array $defaults The default colour values.
 			 * @return array The default colour values to use.
 			 */
-			return apply_filters( 'blogpress_color_option_defaults', $defaults );
+			return apply_filters( 'webpress_color_option_defaults', $defaults );
 		}
 
 		return $defaults;
 	}
 }
 
-if ( ! function_exists( 'blogpress_get_default_fonts' ) ) {
+if ( ! function_exists( 'webpress_get_default_fonts' ) ) {
 	/**
 	 * Set default options.
 	 *
@@ -235,7 +235,7 @@ if ( ! function_exists( 'blogpress_get_default_fonts' ) ) {
 	 * @param bool $filter Whether to return the filtered values or original values.
 	 * @return array Option defaults.
 	 */
-	function blogpress_get_default_fonts( $filter = true ) {
+	function webpress_get_default_fonts( $filter = true ) {
 		$defaults = array(
 			'font_body' => 'System Stack',
 			'font_body_category' => '',
@@ -351,14 +351,14 @@ if ( ! function_exists( 'blogpress_get_default_fonts' ) ) {
 			 * @param array $defaults The default typography values.
 			 * @return array The default typography values to use.
 			 */
-			return apply_filters( 'blogpress_font_option_defaults', $defaults );
+			return apply_filters( 'webpress_font_option_defaults', $defaults );
 		}
 
 		return $defaults;
 	}
 }
 
-if ( ! function_exists( 'blogpress_spacing_get_defaults' ) ) {
+if ( ! function_exists( 'webpress_spacing_get_defaults' ) ) {
 	/**
 	 * Set the default options.
 	 *
@@ -367,7 +367,7 @@ if ( ! function_exists( 'blogpress_spacing_get_defaults' ) ) {
 	 * @param bool $filter Whether to return the filtered values or original values.
 	 * @return array Option defaults.
 	 */
-	function blogpress_spacing_get_defaults( $filter = true ) {
+	function webpress_spacing_get_defaults( $filter = true ) {
 		$defaults = array(
 			'top_bar_top' => '10',
 			'top_bar_right' => '40',
@@ -437,7 +437,7 @@ if ( ! function_exists( 'blogpress_spacing_get_defaults' ) ) {
 			 * @param array $defaults The default spacing values.
 			 * @return array The default spacing values to use.
 			 */
-			return apply_filters( 'blogpress_spacing_option_defaults', $defaults );
+			return apply_filters( 'webpress_spacing_option_defaults', $defaults );
 		}
 
 		return $defaults;

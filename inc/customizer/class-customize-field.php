@@ -2,7 +2,7 @@
 /**
  * This file handles adding Customizer controls.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Helper functions to add Customizer fields.
  */
-class BlogPress_Customize_Field {
+class WebPress_Customize_Field {
 	/**
 	 * Instance.
 	 *
@@ -50,10 +50,10 @@ class BlogPress_Customize_Field {
 
 		$control_args['settings'] = isset( $wp_customize->selective_refresh ) ? array() : 'blogname';
 		$control_args['choices']['id'] = str_replace( '_', '-', $id );
-		$control_args['type'] = 'blogpress-wrapper-control';
+		$control_args['type'] = 'webpress-wrapper-control';
 
 		$wp_customize->add_control(
-			new BlogPress_Customize_Wrapper_Control(
+			new WebPress_Customize_Wrapper_Control(
 				$wp_customize,
 				$id,
 				$control_args
@@ -75,12 +75,12 @@ class BlogPress_Customize_Field {
 		}
 
 		$control_args['settings'] = isset( $wp_customize->selective_refresh ) ? array() : 'blogname';
-		$control_args['type'] = 'blogpress-title-control';
+		$control_args['type'] = 'webpress-title-control';
 		$control_args['choices']['title'] = $control_args['title'];
 		unset( $control_args['title'] );
 
 		$wp_customize->add_control(
-			new BlogPress_Customize_React_Control(
+			new WebPress_Customize_React_Control(
 				$wp_customize,
 				$id,
 				$control_args
@@ -138,9 +138,9 @@ class BlogPress_Customize_Field {
 		}
 
 		if ( isset( $control_args['output'] ) ) {
-			global $blogpress_customize_fields;
+			global $webpress_customize_fields;
 
-			$blogpress_customize_fields[] = array(
+			$webpress_customize_fields[] = array(
 				'js_vars' => $control_args['output'],
 				'settings' => $id,
 			);
@@ -174,7 +174,7 @@ class BlogPress_Customize_Field {
 	 */
 	public static function add_color_field_group( $id, $section_id, $toggle_id, $fields ) {
 		self::add_wrapper(
-			"blogpress{$id}_wrapper",
+			"webpress{$id}_wrapper",
 			array(
 				'section' => $section_id,
 				'choices' => array(
@@ -188,11 +188,11 @@ class BlogPress_Customize_Field {
 		foreach ( $fields as $key => $field ) {
 			self::add_field(
 				$key,
-				'BlogPress_Customize_Color_Control',
+				'WebPress_Customize_Color_Control',
 				array(
 					'default' => $field['default_value'],
 					'transport' => 'postMessage',
-					'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+					'sanitize_callback' => 'webpress_sanitize_rgba_color',
 				),
 				array(
 					'label' => $field['label'],

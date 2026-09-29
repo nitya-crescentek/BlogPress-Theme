@@ -1,11 +1,11 @@
-.blogpress-meta-box-content > div {
+.webpress-meta-box-content > div {
 	padding: 12px;
 }
-#blogpress_layout_options_meta_box .inside {
+#webpress_layout_options_meta_box .inside {
 	padding: 0;
 	margin:0;
 }
-#blogpress-meta-box-container .blogpress-meta-box-menu {
+#webpress-meta-box-container .webpress-meta-box-menu {
 	position: relative;
 	float: left;
 	list-style: none;
@@ -18,7 +18,7 @@
 	box-sizing: border-box;
 }
 
-#blogpress-meta-box-container .blogpress-meta-box-menu li {
+#webpress-meta-box-container .webpress-meta-box-menu li {
 	display: block;
 	position: relative;
 	margin: 0;
@@ -26,7 +26,7 @@
 	line-height: 20px;
 }
 
-#blogpress-meta-box-container .blogpress-meta-box-menu li a {
+#webpress-meta-box-container .webpress-meta-box-menu li a {
 	display: block;
 	margin: 0;
 	padding: 10px;
@@ -36,7 +36,7 @@
 	box-shadow: none;
 }
 
-#blogpress-meta-box-container .blogpress-meta-box-content {
+#webpress-meta-box-container .webpress-meta-box-content {
 	float: left;
 	width: calc( 100% - 180px );
 	margin-left: -1px;
@@ -44,54 +44,54 @@
 	background-color: #fff;
 }
 
-#blogpress-meta-box-container {
+#webpress-meta-box-container {
 	overflow: hidden;
 	background: #fff;
 	background: linear-gradient( 90deg, #fafafa 0%, #fafafa 180px, #fff 180px, #fff 100% );
 }
 
-#blogpress-meta-box-container .current {
+#webpress-meta-box-container .current {
 	position: relative;
 	font-weight: bold;
 	background-color: #e0e0e0;
 }
 
-#blogpress-meta-box-container .current a {
+#webpress-meta-box-container .current a {
 	color: #555;
 }
 
-#blogpress-meta-box-container label {
+#webpress-meta-box-container label {
 	font-weight: 400;
 	display: inline-block;
 	margin-bottom: 3px;
 }
 
 
-.blogpress-meta-box-menu li {
+.webpress-meta-box-menu li {
 	display: inline-block;
 }
 
-#side-sortables #blogpress-meta-box-container .blogpress-meta-box-menu,
-#side-sortables #blogpress-meta-box-container .blogpress-meta-box-content  {
+#side-sortables #webpress-meta-box-container .webpress-meta-box-menu,
+#side-sortables #webpress-meta-box-container .webpress-meta-box-content  {
     float: none;
     width: 100%;
 	margin: 0;
 	border: 0;
 }
 
-.edit-post-meta-boxes-area.is-side .blogpress-meta-box-content > div {
+.edit-post-meta-boxes-area.is-side .webpress-meta-box-content > div {
     display: block !important;
 }
 
-.edit-post-meta-boxes-area.is-side .blogpress-meta-box-menu {
+.edit-post-meta-boxes-area.is-side .webpress-meta-box-menu {
     display: none;
 }
 
-#blogpress-meta-box-container label {
+#webpress-meta-box-container label {
     display: none;
 }
 
-.edit-post-meta-boxes-area.is-side #blogpress-meta-box-container label.blogpress-layout-metabox-section-title {
+.edit-post-meta-boxes-area.is-side #webpress-meta-box-container label.webpress-layout-metabox-section-title {
     display: block;
     font-weight: 500;
     margin-bottom: 5px;

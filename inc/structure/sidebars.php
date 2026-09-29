@@ -2,21 +2,21 @@
 /**
  * Build the sidebars.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! function_exists( 'blogpress_construct_sidebars' ) ) {
+if ( ! function_exists( 'webpress_construct_sidebars' ) ) {
 	/**
 	 * Construct the sidebars.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_construct_sidebars() {
-		$layout = blogpress_get_layout();
+	function webpress_construct_sidebars() {
+		$layout = webpress_get_layout();
 
 		// When to show the right sidebar.
 		$rs = array( 'right-sidebar', 'both-sidebars', 'both-right', 'both-left' );

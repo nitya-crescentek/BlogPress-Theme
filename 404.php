@@ -2,7 +2,7 @@
 /**
  * The template for displaying 404 pages (Not Found).
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -11,11 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header(); ?>
 
-	<div <?php blogpress_do_attr( 'content' ); ?>>
-		<main <?php blogpress_do_attr( 'main' ); ?>>
+	<div <?php webpress_do_attr( 'content' ); ?>>
+		<main <?php webpress_do_attr( 'main' ); ?>>
 			<?php
 
-			blogpress_do_template_part( '404' );
+			webpress_do_template_part( '404' );
 
 			?>
 		</main>
@@ -23,6 +23,6 @@ get_header(); ?>
 
 	<?php
 
-	blogpress_construct_sidebars();
+	webpress_construct_sidebars();
 
 	get_footer();

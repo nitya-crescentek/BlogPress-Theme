@@ -41,7 +41,7 @@
 					for ( var t = 0; t < toggles.length; t++ ) {
 						toggles[ t ].classList.remove( 'close-search' );
 						toggles[ t ].classList.remove( 'active' );
-						toggles[ t ].querySelector( 'a' ).setAttribute( 'aria-label', blogpressNavSearch.open );
+						toggles[ t ].querySelector( 'a' ).setAttribute( 'aria-label', webpressNavSearch.open );
 
 						// Allow tabindex on items again.
 						for ( var f = 0; f < focusableEls.length; f++ ) {
@@ -86,7 +86,7 @@
 
 					for ( t = 0; t < toggles.length; t++ ) {
 						toggles[ t ].classList.add( 'active' );
-						toggles[ t ].querySelector( 'a' ).setAttribute( 'aria-label', blogpressNavSearch.close );
+						toggles[ t ].querySelector( 'a' ).setAttribute( 'aria-label', webpressNavSearch.close );
 
 						// Trap tabindex within the search element
 						for ( f = 0; f < focusableEls.length; f++ ) {

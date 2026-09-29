@@ -2,7 +2,7 @@
 /**
  * Build our admin dashboard.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * This class adds HTML attributes to various theme elements.
  */
-class BlogPress_Dashboard {
+class WebPress_Dashboard {
 	/**
 	 * Class instance.
 	 *
@@ -46,10 +46,10 @@ class BlogPress_Dashboard {
 	 */
 	public function add_menu_item() {
 		add_theme_page(
-			esc_html__( 'BlogPress', 'blogpress' ),
-			esc_html__( 'BlogPress', 'blogpress' ),
+			esc_html__( 'WebPress', 'webpress' ),
+			esc_html__( 'WebPress', 'webpress' ),
 			'edit_theme_options',
-			'blogpress-options',
+			'webpress-options',
 			array( $this, 'page' )
 		);
 	}
@@ -59,7 +59,7 @@ class BlogPress_Dashboard {
 	 */
 	public static function get_pages() {
 		return array(
-			'appearance_page_blogpress-options',
+			'appearance_page_webpress-options',
 		);
 	}
 
@@ -73,7 +73,7 @@ class BlogPress_Dashboard {
 		$current_screen = get_current_screen();
 
 		if ( in_array( $current_screen->id, $dashboard_pages ) ) {
-			$classes .= ' blogpress-dashboard-page';
+			$classes .= ' webpress-dashboard-page';
 		}
 
 		return $classes;
@@ -84,8 +84,8 @@ class BlogPress_Dashboard {
 	 */
 	public static function header() {
 		?>
-		<div class="blogpress-dashboard-header">
-			<div class="blogpress-dashboard-header__title">
+		<div class="webpress-dashboard-header">
+			<div class="webpress-dashboard-header__title">
 				<h1>
 					<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600"><path d="M485.2 427.8l-99.1-46.2 15.8-34c5.6-11.9 8.8-24.3 10-36.7 3.3-33.7-9-67.3-33.2-91.1-8.9-8.7-19.3-16.1-31.3-21.7-11.9-5.6-24.3-8.8-36.7-10-33.7-3.3-67.4 9-91.1 33.2-8.7 8.9-16.1 19.3-21.7 31.3l-15.8 34-30.4 65.2c-.7 1.5-.1 3.3 1.5 4l65.2 30.4 34 15.8 34 15.8 68 31.7 74.7 34.8c-65 45.4-152.1 55.2-228.7 17.4C90.2 447.4 44.1 313.3 97.3 202.6c53.3-110.8 186-158.5 297.8-106.3 88.1 41.1 137.1 131.9 129.1 223.4-.1 1.3.6 2.4 1.7 3l65.6 30.6c1.8.8 3.9-.3 4.2-2.2 22.6-130.7-44-265.4-170.5-323.5-150.3-69-327-4.1-396.9 145.8-70 150.1-5.1 328.5 145.1 398.5 114.1 53.2 244.5 28.4 331.3-52.3 17.9-16.6 33.9-35.6 47.5-56.8 1-1.5.4-3.6-1.3-4.3l-65.7-30.7zm-235-109.6l15.8-34c8.8-18.8 31.1-26.9 49.8-18.1s26.9 31 18.1 49.8l-15.8 34-34-15.8-33.9-15.9z" fill="currentColor" /></svg>
 					<?php echo esc_html( get_admin_page_title() ); ?>
@@ -105,13 +105,13 @@ class BlogPress_Dashboard {
 
 		$tabs = array(
 			'dashboard' => array(
-				'name' => __( 'Dashboard', 'blogpress' ),
-				'url' => admin_url( 'themes.php?page=blogpress-options' ),
-				'class' => 'appearance_page_blogpress-options' === $screen->id ? 'active' : '',
+				'name' => __( 'Dashboard', 'webpress' ),
+				'url' => admin_url( 'themes.php?page=webpress-options' ),
+				'class' => 'appearance_page_webpress-options' === $screen->id ? 'active' : '',
 			),
 		);
 		?>
-		<div class="blogpress-dashboard-header__navigation">
+		<div class="webpress-dashboard-header__navigation">
 			<?php
 			foreach ( $tabs as $tab ) {
 				printf(
@@ -149,32 +149,32 @@ class BlogPress_Dashboard {
 
 		if ( in_array( $current_screen->id, $dashboard_pages ) ) {
 			wp_enqueue_style(
-				'blogpress-dashboard',
+				'webpress-dashboard',
 				get_template_directory_uri() . '/assets/dist/style-dashboard.css',
 				array( 'wp-components' ),
-				BLOGPRESS_VERSION
+				WEBPRESS_VERSION
 			);
 
-			if ( 'appearance_page_blogpress-options' === $current_screen->id ) {
+			if ( 'appearance_page_webpress-options' === $current_screen->id ) {
 				wp_enqueue_script(
-					'blogpress-dashboard',
+					'webpress-dashboard',
 					get_template_directory_uri() . '/assets/dist/dashboard.js',
 					array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element', 'wp-api-fetch', 'wp-hooks', 'wp-polyfill' ),
-					BLOGPRESS_VERSION,
+					WEBPRESS_VERSION,
 					true
 				);
 
-				wp_set_script_translations( 'blogpress-dashboard', 'blogpress', get_template_directory() . '/languages' );
+				wp_set_script_translations( 'webpress-dashboard', 'webpress', get_template_directory() . '/languages' );
 
 				wp_localize_script(
-					'blogpress-dashboard',
-					'blogpressDashboard',
+					'webpress-dashboard',
+					'webpressDashboard',
 					array(
 						'customizeSectionUrls' => array(
 							'siteIdentitySection' => add_query_arg( rawurlencode( 'autofocus[section]' ), 'title_tagline', wp_customize_url() ),
-							'colorsSection' => add_query_arg( rawurlencode( 'autofocus[section]' ), 'blogpress_colors_section', wp_customize_url() ),
-							'typographySection' => add_query_arg( rawurlencode( 'autofocus[section]' ), 'blogpress_typography_section', wp_customize_url() ),
-							'layoutSection' => add_query_arg( rawurlencode( 'autofocus[panel]' ), 'blogpress_layout_panel', wp_customize_url() ),
+							'colorsSection' => add_query_arg( rawurlencode( 'autofocus[section]' ), 'webpress_colors_section', wp_customize_url() ),
+							'typographySection' => add_query_arg( rawurlencode( 'autofocus[section]' ), 'webpress_typography_section', wp_customize_url() ),
+							'layoutSection' => add_query_arg( rawurlencode( 'autofocus[panel]' ), 'webpress_layout_panel', wp_customize_url() ),
 						),
 					)
 				);
@@ -188,7 +188,7 @@ class BlogPress_Dashboard {
 	public function page() {
 		?>
 		<div class="wrap">
-			<div class="blogpress-dashboard">
+			<div class="webpress-dashboard">
 				<?php $this->start_customizing();
  $this->reset();
 ?>
@@ -201,15 +201,15 @@ class BlogPress_Dashboard {
 	 * Add the container for our start customizing app.
 	 */
 	public function start_customizing() {
-		echo '<div id="blogpress-dashboard-app"></div>';
+		echo '<div id="webpress-dashboard-app"></div>';
 	}
 
 	/**
 	 * Add the container for our reset app.
 	 */
 	public function reset() {
-		echo '<div id="blogpress-reset"></div>';
+		echo '<div id="webpress-reset"></div>';
 	}
 }
 
-BlogPress_Dashboard::get_instance();
+WebPress_Dashboard::get_instance();

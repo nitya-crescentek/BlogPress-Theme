@@ -2,7 +2,7 @@
 /**
  * Customize API: ColorAlpha class
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 /**
@@ -12,7 +12,7 @@
  *
  * @see WP_Customize_Control
  */
-class BlogPress_Customize_React_Control extends WP_Customize_Control {
+class WebPress_Customize_React_Control extends WP_Customize_Control {
 	/**
 	 * Type.
 	 *
@@ -20,7 +20,7 @@ class BlogPress_Customize_React_Control extends WP_Customize_Control {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	public $type = 'blogpress-react-control';
+	public $type = 'webpress-react-control';
 
 	/**
 	 * Refresh the parameters passed to the JavaScript via JSON.

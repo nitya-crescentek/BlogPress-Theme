@@ -1,4 +1,4 @@
-wp.customize.controlConstructor['blogpress-range-slider'] = wp.customize.Control.extend({
+wp.customize.controlConstructor['webpress-range-slider'] = wp.customize.Control.extend({
 
 	ready: function() {
 
@@ -9,11 +9,11 @@ wp.customize.controlConstructor['blogpress-range-slider'] = wp.customize.Control
 		    thisInput,
 		    inputDefault,
 		    changeAction,
-			controlClass = '.customize-control-blogpress-range-slider',
+			controlClass = '.customize-control-webpress-range-slider',
 			footerActions = jQuery( '#customize-footer-actions' );
 		
 		// Set up the sliders
-		jQuery( '.blogpress-slider' ).each( function() {
+		jQuery( '.webpress-slider' ).each( function() {
 			var _this = jQuery( this );
 			var _input = _this.closest( 'label' ).find( 'input[type="number"]' );
 			var _text = _input.next( '.value' );
@@ -30,21 +30,21 @@ wp.customize.controlConstructor['blogpress-range-slider'] = wp.customize.Control
 		});
 		
 		// Update the range value based on the input value
-		jQuery( controlClass + ' .blogpress_range_value input[type=number]' ).on( 'input', function() {
+		jQuery( controlClass + ' .webpress_range_value input[type=number]' ).on( 'input', function() {
 			value = jQuery( this ).attr( 'value' );
 			if ( '' == value ) {
 				value = -1;
 			}
-			jQuery( this ).closest( 'label' ).find( '.blogpress-slider' ).slider( 'value', parseFloat(value)).change();
+			jQuery( this ).closest( 'label' ).find( '.webpress-slider' ).slider( 'value', parseFloat(value)).change();
 		});
 
 		// Handle the reset button
-		jQuery( controlClass + ' .blogpress-reset' ).on( 'click', function() {
+		jQuery( controlClass + ' .webpress-reset' ).on( 'click', function() {
 			var icon = jQuery( this ),
 				visible_area = icon.closest( '.bp-range-title-area' ).next( '.bp-range-slider-areas' ).children( 'label:visible' ),
 				input = visible_area.find( 'input[type=number]' ),
-				slider_value = visible_area.find( '.blogpress-slider' ),
-				visual_value = visible_area.find( '.blogpress_range_value' ),
+				slider_value = visible_area.find( '.webpress-slider' ),
+				visual_value = visible_area.find( '.webpress_range_value' ),
 				reset_value = input.attr( 'data-reset_value' );
 			
 			input.val( reset_value ).change();
@@ -59,7 +59,7 @@ wp.customize.controlConstructor['blogpress-range-slider'] = wp.customize.Control
 		});
 		
 		// Figure out which device icon to make active on load
-		jQuery( controlClass + ' .blogpress-range-slider-control' ).each( function() {
+		jQuery( controlClass + ' .webpress-range-slider-control' ).each( function() {
 			var _this = jQuery( this );
 			_this.find( '.bp-device-controls' ).children( 'span:first-child' ).addClass( 'selected' );
 			_this.find( '.range-option-area:first-child' ).show();

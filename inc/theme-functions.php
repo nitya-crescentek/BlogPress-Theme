@@ -2,7 +2,7 @@
 /**
  * Main theme functions.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,22 +17,22 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param string $option The option name to look up.
  * @return string The option value.
  */
-function blogpress_get_option( $option ) {
-	$defaults = blogpress_get_defaults();
+function webpress_get_option( $option ) {
+	$defaults = webpress_get_defaults();
 
 	if ( ! isset( $defaults[ $option ] ) ) {
 		return;
 	}
 
 	$options = wp_parse_args(
-		get_option( 'blogpress_settings', array() ),
+		get_option( 'webpress_settings', array() ),
 		$defaults
 	);
 
 	return $options[ $option ];
 }
 
-if ( ! function_exists( 'blogpress_get_layout' ) ) {
+if ( ! function_exists( 'webpress_get_layout' ) ) {
 	/**
 	 * Get the layout for the current page.
 	 *
@@ -40,15 +40,15 @@ if ( ! function_exists( 'blogpress_get_layout' ) ) {
 	 *
 	 * @return string The sidebar layout location.
 	 */
-	function blogpress_get_layout() {
-		$layout = blogpress_get_option( 'layout_setting' );
+	function webpress_get_layout() {
+		$layout = webpress_get_option( 'layout_setting' );
 
 		if ( is_single() ) {
-			$layout = blogpress_get_option( 'single_layout_setting' );
+			$layout = webpress_get_option( 'single_layout_setting' );
 		}
 
 		if ( is_singular() ) {
-			$layout_meta = get_post_meta( get_the_ID(), '_blogpress-sidebar-layout-meta', true );
+			$layout_meta = get_post_meta( get_the_ID(), '_webpress-sidebar-layout-meta', true );
 
 			if ( $layout_meta ) {
 				$layout = $layout_meta;
@@ -56,14 +56,14 @@ if ( ! function_exists( 'blogpress_get_layout' ) ) {
 		}
 
 		if ( is_home() || is_archive() || is_search() || is_tax() ) {
-			$layout = blogpress_get_option( 'blog_layout_setting' );
+			$layout = webpress_get_option( 'blog_layout_setting' );
 		}
 
 		return $layout;
 	}
 }
 
-if ( ! function_exists( 'blogpress_get_footer_widgets' ) ) {
+if ( ! function_exists( 'webpress_get_footer_widgets' ) ) {
 	/**
 	 * Get the footer widgets for the current page
 	 *
@@ -71,11 +71,11 @@ if ( ! function_exists( 'blogpress_get_footer_widgets' ) ) {
 	 *
 	 * @return int The number of footer widgets.
 	 */
-	function blogpress_get_footer_widgets() {
-		$widgets = blogpress_get_option( 'footer_widget_setting' );
+	function webpress_get_footer_widgets() {
+		$widgets = webpress_get_option( 'footer_widget_setting' );
 
 		if ( is_singular() ) {
-			$widgets_meta = get_post_meta( get_the_ID(), '_blogpress-footer-widget-meta', true );
+			$widgets_meta = get_post_meta( get_the_ID(), '_webpress-footer-widget-meta', true );
 
 			if ( $widgets_meta || '0' === $widgets_meta ) {
 				$widgets = $widgets_meta;
@@ -92,17 +92,17 @@ if ( ! function_exists( 'blogpress_get_footer_widgets' ) ) {
 		 * @param int|string $widgets The number of footer widget areas to show.
 		 * @return int|string The number of footer widget areas to show.
 		 */
-		return apply_filters( 'blogpress_footer_widgets', $widgets );
+		return apply_filters( 'webpress_footer_widgets', $widgets );
 	}
 }
 
-if ( ! function_exists( 'blogpress_show_excerpt' ) ) {
+if ( ! function_exists( 'webpress_show_excerpt' ) ) {
 	/**
 	 * Figure out if we should show the blog excerpts or full posts
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_show_excerpt() {
+	function webpress_show_excerpt() {
 		global $post;
 
 		// Check to see if the more tag is being used.
@@ -110,7 +110,7 @@ if ( ! function_exists( 'blogpress_show_excerpt' ) ) {
 
 		$format = ( false !== get_post_format() ) ? get_post_format() : 'standard';
 
-		$show_excerpt = ( 'excerpt' === blogpress_get_option( 'post_content' ) ) ? true : false;
+		$show_excerpt = ( 'excerpt' === webpress_get_option( 'post_content' ) ) ? true : false;
 
 		$show_excerpt = ( 'standard' !== $format ) ? false : $show_excerpt;
 
@@ -126,11 +126,11 @@ if ( ! function_exists( 'blogpress_show_excerpt' ) ) {
 		 * @param bool $show_excerpt Whether to show the excerpt.
 		 * @return bool Whether to show the excerpt.
 		 */
-		return apply_filters( 'blogpress_show_excerpt', $show_excerpt );
+		return apply_filters( 'webpress_show_excerpt', $show_excerpt );
 	}
 }
 
-if ( ! function_exists( 'blogpress_show_title' ) ) {
+if ( ! function_exists( 'webpress_show_title' ) ) {
 	/**
 	 * Check to see if we should show our page/post title or not.
 	 *
@@ -138,10 +138,10 @@ if ( ! function_exists( 'blogpress_show_title' ) ) {
 	 *
 	 * @return bool Whether to show the content title.
 	 */
-	function blogpress_show_title() {
+	function webpress_show_title() {
 		$show_title = true;
 
-		if ( is_singular() && get_post_meta( get_the_ID(), '_blogpress-disable-headline', true ) ) {
+		if ( is_singular() && get_post_meta( get_the_ID(), '_webpress-disable-headline', true ) ) {
 			$show_title = false;
 		}
 
@@ -156,7 +156,7 @@ if ( ! function_exists( 'blogpress_show_title' ) ) {
 		 * @param bool $show_title Whether to show the title.
 		 * @return bool Whether to show the title.
 		 */
-		return apply_filters( 'blogpress_show_title', $show_title );
+		return apply_filters( 'webpress_show_title', $show_title );
 	}
 }
 
@@ -165,11 +165,11 @@ if ( ! function_exists( 'blogpress_show_title' ) ) {
  *
  * @since 1.0.0
  */
-function blogpress_show_entry_header() {
-	return blogpress_show_title();
+function webpress_show_entry_header() {
+	return webpress_show_title();
 }
 
-if ( ! function_exists( 'blogpress_padding_css' ) ) {
+if ( ! function_exists( 'webpress_padding_css' ) ) {
 	/**
 	 * Shorten our padding/margin values into shorthand form.
 	 *
@@ -181,7 +181,7 @@ if ( ! function_exists( 'blogpress_padding_css' ) ) {
 	 * @param int $left Left spacing.
 	 * @return string Element spacing values.
 	 */
-	function blogpress_padding_css( $top, $right, $bottom, $left ) {
+	function webpress_padding_css( $top, $right, $bottom, $left ) {
 		$padding_top = ( isset( $top ) && '' !== $top ) ? absint( $top ) . 'px ' : '0px ';
 		$padding_right = ( isset( $right ) && '' !== $right ) ? absint( $right ) . 'px ' : '0px ';
 		$padding_bottom = ( isset( $bottom ) && '' !== $bottom ) ? absint( $bottom ) . 'px ' : '0px ';
@@ -195,7 +195,7 @@ if ( ! function_exists( 'blogpress_padding_css' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_get_link_url' ) ) {
+if ( ! function_exists( 'webpress_get_link_url' ) ) {
 	/**
 	 * Return the post URL.
 	 *
@@ -206,7 +206,7 @@ if ( ! function_exists( 'blogpress_get_link_url' ) ) {
 	 * @see get_url_in_content()
 	 * @return string The Link format URL.
 	 */
-	function blogpress_get_link_url() {
+	function webpress_get_link_url() {
 		$has_url = get_url_in_content( get_the_content() );
 
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core filter name.
@@ -214,7 +214,7 @@ if ( ! function_exists( 'blogpress_get_link_url' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_get_navigation_location' ) ) {
+if ( ! function_exists( 'webpress_get_navigation_location' ) ) {
 	/**
 	 * Get the location of the navigation and filter it.
 	 *
@@ -222,8 +222,8 @@ if ( ! function_exists( 'blogpress_get_navigation_location' ) ) {
 	 *
 	 * @return string The primary menu location.
 	 */
-	function blogpress_get_navigation_location() {
-		return blogpress_get_option( 'nav_position_setting' );
+	function webpress_get_navigation_location() {
+		return webpress_get_option( 'nav_position_setting' );
 	}
 }
 
@@ -232,9 +232,9 @@ if ( ! function_exists( 'blogpress_get_navigation_location' ) ) {
  *
  * @since 1.0.0
  */
-function blogpress_has_logo_site_branding() {
-	$has_site_title = ! blogpress_get_option( 'hide_title' ) && get_bloginfo( 'title' );
-	$has_site_tagline = ! blogpress_get_option( 'hide_tagline' ) && get_bloginfo( 'description' );
+function webpress_has_logo_site_branding() {
+	$has_site_title = ! webpress_get_option( 'hide_title' ) && get_bloginfo( 'title' );
+	$has_site_tagline = ! webpress_get_option( 'hide_tagline' ) && get_bloginfo( 'description' );
 
 	if ( get_theme_mod( 'custom_logo' ) && ( $has_site_title || $has_site_tagline ) ) {
 		return true;
@@ -243,7 +243,7 @@ function blogpress_has_logo_site_branding() {
 	return false;
 }
 
-if ( ! function_exists( 'blogpress_get_svg_icon' ) ) {
+if ( ! function_exists( 'webpress_get_svg_icon' ) ) {
 	/**
 	 * Create SVG icons.
 	 *
@@ -252,8 +252,8 @@ if ( ! function_exists( 'blogpress_get_svg_icon' ) ) {
 	 * @param string $icon The icon to get.
 	 * @param bool   $replace Whether we're replacing an icon on action (click).
 	 */
-	function blogpress_get_svg_icon( $icon, $replace = false ) {
-		if ( 'svg' !== blogpress_get_option( 'icons' ) ) {
+	function webpress_get_svg_icon( $icon, $replace = false ) {
+		if ( 'svg' !== webpress_get_option( 'icons' ) ) {
 			return;
 		}
 
@@ -312,7 +312,7 @@ if ( ! function_exists( 'blogpress_get_svg_icon' ) ) {
 		 * @param bool   $replace Whether a close icon will be appended for JS toggling.
 		 * @return string The SVG markup to use.
 		 */
-		$output = apply_filters( 'blogpress_svg_icon', $output, $icon, $replace );
+		$output = apply_filters( 'webpress_svg_icon', $output, $icon, $replace );
 
 		if ( $replace ) {
 			$output .= '<svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M71.029 71.029c9.373-9.372 24.569-9.372 33.942 0L256 222.059l151.029-151.03c9.373-9.372 24.569-9.372 33.942 0 9.372 9.373 9.372 24.569 0 33.942L289.941 256l151.03 151.029c9.372 9.373 9.372 24.569 0 33.942-9.373 9.372-24.569 9.372-33.942 0L256 289.941l-151.029 151.03c-9.373 9.372-24.569 9.372-33.942 0-9.372-9.373-9.372-24.569 0-33.942L222.059 256 71.029 104.971c-9.372-9.373-9.372-24.569 0-33.942z" /></svg>';
@@ -333,7 +333,7 @@ if ( ! function_exists( 'blogpress_get_svg_icon' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_do_svg_icon' ) ) {
+if ( ! function_exists( 'webpress_do_svg_icon' ) ) {
 	/**
 	 * Out our icon HTML.
 	 *
@@ -342,8 +342,8 @@ if ( ! function_exists( 'blogpress_do_svg_icon' ) ) {
 	 * @param string $icon The icon to print.
 	 * @param bool   $replace Whether to include the close icon to be shown using JS.
 	 */
-	function blogpress_do_svg_icon( $icon, $replace = false ) {
-		echo blogpress_get_svg_icon( $icon, $replace ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
+	function webpress_do_svg_icon( $icon, $replace = false ) {
+		echo webpress_get_svg_icon( $icon, $replace ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
 	}
 }
 
@@ -355,7 +355,7 @@ if ( ! function_exists( 'blogpress_do_svg_icon' ) ) {
  * @param string $name Name of the media query.
  * @return string The full media query.
  */
-function blogpress_get_media_query( $name ) {
+function webpress_get_media_query( $name ) {
 	$desktop = '(min-width:1025px)';
 	$tablet_only = '(min-width: 769px) and (max-width: 1024px)';
 	$mobile = '(max-width:768px)';
@@ -380,14 +380,14 @@ function blogpress_get_media_query( $name ) {
  * @param string       $context The element we're targeting.
  * @param string|array $class One or more classes to add to the class list.
  */
-function blogpress_do_element_classes( $context, $class = '' ) {
-	$after = blogpress_set_microdata_markup( '', $context );
+function webpress_do_element_classes( $context, $class = '' ) {
+	$after = webpress_set_microdata_markup( '', $context );
 
 	if ( $after ) {
 		$after = ' ' . $after;
 	}
 
-	echo 'class="' . join( ' ', blogpress_get_element_classes( $context, $class ) ) . '"' . $after; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
+	echo 'class="' . join( ' ', webpress_get_element_classes( $context, $class ) ) . '"' . $after; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
 }
 
 /**
@@ -399,7 +399,7 @@ function blogpress_do_element_classes( $context, $class = '' ) {
  * @param string|array $class One or more classes to add to the class list.
  * @return array Array of classes.
  */
-function blogpress_get_element_classes( $context, $class = '' ) {
+function webpress_get_element_classes( $context, $class = '' ) {
 	$classes = array();
 
 	if ( ! empty( $class ) ) {
@@ -414,46 +414,46 @@ function blogpress_get_element_classes( $context, $class = '' ) {
 
 	switch ( $context ) {
 		case 'top_bar':
-			return blogpress_top_bar_classes( $classes );
+			return webpress_top_bar_classes( $classes );
 
 		case 'right_sidebar':
-			return blogpress_right_sidebar_classes( $classes );
+			return webpress_right_sidebar_classes( $classes );
 
 		case 'left_sidebar':
-			return blogpress_left_sidebar_classes( $classes );
+			return webpress_left_sidebar_classes( $classes );
 
 		case 'content':
-			return blogpress_content_classes( $classes );
+			return webpress_content_classes( $classes );
 
 		case 'header':
-			return blogpress_header_classes( $classes );
+			return webpress_header_classes( $classes );
 
 		case 'inside_header':
-			return blogpress_inside_header_classes( $classes );
+			return webpress_inside_header_classes( $classes );
 
 		case 'navigation':
-			return blogpress_navigation_classes( $classes );
+			return webpress_navigation_classes( $classes );
 
 		case 'inside_navigation':
-			return blogpress_inside_navigation_classes( $classes );
+			return webpress_inside_navigation_classes( $classes );
 
 		case 'menu':
-			return blogpress_menu_classes( $classes );
+			return webpress_menu_classes( $classes );
 
 		case 'footer':
-			return blogpress_footer_classes( $classes );
+			return webpress_footer_classes( $classes );
 
 		case 'inside_footer':
-			return blogpress_inside_footer_classes( $classes );
+			return webpress_inside_footer_classes( $classes );
 
 		case 'main':
-			return blogpress_main_classes( $classes );
+			return webpress_main_classes( $classes );
 
 		case 'page':
-			return blogpress_do_page_container_classes( $classes );
+			return webpress_do_page_container_classes( $classes );
 
 		case 'comment-author':
-			return blogpress_do_comment_author_classes( $classes );
+			return webpress_do_comment_author_classes( $classes );
 	}
 
 	return $classes;
@@ -464,7 +464,7 @@ function blogpress_get_element_classes( $context, $class = '' ) {
  *
  * @since 1.0.0
  */
-function blogpress_get_schema_type() {
+function webpress_get_schema_type() {
 	return 'microdata';
 }
 
@@ -476,10 +476,10 @@ function blogpress_get_schema_type() {
  * @param string $context The element to target.
  * @return string Our final attribute to add to the element.
  */
-function blogpress_get_microdata( $context ) {
+function webpress_get_microdata( $context ) {
 	$data = false;
 
-	if ( 'microdata' !== blogpress_get_schema_type() ) {
+	if ( 'microdata' !== webpress_get_schema_type() ) {
 		return false;
 	}
 
@@ -498,14 +498,14 @@ function blogpress_get_microdata( $context ) {
 		 * Filters the schema.org type used for the body element.
 		 *
 		 * Note this is the schema *type* (Blog, WebPage, SearchResultsPage), not
-		 * the schema format returned by blogpress_get_schema_type().
+		 * the schema format returned by webpress_get_schema_type().
 		 *
 		 * @since 1.0.0
 		 *
 		 * @param string $type The schema.org type name, without the URL prefix.
 		 * @return string The schema.org type to output.
 		 */
-		$type = apply_filters( 'blogpress_schema_type', $type );
+		$type = apply_filters( 'webpress_schema_type', $type );
 
 		$data = sprintf(
 			'itemtype="https://schema.org/%s" itemscope',
@@ -553,7 +553,7 @@ function blogpress_get_microdata( $context ) {
 	return $data;
 }
 
-if ( ! function_exists( 'blogpress_do_microdata' ) ) {
+if ( ! function_exists( 'webpress_do_microdata' ) ) {
 	/**
 	 * Output our microdata for an element.
 	 *
@@ -561,8 +561,8 @@ if ( ! function_exists( 'blogpress_do_microdata' ) ) {
 	 *
 	 * @param string $context The element to target.
 	 */
-	function blogpress_do_microdata( $context ) {
-		echo blogpress_get_microdata( $context ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
+	function webpress_do_microdata( $context ) {
+		echo webpress_get_microdata( $context ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
 	}
 }
 
@@ -571,7 +571,7 @@ if ( ! function_exists( 'blogpress_do_microdata' ) ) {
  *
  * @since 1.0.0
  */
-function blogpress_is_using_hatom() {
+function webpress_is_using_hatom() {
 	return true;
 }
 
@@ -580,22 +580,22 @@ function blogpress_is_using_hatom() {
  *
  * @since 1.0.0
  */
-function blogpress_has_menu_bar_items() {
-	if ( 'enable' === blogpress_get_option( 'nav_search' ) ) {
+function webpress_has_menu_bar_items() {
+	if ( 'enable' === webpress_get_option( 'nav_search' ) ) {
 		return true;
 	}
 
-	return blogpress_get_option( 'nav_search_modal' ) && 'svg' === blogpress_get_option( 'icons' );
+	return webpress_get_option( 'nav_search_modal' ) && 'svg' === webpress_get_option( 'icons' );
 }
 
-if ( ! function_exists( 'blogpress_do_template_part' ) ) {
+if ( ! function_exists( 'webpress_do_template_part' ) ) {
 	/**
 	 * Check if we should include the default template part.
 	 *
 	 * @since 1.0.0
 	 * @param string $template The template to get.
 	 */
-	function blogpress_do_template_part( $template ) {
+	function webpress_do_template_part( $template ) {
 		if ( 'archive' === $template || 'index' === $template ) {
 			get_template_part( 'content', get_post_format() );
 		} elseif ( 'none' === $template ) {
@@ -604,7 +604,7 @@ if ( ! function_exists( 'blogpress_do_template_part' ) ) {
 			get_template_part( 'content', $template );
 		}
 
-		blogpress_do_comments_template( $template );
+		webpress_do_comments_template( $template );
 	}
 }
 
@@ -613,8 +613,8 @@ if ( ! function_exists( 'blogpress_do_template_part' ) ) {
  *
  * @since 1.0.0
  */
-function blogpress_has_inline_mobile_toggle() {
-	$has_inline_mobile_toggle = 'nav-float-right' === blogpress_get_navigation_location() || 'nav-float-left' === blogpress_get_navigation_location();
+function webpress_has_inline_mobile_toggle() {
+	$has_inline_mobile_toggle = 'nav-float-right' === webpress_get_navigation_location() || 'nav-float-left' === webpress_get_navigation_location();
 
 	return $has_inline_mobile_toggle;
 }
@@ -624,11 +624,11 @@ function blogpress_has_inline_mobile_toggle() {
  *
  * @since 1.0.0
  */
-function blogpress_get_the_title_parameters() {
+function webpress_get_the_title_parameters() {
 	$params = array(
 		'before' => sprintf(
 			'<h1 class="entry-title"%s>',
-			'microdata' === blogpress_get_schema_type() ? ' itemprop="headline"' : ''
+			'microdata' === webpress_get_schema_type() ? ' itemprop="headline"' : ''
 		),
 		'after' => '</h1>',
 	);
@@ -638,7 +638,7 @@ function blogpress_get_the_title_parameters() {
 			'before' => sprintf(
 				'<h2 class="entry-title"%2$s><a href="%1$s" rel="bookmark">',
 				esc_url( get_permalink() ),
-				'microdata' === blogpress_get_schema_type() ? ' itemprop="headline"' : ''
+				'microdata' === webpress_get_schema_type() ? ' itemprop="headline"' : ''
 			),
 			'after' => '</a></h2>',
 		);
@@ -648,8 +648,8 @@ function blogpress_get_the_title_parameters() {
 		$params = array(
 			'before' => sprintf(
 				'<h2 class="entry-title"%2$s><a href="%1$s" rel="bookmark">',
-				esc_url( blogpress_get_link_url() ),
-				'microdata' === blogpress_get_schema_type() ? ' itemprop="headline"' : ''
+				esc_url( webpress_get_link_url() ),
+				'microdata' === webpress_get_schema_type() ? ' itemprop="headline"' : ''
 			),
 			'after' => '</a></h2>',
 		);
@@ -665,7 +665,7 @@ function blogpress_get_the_title_parameters() {
  *
  * @return bool Whether the default loop should run.
  */
-function blogpress_has_default_loop() {
+function webpress_has_default_loop() {
 	/**
 	 * Filters whether the default post loop should run.
 	 *
@@ -677,7 +677,7 @@ function blogpress_has_default_loop() {
 	 * @param bool $has_default_loop Whether to run the default loop. Default true.
 	 * @return bool Whether to run the default loop.
 	 */
-	return apply_filters( 'blogpress_default_loop', true );
+	return apply_filters( 'webpress_default_loop', true );
 }
 
 /**
@@ -685,10 +685,10 @@ function blogpress_has_default_loop() {
  *
  * @since 1.0.0
  */
-function blogpress_needs_site_branding_container() {
+function webpress_needs_site_branding_container() {
 	$container = false;
 
-	if ( blogpress_has_logo_site_branding() ) {
+	if ( webpress_has_logo_site_branding() ) {
 		$container = true;
 	}
 
@@ -698,7 +698,7 @@ function blogpress_needs_site_branding_container() {
 /**
  * Merge array of attributes with defaults, and apply contextual filter on array.
  *
- * The contextual filter is of the form `blogpress_attr_{context}`.
+ * The contextual filter is of the form `webpress_attr_{context}`.
  *
  * @since 1.0.0
  *
@@ -707,27 +707,27 @@ function blogpress_needs_site_branding_container() {
  * @param array  $settings   Optional. Custom data to pass to filter.
  * @return array Merged and filtered attributes.
  */
-function blogpress_parse_attr( $context, $attributes = array(), $settings = array() ) {
+function webpress_parse_attr( $context, $attributes = array(), $settings = array() ) {
 	// Initialize an empty class attribute so it's easier to append to in filters.
 	if ( ! isset( $attributes['class'] ) ) {
 		$attributes['class'] = '';
 	}
 
 	// We used to have a class-only system. If it's in use, add the classes.
-	$classes = blogpress_get_element_classes( $context );
+	$classes = webpress_get_element_classes( $context );
 
 	if ( $classes ) {
 		$attributes['class'] .= join( ' ', $classes );
 	}
 
 	// Contextual filter.
-	return BlogPress_HTML_Attributes::get_instance()->parse_attributes( $attributes, $context, $settings );
+	return WebPress_HTML_Attributes::get_instance()->parse_attributes( $attributes, $context, $settings );
 }
 
 /**
  * Build list of attributes into a string and apply contextual filter on string.
  *
- * The contextual filter is of the form `blogpress_attr_{context}_output`.
+ * The contextual filter is of the form `webpress_attr_{context}_output`.
  *
  * @since 1.0.0
  *
@@ -736,8 +736,8 @@ function blogpress_parse_attr( $context, $attributes = array(), $settings = arra
  * @param array  $settings   Optional. Custom data to pass to filter.
  * @return string String of HTML attributes and values.
  */
-function blogpress_get_attr( $context, $attributes = array(), $settings = array() ) {
-	$attributes = blogpress_parse_attr( $context, $attributes, $settings );
+function webpress_get_attr( $context, $attributes = array(), $settings = array() ) {
+	$attributes = webpress_parse_attr( $context, $attributes, $settings );
 
 	$output = '';
 
@@ -760,7 +760,7 @@ function blogpress_get_attr( $context, $attributes = array(), $settings = array(
 	}
 
 	// Before this function existed we had the below to add attributes after the class attribute.
-	$after = blogpress_set_microdata_markup( '', $context );
+	$after = webpress_set_microdata_markup( '', $context );
 
 	if ( $after ) {
 		$after = ' ' . $after;
@@ -772,7 +772,7 @@ function blogpress_get_attr( $context, $attributes = array(), $settings = array(
 	 * Filters the assembled HTML attribute string for a given context.
 	 *
 	 * The dynamic portion of the hook name, `$context`, refers to the element
-	 * being built — for example `blogpress_attr_header_output`.
+	 * being built — for example `webpress_attr_header_output`.
 	 *
 	 * @since 1.0.0
 	 *
@@ -781,7 +781,7 @@ function blogpress_get_attr( $context, $attributes = array(), $settings = array(
 	 * @param array  $settings   Custom data passed to the attribute builder.
 	 * @return string The attribute string to output.
 	 */
-	$output = apply_filters( "blogpress_attr_{$context}_output", $output, $context, $settings );
+	$output = apply_filters( "webpress_attr_{$context}_output", $output, $context, $settings );
 
 	return trim( $output );
 }
@@ -795,8 +795,8 @@ function blogpress_get_attr( $context, $attributes = array(), $settings = array(
  * @param array  $attributes Optional. Extra attributes to merge with defaults.
  * @param array  $settings   Optional. Custom data to pass to filter.
  */
-function blogpress_do_attr( $context, $attributes = array(), $settings = array() ) {
-	echo blogpress_get_attr( $context, $attributes, $settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_get_attr() escapes every name and value.
+function webpress_do_attr( $context, $attributes = array(), $settings = array() ) {
+	echo webpress_get_attr( $context, $attributes, $settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- webpress_get_attr() escapes every name and value.
 }
 
 /**
@@ -804,8 +804,8 @@ function blogpress_do_attr( $context, $attributes = array(), $settings = array()
  *
  * @since 1.0.0
  */
-function blogpress_get_editor_color_palette() {
-	$global_colors = blogpress_get_option( 'global_colors' );
+function webpress_get_editor_color_palette() {
+	$global_colors = webpress_get_option( 'global_colors' );
 	$editor_palette = array();
 	$static_colors = false;
 
@@ -827,8 +827,8 @@ function blogpress_get_editor_color_palette() {
  *
  * @since 1.0.0
  */
-function blogpress_get_global_colors() {
-	$global_colors = blogpress_get_option( 'global_colors' );
+function webpress_get_global_colors() {
+	$global_colors = webpress_get_option( 'global_colors' );
 	$colors = array();
 
 	if ( ! empty( $global_colors ) ) {
@@ -848,7 +848,7 @@ function blogpress_get_global_colors() {
  *
  * @since 1.0.0
  */
-function blogpress_get_system_default_font() {
+function webpress_get_system_default_font() {
 	return '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 }
 
@@ -858,10 +858,10 @@ function blogpress_get_system_default_font() {
  *
  * @since 1.0.0
  */
-function blogpress_has_active_menu() {
+function webpress_has_active_menu() {
 	$has_active_menu = true;
 
-	if ( ! blogpress_get_navigation_location() ) {
+	if ( ! webpress_get_navigation_location() ) {
 		$has_active_menu = false;
 	}
 
@@ -876,7 +876,7 @@ function blogpress_has_active_menu() {
  * @param string $var    The JavaScript variable name to assign the data to.
  * @param string $position The position to add the inline script.
  */
-function blogpress_add_inline_script( $handle, $data, $var, $position = 'before' ) {
+function webpress_add_inline_script( $handle, $data, $var, $position = 'before' ) {
 	if ( ! empty( $data ) ) {
 		$json_data = wp_json_encode( $data );
 		$inline_script = "var $var = $json_data;";

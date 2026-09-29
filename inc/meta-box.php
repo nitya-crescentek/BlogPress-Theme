@@ -2,14 +2,14 @@
 /**
  * Builds our main Layout meta box.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-add_action( 'admin_enqueue_scripts', 'blogpress_enqueue_meta_box_scripts' );
+add_action( 'admin_enqueue_scripts', 'webpress_enqueue_meta_box_scripts' );
 /**
  * Adds any scripts for this meta box.
  *
@@ -17,31 +17,31 @@ add_action( 'admin_enqueue_scripts', 'blogpress_enqueue_meta_box_scripts' );
  *
  * @param string $hook The current admin page.
  */
-function blogpress_enqueue_meta_box_scripts( $hook ) {
+function webpress_enqueue_meta_box_scripts( $hook ) {
 	if ( in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
 		$post_types = get_post_types( array( 'public' => true ) );
 		$screen = get_current_screen();
 		$post_type = $screen->id;
 
 		if ( in_array( $post_type, (array) $post_types ) ) {
-			wp_enqueue_style( 'blogpress-layout-metabox', get_template_directory_uri() . '/assets/css/admin/meta-box.css', array(), BLOGPRESS_VERSION );
+			wp_enqueue_style( 'webpress-layout-metabox', get_template_directory_uri() . '/assets/css/admin/meta-box.css', array(), WEBPRESS_VERSION );
 		}
 	}
 }
 
-add_action( 'add_meta_boxes', 'blogpress_register_layout_meta_box' );
+add_action( 'add_meta_boxes', 'webpress_register_layout_meta_box' );
 /**
  * Register the layout metabox.
  *
  * @since 1.0.0
  */
-function blogpress_register_layout_meta_box() {
+function webpress_register_layout_meta_box() {
 	if ( ! current_user_can( 'edit_theme_options' ) ) {
 		return;
 	}
 
-	if ( ! defined( 'BLOGPRESS_LAYOUT_META_BOX' ) ) {
-		define( 'BLOGPRESS_LAYOUT_META_BOX', true );
+	if ( ! defined( 'WEBPRESS_LAYOUT_META_BOX' ) ) {
+		define( 'WEBPRESS_LAYOUT_META_BOX', true );
 	}
 
 	global $post;
@@ -58,9 +58,9 @@ function blogpress_register_layout_meta_box() {
 	foreach ( $post_types as $type ) {
 		if ( 'attachment' !== $type ) {
 			add_meta_box(
-				'blogpress_layout_options_meta_box',
-				esc_html__( 'Layout', 'blogpress' ),
-				'blogpress_do_layout_meta_box',
+				'webpress_layout_options_meta_box',
+				esc_html__( 'Layout', 'webpress' ),
+				'webpress_do_layout_meta_box',
 				$type,
 				'side'
 			);
@@ -75,40 +75,40 @@ function blogpress_register_layout_meta_box() {
  *
  * @param object $post All post information.
  */
-function blogpress_do_layout_meta_box( $post ) {
-	wp_nonce_field( basename( __FILE__ ), 'blogpress_layout_nonce' );
+function webpress_do_layout_meta_box( $post ) {
+	wp_nonce_field( basename( __FILE__ ), 'webpress_layout_nonce' );
 	$stored_meta = (array) get_post_meta( $post->ID );
-	$stored_meta['_blogpress-sidebar-layout-meta'][0] = ( isset( $stored_meta['_blogpress-sidebar-layout-meta'][0] ) ) ? $stored_meta['_blogpress-sidebar-layout-meta'][0] : '';
-	$stored_meta['_blogpress-footer-widget-meta'][0] = ( isset( $stored_meta['_blogpress-footer-widget-meta'][0] ) ) ? $stored_meta['_blogpress-footer-widget-meta'][0] : '';
-	$stored_meta['_blogpress-full-width-content'][0] = ( isset( $stored_meta['_blogpress-full-width-content'][0] ) ) ? $stored_meta['_blogpress-full-width-content'][0] : '';
-	$stored_meta['_blogpress-disable-headline'][0] = ( isset( $stored_meta['_blogpress-disable-headline'][0] ) ) ? $stored_meta['_blogpress-disable-headline'][0] : '';
+	$stored_meta['_webpress-sidebar-layout-meta'][0] = ( isset( $stored_meta['_webpress-sidebar-layout-meta'][0] ) ) ? $stored_meta['_webpress-sidebar-layout-meta'][0] : '';
+	$stored_meta['_webpress-footer-widget-meta'][0] = ( isset( $stored_meta['_webpress-footer-widget-meta'][0] ) ) ? $stored_meta['_webpress-footer-widget-meta'][0] : '';
+	$stored_meta['_webpress-full-width-content'][0] = ( isset( $stored_meta['_webpress-full-width-content'][0] ) ) ? $stored_meta['_webpress-full-width-content'][0] : '';
+	$stored_meta['_webpress-disable-headline'][0] = ( isset( $stored_meta['_webpress-disable-headline'][0] ) ) ? $stored_meta['_webpress-disable-headline'][0] : '';
 
 	$tabs = array(
 		'sidebars' => array(
-			'title' => esc_html__( 'Sidebars', 'blogpress' ),
-			'target' => '#blogpress-layout-sidebars',
+			'title' => esc_html__( 'Sidebars', 'webpress' ),
+			'target' => '#webpress-layout-sidebars',
 			'class' => 'current',
 		),
 		'footer_widgets' => array(
-			'title' => esc_html__( 'Footer Widgets', 'blogpress' ),
-			'target' => '#blogpress-layout-footer-widgets',
+			'title' => esc_html__( 'Footer Widgets', 'webpress' ),
+			'target' => '#webpress-layout-footer-widgets',
 			'class' => '',
 		),
 		'disable_elements' => array(
-			'title' => esc_html__( 'Disable Elements', 'blogpress' ),
-			'target' => '#blogpress-layout-disable-elements',
+			'title' => esc_html__( 'Disable Elements', 'webpress' ),
+			'target' => '#webpress-layout-disable-elements',
 			'class' => '',
 		),
 		'container' => array(
-			'title' => esc_html__( 'Content Container', 'blogpress' ),
-			'target' => '#blogpress-layout-page-builder-container',
+			'title' => esc_html__( 'Content Container', 'webpress' ),
+			'target' => '#webpress-layout-page-builder-container',
 			'class' => '',
 		),
 	);
 	?>
 	<script>
 		jQuery(document).ready(function($) {
-			$( '.blogpress-meta-box-menu li a' ).on( 'click', function( event ) {
+			$( '.webpress-meta-box-menu li a' ).on( 'click', function( event ) {
 				event.preventDefault();
 				$( this ).parent().addClass( 'current' );
 				$( this ).parent().siblings().removeClass( 'current' );
@@ -119,13 +119,13 @@ function blogpress_do_layout_meta_box( $post ) {
 					tab = $( this ).attr( 'href' );
 				}
 
-				$( '.blogpress-meta-box-content' ).children( 'div' ).not( tab ).css( 'display', 'none' );
+				$( '.webpress-meta-box-content' ).children( 'div' ).not( tab ).css( 'display', 'none' );
 				$( tab ).fadeIn( 100 );
 			});
 		});
 	</script>
-	<div id="blogpress-meta-box-container">
-		<ul class="blogpress-meta-box-menu">
+	<div id="webpress-meta-box-container">
+		<ul class="webpress-meta-box-menu">
 			<?php
 			foreach ( (array) $tabs as $tab => $data ) {
 				echo '<li class="' . esc_attr( $data['class'] ) . '"><a data-target="' . esc_attr( $data['target'] ) . '" href="#">' . esc_html( $data['title'] ) . '</a></li>';
@@ -133,58 +133,58 @@ function blogpress_do_layout_meta_box( $post ) {
 
 			?>
 		</ul>
-		<div class="blogpress-meta-box-content">
-			<div id="blogpress-layout-sidebars">
-				<div class="blogpress_layouts">
-					<label for="blogpress-sidebar-layout" class="blogpress-layout-metabox-section-title"><?php esc_html_e( 'Sidebar Layout', 'blogpress' ); ?></label>
+		<div class="webpress-meta-box-content">
+			<div id="webpress-layout-sidebars">
+				<div class="webpress_layouts">
+					<label for="webpress-sidebar-layout" class="webpress-layout-metabox-section-title"><?php esc_html_e( 'Sidebar Layout', 'webpress' ); ?></label>
 
-					<select name="_blogpress-sidebar-layout-meta" id="blogpress-sidebar-layout">
-						<option value="" <?php selected( $stored_meta['_blogpress-sidebar-layout-meta'][0], '' ); ?>><?php esc_html_e( 'Default', 'blogpress' ); ?></option>
-						<option value="right-sidebar" <?php selected( $stored_meta['_blogpress-sidebar-layout-meta'][0], 'right-sidebar' ); ?>><?php esc_html_e( 'Right Sidebar', 'blogpress' ); ?></option>
-						<option value="left-sidebar" <?php selected( $stored_meta['_blogpress-sidebar-layout-meta'][0], 'left-sidebar' ); ?>><?php esc_html_e( 'Left Sidebar', 'blogpress' ); ?></option>
-						<option value="no-sidebar" <?php selected( $stored_meta['_blogpress-sidebar-layout-meta'][0], 'no-sidebar' ); ?>><?php esc_html_e( 'No Sidebars', 'blogpress' ); ?></option>
-						<option value="both-sidebars" <?php selected( $stored_meta['_blogpress-sidebar-layout-meta'][0], 'both-sidebars' ); ?>><?php esc_html_e( 'Both Sidebars', 'blogpress' ); ?></option>
-						<option value="both-left" <?php selected( $stored_meta['_blogpress-sidebar-layout-meta'][0], 'both-left' ); ?>><?php esc_html_e( 'Both Sidebars on Left', 'blogpress' ); ?></option>
-						<option value="both-right" <?php selected( $stored_meta['_blogpress-sidebar-layout-meta'][0], 'both-right' ); ?>><?php esc_html_e( 'Both Sidebars on Right', 'blogpress' ); ?></option>
+					<select name="_webpress-sidebar-layout-meta" id="webpress-sidebar-layout">
+						<option value="" <?php selected( $stored_meta['_webpress-sidebar-layout-meta'][0], '' ); ?>><?php esc_html_e( 'Default', 'webpress' ); ?></option>
+						<option value="right-sidebar" <?php selected( $stored_meta['_webpress-sidebar-layout-meta'][0], 'right-sidebar' ); ?>><?php esc_html_e( 'Right Sidebar', 'webpress' ); ?></option>
+						<option value="left-sidebar" <?php selected( $stored_meta['_webpress-sidebar-layout-meta'][0], 'left-sidebar' ); ?>><?php esc_html_e( 'Left Sidebar', 'webpress' ); ?></option>
+						<option value="no-sidebar" <?php selected( $stored_meta['_webpress-sidebar-layout-meta'][0], 'no-sidebar' ); ?>><?php esc_html_e( 'No Sidebars', 'webpress' ); ?></option>
+						<option value="both-sidebars" <?php selected( $stored_meta['_webpress-sidebar-layout-meta'][0], 'both-sidebars' ); ?>><?php esc_html_e( 'Both Sidebars', 'webpress' ); ?></option>
+						<option value="both-left" <?php selected( $stored_meta['_webpress-sidebar-layout-meta'][0], 'both-left' ); ?>><?php esc_html_e( 'Both Sidebars on Left', 'webpress' ); ?></option>
+						<option value="both-right" <?php selected( $stored_meta['_webpress-sidebar-layout-meta'][0], 'both-right' ); ?>><?php esc_html_e( 'Both Sidebars on Right', 'webpress' ); ?></option>
 					</select>
 				</div>
 			</div>
 
-			<div id="blogpress-layout-footer-widgets" style="display: none;">
-				<div class="blogpress_footer_widget">
-					<label for="blogpress-footer-widget" class="blogpress-layout-metabox-section-title"><?php esc_html_e( 'Footer Widgets', 'blogpress' ); ?></label>
+			<div id="webpress-layout-footer-widgets" style="display: none;">
+				<div class="webpress_footer_widget">
+					<label for="webpress-footer-widget" class="webpress-layout-metabox-section-title"><?php esc_html_e( 'Footer Widgets', 'webpress' ); ?></label>
 
-					<select name="_blogpress-footer-widget-meta" id="blogpress-footer-widget">
-						<option value="" <?php selected( $stored_meta['_blogpress-footer-widget-meta'][0], '' ); ?>><?php esc_html_e( 'Default', 'blogpress' ); ?></option>
-						<option value="0" <?php selected( $stored_meta['_blogpress-footer-widget-meta'][0], '0' ); ?>><?php esc_html_e( '0 Widgets', 'blogpress' ); ?></option>
-						<option value="1" <?php selected( $stored_meta['_blogpress-footer-widget-meta'][0], '1' ); ?>><?php esc_html_e( '1 Widgets', 'blogpress' ); ?></option>
-						<option value="2" <?php selected( $stored_meta['_blogpress-footer-widget-meta'][0], '2' ); ?>><?php esc_html_e( '2 Widgets', 'blogpress' ); ?></option>
-						<option value="3" <?php selected( $stored_meta['_blogpress-footer-widget-meta'][0], '3' ); ?>><?php esc_html_e( '3 Widgets', 'blogpress' ); ?></option>
-						<option value="4" <?php selected( $stored_meta['_blogpress-footer-widget-meta'][0], '4' ); ?>><?php esc_html_e( '4 Widgets', 'blogpress' ); ?></option>
-						<option value="5" <?php selected( $stored_meta['_blogpress-footer-widget-meta'][0], '5' ); ?>><?php esc_html_e( '5 Widgets', 'blogpress' ); ?></option>
+					<select name="_webpress-footer-widget-meta" id="webpress-footer-widget">
+						<option value="" <?php selected( $stored_meta['_webpress-footer-widget-meta'][0], '' ); ?>><?php esc_html_e( 'Default', 'webpress' ); ?></option>
+						<option value="0" <?php selected( $stored_meta['_webpress-footer-widget-meta'][0], '0' ); ?>><?php esc_html_e( '0 Widgets', 'webpress' ); ?></option>
+						<option value="1" <?php selected( $stored_meta['_webpress-footer-widget-meta'][0], '1' ); ?>><?php esc_html_e( '1 Widgets', 'webpress' ); ?></option>
+						<option value="2" <?php selected( $stored_meta['_webpress-footer-widget-meta'][0], '2' ); ?>><?php esc_html_e( '2 Widgets', 'webpress' ); ?></option>
+						<option value="3" <?php selected( $stored_meta['_webpress-footer-widget-meta'][0], '3' ); ?>><?php esc_html_e( '3 Widgets', 'webpress' ); ?></option>
+						<option value="4" <?php selected( $stored_meta['_webpress-footer-widget-meta'][0], '4' ); ?>><?php esc_html_e( '4 Widgets', 'webpress' ); ?></option>
+						<option value="5" <?php selected( $stored_meta['_webpress-footer-widget-meta'][0], '5' ); ?>><?php esc_html_e( '5 Widgets', 'webpress' ); ?></option>
 					</select>
 				</div>
 			</div>
-			<div id="blogpress-layout-page-builder-container" style="display: none;">
-				<label for="_blogpress-full-width-content" class="blogpress-layout-metabox-section-title"><?php esc_html_e( 'Content Container', 'blogpress' ); ?></label>
+			<div id="webpress-layout-page-builder-container" style="display: none;">
+				<label for="_webpress-full-width-content" class="webpress-layout-metabox-section-title"><?php esc_html_e( 'Content Container', 'webpress' ); ?></label>
 
 				<p class="page-builder-content" style="color:#666;font-size:13px;margin-top:0;">
-					<?php esc_html_e( 'Choose your content container type.', 'blogpress' ); ?>
+					<?php esc_html_e( 'Choose your content container type.', 'webpress' ); ?>
 				</p>
 
-				<select name="_blogpress-full-width-content" id="_blogpress-full-width-content">
-					<option value="" <?php selected( $stored_meta['_blogpress-full-width-content'][0], '' ); ?>><?php esc_html_e( 'Default', 'blogpress' ); ?></option>
-					<option value="true" <?php selected( $stored_meta['_blogpress-full-width-content'][0], 'true' ); ?>><?php esc_html_e( 'Full Width', 'blogpress' ); ?></option>
-					<option value="contained" <?php selected( $stored_meta['_blogpress-full-width-content'][0], 'contained' ); ?>><?php esc_html_e( 'Contained', 'blogpress' ); ?></option>
+				<select name="_webpress-full-width-content" id="_webpress-full-width-content">
+					<option value="" <?php selected( $stored_meta['_webpress-full-width-content'][0], '' ); ?>><?php esc_html_e( 'Default', 'webpress' ); ?></option>
+					<option value="true" <?php selected( $stored_meta['_webpress-full-width-content'][0], 'true' ); ?>><?php esc_html_e( 'Full Width', 'webpress' ); ?></option>
+					<option value="contained" <?php selected( $stored_meta['_webpress-full-width-content'][0], 'contained' ); ?>><?php esc_html_e( 'Contained', 'webpress' ); ?></option>
 				</select>
 			</div>
-			<div id="blogpress-layout-disable-elements" style="display: none;">
-				<label class="blogpress-layout-metabox-section-title"><?php esc_html_e( 'Disable Elements', 'blogpress' ); ?></label>
-				<?php if ( ! defined( 'BLOGPRESS_DE_VERSION' ) ) : ?>
-					<div class="blogpress_disable_elements">
-						<label for="meta-blogpress-disable-headline" style="display:block;margin: 0 0 1em;" title="<?php esc_attr_e( 'Content Title', 'blogpress' ); ?>">
-							<input type="checkbox" name="_blogpress-disable-headline" id="meta-blogpress-disable-headline" value="true" <?php checked( $stored_meta['_blogpress-disable-headline'][0], 'true' ); ?>>
-							<?php esc_html_e( 'Content Title', 'blogpress' ); ?>
+			<div id="webpress-layout-disable-elements" style="display: none;">
+				<label class="webpress-layout-metabox-section-title"><?php esc_html_e( 'Disable Elements', 'webpress' ); ?></label>
+				<?php if ( ! defined( 'WEBPRESS_DE_VERSION' ) ) : ?>
+					<div class="webpress_disable_elements">
+						<label for="meta-webpress-disable-headline" style="display:block;margin: 0 0 1em;" title="<?php esc_attr_e( 'Content Title', 'webpress' ); ?>">
+							<input type="checkbox" name="_webpress-disable-headline" id="meta-webpress-disable-headline" value="true" <?php checked( $stored_meta['_webpress-disable-headline'][0], 'true' ); ?>>
+							<?php esc_html_e( 'Content Title', 'webpress' ); ?>
 						</label>
 
 					</div>
@@ -198,7 +198,7 @@ function blogpress_do_layout_meta_box( $post ) {
 				 *
 				 * @param WP_Post $post The post being edited.
 				 */
-				do_action( 'blogpress_layout_meta_box_disable_elements', $post );
+				do_action( 'webpress_layout_meta_box_disable_elements', $post );
 				?>
 			</div>
 			<?php
@@ -209,24 +209,24 @@ function blogpress_do_layout_meta_box( $post ) {
 			 *
 			 * @param WP_Post $post The post being edited.
 			 */
-			do_action( 'blogpress_layout_meta_box_settings', $post );
+			do_action( 'webpress_layout_meta_box_settings', $post );
 			?>
 		</div>
 	</div>
 	<?php
 }
 
-add_action( 'save_post', 'blogpress_save_layout_meta_data' );
+add_action( 'save_post', 'webpress_save_layout_meta_data' );
 /**
  * Saves the sidebar layout meta data.
  *
  * @since 1.0.0
  * @param int $post_id Post ID.
  */
-function blogpress_save_layout_meta_data( $post_id ) {
+function webpress_save_layout_meta_data( $post_id ) {
 	$is_autosave = wp_is_post_autosave( $post_id );
 	$is_revision = wp_is_post_revision( $post_id );
-	$is_valid_nonce = ( isset( $_POST['blogpress_layout_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['blogpress_layout_nonce'] ), basename( __FILE__ ) ) ) ? true : false;
+	$is_valid_nonce = ( isset( $_POST['webpress_layout_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['webpress_layout_nonce'] ), basename( __FILE__ ) ) ) ? true : false;
 
 	if ( $is_autosave || $is_revision || ! $is_valid_nonce ) {
 		return;
@@ -236,7 +236,7 @@ function blogpress_save_layout_meta_data( $post_id ) {
 		return $post_id;
 	}
 
-	$sidebar_layout_key   = '_blogpress-sidebar-layout-meta';
+	$sidebar_layout_key   = '_webpress-sidebar-layout-meta';
 	$sidebar_layout_value = isset( $_POST[ $sidebar_layout_key ] )
 		? sanitize_text_field( wp_unslash( $_POST[ $sidebar_layout_key ] ) )
 		: '';
@@ -247,7 +247,7 @@ function blogpress_save_layout_meta_data( $post_id ) {
 		delete_post_meta( $post_id, $sidebar_layout_key );
 	}
 
-	$footer_widget_key   = '_blogpress-footer-widget-meta';
+	$footer_widget_key   = '_webpress-footer-widget-meta';
 	$footer_widget_value = isset( $_POST[ $footer_widget_key ] )
 		? sanitize_text_field( wp_unslash( $_POST[ $footer_widget_key ] ) )
 		: '';
@@ -259,7 +259,7 @@ function blogpress_save_layout_meta_data( $post_id ) {
 		delete_post_meta( $post_id, $footer_widget_key );
 	}
 
-	$page_builder_container_key   = '_blogpress-full-width-content';
+	$page_builder_container_key   = '_webpress-full-width-content';
 	$page_builder_container_value = isset( $_POST[ $page_builder_container_key ] )
 		? sanitize_text_field( wp_unslash( $_POST[ $page_builder_container_key ] ) )
 		: '';
@@ -271,8 +271,8 @@ function blogpress_save_layout_meta_data( $post_id ) {
 	}
 
 	// We only need this if the Disable Elements module doesn't exist.
-	if ( ! defined( 'BLOGPRESS_DE_VERSION' ) ) {
-		$disable_content_title_key   = '_blogpress-disable-headline';
+	if ( ! defined( 'WEBPRESS_DE_VERSION' ) ) {
+		$disable_content_title_key   = '_webpress-disable-headline';
 		$disable_content_title_value = isset( $_POST[ $disable_content_title_key ] )
 			? sanitize_text_field( wp_unslash( $_POST[ $disable_content_title_key ] ) )
 			: '';

@@ -2,7 +2,7 @@
 /**
  * Customize API: ColorAlpha class
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 /**
@@ -12,7 +12,7 @@
  *
  * @see WP_Customize_Control
  */
-class BlogPress_Customize_Color_Control extends WP_Customize_Color_Control {
+class WebPress_Customize_Color_Control extends WP_Customize_Color_Control {
 	/**
 	 * Type.
 	 *
@@ -20,7 +20,7 @@ class BlogPress_Customize_Color_Control extends WP_Customize_Color_Control {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	public $type = 'blogpress-color-control';
+	public $type = 'webpress-color-control';
 
 	/**
 	 * Refresh the parameters passed to the JavaScript via JSON.

@@ -1,4 +1,4 @@
-.customize-control-blogpress-range-slider .blogpress-slider {
+.customize-control-webpress-range-slider .webpress-slider {
 	position: relative;
 	width: calc(100% - 60px);
 	height: 6px;
@@ -9,19 +9,19 @@
 	transition: background .5s;
 }
 
-.customize-control-blogpress-range-slider .has-unit .blogpress-slider {
+.customize-control-webpress-range-slider .has-unit .webpress-slider {
 	width: calc(100% - 90px);
 }
 
-.customize-control-blogpress-range-slider .blogpress_range_value.hide-value {
+.customize-control-webpress-range-slider .webpress_range_value.hide-value {
 	display: none;
 }
 
-.customize-control-blogpress-range-slider .blogpress_range_value.hide-value + .blogpress-slider {
+.customize-control-webpress-range-slider .webpress_range_value.hide-value + .webpress-slider {
 	width: 100%;
 }
 
-.customize-control-blogpress-range-slider .blogpress-slider .ui-slider-handle {
+.customize-control-webpress-range-slider .webpress-slider .ui-slider-handle {
 	height: 16px;
 	width: 16px;
 	background-color: #3498D9;
@@ -42,7 +42,7 @@
 	margin-left: auto;
 }
 
-.customize-control-blogpress-range-slider .wrapper {
+.customize-control-webpress-range-slider .wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -54,7 +54,7 @@
 	align-items: center;
 }
 
-.customize-control-blogpress-range-slider .blogpress_range_value {
+.customize-control-webpress-range-slider .webpress_range_value {
 	font-size: 14px;
 	padding: 0;
 	font-weight: 400;
@@ -64,11 +64,11 @@
 	display: flex;
 }
 
-.customize-control-blogpress-range-slider .has-unit .blogpress_range_value {
+.customize-control-webpress-range-slider .has-unit .webpress_range_value {
 	width: 80px;
 }
 
-.customize-control-blogpress-range-slider .blogpress_range_value span.value {
+.customize-control-webpress-range-slider .webpress_range_value span.value {
     font-size: 12px;
     width: calc(100% - 2px);
     text-align: center;
@@ -78,12 +78,12 @@
     border: 1px solid #DDD;
 }
 
-.customize-control-blogpress-range-slider .has-unit .blogpress_range_value span.value {
+.customize-control-webpress-range-slider .has-unit .webpress_range_value span.value {
 	width: calc(100% - 32px);
 	display: block;
 }
 
-.customize-control-blogpress-range-slider .blogpress_range_value .unit {
+.customize-control-webpress-range-slider .webpress_range_value .unit {
     width: 29px;
     text-align: center;
     font-size: 12px;
@@ -93,12 +93,12 @@
 	margin-left: 1px;
 }
 
-.customize-control-blogpress-range-slider .blogpress-range-slider-reset span {
+.customize-control-webpress-range-slider .webpress-range-slider-reset span {
     font-size: 16px;
     line-height: 22px;
 }
 
-.customize-control-blogpress-range-slider .blogpress_range_value input {
+.customize-control-webpress-range-slider .webpress_range_value input {
     font-size: 12px;
     padding: 0px;
     text-align: center;
@@ -108,11 +108,11 @@
 	border-color: #ddd;
 }
 
-.customize-control-blogpress-range-slider .has-unit .blogpress_range_value input {
+.customize-control-webpress-range-slider .has-unit .webpress_range_value input {
     width: calc(100% - 30px);
 }
 
-.customize-control-blogpress-range-slider .bp-range-title-area .dashicons {
+.customize-control-webpress-range-slider .bp-range-title-area .dashicons {
 	cursor: pointer;
 	font-size: 11px;
 	width: 20px;
@@ -124,19 +124,19 @@
 	top: 2px;
 }
 
-.customize-control-blogpress-range-slider .bp-range-title-area .dashicons:hover {
+.customize-control-webpress-range-slider .bp-range-title-area .dashicons:hover {
 	background: #fafafa;
 }
 
-.customize-control-blogpress-range-slider .bp-range-title-area .dashicons.selected {
+.customize-control-webpress-range-slider .bp-range-title-area .dashicons.selected {
 	background: #fff;
 	color: #222;
 }
 
-.customize-control-blogpress-range-slider .bp-device-controls > span:first-child:last-child {
+.customize-control-webpress-range-slider .bp-device-controls > span:first-child:last-child {
 	display: none;
 }
 
-.customize-control-blogpress-range-slider .sub-description {
+.customize-control-webpress-range-slider .sub-description {
 	margin-top: 10px;
 }

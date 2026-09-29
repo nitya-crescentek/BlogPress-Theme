@@ -2,7 +2,7 @@
 	'use strict';
 
 	// Add callback for when the header_textcolor setting exists.
-	api( 'blogpress_settings[nav_position_setting]', function( setting ) {
+	api( 'webpress_settings[nav_position_setting]', function( setting ) {
 		var isNavFloated, isNavAlignable, setNavDropPointActiveState, setNavAlignmentsActiveState;
 
 		/**
@@ -25,7 +25,7 @@
 		 */
 		isNavAlignable = function() {
 			if ( 'nav-float-right' === setting.get() || 'nav-float-left' === setting.get() ) {
-				var navAsHeader = api.instance( 'blogpress_menu_plus_settings[navigation_as_header]' );
+				var navAsHeader = api.instance( 'webpress_menu_plus_settings[navigation_as_header]' );
 
 				if ( navAsHeader && navAsHeader.get() ) {
 					return true;
@@ -99,47 +99,47 @@
 			setting.bind( setActiveState );
 		};
 
-		api.control( 'blogpress_settings[nav_drop_point]', setNavDropPointActiveState );
-		api.control( 'blogpress_settings[nav_layout_setting]', setNavAlignmentsActiveState );
-		api.control( 'blogpress_settings[nav_inner_width]', setNavAlignmentsActiveState );
-		api.control( 'blogpress_settings[nav_alignment_setting]', setNavAlignmentsActiveState );
+		api.control( 'webpress_settings[nav_drop_point]', setNavDropPointActiveState );
+		api.control( 'webpress_settings[nav_layout_setting]', setNavAlignmentsActiveState );
+		api.control( 'webpress_settings[nav_inner_width]', setNavAlignmentsActiveState );
+		api.control( 'webpress_settings[nav_alignment_setting]', setNavAlignmentsActiveState );
 	} );
 
 	var setOption = function( options ) {
 		if ( options.headerAlignment ) {
-			api.instance( 'blogpress_settings[header_alignment_setting]' ).set( options.headerAlignment );
+			api.instance( 'webpress_settings[header_alignment_setting]' ).set( options.headerAlignment );
 		}
 
 		if ( options.navLocation ) {
-			api.instance( 'blogpress_settings[nav_position_setting]' ).set( options.navLocation );
+			api.instance( 'webpress_settings[nav_position_setting]' ).set( options.navLocation );
 		}
 
 		if ( options.navAlignment ) {
-			api.instance( 'blogpress_settings[nav_alignment_setting]' ).set( options.navAlignment );
+			api.instance( 'webpress_settings[nav_alignment_setting]' ).set( options.navAlignment );
 		}
 
 		if ( options.boxAlignment ) {
-			api.instance( 'blogpress_settings[container_alignment]' ).set( options.boxAlignment );
+			api.instance( 'webpress_settings[container_alignment]' ).set( options.boxAlignment );
 		}
 
 		if ( options.siteTitleFontSize ) {
-			api.instance( 'blogpress_settings[site_title_font_size]' ).set( options.siteTitleFontSize );
+			api.instance( 'webpress_settings[site_title_font_size]' ).set( options.siteTitleFontSize );
 		}
 
 		if ( 'undefined' !== typeof options.hideSiteTagline ) {
-			api.instance( 'blogpress_settings[hide_tagline]' ).set( options.hideSiteTagline );
+			api.instance( 'webpress_settings[hide_tagline]' ).set( options.hideSiteTagline );
 		}
 
 		if ( options.headerPaddingTop ) {
-			api.instance( 'blogpress_spacing_settings[header_top]' ).set( options.headerPaddingTop );
+			api.instance( 'webpress_spacing_settings[header_top]' ).set( options.headerPaddingTop );
 		}
 
 		if ( options.headerPaddingBottom ) {
-			api.instance( 'blogpress_spacing_settings[header_bottom]' ).set( options.headerPaddingBottom );
+			api.instance( 'webpress_spacing_settings[header_bottom]' ).set( options.headerPaddingBottom );
 		}
 	};
 
-	api( 'blogpress_header_helper', function( value ) {
+	api( 'webpress_header_helper', function( value ) {
 		var headerAlignment = false,
 			navLocation = false,
 			navAlignment = false,
@@ -150,14 +150,14 @@
 			headerPaddingBottom = false;
 
 		value.bind( function( newval ) {
-			var headerAlignmentSetting = api.instance( 'blogpress_settings[header_alignment_setting]' );
-			var navLocationSetting = api.instance( 'blogpress_settings[nav_position_setting]' );
-			var navAlignmentSetting = api.instance( 'blogpress_settings[nav_alignment_setting]' );
-			var boxAlignmentSetting = api.instance( 'blogpress_settings[container_alignment]' );
-			var siteTitleFontSizeSetting = api.instance( 'blogpress_settings[site_title_font_size]' );
-			var hideSiteTaglineSetting = api.instance( 'blogpress_settings[hide_tagline]' );
-			var headerPaddingTopSetting = api.instance( 'blogpress_spacing_settings[header_top]' );
-			var headerPaddingBottomSetting = api.instance( 'blogpress_spacing_settings[header_bottom]' );
+			var headerAlignmentSetting = api.instance( 'webpress_settings[header_alignment_setting]' );
+			var navLocationSetting = api.instance( 'webpress_settings[nav_position_setting]' );
+			var navAlignmentSetting = api.instance( 'webpress_settings[nav_alignment_setting]' );
+			var boxAlignmentSetting = api.instance( 'webpress_settings[container_alignment]' );
+			var siteTitleFontSizeSetting = api.instance( 'webpress_settings[site_title_font_size]' );
+			var hideSiteTaglineSetting = api.instance( 'webpress_settings[hide_tagline]' );
+			var headerPaddingTopSetting = api.instance( 'webpress_spacing_settings[header_top]' );
+			var headerPaddingBottomSetting = api.instance( 'webpress_spacing_settings[header_bottom]' );
 
 			if ( ! headerAlignmentSetting._dirty ) {
 				headerAlignment = headerAlignmentSetting.get();
@@ -192,14 +192,14 @@
 			}
 
 			var options = {
-				headerAlignment: blogpress_defaults.header_alignment_setting,
-				navLocation: blogpress_defaults.nav_position_setting,
-				navAlignment: blogpress_defaults.nav_alignment_setting,
-				boxAlignment: blogpress_defaults.container_alignment,
-				siteTitleFontSize: blogpress_typography_defaults.site_title_font_size,
-				hideSiteTagline: blogpress_defaults.hide_tagline,
-				headerPaddingTop: blogpress_spacing_defaults.header_top,
-				headerPaddingBottom: blogpress_spacing_defaults.header_bottom,
+				headerAlignment: webpress_defaults.header_alignment_setting,
+				navLocation: webpress_defaults.nav_position_setting,
+				navAlignment: webpress_defaults.nav_alignment_setting,
+				boxAlignment: webpress_defaults.container_alignment,
+				siteTitleFontSize: webpress_typography_defaults.site_title_font_size,
+				hideSiteTagline: webpress_defaults.hide_tagline,
+				headerPaddingTop: webpress_spacing_defaults.header_top,
+				headerPaddingBottom: webpress_spacing_defaults.header_bottom,
 			};
 
 			if ( 'current' === newval ) {

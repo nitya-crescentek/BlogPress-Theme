@@ -2,7 +2,7 @@
 /**
  * The template for displaying Search Results pages.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -11,27 +11,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header(); ?>
 
-	<div <?php blogpress_do_attr( 'content' ); ?>>
-		<main <?php blogpress_do_attr( 'main' ); ?>>
+	<div <?php webpress_do_attr( 'content' ); ?>>
+		<main <?php webpress_do_attr( 'main' ); ?>>
 			<?php
 
-			if ( blogpress_has_default_loop() ) {
+			if ( webpress_has_default_loop() ) {
 				if ( have_posts() ) :
-					blogpress_do_search_results_title( 'search' );
+					webpress_do_search_results_title( 'search' );
 
 					while ( have_posts() ) :
 
 						the_post();
 
-						blogpress_do_template_part( 'search' );
+						webpress_do_template_part( 'search' );
 
 					endwhile;
 
-					blogpress_do_post_navigation( 'search' );
+					webpress_do_post_navigation( 'search' );
 
 				else :
 
-					blogpress_do_template_part( 'none' );
+					webpress_do_template_part( 'none' );
 
 				endif;
 			}
@@ -42,6 +42,6 @@ get_header(); ?>
 
 	<?php
 
-	blogpress_construct_sidebars();
+	webpress_construct_sidebars();
 
 	get_footer();

@@ -2,7 +2,7 @@
 /**
  * The template for displaying the footer.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'blogpress_after_main_content' );
+		do_action( 'webpress_after_main_content' );
 		?>
 	</div>
 </div>
@@ -27,14 +27,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-do_action( 'blogpress_before_footer' );
+do_action( 'webpress_before_footer' );
 ?>
 
-<div <?php blogpress_do_attr( 'footer' ); ?>>
+<div <?php webpress_do_attr( 'footer' ); ?>>
 	<?php
 
-	blogpress_construct_footer_widgets();
-	blogpress_construct_footer();
+	webpress_construct_footer_widgets();
+	webpress_construct_footer();
 
 	?>
 </div>
@@ -45,9 +45,9 @@ do_action( 'blogpress_before_footer' );
  *
  * @since 1.0.0
  */
-do_action( 'blogpress_after_footer' );
+do_action( 'webpress_after_footer' );
 
-blogpress_back_to_top();
+webpress_back_to_top();
 
 wp_footer();
 ?>

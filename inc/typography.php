@@ -2,31 +2,31 @@
 /**
  * Typography related functions.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! function_exists( 'blogpress_enqueue_google_fonts' ) ) {
-	add_action( 'wp_enqueue_scripts', 'blogpress_enqueue_google_fonts', 0 );
+if ( ! function_exists( 'webpress_enqueue_google_fonts' ) ) {
+	add_action( 'wp_enqueue_scripts', 'webpress_enqueue_google_fonts', 0 );
 	/**
 	 * Add Google Fonts to wp_head if needed.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_enqueue_google_fonts() {
-		if ( blogpress_is_using_dynamic_typography() ) {
+	function webpress_enqueue_google_fonts() {
+		if ( webpress_is_using_dynamic_typography() ) {
 			return;
 		}
 
-		$blogpress_settings = wp_parse_args(
-			get_option( 'blogpress_settings', array() ),
-			blogpress_get_default_fonts()
+		$webpress_settings = wp_parse_args(
+			get_option( 'webpress_settings', array() ),
+			webpress_get_default_fonts()
 		);
 
-		$not_google = str_replace( ' ', '+', blogpress_typography_default_fonts() );
+		$not_google = str_replace( ' ', '+', webpress_typography_default_fonts() );
 
 		$font_settings = array(
 			'font_body',
@@ -50,18 +50,18 @@ if ( ! function_exists( 'blogpress_enqueue_google_fonts' ) ) {
 
 			foreach ( $font_settings as $key ) {
 
-				if ( ! isset( $blogpress_settings[ $key ] ) ) {
+				if ( ! isset( $webpress_settings[ $key ] ) ) {
 					continue;
 				}
 
 				// If our value is still using the old format, fix it.
-				if ( strpos( $blogpress_settings[ $key ], ':' ) !== false ) {
-					$blogpress_settings[ $key ] = current( explode( ':', $blogpress_settings[ $key ] ) );
+				if ( strpos( $webpress_settings[ $key ], ':' ) !== false ) {
+					$webpress_settings[ $key ] = current( explode( ':', $webpress_settings[ $key ] ) );
 				}
 
-				$value = str_replace( ' ', '+', $blogpress_settings[ $key ] );
+				$value = str_replace( ' ', '+', $webpress_settings[ $key ] );
 
-				$variants = blogpress_get_google_font_variants( $blogpress_settings[ $key ], $key );
+				$variants = webpress_get_google_font_variants( $webpress_settings[ $key ], $key );
 
 				$value = ! empty( $variants ) ? $value . ':' . $variants : $value;
 
@@ -76,9 +76,9 @@ if ( ! function_exists( 'blogpress_enqueue_google_fonts' ) ) {
 		$google_fonts = array_diff( $google_fonts, $not_google );
 
 		$google_fonts = implode( '|', $google_fonts );
-		$google_fonts = apply_filters( 'blogpress_typography_google_fonts', $google_fonts );
+		$google_fonts = apply_filters( 'webpress_typography_google_fonts', $google_fonts );
 
-		$subset = apply_filters( 'blogpress_fonts_subset', '' );
+		$subset = apply_filters( 'webpress_fonts_subset', '' );
 
 		$font_args = array();
 		$font_args['family'] = $google_fonts;
@@ -87,7 +87,7 @@ if ( ! function_exists( 'blogpress_enqueue_google_fonts' ) ) {
 			$font_args['subset'] = rawurlencode( $subset );
 		}
 
-		$display = apply_filters( 'blogpress_google_font_display', '' );
+		$display = apply_filters( 'webpress_google_font_display', '' );
 
 		if ( $display ) {
 			$font_args['display'] = $display;
@@ -96,13 +96,13 @@ if ( ! function_exists( 'blogpress_enqueue_google_fonts' ) ) {
 		$fonts_url = add_query_arg( $font_args, '//fonts.googleapis.com/css' );
 
 		if ( $google_fonts ) {
-			wp_enqueue_style( 'blogpress-fonts', $fonts_url, array(), null, 'all' ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Remote Google Fonts URL is already versioned by the API.
+			wp_enqueue_style( 'webpress-fonts', $fonts_url, array(), null, 'all' ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Remote Google Fonts URL is already versioned by the API.
 		}
 	}
 }
 
-if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
-	add_action( 'customize_register', 'blogpress_default_fonts_customize_register' );
+if ( ! function_exists( 'webpress_default_fonts_customize_register' ) ) {
+	add_action( 'customize_register', 'webpress_default_fonts_customize_register' );
 	/**
 	 * Build our Typography options
 	 *
@@ -110,14 +110,14 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 	 *
 	 * @param std_Class $wp_customize The Customize class.
 	 */
-	function blogpress_default_fonts_customize_register( $wp_customize ) {
-		if ( blogpress_is_using_dynamic_typography() ) {
+	function webpress_default_fonts_customize_register( $wp_customize ) {
+		if ( webpress_is_using_dynamic_typography() ) {
 			return;
 		}
 
 		require_once trailingslashit( get_template_directory() ) . 'inc/customizer/customizer-helpers.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound -- Loading a theme partial, not external code.
 
-		$defaults = blogpress_get_default_fonts();
+		$defaults = webpress_get_default_fonts();
 
 		if ( method_exists( $wp_customize, 'register_control_type' ) ) {
 			$wp_customize->register_control_type( 'Blogpress_Typography_Customize_Control' );
@@ -127,11 +127,11 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		$wp_customize->add_section(
 			'font_section',
 			array(
-				'title' => __( 'Typography', 'blogpress' ),
+				'title' => __( 'Typography', 'webpress' ),
 				'capability' => 'edit_theme_options',
 				'priority' => 30,
 				'active_callback' => function() {
-					if ( blogpress_is_using_dynamic_typography() ) {
+					if ( webpress_is_using_dynamic_typography() ) {
 						return false;
 					}
 
@@ -141,7 +141,7 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[font_body]',
+			'webpress_settings[font_body]',
 			array(
 				'default' => $defaults['font_body'],
 				'type' => 'option',
@@ -161,12 +161,12 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 			'font_body_variants',
 			array(
 				'default' => $defaults['font_body_variants'],
-				'sanitize_callback' => 'blogpress_sanitize_variants',
+				'sanitize_callback' => 'webpress_sanitize_variants',
 			)
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[body_font_weight]',
+			'webpress_settings[body_font_weight]',
 			array(
 				'default' => $defaults['body_font_weight'],
 				'type' => 'option',
@@ -176,7 +176,7 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[body_font_transform]',
+			'webpress_settings[body_font_transform]',
 			array(
 				'default' => $defaults['body_font_transform'],
 				'type' => 'option',
@@ -191,26 +191,26 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 				$wp_customize,
 				'body_typography',
 				array(
-					'label' => __( 'Body', 'blogpress' ),
+					'label' => __( 'Body', 'webpress' ),
 					'section' => 'font_section',
 					'priority' => 1,
 					'settings' => array(
-						'family' => 'blogpress_settings[font_body]',
+						'family' => 'webpress_settings[font_body]',
 						'variant' => 'font_body_variants',
 						'category' => 'font_body_category',
-						'weight' => 'blogpress_settings[body_font_weight]',
-						'transform' => 'blogpress_settings[body_font_transform]',
+						'weight' => 'webpress_settings[body_font_weight]',
+						'transform' => 'webpress_settings[body_font_transform]',
 					),
 				)
 			)
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[body_font_size]',
+			'webpress_settings[body_font_size]',
 			array(
 				'default' => $defaults['body_font_size'],
 				'type' => 'option',
-				'sanitize_callback' => 'blogpress_sanitize_integer',
+				'sanitize_callback' => 'webpress_sanitize_integer',
 				'transport' => 'postMessage',
 			)
 		);
@@ -218,13 +218,13 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		$wp_customize->add_control(
 			new Blogpress_Range_Slider_Control(
 				$wp_customize,
-				'blogpress_settings[body_font_size]',
+				'webpress_settings[body_font_size]',
 				array(
-					'type' => 'blogpress-range-slider',
-					'description' => __( 'Font size', 'blogpress' ),
+					'type' => 'webpress-range-slider',
+					'description' => __( 'Font size', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'desktop' => 'blogpress_settings[body_font_size]',
+						'desktop' => 'webpress_settings[body_font_size]',
 					),
 					'choices' => array(
 						'desktop' => array(
@@ -240,11 +240,11 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[body_line_height]',
+			'webpress_settings[body_line_height]',
 			array(
 				'default' => $defaults['body_line_height'],
 				'type' => 'option',
-				'sanitize_callback' => 'blogpress_sanitize_decimal_integer',
+				'sanitize_callback' => 'webpress_sanitize_decimal_integer',
 				'transport' => 'postMessage',
 			)
 		);
@@ -252,13 +252,13 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		$wp_customize->add_control(
 			new Blogpress_Range_Slider_Control(
 				$wp_customize,
-				'blogpress_settings[body_line_height]',
+				'webpress_settings[body_line_height]',
 				array(
-					'type' => 'blogpress-range-slider',
-					'description' => __( 'Line height', 'blogpress' ),
+					'type' => 'webpress-range-slider',
+					'description' => __( 'Line height', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'desktop' => 'blogpress_settings[body_line_height]',
+						'desktop' => 'webpress_settings[body_line_height]',
 					),
 					'choices' => array(
 						'desktop' => array(
@@ -274,11 +274,11 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[paragraph_margin]',
+			'webpress_settings[paragraph_margin]',
 			array(
 				'default' => $defaults['paragraph_margin'],
 				'type' => 'option',
-				'sanitize_callback' => 'blogpress_sanitize_decimal_integer',
+				'sanitize_callback' => 'webpress_sanitize_decimal_integer',
 				'transport' => 'postMessage',
 			)
 		);
@@ -286,13 +286,13 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		$wp_customize->add_control(
 			new Blogpress_Range_Slider_Control(
 				$wp_customize,
-				'blogpress_settings[paragraph_margin]',
+				'webpress_settings[paragraph_margin]',
 				array(
-					'type' => 'blogpress-range-slider',
-					'description' => __( 'Paragraph margin', 'blogpress' ),
+					'type' => 'webpress-range-slider',
+					'description' => __( 'Paragraph margin', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'desktop' => 'blogpress_settings[paragraph_margin]',
+						'desktop' => 'webpress_settings[paragraph_margin]',
 					),
 					'choices' => array(
 						'desktop' => array(
@@ -308,7 +308,7 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[font_heading_1]',
+			'webpress_settings[font_heading_1]',
 			array(
 				'default' => $defaults['font_heading_1'],
 				'type' => 'option',
@@ -328,12 +328,12 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 			'font_heading_1_variants',
 			array(
 				'default' => '',
-				'sanitize_callback' => 'blogpress_sanitize_variants',
+				'sanitize_callback' => 'webpress_sanitize_variants',
 			)
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_1_weight]',
+			'webpress_settings[heading_1_weight]',
 			array(
 				'default' => $defaults['heading_1_weight'],
 				'type' => 'option',
@@ -343,7 +343,7 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_1_transform]',
+			'webpress_settings[heading_1_transform]',
 			array(
 				'default' => $defaults['heading_1_transform'],
 				'type' => 'option',
@@ -357,21 +357,21 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 				$wp_customize,
 				'font_heading_1_control',
 				array(
-					'label' => __( 'Heading 1 (H1)', 'blogpress' ),
+					'label' => __( 'Heading 1 (H1)', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'family' => 'blogpress_settings[font_heading_1]',
+						'family' => 'webpress_settings[font_heading_1]',
 						'variant' => 'font_heading_1_variants',
 						'category' => 'font_heading_1_category',
-						'weight' => 'blogpress_settings[heading_1_weight]',
-						'transform' => 'blogpress_settings[heading_1_transform]',
+						'weight' => 'webpress_settings[heading_1_weight]',
+						'transform' => 'webpress_settings[heading_1_transform]',
 					),
 				)
 			)
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_1_font_size]',
+			'webpress_settings[heading_1_font_size]',
 			array(
 				'default' => $defaults['heading_1_font_size'],
 				'type' => 'option',
@@ -381,11 +381,11 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[mobile_heading_1_font_size]',
+			'webpress_settings[mobile_heading_1_font_size]',
 			array(
 				'default' => $defaults['mobile_heading_1_font_size'],
 				'type' => 'option',
-				'sanitize_callback' => 'blogpress_sanitize_empty_absint',
+				'sanitize_callback' => 'webpress_sanitize_empty_absint',
 				'transport' => 'postMessage',
 			)
 		);
@@ -395,11 +395,11 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 				$wp_customize,
 				'h1_font_sizes',
 				array(
-					'description' => __( 'Font size', 'blogpress' ),
+					'description' => __( 'Font size', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'desktop' => 'blogpress_settings[heading_1_font_size]',
-						'mobile' => 'blogpress_settings[mobile_heading_1_font_size]',
+						'desktop' => 'webpress_settings[heading_1_font_size]',
+						'mobile' => 'webpress_settings[mobile_heading_1_font_size]',
 					),
 					'choices' => array(
 						'desktop' => array(
@@ -422,11 +422,11 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_1_line_height]',
+			'webpress_settings[heading_1_line_height]',
 			array(
 				'default' => $defaults['heading_1_line_height'],
 				'type' => 'option',
-				'sanitize_callback' => 'blogpress_sanitize_decimal_integer',
+				'sanitize_callback' => 'webpress_sanitize_decimal_integer',
 				'transport' => 'postMessage',
 			)
 		);
@@ -434,12 +434,12 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		$wp_customize->add_control(
 			new Blogpress_Range_Slider_Control(
 				$wp_customize,
-				'blogpress_settings[heading_1_line_height]',
+				'webpress_settings[heading_1_line_height]',
 				array(
-					'description' => __( 'Line height', 'blogpress' ),
+					'description' => __( 'Line height', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'desktop' => 'blogpress_settings[heading_1_line_height]',
+						'desktop' => 'webpress_settings[heading_1_line_height]',
 					),
 					'choices' => array(
 						'desktop' => array(
@@ -455,7 +455,7 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[font_heading_2]',
+			'webpress_settings[font_heading_2]',
 			array(
 				'default' => $defaults['font_heading_2'],
 				'type' => 'option',
@@ -475,12 +475,12 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 			'font_heading_2_variants',
 			array(
 				'default' => '',
-				'sanitize_callback' => 'blogpress_sanitize_variants',
+				'sanitize_callback' => 'webpress_sanitize_variants',
 			)
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_2_weight]',
+			'webpress_settings[heading_2_weight]',
 			array(
 				'default' => $defaults['heading_2_weight'],
 				'type' => 'option',
@@ -490,7 +490,7 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_2_transform]',
+			'webpress_settings[heading_2_transform]',
 			array(
 				'default' => $defaults['heading_2_transform'],
 				'type' => 'option',
@@ -504,21 +504,21 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 				$wp_customize,
 				'font_heading_2_control',
 				array(
-					'label' => __( 'Heading 2 (H2)', 'blogpress' ),
+					'label' => __( 'Heading 2 (H2)', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'family' => 'blogpress_settings[font_heading_2]',
+						'family' => 'webpress_settings[font_heading_2]',
 						'variant' => 'font_heading_2_variants',
 						'category' => 'font_heading_2_category',
-						'weight' => 'blogpress_settings[heading_2_weight]',
-						'transform' => 'blogpress_settings[heading_2_transform]',
+						'weight' => 'webpress_settings[heading_2_weight]',
+						'transform' => 'webpress_settings[heading_2_transform]',
 					),
 				)
 			)
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_2_font_size]',
+			'webpress_settings[heading_2_font_size]',
 			array(
 				'default' => $defaults['heading_2_font_size'],
 				'type' => 'option',
@@ -528,11 +528,11 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[mobile_heading_2_font_size]',
+			'webpress_settings[mobile_heading_2_font_size]',
 			array(
 				'default' => $defaults['mobile_heading_2_font_size'],
 				'type' => 'option',
-				'sanitize_callback' => 'blogpress_sanitize_empty_absint',
+				'sanitize_callback' => 'webpress_sanitize_empty_absint',
 				'transport' => 'postMessage',
 			)
 		);
@@ -542,11 +542,11 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 				$wp_customize,
 				'h2_font_sizes',
 				array(
-					'description' => __( 'Font size', 'blogpress' ),
+					'description' => __( 'Font size', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'desktop' => 'blogpress_settings[heading_2_font_size]',
-						'mobile' => 'blogpress_settings[mobile_heading_2_font_size]',
+						'desktop' => 'webpress_settings[heading_2_font_size]',
+						'mobile' => 'webpress_settings[mobile_heading_2_font_size]',
 					),
 					'choices' => array(
 						'desktop' => array(
@@ -569,11 +569,11 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_2_line_height]',
+			'webpress_settings[heading_2_line_height]',
 			array(
 				'default' => $defaults['heading_2_line_height'],
 				'type' => 'option',
-				'sanitize_callback' => 'blogpress_sanitize_decimal_integer',
+				'sanitize_callback' => 'webpress_sanitize_decimal_integer',
 				'transport' => 'postMessage',
 			)
 		);
@@ -581,12 +581,12 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		$wp_customize->add_control(
 			new Blogpress_Range_Slider_Control(
 				$wp_customize,
-				'blogpress_settings[heading_2_line_height]',
+				'webpress_settings[heading_2_line_height]',
 				array(
-					'description' => __( 'Line height', 'blogpress' ),
+					'description' => __( 'Line height', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'desktop' => 'blogpress_settings[heading_2_line_height]',
+						'desktop' => 'webpress_settings[heading_2_line_height]',
 					),
 					'choices' => array(
 						'desktop' => array(
@@ -602,7 +602,7 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[font_heading_3]',
+			'webpress_settings[font_heading_3]',
 			array(
 				'default' => $defaults['font_heading_3'],
 				'type' => 'option',
@@ -622,12 +622,12 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 			'font_heading_3_variants',
 			array(
 				'default' => '',
-				'sanitize_callback' => 'blogpress_sanitize_variants',
+				'sanitize_callback' => 'webpress_sanitize_variants',
 			)
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_3_weight]',
+			'webpress_settings[heading_3_weight]',
 			array(
 				'default' => $defaults['heading_3_weight'],
 				'type' => 'option',
@@ -637,7 +637,7 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_3_transform]',
+			'webpress_settings[heading_3_transform]',
 			array(
 				'default' => $defaults['heading_3_transform'],
 				'type' => 'option',
@@ -651,21 +651,21 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 				$wp_customize,
 				'font_heading_3_control',
 				array(
-					'label' => __( 'Heading 3 (H3)', 'blogpress' ),
+					'label' => __( 'Heading 3 (H3)', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'family' => 'blogpress_settings[font_heading_3]',
+						'family' => 'webpress_settings[font_heading_3]',
 						'variant' => 'font_heading_3_variants',
 						'category' => 'font_heading_3_category',
-						'weight' => 'blogpress_settings[heading_3_weight]',
-						'transform' => 'blogpress_settings[heading_3_transform]',
+						'weight' => 'webpress_settings[heading_3_weight]',
+						'transform' => 'webpress_settings[heading_3_transform]',
 					),
 				)
 			)
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_3_font_size]',
+			'webpress_settings[heading_3_font_size]',
 			array(
 				'default' => $defaults['heading_3_font_size'],
 				'type' => 'option',
@@ -679,10 +679,10 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 				$wp_customize,
 				'h3_font_sizes',
 				array(
-					'description' => __( 'Font size', 'blogpress' ),
+					'description' => __( 'Font size', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'desktop' => 'blogpress_settings[heading_3_font_size]',
+						'desktop' => 'webpress_settings[heading_3_font_size]',
 					),
 					'choices' => array(
 						'desktop' => array(
@@ -698,11 +698,11 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'blogpress_settings[heading_3_line_height]',
+			'webpress_settings[heading_3_line_height]',
 			array(
 				'default' => $defaults['heading_3_line_height'],
 				'type' => 'option',
-				'sanitize_callback' => 'blogpress_sanitize_decimal_integer',
+				'sanitize_callback' => 'webpress_sanitize_decimal_integer',
 				'transport' => 'postMessage',
 			)
 		);
@@ -710,12 +710,12 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 		$wp_customize->add_control(
 			new Blogpress_Range_Slider_Control(
 				$wp_customize,
-				'blogpress_settings[heading_3_line_height]',
+				'webpress_settings[heading_3_line_height]',
 				array(
-					'description' => __( 'Line height', 'blogpress' ),
+					'description' => __( 'Line height', 'webpress' ),
 					'section' => 'font_section',
 					'settings' => array(
-						'desktop' => 'blogpress_settings[heading_3_line_height]',
+						'desktop' => 'webpress_settings[heading_3_line_height]',
 					),
 					'choices' => array(
 						'desktop' => array(
@@ -733,7 +733,7 @@ if ( ! function_exists( 'blogpress_default_fonts_customize_register' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_get_all_google_fonts' ) ) {
+if ( ! function_exists( 'webpress_get_all_google_fonts' ) ) {
 	/**
 	 * Return an array of all of our Google Fonts.
 	 *
@@ -741,7 +741,7 @@ if ( ! function_exists( 'blogpress_get_all_google_fonts' ) ) {
 	 * @param string $amount How many fonts to return.
 	 * @return array The list of Google Fonts.
 	 */
-	function blogpress_get_all_google_fonts( $amount = 'all' ) {
+	function webpress_get_all_google_fonts( $amount = 'all' ) {
 		// Our big list Google Fonts.
 		// We use json_decode to reduce PHP memory usage.
 		// Adding them as a PHP array seems to use quite a bit more memory.
@@ -769,33 +769,33 @@ if ( ! function_exists( 'blogpress_get_all_google_fonts' ) ) {
 			$fonts = array_slice( $fonts, 0, $amount );
 		}
 
-		if ( apply_filters( 'blogpress_alphabetize_google_fonts', true ) ) {
+		if ( apply_filters( 'webpress_alphabetize_google_fonts', true ) ) {
 			asort( $fonts );
 		}
 
-		return apply_filters( 'blogpress_google_fonts_array', $fonts );
+		return apply_filters( 'webpress_google_fonts_array', $fonts );
 	}
 }
 
-if ( ! function_exists( 'blogpress_get_all_google_fonts_ajax' ) ) {
-	add_action( 'wp_ajax_blogpress_get_all_google_fonts_ajax', 'blogpress_get_all_google_fonts_ajax' );
+if ( ! function_exists( 'webpress_get_all_google_fonts_ajax' ) ) {
+	add_action( 'wp_ajax_webpress_get_all_google_fonts_ajax', 'webpress_get_all_google_fonts_ajax' );
 	/**
 	 * Return an array of all of our Google Fonts.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_get_all_google_fonts_ajax() {
-		if ( blogpress_is_using_dynamic_typography() ) {
+	function webpress_get_all_google_fonts_ajax() {
+		if ( webpress_is_using_dynamic_typography() ) {
 			wp_die();
 		}
 
-		check_ajax_referer( 'blogpress_customize_nonce', 'blogpress_customize_nonce' );
+		check_ajax_referer( 'webpress_customize_nonce', 'webpress_customize_nonce' );
 
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			wp_die();
 		}
 
-		$fonts = blogpress_get_all_google_fonts();
+		$fonts = webpress_get_all_google_fonts();
 
 		echo wp_json_encode( $fonts );
 
@@ -803,19 +803,19 @@ if ( ! function_exists( 'blogpress_get_all_google_fonts_ajax' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_get_google_font_variants' ) ) {
+if ( ! function_exists( 'webpress_get_google_font_variants' ) ) {
 	/**
 	 * Wrapper function to find variants for chosen Google Fonts
-	 * Example: blogpress_get_google_font_variation( 'Open Sans' )
+	 * Example: webpress_get_google_font_variation( 'Open Sans' )
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $font The font to look up.
 	 * @param string $key The option to look up.
 	 */
-	function blogpress_get_google_font_variants( $font, $key = '' ) {
+	function webpress_get_google_font_variants( $font, $key = '' ) {
 		// Don't need variants if we're using a system font.
-		if ( in_array( $font, blogpress_typography_default_fonts() ) ) {
+		if ( in_array( $font, webpress_typography_default_fonts() ) ) {
 			return;
 		}
 
@@ -824,7 +824,7 @@ if ( ! function_exists( 'blogpress_get_google_font_variants' ) ) {
 			return get_theme_mod( $key . '_variants' );
 		}
 
-		$defaults = blogpress_get_default_fonts();
+		$defaults = webpress_get_default_fonts();
 
 		if ( $defaults[ $key ] === $font ) {
 			return $defaults[ $key . '_variants' ];
@@ -832,7 +832,7 @@ if ( ! function_exists( 'blogpress_get_google_font_variants' ) ) {
 
 		// Grab all of our fonts.
 		// It's a big list, so hopefully we're not even still reading.
-		$fonts = blogpress_get_all_google_fonts();
+		$fonts = webpress_get_all_google_fonts();
 
 		// Get the ID from our font.
 		$id = strtolower( str_replace( ' ', '_', $font ) );
@@ -852,15 +852,15 @@ if ( ! function_exists( 'blogpress_get_google_font_variants' ) ) {
 				$output[] = $variant;
 			}
 
-			return implode( ',', apply_filters( 'blogpress_typography_variants', $output ) );
+			return implode( ',', apply_filters( 'webpress_typography_variants', $output ) );
 		}
 	}
 }
 
-if ( ! function_exists( 'blogpress_get_google_font_category' ) ) {
+if ( ! function_exists( 'webpress_get_google_font_category' ) ) {
 	/**
 	 * Wrapper function to find the category for chosen Google Font
-	 * Example: blogpress_get_google_font_category( 'Open Sans' )
+	 * Example: webpress_get_google_font_category( 'Open Sans' )
 	 *
 	 * @since 1.0.0
 	 *
@@ -868,9 +868,9 @@ if ( ! function_exists( 'blogpress_get_google_font_category' ) ) {
 	 * @param string $key The ID of the font setting.
 	 * @return string The category of our font.
 	 */
-	function blogpress_get_google_font_category( $font, $key = '' ) {
+	function webpress_get_google_font_category( $font, $key = '' ) {
 		// Don't need a category if we're using a system font.
-		if ( in_array( $font, blogpress_typography_default_fonts() ) ) {
+		if ( in_array( $font, webpress_typography_default_fonts() ) ) {
 			return;
 		}
 
@@ -879,7 +879,7 @@ if ( ! function_exists( 'blogpress_get_google_font_category' ) ) {
 			return ', ' . get_theme_mod( $key . '_category' );
 		}
 
-		$defaults = blogpress_get_default_fonts();
+		$defaults = webpress_get_default_fonts();
 
 		// If our default font is selected and the category isn't saved, we already know the category.
 		if ( $defaults[ $key ] === $font ) {
@@ -888,7 +888,7 @@ if ( ! function_exists( 'blogpress_get_google_font_category' ) ) {
 
 		// Grab all of our fonts.
 		// It's a big list, so hopefully we're not even still reading.
-		$fonts = blogpress_get_all_google_fonts();
+		$fonts = webpress_get_all_google_fonts();
 
 		// Get the ID from our font.
 		$id = strtolower( str_replace( ' ', '_', $font ) );
@@ -907,7 +907,7 @@ if ( ! function_exists( 'blogpress_get_google_font_category' ) ) {
 
 
 
-if ( ! function_exists( 'blogpress_get_font_family_css' ) ) {
+if ( ! function_exists( 'webpress_get_font_family_css' ) ) {
 	/**
 	 * Wrapper function to create font-family value for CSS.
 	 *
@@ -918,8 +918,8 @@ if ( ! function_exists( 'blogpress_get_font_family_css' ) ) {
 	 * @param array  $default The defaults for our $settings.
 	 * @return string The CSS value for our font family.
 	 */
-	function blogpress_get_font_family_css( $font, $settings, $default ) {
-		$blogpress_settings = wp_parse_args(
+	function webpress_get_font_family_css( $font, $settings, $default ) {
+		$webpress_settings = wp_parse_args(
 			get_option( $settings, array() ),
 			$default
 		);
@@ -935,13 +935,13 @@ if ( ! function_exists( 'blogpress_get_font_family_css' ) ) {
 			'Tahoma, Geneva, sans-serif',
 			'Trebuchet MS, Helvetica, sans-serif',
 			'Verdana, Geneva, sans-serif',
-			apply_filters( 'blogpress_typography_system_stack', '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"' ),
+			apply_filters( 'webpress_typography_system_stack', '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"' ),
 		);
 
-		$font_family = $blogpress_settings[ $font ];
+		$font_family = $webpress_settings[ $font ];
 
 		if ( 'System Stack' === $font_family ) {
-			$font_family = apply_filters( 'blogpress_typography_system_stack', '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"' );
+			$font_family = apply_filters( 'webpress_typography_system_stack', '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"' );
 		}
 
 		// If our value is still using the old format, fix it.
@@ -955,7 +955,7 @@ if ( ! function_exists( 'blogpress_get_font_family_css' ) ) {
 			$wrapper_end = null;
 		} else {
 			$wrapper_start = '"';
-			$wrapper_end = '"' . blogpress_get_google_font_category( $font_family, $font );
+			$wrapper_end = '"' . webpress_get_google_font_category( $font_family, $font );
 		}
 
 		$output = ( 'inherit' === $font_family ) ? '' : $wrapper_start . $font_family . $wrapper_end;
@@ -964,8 +964,8 @@ if ( ! function_exists( 'blogpress_get_font_family_css' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_add_to_font_customizer_list' ) ) {
-	add_filter( 'blogpress_typography_customize_list', 'blogpress_add_to_font_customizer_list' );
+if ( ! function_exists( 'webpress_add_to_font_customizer_list' ) ) {
+	add_filter( 'webpress_typography_customize_list', 'webpress_add_to_font_customizer_list' );
 	/**
 	 * This function makes sure your selected typography option exists in the Customizer list
 	 * Why wouldn't it? Originally, all 800+ fonts were in each list. This has been reduced to 200.
@@ -975,15 +975,15 @@ if ( ! function_exists( 'blogpress_add_to_font_customizer_list' ) ) {
 	 *
 	 * @param array $fonts The existing fonts.
 	 */
-	function blogpress_add_to_font_customizer_list( $fonts ) {
+	function webpress_add_to_font_customizer_list( $fonts ) {
 		// Bail if we don't have our defaults.
-		if ( ! function_exists( 'blogpress_get_default_fonts' ) ) {
+		if ( ! function_exists( 'webpress_get_default_fonts' ) ) {
 			return;
 		}
 
-		$blogpress_settings = wp_parse_args(
-			get_option( 'blogpress_settings', array() ),
-			blogpress_get_default_fonts()
+		$webpress_settings = wp_parse_args(
+			get_option( 'webpress_settings', array() ),
+			webpress_get_default_fonts()
 		);
 
 		$font_settings = array(
@@ -998,37 +998,37 @@ if ( ! function_exists( 'blogpress_add_to_font_customizer_list' ) ) {
 			'font_heading_3',
 		);
 
-		$all_fonts = blogpress_get_all_google_fonts();
-		$select_fonts = blogpress_get_all_google_fonts( apply_filters( 'blogpress_number_of_fonts', 200 ) );
+		$all_fonts = webpress_get_all_google_fonts();
+		$select_fonts = webpress_get_all_google_fonts( apply_filters( 'webpress_number_of_fonts', 200 ) );
 
 		foreach ( $font_settings as $setting ) {
 			// If we don't have a setting, keep going.
-			if ( ! isset( $blogpress_settings[ $setting ] ) ) {
+			if ( ! isset( $webpress_settings[ $setting ] ) ) {
 				continue;
 			}
 
-			$id = strtolower( str_replace( ' ', '_', $blogpress_settings[ $setting ] ) );
+			$id = strtolower( str_replace( ' ', '_', $webpress_settings[ $setting ] ) );
 
-			if ( array_key_exists( $id, $select_fonts ) || in_array( $blogpress_settings[ $setting ], blogpress_typography_default_fonts() ) ) {
+			if ( array_key_exists( $id, $select_fonts ) || in_array( $webpress_settings[ $setting ], webpress_typography_default_fonts() ) ) {
 				continue;
 			}
 
-			$fonts[ strtolower( str_replace( ' ', '_', $blogpress_settings[ $setting ] ) ) ] = array(
-				'name' => $blogpress_settings[ $setting ],
+			$fonts[ strtolower( str_replace( ' ', '_', $webpress_settings[ $setting ] ) ) ] = array(
+				'name' => $webpress_settings[ $setting ],
 				'variants' => array_key_exists( $id, $all_fonts ) ? $all_fonts[ $id ]['variants'] : array(),
 				'category' => array_key_exists( $id, $all_fonts ) ? $all_fonts[ $id ]['category'] : 'sans-serif',
 			);
 		}
 
-		if ( function_exists( 'blogpress_secondary_nav_get_defaults' ) ) {
+		if ( function_exists( 'webpress_secondary_nav_get_defaults' ) ) {
 			$secondary_nav_settings = wp_parse_args(
-				get_option( 'blogpress_secondary_nav_settings', array() ),
-				blogpress_secondary_nav_get_defaults()
+				get_option( 'webpress_secondary_nav_settings', array() ),
+				webpress_secondary_nav_get_defaults()
 			);
 
 			$secondary_nav_id = strtolower( str_replace( ' ', '_', $secondary_nav_settings['font_secondary_navigation'] ) );
 
-			if ( ! array_key_exists( $secondary_nav_id, $select_fonts ) && ! in_array( $secondary_nav_settings['font_secondary_navigation'], blogpress_typography_default_fonts() ) ) {
+			if ( ! array_key_exists( $secondary_nav_id, $select_fonts ) && ! in_array( $secondary_nav_settings['font_secondary_navigation'], webpress_typography_default_fonts() ) ) {
 				$fonts[ strtolower( str_replace( ' ', '_', $secondary_nav_settings['font_secondary_navigation'] ) ) ] = array(
 					'name' => $secondary_nav_settings['font_secondary_navigation'],
 					'variants' => array_key_exists( $secondary_nav_id, $all_fonts ) ? $all_fonts[ $secondary_nav_id ]['variants'] : array(),
@@ -1041,8 +1041,8 @@ if ( ! function_exists( 'blogpress_add_to_font_customizer_list' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_typography_set_font_data' ) ) {
-	add_action( 'admin_init', 'blogpress_typography_set_font_data' );
+if ( ! function_exists( 'webpress_typography_set_font_data' ) ) {
+	add_action( 'admin_init', 'webpress_typography_set_font_data' );
 	/**
 	 * This function will check to see if your category and variants are saved
 	 * If not, it will set them for you
@@ -1051,27 +1051,27 @@ if ( ! function_exists( 'blogpress_typography_set_font_data' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_typography_set_font_data() {
-		if ( blogpress_is_using_dynamic_typography() ) {
+	function webpress_typography_set_font_data() {
+		if ( webpress_is_using_dynamic_typography() ) {
 			return;
 		}
 
 		// Get our defaults.
-		$defaults = blogpress_get_default_fonts();
+		$defaults = webpress_get_default_fonts();
 
 		// Get our settings.
-		$blogpress_settings = wp_parse_args(
-			get_option( 'blogpress_settings', array() ),
+		$webpress_settings = wp_parse_args(
+			get_option( 'webpress_settings', array() ),
 			$defaults
 		);
 
 		// We don't need to do this if we're using the default font, as these values have defaults already.
-		if ( $defaults['font_body'] == $blogpress_settings['font_body'] ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- Values may differ in type; loose compare is intentional.
+		if ( $defaults['font_body'] == $webpress_settings['font_body'] ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- Values may differ in type; loose compare is intentional.
 			return;
 		}
 
 		// Don't need to continue if we're using a system font or our default font.
-		if ( in_array( $blogpress_settings['font_body'], blogpress_typography_default_fonts() ) ) {
+		if ( in_array( $webpress_settings['font_body'], webpress_typography_default_fonts() ) ) {
 			return;
 		}
 
@@ -1081,10 +1081,10 @@ if ( ! function_exists( 'blogpress_typography_set_font_data' ) ) {
 		}
 
 		// Get all of our fonts.
-		$fonts = blogpress_get_all_google_fonts();
+		$fonts = webpress_get_all_google_fonts();
 
 		// Get the ID from our font.
-		$id = strtolower( str_replace( ' ', '_', $blogpress_settings['font_body'] ) );
+		$id = strtolower( str_replace( ' ', '_', $webpress_settings['font_body'] ) );
 
 		// If the ID doesn't exist within our fonts, we can bail.
 		if ( ! array_key_exists( $id, $fonts ) ) {

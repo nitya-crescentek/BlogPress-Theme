@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class BlogpressBlocks_Rest
  */
-class BlogPress_Rest extends WP_REST_Controller {
+class WebPress_Rest extends WP_REST_Controller {
 	/**
 	 * Instance.
 	 *
@@ -26,7 +26,7 @@ class BlogPress_Rest extends WP_REST_Controller {
 	 *
 	 * @var string
 	 */
-	protected $namespace = 'blogpress/v';
+	protected $namespace = 'webpress/v';
 
 	/**
 	 * Version.
@@ -49,7 +49,7 @@ class BlogPress_Rest extends WP_REST_Controller {
 	}
 
 	/**
-	 * BlogPress_Rest constructor.
+	 * WebPress_Rest constructor.
 	 */
 	public function __construct() {
 		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
@@ -89,15 +89,15 @@ class BlogPress_Rest extends WP_REST_Controller {
 	 * @return mixed
 	 */
 	public function reset( WP_REST_Request $request ) {
-		delete_option( 'blogpress_settings' );
-		delete_option( 'blogpress_dynamic_css_output' );
-		delete_option( 'blogpress_dynamic_css_cached_version' );
+		delete_option( 'webpress_settings' );
+		delete_option( 'webpress_dynamic_css_output' );
+		delete_option( 'webpress_dynamic_css_cached_version' );
 
 		// The dynamic CSS is cached per text direction.
-		delete_option( 'blogpress_dynamic_css_output_rtl' );
-		delete_option( 'blogpress_dynamic_css_cached_version_rtl' );
+		delete_option( 'webpress_dynamic_css_output_rtl' );
+		delete_option( 'webpress_dynamic_css_cached_version_rtl' );
 
-		return $this->success( __( 'Settings reset.', 'blogpress' ) );
+		return $this->success( __( 'Settings reset.', 'webpress' ) );
 	}
 
 	/**
@@ -152,4 +152,4 @@ class BlogPress_Rest extends WP_REST_Controller {
 	}
 }
 
-BlogPress_Rest::get_instance();
+WebPress_Rest::get_instance();

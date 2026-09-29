@@ -2,25 +2,25 @@
 /**
  * Archive elements.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! function_exists( 'blogpress_archive_title' ) ) {
+if ( ! function_exists( 'webpress_archive_title' ) ) {
 	/**
 	 * Build the archive title
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_archive_title() {
+	function webpress_archive_title() {
 		if ( ! function_exists( 'the_archive_title' ) ) {
 			return;
 		}
 		?>
-		<header <?php blogpress_do_attr( 'page-header' ); ?>>
+		<header <?php webpress_do_attr( 'page-header' ); ?>>
 			<?php
 			?>
 
@@ -29,15 +29,15 @@ if ( ! function_exists( 'blogpress_archive_title' ) ) {
 			</h1>
 
 			<?php
-			blogpress_do_archive_description();
+			webpress_do_archive_description();
 			?>
 		</header>
 		<?php
 	}
 }
 
-if ( ! function_exists( 'blogpress_filter_the_archive_title' ) ) {
-	add_filter( 'get_the_archive_title', 'blogpress_filter_the_archive_title' );
+if ( ! function_exists( 'webpress_filter_the_archive_title' ) ) {
+	add_filter( 'get_the_archive_title', 'webpress_filter_the_archive_title' );
 	/**
 	 * Alter the_archive_title() function to match our original archive title function
 	 *
@@ -46,7 +46,7 @@ if ( ! function_exists( 'blogpress_filter_the_archive_title' ) ) {
 	 * @param string $title The archive title.
 	 * @return string The altered archive title
 	 */
-	function blogpress_filter_the_archive_title( $title ) {
+	function webpress_filter_the_archive_title( $title ) {
 		if ( is_category() ) {
 			$title = single_cat_title( '', false );
 		} elseif ( is_tag() ) {
@@ -76,13 +76,13 @@ if ( ! function_exists( 'blogpress_filter_the_archive_title' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_do_archive_description' ) ) {
+if ( ! function_exists( 'webpress_do_archive_description' ) ) {
 	/**
 	 * Output the archive description.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_do_archive_description() {
+	function webpress_do_archive_description() {
 		$term_description = get_the_archive_description();
 
 		if ( ! empty( $term_description ) ) {
@@ -95,21 +95,21 @@ if ( ! function_exists( 'blogpress_do_archive_description' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_do_search_results_title' ) ) {
+if ( ! function_exists( 'webpress_do_search_results_title' ) ) {
 	/**
 	 * Add the search results title to the search results page.
 	 *
 	 * @since 1.0.0
 	 * @param string $template The template we're targeting.
 	 */
-	function blogpress_do_search_results_title( $template ) {
+	function webpress_do_search_results_title( $template ) {
 		if ( 'search' === $template ) {
 			echo sprintf(
 				'<header %s><h1 class="page-title">%s</h1></header>',
-				blogpress_get_attr( 'page-header' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- blogpress_get_attr() escapes every attribute name and value.
+				webpress_get_attr( 'page-header' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- webpress_get_attr() escapes every attribute name and value.
 				sprintf(
 					/* translators: 1: Search query name */
-					__( 'Search Results for: %s', 'blogpress' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme-controlled translatable string; the search term is escaped by get_search_query().
+					__( 'Search Results for: %s', 'webpress' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme-controlled translatable string; the search term is escaped by get_search_query().
 					'<span>' . get_search_query() . '</span>'
 				)
 			);

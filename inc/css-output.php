@@ -2,26 +2,26 @@
 /**
  * Output all of our dynamic CSS.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! function_exists( 'blogpress_base_css' ) ) {
+if ( ! function_exists( 'webpress_base_css' ) ) {
 	/**
 	 * Output the CSS in the <head> section using the Theme Customizer.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_base_css() {
+	function webpress_base_css() {
 		$settings = wp_parse_args(
-			get_option( 'blogpress_settings', array() ),
-			blogpress_get_defaults()
+			get_option( 'webpress_settings', array() ),
+			webpress_get_defaults()
 		);
 
-		$css = new BlogPress_CSS();
+		$css = new WebPress_CSS();
 
 		$css->set_selector( 'body' );
 		$css->add_property( 'background-color', $settings['background_color'] );
@@ -32,7 +32,7 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 
 		$css->set_selector( 'a:visited' )->add_property( 'color', $settings['link_color_visited'] );
 
-		$underline_links = blogpress_get_option( 'underline_links' );
+		$underline_links = webpress_get_option( 'underline_links' );
 
 		if ( 'never' !== $underline_links ) {
 			if ( 'always' === $underline_links ) {
@@ -69,8 +69,8 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 		$css->add_property( 'margin-left', 'auto' );
 		$css->add_property( 'margin-right', 'auto' );
 
-		$nav_drop_point = blogpress_get_option( 'nav_drop_point' );
-		$nav_location = blogpress_get_navigation_location();
+		$nav_drop_point = webpress_get_option( 'nav_drop_point' );
+		$nav_location = webpress_get_navigation_location();
 
 		if ( ( 'nav-float-right' === $nav_location || 'nav-float-left' === $nav_location ) && $nav_drop_point ) {
 			$media_query = sprintf(
@@ -95,26 +95,26 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 				$css->add_property( 'margin-top', '1.5em' );
 
 				// phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
-				if ( 'nav-float-left' === blogpress_get_option( 'nav_position_setting' ) ) {
+				if ( 'nav-float-left' === webpress_get_option( 'nav_position_setting' ) ) {
 					$css->set_selector( '.nav-float-left .site-logo,.nav-float-left .site-branding,.nav-float-left .header-widget' );
 					$css->add_property( 'order', 'initial' );
 				} // phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Indented inside media query.
 			$css->stop_media_query();
 		}
 
-		if ( blogpress_get_option( 'logo_width' ) ) {
+		if ( webpress_get_option( 'logo_width' ) ) {
 			$css->set_selector( '.site-header .header-image' );
-			$css->add_property( 'width', absint( blogpress_get_option( 'logo_width' ) ), false, 'px' );
+			$css->add_property( 'width', absint( webpress_get_option( 'logo_width' ) ), false, 'px' );
 		}
 
-		if ( blogpress_get_option( 'back_to_top' ) ) {
-			$back_to_top_size = absint( blogpress_get_option( 'back_to_top_size' ) );
-			$back_to_top_offset = absint( blogpress_get_option( 'back_to_top_offset' ) );
-			$back_to_top_side = 'left' === blogpress_get_option( 'back_to_top_position' ) ? 'left' : 'right';
+		if ( webpress_get_option( 'back_to_top' ) ) {
+			$back_to_top_size = absint( webpress_get_option( 'back_to_top_size' ) );
+			$back_to_top_offset = absint( webpress_get_option( 'back_to_top_offset' ) );
+			$back_to_top_side = 'left' === webpress_get_option( 'back_to_top_position' ) ? 'left' : 'right';
 
-			$css->set_selector( '.blogpress-back-to-top' );
+			$css->set_selector( '.webpress-back-to-top' );
 			$css->add_property( 'font-size', round( $back_to_top_size / 2 ), false, 'px' );
-			$css->add_property( 'border-radius', absint( blogpress_get_option( 'back_to_top_border_radius' ) ), false, 'px' );
+			$css->add_property( 'border-radius', absint( webpress_get_option( 'back_to_top_border_radius' ) ), false, 'px' );
 			$css->add_property( 'position', 'fixed' );
 			$css->add_property( 'bottom', $back_to_top_offset, false, 'px' );
 			$css->add_property( $back_to_top_side, $back_to_top_offset, false, 'px' );
@@ -126,12 +126,12 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 			$css->add_property( 'opacity', '0.1' ); // Can't be 0 or we face double-tap issues on iOS.
 			$css->add_property( 'transform', 'translateY(1000px)' ); // Can't use visibility or we face the same issue as above.
 
-			$css->set_selector( '.blogpress-back-to-top__show' );
+			$css->set_selector( '.webpress-back-to-top__show' );
 			$css->add_property( 'opacity', '1' );
 			$css->add_property( 'transform', 'translateY(0)' );
 		}
 
-		if ( 'enable' === blogpress_get_option( 'nav_search' ) ) {
+		if ( 'enable' === webpress_get_option( 'nav_search' ) ) {
 			$css->set_selector( '.navigation-search' );
 			$css->add_property( 'position', 'absolute' );
 			$css->add_property( 'left', '-99999px' );
@@ -175,12 +175,12 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 			$css->set_selector( '.navigation-search input::-webkit-search-decoration, .navigation-search input::-webkit-search-cancel-button, .navigation-search input::-webkit-search-results-button, .navigation-search input::-webkit-search-results-decoration' );
 			$css->add_property( 'display', 'none' );
 
-			$css->set_selector( '.blogpress-sidebar-nav .navigation-search' );
+			$css->set_selector( '.webpress-sidebar-nav .navigation-search' );
 			$css->add_property( 'top', 'auto' );
 			$css->add_property( 'bottom', '0' );
 		}
 
-		if ( 'click' === blogpress_get_option( 'nav_dropdown_type' ) || 'click-arrow' === blogpress_get_option( 'nav_dropdown_type' ) ) {
+		if ( 'click' === webpress_get_option( 'nav_dropdown_type' ) || 'click-arrow' === webpress_get_option( 'nav_dropdown_type' ) ) {
 			$css->set_selector( '.dropdown-click .main-navigation ul ul' );
 			$css->add_property( 'display', 'none' );
 			$css->add_property( 'visibility', 'hidden' );
@@ -231,7 +231,7 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 			$css->set_selector( '.dropdown-click .sfHover > a > .dropdown-menu-toggle > .bp-icon svg' );
 			$css->add_property( 'transform', 'rotate(180deg)' );
 
-			if ( 'click' === blogpress_get_option( 'nav_dropdown_type' ) ) {
+			if ( 'click' === webpress_get_option( 'nav_dropdown_type' ) ) {
 				$css->set_selector( '.menu-item-has-children  .dropdown-menu-toggle[role="presentation"]' );
 				$css->add_property( 'pointer-events', 'none' );
 			}
@@ -239,7 +239,7 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 
 		$css->set_selector( ':root' );
 
-		$global_colors = blogpress_get_global_colors();
+		$global_colors = webpress_get_global_colors();
 
 		if ( ! empty( $global_colors ) ) {
 			foreach ( (array) $global_colors as $key => $data ) {
@@ -259,26 +259,26 @@ if ( ! function_exists( 'blogpress_base_css' ) ) {
 			}
 		}
 
-		blogpress_do_modal_css( $css );
-		blogpress_do_search_modal_css( $css );
+		webpress_do_modal_css( $css );
+		webpress_do_search_modal_css( $css );
 
 		return $css->css_output();
 	}
 }
 
-if ( ! function_exists( 'blogpress_advanced_css' ) ) {
+if ( ! function_exists( 'webpress_advanced_css' ) ) {
 	/**
 	 * Output the CSS in the <head> section using the Theme Customizer.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_advanced_css() {
+	function webpress_advanced_css() {
 		$settings = wp_parse_args(
-			get_option( 'blogpress_settings', array() ),
-			blogpress_get_color_defaults()
+			get_option( 'webpress_settings', array() ),
+			webpress_get_color_defaults()
 		);
 
-		$css = new BlogPress_CSS();
+		$css = new WebPress_CSS();
 
 		$css->set_selector( '.top-bar' );
 		$css->add_property( 'background-color', $settings['top_bar_background_color'] );
@@ -465,11 +465,11 @@ if ( ! function_exists( 'blogpress_advanced_css' ) ) {
 		$css->add_property( 'color', $settings['form_button_text_color_hover'] );
 		$css->add_property( 'background-color', $settings['form_button_background_color_hover'] );
 
-		$css->set_selector( 'a.blogpress-back-to-top' );
+		$css->set_selector( 'a.webpress-back-to-top' );
 		$css->add_property( 'background-color', $settings['back_to_top_background_color'] );
 		$css->add_property( 'color', $settings['back_to_top_text_color'] );
 
-		$css->set_selector( 'a.blogpress-back-to-top:hover,a.blogpress-back-to-top:focus' );
+		$css->set_selector( 'a.webpress-back-to-top:hover,a.webpress-back-to-top:focus' );
 		$css->add_property( 'background-color', $settings['back_to_top_background_color_hover'] );
 		$css->add_property( 'color', $settings['back_to_top_text_color_hover'] );
 
@@ -478,7 +478,7 @@ if ( ! function_exists( 'blogpress_advanced_css' ) ) {
 		$css->add_property( '--bp-search-modal-text-color', $settings['search_modal_text_color'] );
 		$css->add_property( '--bp-search-modal-overlay-bg-color', $settings['search_modal_overlay_bg_color'] );
 
-		$css->start_media_query( blogpress_get_media_query( 'mobile-menu' ) );
+		$css->start_media_query( webpress_get_media_query( 'mobile-menu' ) );
 		$css->set_selector( '.main-navigation .menu-bar-item:hover > a, .main-navigation .menu-bar-item.sfHover > a' );
 		$css->add_property( 'background', 'none' );
 		$css->add_property( 'color', $settings['navigation_text_color'] );
@@ -488,56 +488,56 @@ if ( ! function_exists( 'blogpress_advanced_css' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_spacing_css' ) ) {
+if ( ! function_exists( 'webpress_spacing_css' ) ) {
 	/**
 	 * Write our dynamic CSS.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_spacing_css() {
+	function webpress_spacing_css() {
 		$settings = wp_parse_args(
-			get_option( 'blogpress_spacing_settings', array() ),
-			blogpress_spacing_get_defaults()
+			get_option( 'webpress_spacing_settings', array() ),
+			webpress_spacing_get_defaults()
 		);
 
-		$defaults = blogpress_spacing_get_defaults( false );
-		$sidebar_layout = blogpress_get_layout();
+		$defaults = webpress_spacing_get_defaults( false );
+		$sidebar_layout = webpress_get_layout();
 
-		$css = new BlogPress_CSS();
+		$css = new WebPress_CSS();
 
 		$css->set_selector( '.inside-top-bar' );
-		$css->add_property( 'padding', blogpress_padding_css( $settings['top_bar_top'], $settings['top_bar_right'], $settings['top_bar_bottom'], $settings['top_bar_left'] ), blogpress_padding_css( $defaults['top_bar_top'], $defaults['top_bar_right'], $defaults['top_bar_bottom'], $defaults['top_bar_left'] ) );
+		$css->add_property( 'padding', webpress_padding_css( $settings['top_bar_top'], $settings['top_bar_right'], $settings['top_bar_bottom'], $settings['top_bar_left'] ), webpress_padding_css( $defaults['top_bar_top'], $defaults['top_bar_right'], $defaults['top_bar_bottom'], $defaults['top_bar_left'] ) );
 
-		if ( 'boxes' === blogpress_get_option( 'container_alignment' ) ) {
+		if ( 'boxes' === webpress_get_option( 'container_alignment' ) ) {
 			$top_bar_padding = absint( $settings['top_bar_right'] ) + absint( $settings['top_bar_left'] );
 
 			$css->set_selector( '.inside-top-bar.grid-container' );
-			$css->add_property( 'max-width', blogpress_get_option( 'container_width' ) + $top_bar_padding, false, 'px' );
+			$css->add_property( 'max-width', webpress_get_option( 'container_width' ) + $top_bar_padding, false, 'px' );
 		}
 
 		$css->set_selector( '.inside-header' );
-		$css->add_property( 'padding', blogpress_padding_css( $settings['header_top'], $settings['header_right'], $settings['header_bottom'], $settings['header_left'] ), blogpress_padding_css( $defaults['header_top'], $defaults['header_right'], $defaults['header_bottom'], $defaults['header_left'] ) );
+		$css->add_property( 'padding', webpress_padding_css( $settings['header_top'], $settings['header_right'], $settings['header_bottom'], $settings['header_left'] ), webpress_padding_css( $defaults['header_top'], $defaults['header_right'], $defaults['header_bottom'], $defaults['header_left'] ) );
 
-		if ( 'boxes' === blogpress_get_option( 'container_alignment' ) ) {
+		if ( 'boxes' === webpress_get_option( 'container_alignment' ) ) {
 			$header_padding = absint( $settings['header_right'] ) + absint( $settings['header_left'] );
 
 			$css->set_selector( '.inside-header.grid-container' );
-			$css->add_property( 'max-width', blogpress_get_option( 'container_width' ) + $header_padding, false, 'px' );
+			$css->add_property( 'max-width', webpress_get_option( 'container_width' ) + $header_padding, false, 'px' );
 		}
 
-		if ( 'text' === blogpress_get_option( 'container_alignment' ) ) {
+		if ( 'text' === webpress_get_option( 'container_alignment' ) ) {
 			$navigation_left_padding = absint( $settings['header_left'] ) - absint( $settings['menu_item'] );
 			$navigation_right_padding = absint( $settings['header_right'] ) - absint( $settings['menu_item'] );
 
 			$css->set_selector( '.nav-below-header .main-navigation .inside-navigation.grid-container, .nav-above-header .main-navigation .inside-navigation.grid-container' );
-			$css->add_property( 'padding', blogpress_padding_css( 0, $navigation_right_padding, 0, $navigation_left_padding ) );
+			$css->add_property( 'padding', webpress_padding_css( 0, $navigation_right_padding, 0, $navigation_left_padding ) );
 		}
 
 		$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .separate-containers .paging-navigation, .one-container .site-content, .inside-page-header' );
-		$css->add_property( 'padding', blogpress_padding_css( $settings['content_top'], $settings['content_right'], $settings['content_bottom'], $settings['content_left'] ), blogpress_padding_css( $defaults['content_top'], $defaults['content_right'], $defaults['content_bottom'], $defaults['content_left'] ) );
+		$css->add_property( 'padding', webpress_padding_css( $settings['content_top'], $settings['content_right'], $settings['content_bottom'], $settings['content_left'] ), webpress_padding_css( $defaults['content_top'], $defaults['content_right'], $defaults['content_bottom'], $defaults['content_left'] ) );
 
 		$css->set_selector( '.site-main .wp-block-group__inner-container' );
-		$css->add_property( 'padding', blogpress_padding_css( $settings['content_top'], $settings['content_right'], $settings['content_bottom'], $settings['content_left'] ) );
+		$css->add_property( 'padding', webpress_padding_css( $settings['content_top'], $settings['content_right'], $settings['content_bottom'], $settings['content_left'] ) );
 
 		$css->set_selector( '.separate-containers .paging-navigation' );
 		$css->add_property( 'padding-top', '20px' );
@@ -556,7 +556,7 @@ if ( ! function_exists( 'blogpress_spacing_css' ) ) {
 		$css->add_property( 'margin-left', absint( $settings['content_left'] ), absint( $defaults['content_left'] ), 'px' );
 
 		$css->set_selector( '.one-container.both-sidebars .site-main' );
-		$css->add_property( 'margin', blogpress_padding_css( '0', $settings['content_right'], '0', $settings['content_left'] ), blogpress_padding_css( '0', $defaults['content_right'], '0', $defaults['content_left'] ) );
+		$css->add_property( 'margin', webpress_padding_css( '0', $settings['content_right'], '0', $settings['content_left'] ), webpress_padding_css( '0', $defaults['content_right'], '0', $defaults['content_left'] ) );
 
 		$css->set_selector( '.sidebar .widget, .page-header, .widget-area .main-navigation, .site-main > *' );
 
@@ -589,7 +589,7 @@ if ( ! function_exists( 'blogpress_spacing_css' ) ) {
 		$css->add_property( 'line-height', absint( $settings['menu_item_height'] ), absint( $defaults['menu_item_height'] ), 'px' );
 
 		$css->set_selector( '.main-navigation .main-nav ul ul li a' );
-		$css->add_property( 'padding', blogpress_padding_css( $settings['sub_menu_item_height'], $settings['menu_item'], $settings['sub_menu_item_height'], $settings['menu_item'] ), blogpress_padding_css( $defaults['sub_menu_item_height'], $defaults['menu_item'], $defaults['sub_menu_item_height'], $defaults['menu_item'] ) );
+		$css->add_property( 'padding', webpress_padding_css( $settings['sub_menu_item_height'], $settings['menu_item'], $settings['sub_menu_item_height'], $settings['menu_item'] ), webpress_padding_css( $defaults['sub_menu_item_height'], $defaults['menu_item'], $defaults['sub_menu_item_height'], $defaults['menu_item'] ) );
 
 		$css->set_selector( '.main-navigation ul ul' );
 		$css->add_property( 'width', absint( $settings['sub_menu_width'] ), absint( $defaults['sub_menu_width'] ), 'px' );
@@ -612,40 +612,40 @@ if ( ! function_exists( 'blogpress_spacing_css' ) ) {
 		$css->add_property( 'padding-right', absint( $settings['menu_item'] ), false, 'px' );
 
 		$css->set_selector( '.widget-area .widget' );
-		$css->add_property( 'padding', blogpress_padding_css( $settings['widget_top'], $settings['widget_right'], $settings['widget_bottom'], $settings['widget_left'] ), blogpress_padding_css( $defaults['widget_top'], $defaults['widget_right'], $defaults['widget_bottom'], $defaults['widget_left'] ) );
+		$css->add_property( 'padding', webpress_padding_css( $settings['widget_top'], $settings['widget_right'], $settings['widget_bottom'], $settings['widget_left'] ), webpress_padding_css( $defaults['widget_top'], $defaults['widget_right'], $defaults['widget_bottom'], $defaults['widget_left'] ) );
 
 		$css->set_selector( '.footer-widgets-container' );
-		$css->add_property( 'padding', blogpress_padding_css( $settings['footer_widget_container_top'], $settings['footer_widget_container_right'], $settings['footer_widget_container_bottom'], $settings['footer_widget_container_left'] ), blogpress_padding_css( $defaults['footer_widget_container_top'], $defaults['footer_widget_container_right'], $defaults['footer_widget_container_bottom'], $defaults['footer_widget_container_left'] ) );
+		$css->add_property( 'padding', webpress_padding_css( $settings['footer_widget_container_top'], $settings['footer_widget_container_right'], $settings['footer_widget_container_bottom'], $settings['footer_widget_container_left'] ), webpress_padding_css( $defaults['footer_widget_container_top'], $defaults['footer_widget_container_right'], $defaults['footer_widget_container_bottom'], $defaults['footer_widget_container_left'] ) );
 
-		if ( 'boxes' === blogpress_get_option( 'container_alignment' ) ) {
+		if ( 'boxes' === webpress_get_option( 'container_alignment' ) ) {
 			$footer_widgets_padding = absint( $settings['footer_widget_container_right'] ) + absint( $settings['footer_widget_container_left'] );
 
 			$css->set_selector( '.footer-widgets-container.grid-container' );
-			$css->add_property( 'max-width', blogpress_get_option( 'container_width' ) + $footer_widgets_padding, false, 'px' );
+			$css->add_property( 'max-width', webpress_get_option( 'container_width' ) + $footer_widgets_padding, false, 'px' );
 		}
 
 		$css->set_selector( '.site-footer .footer-widgets-container .inner-padding' );
-		$css->add_property( 'padding', blogpress_padding_css( '0', '0', '0', $settings['footer_widget_separator'] ), blogpress_padding_css( '0', '0', '0', $defaults['footer_widget_separator'] ) );
+		$css->add_property( 'padding', webpress_padding_css( '0', '0', '0', $settings['footer_widget_separator'] ), webpress_padding_css( '0', '0', '0', $defaults['footer_widget_separator'] ) );
 
 		$css->set_selector( '.site-footer .footer-widgets-container .inside-footer-widgets' );
 		$css->add_property( 'margin-left', '-' . absint( $settings['footer_widget_separator'] ), '-' . absint( $defaults['footer_widget_separator'] ), 'px' );
 
 		$css->set_selector( '.inside-site-info' );
-		$css->add_property( 'padding', blogpress_padding_css( $settings['footer_top'], $settings['footer_right'], $settings['footer_bottom'], $settings['footer_left'] ), blogpress_padding_css( $defaults['footer_top'], $defaults['footer_right'], $defaults['footer_bottom'], $defaults['footer_left'] ) );
+		$css->add_property( 'padding', webpress_padding_css( $settings['footer_top'], $settings['footer_right'], $settings['footer_bottom'], $settings['footer_left'] ), webpress_padding_css( $defaults['footer_top'], $defaults['footer_right'], $defaults['footer_bottom'], $defaults['footer_left'] ) );
 
-		if ( 'boxes' === blogpress_get_option( 'container_alignment' ) ) {
+		if ( 'boxes' === webpress_get_option( 'container_alignment' ) ) {
 			$site_info_padding = absint( $settings['footer_right'] ) + absint( $settings['footer_left'] );
 
 			$css->set_selector( '.inside-site-info.grid-container' );
-			$css->add_property( 'max-width', blogpress_get_option( 'container_width' ) + $site_info_padding, false, 'px' );
+			$css->add_property( 'max-width', webpress_get_option( 'container_width' ) + $site_info_padding, false, 'px' );
 		}
 
-		$css->start_media_query( blogpress_get_media_query( 'mobile' ) );
+		$css->start_media_query( webpress_get_media_query( 'mobile' ) );
 		$css->set_selector( '.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .separate-containers .paging-navigation, .one-container .site-content, .inside-page-header' );
-		$css->add_property( 'padding', blogpress_padding_css( $settings['mobile_content_top'], $settings['mobile_content_right'], $settings['mobile_content_bottom'], $settings['mobile_content_left'] ) );
+		$css->add_property( 'padding', webpress_padding_css( $settings['mobile_content_top'], $settings['mobile_content_right'], $settings['mobile_content_bottom'], $settings['mobile_content_left'] ) );
 
 		$css->set_selector( '.site-main .wp-block-group__inner-container' );
-		$css->add_property( 'padding', blogpress_padding_css( $settings['mobile_content_top'], $settings['mobile_content_right'], $settings['mobile_content_bottom'], $settings['mobile_content_left'] ) );
+		$css->add_property( 'padding', webpress_padding_css( $settings['mobile_content_top'], $settings['mobile_content_right'], $settings['mobile_content_bottom'], $settings['mobile_content_left'] ) );
 
 		$css->set_selector( '.inside-top-bar' );
 
@@ -785,8 +785,8 @@ if ( ! function_exists( 'blogpress_spacing_css' ) ) {
  *
  * @since 1.0.0
  */
-function blogpress_no_cache_dynamic_css() {
-	$css = new BlogPress_CSS();
+function webpress_no_cache_dynamic_css() {
+	$css = new WebPress_CSS();
 
 	$right_sidebar_width = '30';
 	$left_sidebar_width = '30';
@@ -798,7 +798,7 @@ function blogpress_no_cache_dynamic_css() {
 	$css->add_property( 'width', absint( $left_sidebar_width ) . '%' );
 
 	$content_width = 100;
-	$sidebar_layout = blogpress_get_layout();
+	$sidebar_layout = webpress_get_layout();
 
 	switch ( $sidebar_layout ) {
 		case 'right-sidebar':
@@ -819,12 +819,12 @@ function blogpress_no_cache_dynamic_css() {
 	$css->set_selector( '.site-content .content-area' );
 	$css->add_property( 'width', absint( $content_width ) . '%' );
 
-	$css->start_media_query( blogpress_get_media_query( 'mobile-menu' ) );
+	$css->start_media_query( webpress_get_media_query( 'mobile-menu' ) );
 
 	$css->set_selector( '.main-navigation .menu-toggle,.sidebar-nav-mobile:not(#sticky-placeholder)' );
 	$css->add_property( 'display', 'block' );
 
-	$css->set_selector( '.main-navigation ul,.blogpress-sidebar-nav,.main-navigation:not(.slideout-navigation):not(.toggled) .main-nav > ul,.has-inline-mobile-toggle #site-navigation .inside-navigation > *:not(.navigation-search):not(.main-nav)' );
+	$css->set_selector( '.main-navigation ul,.webpress-sidebar-nav,.main-navigation:not(.slideout-navigation):not(.toggled) .main-nav > ul,.has-inline-mobile-toggle #site-navigation .inside-navigation > *:not(.navigation-search):not(.main-nav)' );
 	$css->add_property( 'display', 'none' );
 
 	$css->set_selector( '.nav-align-right .inside-navigation,.nav-align-center .inside-navigation' );
@@ -835,7 +835,7 @@ function blogpress_no_cache_dynamic_css() {
 		$css->add_property( 'justify-content', 'space-between' );
 	}
 
-	if ( blogpress_has_inline_mobile_toggle() ) {
+	if ( webpress_has_inline_mobile_toggle() ) {
 		$css->set_selector( '.has-inline-mobile-toggle .mobile-menu-control-wrapper' );
 		$css->add_property( 'display', 'flex' );
 		$css->add_property( 'flex-wrap', 'wrap' );
@@ -874,12 +874,12 @@ function blogpress_no_cache_dynamic_css() {
  *     @type string $version Option name holding the version it was cached at.
  * }
  */
-function blogpress_get_dynamic_css_cache_keys() {
+function webpress_get_dynamic_css_cache_keys() {
 	$suffix = is_rtl() ? '_rtl' : '';
 
 	return array(
-		'css' => 'blogpress_dynamic_css_output' . $suffix,
-		'version' => 'blogpress_dynamic_css_cached_version' . $suffix,
+		'css' => 'webpress_dynamic_css_output' . $suffix,
+		'version' => 'webpress_dynamic_css_cached_version' . $suffix,
 	);
 }
 
@@ -888,35 +888,35 @@ function blogpress_get_dynamic_css_cache_keys() {
  *
  * @since 1.0.0
  */
-function blogpress_get_dynamic_css() {
-	$typography_css = BlogPress_Typography::get_css();
+function webpress_get_dynamic_css() {
+	$typography_css = WebPress_Typography::get_css();
 
-	$css = blogpress_base_css() . $typography_css . blogpress_advanced_css() . blogpress_spacing_css();
+	$css = webpress_base_css() . $typography_css . webpress_advanced_css() . webpress_spacing_css();
 
 	return $css;
 }
 
-add_action( 'wp_enqueue_scripts', 'blogpress_enqueue_dynamic_css', 50 );
+add_action( 'wp_enqueue_scripts', 'webpress_enqueue_dynamic_css', 50 );
 /**
  * Enqueue our dynamic CSS.
  *
  * @since 1.0.0
  */
-function blogpress_enqueue_dynamic_css() {
-	$cache_keys = blogpress_get_dynamic_css_cache_keys();
+function webpress_enqueue_dynamic_css() {
+	$cache_keys = webpress_get_dynamic_css_cache_keys();
 
-	if ( ! get_option( $cache_keys['css'], false ) || is_customize_preview() || ! blogpress_get_option( 'dynamic_css_cache' ) ) {
-		$css = blogpress_get_dynamic_css();
+	if ( ! get_option( $cache_keys['css'], false ) || is_customize_preview() || ! webpress_get_option( 'dynamic_css_cache' ) ) {
+		$css = webpress_get_dynamic_css();
 	} else {
 		$css = get_option( $cache_keys['css'] ) . '/* End cached CSS */';
 	}
 
-	$css = $css . blogpress_no_cache_dynamic_css();
+	$css = $css . webpress_no_cache_dynamic_css();
 
-	wp_add_inline_style( 'blogpress-style', wp_strip_all_tags( $css ) );
+	wp_add_inline_style( 'webpress-style', wp_strip_all_tags( $css ) );
 }
 
-add_action( 'init', 'blogpress_set_dynamic_css_cache' );
+add_action( 'init', 'webpress_set_dynamic_css_cache' );
 /**
  * Sets our dynamic CSS cache if it doesn't exist.
  *
@@ -924,31 +924,31 @@ add_action( 'init', 'blogpress_set_dynamic_css_cache' );
  *
  * @since 1.0.0
  */
-function blogpress_set_dynamic_css_cache() {
-	if ( ! blogpress_get_option( 'dynamic_css_cache' ) ) {
+function webpress_set_dynamic_css_cache() {
+	if ( ! webpress_get_option( 'dynamic_css_cache' ) ) {
 		return;
 	}
 
-	$cache_keys = blogpress_get_dynamic_css_cache_keys();
+	$cache_keys = webpress_get_dynamic_css_cache_keys();
 	$cached_css = get_option( $cache_keys['css'], false );
 	$cached_version = get_option( $cache_keys['version'], '' );
 
-	if ( ! $cached_css || BLOGPRESS_VERSION !== $cached_version ) {
-		$css = blogpress_get_dynamic_css();
+	if ( ! $cached_css || WEBPRESS_VERSION !== $cached_version ) {
+		$css = webpress_get_dynamic_css();
 
 		update_option( $cache_keys['css'], wp_strip_all_tags( $css ) );
-		update_option( $cache_keys['version'], esc_html( BLOGPRESS_VERSION ) );
+		update_option( $cache_keys['version'], esc_html( WEBPRESS_VERSION ) );
 	}
 }
 
-add_action( 'customize_save_after', 'blogpress_update_dynamic_css_cache' );
+add_action( 'customize_save_after', 'webpress_update_dynamic_css_cache' );
 /**
  * Update our CSS cache when done saving Customizer options.
  *
  * @since 1.0.0
  */
-function blogpress_update_dynamic_css_cache() {
-	if ( ! blogpress_get_option( 'dynamic_css_cache' ) ) {
+function webpress_update_dynamic_css_cache() {
+	if ( ! webpress_get_option( 'dynamic_css_cache' ) ) {
 		return;
 	}
 
@@ -958,14 +958,14 @@ function blogpress_update_dynamic_css_cache() {
 	 * rather than serving pre-save CSS.
 	 */
 	$opposite = is_rtl() ? '' : '_rtl';
-	delete_option( 'blogpress_dynamic_css_output' . $opposite );
-	delete_option( 'blogpress_dynamic_css_cached_version' . $opposite );
+	delete_option( 'webpress_dynamic_css_output' . $opposite );
+	delete_option( 'webpress_dynamic_css_cached_version' . $opposite );
 
-	$cache_keys = blogpress_get_dynamic_css_cache_keys();
-	$css = blogpress_get_dynamic_css();
+	$cache_keys = webpress_get_dynamic_css_cache_keys();
+	$css = webpress_get_dynamic_css();
 
 	update_option( $cache_keys['css'], wp_strip_all_tags( $css ) );
-	update_option( $cache_keys['version'], esc_html( BLOGPRESS_VERSION ) );
+	update_option( $cache_keys['version'], esc_html( WEBPRESS_VERSION ) );
 }
 
 /**
@@ -973,8 +973,8 @@ function blogpress_update_dynamic_css_cache() {
  *
  * @param Object $css The existing CSS object.
  */
-function blogpress_do_modal_css( $css ) {
-	if ( ! blogpress_get_option( 'nav_search_modal' ) ) {
+function webpress_do_modal_css( $css ) {
+	if ( ! webpress_get_option( 'nav_search_modal' ) ) {
 		return;
 	}
 

@@ -2,7 +2,7 @@
 /**
  * The range slider Customizer control.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,7 +23,7 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_
 		 * @access public
 		 * @var string
 		 */
-		public $type = 'blogpress-range-slider';
+		public $type = 'webpress-range-slider';
 
 		/**
 		 * The control description.
@@ -66,10 +66,10 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_
 				);
 			}
 
-			$this->json['desktop_label'] = __( 'Desktop', 'blogpress' );
-			$this->json['tablet_label'] = __( 'Tablet', 'blogpress' );
-			$this->json['mobile_label'] = __( 'Mobile', 'blogpress' );
-			$this->json['reset_label'] = __( 'Reset', 'blogpress' );
+			$this->json['desktop_label'] = __( 'Desktop', 'webpress' );
+			$this->json['tablet_label'] = __( 'Tablet', 'webpress' );
+			$this->json['mobile_label'] = __( 'Mobile', 'webpress' );
+			$this->json['reset_label'] = __( 'Reset', 'webpress' );
 
 			$this->json['description'] = $this->description;
 			$this->json['sub_description'] = $this->sub_description;
@@ -82,22 +82,22 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_
 		 */
 		public function enqueue() {
 			wp_enqueue_script(
-				'blogpress-range-slider',
+				'webpress-range-slider',
 				trailingslashit( get_template_directory_uri() ) . 'inc/customizer/controls/js/slider-control.js',
 				array(
 					'jquery',
 					'customize-base',
 					'jquery-ui-slider',
 				),
-				BLOGPRESS_VERSION,
+				WEBPRESS_VERSION,
 				true
 			);
 
 			wp_enqueue_style(
-				'blogpress-range-slider-css',
+				'webpress-range-slider-css',
 				trailingslashit( get_template_directory_uri() ) . 'inc/customizer/controls/css/slider-customizer.css',
 				array(),
-				BLOGPRESS_VERSION
+				WEBPRESS_VERSION
 			);
 		}
 
@@ -113,7 +113,7 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_
 		 */
 		protected function content_template() {
 			?>
-			<div class="blogpress-range-slider-control">
+			<div class="webpress-range-slider-control">
 				<div class="bp-range-title-area">
 					<# if ( data.label || data.description ) { #>
 						<div class="bp-range-title-info">
@@ -130,19 +130,19 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_
 					<div class="bp-range-slider-controls">
 						<span class="bp-device-controls">
 							<# if ( 'undefined' !== typeof ( data.desktop ) ) { #>
-								<span class="blogpress-device-desktop dashicons dashicons-desktop" data-option="desktop" title="{{ data.desktop_label }}"></span>
+								<span class="webpress-device-desktop dashicons dashicons-desktop" data-option="desktop" title="{{ data.desktop_label }}"></span>
 							<# } #>
 
 							<# if ( 'undefined' !== typeof (data.tablet) ) { #>
-								<span class="blogpress-device-tablet dashicons dashicons-tablet" data-option="tablet" title="{{ data.tablet_label }}"></span>
+								<span class="webpress-device-tablet dashicons dashicons-tablet" data-option="tablet" title="{{ data.tablet_label }}"></span>
 							<# } #>
 
 							<# if ( 'undefined' !== typeof (data.mobile) ) { #>
-								<span class="blogpress-device-mobile dashicons dashicons-smartphone" data-option="mobile" title="{{ data.mobile_label }}"></span>
+								<span class="webpress-device-mobile dashicons dashicons-smartphone" data-option="mobile" title="{{ data.mobile_label }}"></span>
 							<# } #>
 						</span>
 
-						<span title="{{ data.reset_label }}" class="blogpress-reset dashicons dashicons-image-rotate"></span>
+						<span title="{{ data.reset_label }}" class="webpress-reset dashicons dashicons-image-rotate"></span>
 					</div>
 				</div>
 
@@ -150,9 +150,9 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_
 					<# if ( 'undefined' !== typeof ( data.desktop ) ) { #>
 						<label class="range-option-area" data-option="desktop" style="display: none;">
 							<div class="wrapper <# if ( '' !== data.choices['desktop']['unit'] ) { #>has-unit<# } #>">
-								<div class="blogpress-slider" data-step="{{ data.choices['desktop']['step'] }}" data-min="{{ data.choices['desktop']['min'] }}" data-max="{{ data.choices['desktop']['max'] }}"></div>
+								<div class="webpress-slider" data-step="{{ data.choices['desktop']['step'] }}" data-min="{{ data.choices['desktop']['min'] }}" data-max="{{ data.choices['desktop']['max'] }}"></div>
 
-								<div class="blogpress_range_value <# if ( '' == data.choices['desktop']['unit'] && ! data.choices['desktop']['edit'] ) { #>hide-value<# } #>">
+								<div class="webpress_range_value <# if ( '' == data.choices['desktop']['unit'] && ! data.choices['desktop']['edit'] ) { #>hide-value<# } #>">
 									<input <# if ( data.choices['desktop']['edit'] ) { #>style="display:inline-block;"<# } else { #>style="display:none;"<# } #> type="number" step="{{ data.choices['desktop']['step'] }}" class="desktop-range value" value="{{ data.desktop.value }}" min="{{ data.choices['desktop']['min'] }}" max="{{ data.choices['desktop']['max'] }}" {{{ data.desktop.link }}} data-reset_value="{{ data.desktop.default }}" />
 									<span <# if ( ! data.choices['desktop']['edit'] ) { #>style="display:inline-block;"<# } else { #>style="display:none;"<# } #> class="value">{{ data.desktop.value }}</span>
 
@@ -167,9 +167,9 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_
 					<# if ( 'undefined' !== typeof ( data.tablet ) ) { #>
 						<label class="range-option-area" data-option="tablet" style="display:none">
 							<div class="wrapper <# if ( '' !== data.choices['tablet']['unit'] ) { #>has-unit<# } #>">
-								<div class="blogpress-slider" data-step="{{ data.choices['tablet']['step'] }}" data-min="{{ data.choices['tablet']['min'] }}" data-max="{{ data.choices['tablet']['max'] }}"></div>
+								<div class="webpress-slider" data-step="{{ data.choices['tablet']['step'] }}" data-min="{{ data.choices['tablet']['min'] }}" data-max="{{ data.choices['tablet']['max'] }}"></div>
 
-								<div class="blogpress_range_value <# if ( '' == data.choices['tablet']['unit'] && ! data.choices['desktop']['edit'] ) { #>hide-value<# } #>">
+								<div class="webpress_range_value <# if ( '' == data.choices['tablet']['unit'] && ! data.choices['desktop']['edit'] ) { #>hide-value<# } #>">
 									<input <# if ( data.choices['tablet']['edit'] ) { #>style="display:inline-block;"<# } else { #>style="display:none;"<# } #> type="number" step="{{ data.choices['tablet']['step'] }}" class="tablet-range value" value="{{ data.tablet.value }}" min="{{ data.choices['tablet']['min'] }}" max="{{ data.choices['tablet']['max'] }}" {{{ data.tablet.link }}} data-reset_value="{{ data.tablet.default }}" />
 									<span <# if ( ! data.choices['tablet']['edit'] ) { #>style="display:inline-block;"<# } else { #>style="display:none;"<# } #> class="value">{{ data.tablet.value }}</span>
 
@@ -184,9 +184,9 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_
 					<# if ( 'undefined' !== typeof ( data.mobile ) ) { #>
 						<label class="range-option-area" data-option="mobile" style="display:none;">
 							<div class="wrapper <# if ( '' !== data.choices['mobile']['unit'] ) { #>has-unit<# } #>">
-								<div class="blogpress-slider" data-step="{{ data.choices['mobile']['step'] }}" data-min="{{ data.choices['mobile']['min'] }}" data-max="{{ data.choices['mobile']['max'] }}"></div>
+								<div class="webpress-slider" data-step="{{ data.choices['mobile']['step'] }}" data-min="{{ data.choices['mobile']['min'] }}" data-max="{{ data.choices['mobile']['max'] }}"></div>
 
-								<div class="blogpress_range_value <# if ( '' == data.choices['mobile']['unit'] && ! data.choices['desktop']['edit'] ) { #>hide-value<# } #>">
+								<div class="webpress_range_value <# if ( '' == data.choices['mobile']['unit'] && ! data.choices['desktop']['edit'] ) { #>hide-value<# } #>">
 									<input <# if ( data.choices['mobile']['edit'] ) { #>style="display:inline-block;"<# } else { #>style="display:none;"<# } #> type="number" step="{{ data.choices['mobile']['step'] }}" class="mobile-range value" value="{{ data.mobile.value }}" min="{{ data.choices['mobile']['min'] }}" max="{{ data.choices['mobile']['max'] }}" {{{ data.mobile.link }}} data-reset_value="{{ data.mobile.default }}" />
 									<span <# if ( ! data.choices['mobile']['edit'] ) { #>style="display:inline-block;"<# } else { #>style="display:none;"<# } #> class="value">{{ data.mobile.value }}</span>
 

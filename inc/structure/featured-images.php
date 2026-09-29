@@ -2,18 +2,18 @@
 /**
  * Featured image elements.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! function_exists( 'blogpress_post_image' ) ) {
+if ( ! function_exists( 'webpress_post_image' ) ) {
 	/**
 	 * Prints the Post Image to post excerpts
 	 */
-	function blogpress_post_image() {
+	function webpress_post_image() {
 		// If there's no featured image, return.
 		if ( ! has_post_thumbnail() ) {
 			return;
@@ -23,7 +23,7 @@ if ( ! function_exists( 'blogpress_post_image' ) ) {
 		if ( ! is_singular() && ! is_404() ) {
 			$attrs = array();
 
-			if ( 'microdata' === blogpress_get_schema_type() ) {
+			if ( 'microdata' === webpress_get_schema_type() ) {
 				$attrs = array(
 					'itemprop' => 'image',
 				);
@@ -48,7 +48,7 @@ if ( ! function_exists( 'blogpress_post_image' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_featured_page_header_area' ) ) {
+if ( ! function_exists( 'webpress_featured_page_header_area' ) ) {
 	/**
 	 * Build the page header.
 	 *
@@ -56,7 +56,7 @@ if ( ! function_exists( 'blogpress_featured_page_header_area' ) ) {
 	 *
 	 * @param string $class The featured image container class.
 	 */
-	function blogpress_featured_page_header_area( $class ) {
+	function webpress_featured_page_header_area( $class ) {
 		// Don't run the function unless we're on a page it applies to.
 		if ( ! is_singular() ) {
 			return;
@@ -69,7 +69,7 @@ if ( ! function_exists( 'blogpress_featured_page_header_area' ) ) {
 
 		$attrs = array();
 
-		if ( 'microdata' === blogpress_get_schema_type() ) {
+		if ( 'microdata' === webpress_get_schema_type() ) {
 			$attrs = array(
 				'itemprop' => 'image',
 			);
@@ -87,37 +87,37 @@ if ( ! function_exists( 'blogpress_featured_page_header_area' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_featured_page_header' ) ) {
+if ( ! function_exists( 'webpress_featured_page_header' ) ) {
 	/**
 	 * Add page header above content.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_featured_page_header() {
-		if ( function_exists( 'blogpress_page_header' ) ) {
+	function webpress_featured_page_header() {
+		if ( function_exists( 'webpress_page_header' ) ) {
 			return;
 		}
 
 		if ( is_page() ) {
-			blogpress_featured_page_header_area( 'page-header-image' );
+			webpress_featured_page_header_area( 'page-header-image' );
 		}
 	}
 }
 
-if ( ! function_exists( 'blogpress_featured_page_header_inside_single' ) ) {
+if ( ! function_exists( 'webpress_featured_page_header_inside_single' ) ) {
 	/**
 	 * Add post header inside content.
 	 * Only add to single post.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_featured_page_header_inside_single() {
-		if ( function_exists( 'blogpress_page_header' ) ) {
+	function webpress_featured_page_header_inside_single() {
+		if ( function_exists( 'webpress_page_header' ) ) {
 			return;
 		}
 
 		if ( is_single() ) {
-			blogpress_featured_page_header_area( 'page-header-image-single' );
+			webpress_featured_page_header_area( 'page-header-image-single' );
 		}
 	}
 }

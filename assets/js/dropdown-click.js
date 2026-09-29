@@ -46,10 +46,10 @@
 			if ( body.classList.contains( 'dropdown-click-menu-item' ) && _this.tagName && 'A' === _this.tagName.toUpperCase() ) {
 				if ( 'false' === _this.getAttribute( 'aria-expanded' ) || ! _this.getAttribute( 'aria-expanded' ) ) {
 					_this.setAttribute( 'aria-expanded', 'true' );
-					_this.setAttribute( 'aria-label', blogpressDropdownClick.closeSubMenuLabel );
+					_this.setAttribute( 'aria-label', webpressDropdownClick.closeSubMenuLabel );
 				} else {
 					_this.setAttribute( 'aria-expanded', 'false' );
-					_this.setAttribute( 'aria-label', blogpressDropdownClick.openSubMenuLabel );
+					_this.setAttribute( 'aria-label', webpressDropdownClick.openSubMenuLabel );
 				}
 			}
 
@@ -147,7 +147,7 @@
 
 					for ( i = 0; i < activeDropdownLinks.length; i++ ) {
 						activeDropdownLinks[ i ].setAttribute( 'aria-expanded', 'false' );
-						activeDropdownLinks[ i ].setAttribute( 'aria-label', blogpressDropdownClick.openSubMenuLabel );
+						activeDropdownLinks[ i ].setAttribute( 'aria-label', webpressDropdownClick.openSubMenuLabel );
 					}
 				}
 			}

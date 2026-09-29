@@ -1,7 +1,7 @@
 @font-face {
-	font-family: "BlogPress";
-	src: url("../../fonts/blogpress.eot");
-	src: url("../../fonts/blogpress.eot#iefix") format("embedded-opentype"), url("../../fonts/blogpress.woff2") format("woff2"), url("../../fonts/blogpress.woff") format("woff"), url("../../fonts/blogpress.ttf") format("truetype"), url("../../fonts/blogpress.svg#BlogPress") format("svg");
+	font-family: "WebPress";
+	src: url("../../fonts/webpress.eot");
+	src: url("../../fonts/webpress.eot#iefix") format("embedded-opentype"), url("../../fonts/webpress.woff2") format("woff2"), url("../../fonts/webpress.woff") format("woff"), url("../../fonts/webpress.ttf") format("truetype"), url("../../fonts/webpress.svg#WebPress") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
@@ -14,7 +14,7 @@
 .comments-link:before,
 .nav-previous .prev:before,
 .nav-next .next:before,
-.blogpress-back-to-top:before,
+.webpress-back-to-top:before,
 .search-form .search-submit:before {
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
@@ -37,7 +37,7 @@
 --------------------------------------------------------------*/
 .menu-toggle:before {
 	content: "\f0c9";
-	font-family: BlogPress;
+	font-family: WebPress;
 	width: 1.28571429em;
 	text-align: center;
 	display: inline-block;
@@ -56,7 +56,7 @@
 --------------------------------------------------------------*/
 .search-item a:before {
 	content: "\f002";
-	font-family: BlogPress;
+	font-family: WebPress;
 	width: 1.28571429em;
 	text-align: center;
 	display: inline-block;
@@ -68,7 +68,7 @@
 
 .widget .search-form button:before {
 	content: "\f002";
-	font-family: BlogPress;
+	font-family: WebPress;
 }
 
 /*--------------------------------------------------------------
@@ -76,7 +76,7 @@
 --------------------------------------------------------------*/
 .dropdown-menu-toggle:before {
 	content: "\f107";
-	font-family: BlogPress;
+	font-family: WebPress;
 	display: inline-block;
 	width: 0.8em;
 	text-align: left;
@@ -112,7 +112,7 @@ nav:not(.toggled) ul ul .dropdown-menu-toggle:before {
 .comments-link:before,
 .nav-previous .prev:before,
 .nav-next .next:before {
-	font-family: BlogPress;
+	font-family: WebPress;
 	text-decoration: inherit;
 	position: relative;
 	margin-right: 0.6em;
@@ -157,9 +157,9 @@ nav:not(.toggled) ul ul .dropdown-menu-toggle:before {
 /*--------------------------------------------------------------
 # Back to Top Button
 --------------------------------------------------------------*/
-.blogpress-back-to-top:before {
+.webpress-back-to-top:before {
 	content: "\f106";
-	font-family: BlogPress;
+	font-family: WebPress;
 }
 
 /*--------------------------------------------------------------
@@ -167,7 +167,7 @@ nav:not(.toggled) ul ul .dropdown-menu-toggle:before {
 --------------------------------------------------------------*/
 .search-form .search-submit:before {
 	content: "\f002";
-	font-family: BlogPress;
+	font-family: WebPress;
 	width: 1.28571429em;
 	text-align: center;
 	display: inline-block;

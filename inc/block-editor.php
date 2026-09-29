@@ -1,8 +1,8 @@
 <?php
 /**
- * Integrate BlogPress with the WordPress block editor.
+ * Integrate WebPress with the WordPress block editor.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Check what sidebar layout we're using.
- * We need this function as the post meta in blogpress_get_layout() only runs
+ * We need this function as the post meta in webpress_get_layout() only runs
  * on is_singular()
  *
  * @since 1.0.0
@@ -19,14 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param bool $meta Check for post meta.
  * @return string The saved sidebar layout.
  */
-function blogpress_get_block_editor_sidebar_layout( $meta = true ) {
-	$layout = blogpress_get_option( 'layout_setting' );
+function webpress_get_block_editor_sidebar_layout( $meta = true ) {
+	$layout = webpress_get_option( 'layout_setting' );
 
 	if ( function_exists( 'get_current_screen' ) ) {
 		$screen = get_current_screen();
 
 		if ( is_object( $screen ) && 'post' === $screen->post_type ) {
-			$layout = blogpress_get_option( 'single_layout_setting' );
+			$layout = webpress_get_option( 'single_layout_setting' );
 		}
 	}
 
@@ -42,10 +42,10 @@ function blogpress_get_block_editor_sidebar_layout( $meta = true ) {
 	 * @param string $layout The sidebar layout slug.
 	 * @return string The sidebar layout to use.
 	 */
-	$layout = apply_filters( 'blogpress_sidebar_layout', $layout );
+	$layout = apply_filters( 'webpress_sidebar_layout', $layout );
 
 	if ( $meta ) {
-		$layout_meta = get_post_meta( get_the_ID(), '_blogpress-sidebar-layout-meta', true );
+		$layout_meta = get_post_meta( get_the_ID(), '_webpress-sidebar-layout-meta', true );
 
 		if ( $layout_meta ) {
 			$layout = $layout_meta;
@@ -61,8 +61,8 @@ function blogpress_get_block_editor_sidebar_layout( $meta = true ) {
  *
  * @since 1.0.0
  */
-function blogpress_get_block_editor_content_width() {
-	$container_width = blogpress_get_option( 'container_width' );
+function webpress_get_block_editor_content_width() {
+	$container_width = webpress_get_option( 'container_width' );
 
 	$content_width = $container_width;
 
@@ -70,7 +70,7 @@ function blogpress_get_block_editor_content_width() {
 
 	$left_sidebar_width = '25';
 
-	$layout = blogpress_get_block_editor_sidebar_layout();
+	$layout = webpress_get_block_editor_sidebar_layout();
 
 	if ( 'left-sidebar' === $layout ) {
 		$content_width = $container_width * ( ( 100 - $left_sidebar_width ) / 100 );
@@ -85,17 +85,17 @@ function blogpress_get_block_editor_content_width() {
 	return $content_width;
 }
 
-add_filter( 'block_editor_settings_all', 'blogpress_add_inline_block_editor_styles' );
+add_filter( 'block_editor_settings_all', 'webpress_add_inline_block_editor_styles' );
 /**
  * Add dynamic inline styles to the block editor content.
  *
  * @param array $editor_settings The existing editor settings.
  */
-function blogpress_add_inline_block_editor_styles( $editor_settings ) {
+function webpress_add_inline_block_editor_styles( $editor_settings ) {
 	$show_editor_styles = true;
 
 	if ( $show_editor_styles ) {
-		$google_fonts_uri = BlogPress_Typography::get_google_fonts_uri();
+		$google_fonts_uri = WebPress_Typography::get_google_fonts_uri();
 
 		if ( $google_fonts_uri ) {
 			// Need to use @import for now until this is ready: https://github.com/WordPress/gutenberg/pull/35950.
@@ -107,25 +107,25 @@ function blogpress_add_inline_block_editor_styles( $editor_settings ) {
 			$editor_settings['styles'][] = array( 'css' => $google_fonts_import );
 		}
 
-		$editor_settings['styles'][] = array( 'css' => wp_strip_all_tags( blogpress_do_inline_block_editor_css() ) );
+		$editor_settings['styles'][] = array( 'css' => wp_strip_all_tags( webpress_do_inline_block_editor_css() ) );
 
-		$editor_settings['styles'][] = array( 'css' => wp_strip_all_tags( BlogPress_Typography::get_css( 'core' ) ) );
+		$editor_settings['styles'][] = array( 'css' => wp_strip_all_tags( WebPress_Typography::get_css( 'core' ) ) );
 	}
 
 	return $editor_settings;
 }
 
-add_action( 'enqueue_block_editor_assets', 'blogpress_enqueue_backend_block_editor_assets' );
+add_action( 'enqueue_block_editor_assets', 'webpress_enqueue_backend_block_editor_assets' );
 /**
  * Add CSS to the admin side of the block editor.
  *
  * @since 1.0.0
  */
-function blogpress_enqueue_backend_block_editor_assets() {
+function webpress_enqueue_backend_block_editor_assets() {
 	// Our global colors belong on every block editor screen.
-	wp_register_style( 'blogpress-block-editor', false, array(), true, true );
-	wp_add_inline_style( 'blogpress-block-editor', blogpress_do_inline_block_editor_css( 'block-editor' ) );
-	wp_enqueue_style( 'blogpress-block-editor' );
+	wp_register_style( 'webpress-block-editor', false, array(), true, true );
+	wp_add_inline_style( 'webpress-block-editor', webpress_do_inline_block_editor_css( 'block-editor' ) );
+	wp_enqueue_style( 'webpress-block-editor' );
 
 	/*
 	 * The content width script is post editor only. The widgets and site editor
@@ -139,38 +139,38 @@ function blogpress_enqueue_backend_block_editor_assets() {
 	}
 
 	wp_enqueue_script(
-		'blogpress-block-editor',
+		'webpress-block-editor',
 		trailingslashit( get_template_directory_uri() ) . 'assets/dist/block-editor.js',
 		array( 'wp-data', 'wp-dom-ready', 'wp-element', 'wp-plugins', 'wp-polyfill' ),
-		BLOGPRESS_VERSION,
+		WEBPRESS_VERSION,
 		true
 	);
 
 	$color_settings = wp_parse_args(
-		get_option( 'blogpress_settings', array() ),
-		blogpress_get_color_defaults()
+		get_option( 'webpress_settings', array() ),
+		webpress_get_color_defaults()
 	);
 
 	$spacing_settings = wp_parse_args(
-		get_option( 'blogpress_spacing_settings', array() ),
-		blogpress_spacing_get_defaults()
+		get_option( 'webpress_spacing_settings', array() ),
+		webpress_spacing_get_defaults()
 	);
 
-	$text_color = blogpress_get_option( 'text_color' );
+	$text_color = webpress_get_option( 'text_color' );
 
 	if ( $color_settings['content_text_color'] ) {
 		$text_color = $color_settings['content_text_color'];
 	}
 
-	$sidebar_layout = get_post_meta( get_the_ID(), '_blogpress_sidebar_layout', true );
-	$content_area_type = get_post_meta( get_the_ID(), '_blogpress-full-width-content', true );
+	$sidebar_layout = get_post_meta( get_the_ID(), '_webpress_sidebar_layout', true );
+	$content_area_type = get_post_meta( get_the_ID(), '_webpress-full-width-content', true );
 
 	wp_localize_script(
-		'blogpress-block-editor',
-		'blogpressBlockEditor',
+		'webpress-block-editor',
+		'webpressBlockEditor',
 		array(
-			'sidebarLayout' => $sidebar_layout ? $sidebar_layout : blogpress_get_block_editor_sidebar_layout( false ),
-			'containerWidth' => blogpress_get_option( 'container_width' ),
+			'sidebarLayout' => $sidebar_layout ? $sidebar_layout : webpress_get_block_editor_sidebar_layout( false ),
+			'containerWidth' => webpress_get_option( 'container_width' ),
 			'contentPaddingRight' => absint( $spacing_settings['content_right'] ) . 'px',
 			'contentPaddingLeft' => absint( $spacing_settings['content_left'] ) . 'px',
 			'rightSidebarWidth' => '25',
@@ -189,12 +189,12 @@ function blogpress_enqueue_backend_block_editor_assets() {
  * @since 1.0.0
  * @param string $for Define whether this CSS for the block content or the block editor.
  */
-function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {
-	$css = new BlogPress_CSS();
+function webpress_do_inline_block_editor_css( $for = 'block-content' ) {
+	$css = new WebPress_CSS();
 
 	$css->set_selector( ':root' );
 
-	$global_colors = blogpress_get_global_colors();
+	$global_colors = webpress_get_global_colors();
 
 	if ( ! empty( $global_colors ) ) {
 		foreach ( (array) $global_colors as $key => $data ) {
@@ -220,15 +220,15 @@ function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {
 	}
 
 	$color_settings = wp_parse_args(
-		get_option( 'blogpress_settings', array() ),
-		blogpress_get_color_defaults()
+		get_option( 'webpress_settings', array() ),
+		webpress_get_color_defaults()
 	);
 
-	$content_width = blogpress_get_block_editor_content_width();
+	$content_width = webpress_get_block_editor_content_width();
 
 	$spacing_settings = wp_parse_args(
-		get_option( 'blogpress_spacing_settings', array() ),
-		blogpress_spacing_get_defaults()
+		get_option( 'webpress_spacing_settings', array() ),
+		webpress_spacing_get_defaults()
 	);
 
 	$content_width_calc = sprintf(
@@ -241,7 +241,7 @@ function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {
 	$css->set_selector( 'body' );
 	$css->add_property(
 		'--content-width',
-		'true' === get_post_meta( get_the_ID(), '_blogpress-full-width-content', true )
+		'true' === get_post_meta( get_the_ID(), '_webpress-full-width-content', true )
 			? '100%'
 			: $content_width_calc
 	);
@@ -255,7 +255,7 @@ function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {
 	$css->set_selector( '.wp-block[data-align="wide"]' );
 	$css->add_property( 'max-width', absint( $content_width ), false, 'px' );
 
-	$underline_links = blogpress_get_option( 'underline_links' );
+	$underline_links = webpress_get_option( 'underline_links' );
 
 	if ( 'never' !== $underline_links ) {
 		if ( 'always' === $underline_links ) {
@@ -290,7 +290,7 @@ function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {
 	$css->add_property( 'max-width', absint( $content_width ), false, 'px' );
 	$css->add_property( 'margin-left', 'auto' );
 	$css->add_property( 'margin-right', 'auto' );
-	$css->add_property( 'padding', blogpress_padding_css( $spacing_settings['content_top'], $spacing_settings['content_right'], $spacing_settings['content_bottom'], $spacing_settings['content_left'] ) );
+	$css->add_property( 'padding', webpress_padding_css( $spacing_settings['content_top'], $spacing_settings['content_right'], $spacing_settings['content_bottom'], $spacing_settings['content_left'] ) );
 
 	$css->set_selector( 'a.button, a.button:visited, .wp-block-button__link:not(.has-background)' );
 	$css->add_property( 'color', $color_settings['form_button_text_color'] );
@@ -308,7 +308,7 @@ function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {
 	if ( $color_settings['content_text_color'] ) {
 		$css->add_property( 'color', $color_settings['content_text_color'] );
 	} else {
-		$css->add_property( 'color', blogpress_get_option( 'text_color' ) );
+		$css->add_property( 'color', webpress_get_option( 'text_color' ) );
 	}
 
 	$css->set_selector( '.content-title-visibility' );
@@ -316,7 +316,7 @@ function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {
 	if ( $color_settings['content_text_color'] ) {
 		$css->add_property( 'color', $color_settings['content_text_color'] );
 	} else {
-		$css->add_property( 'color', blogpress_get_option( 'text_color' ) );
+		$css->add_property( 'color', webpress_get_option( 'text_color' ) );
 	}
 
 	$css->set_selector( 'h1' );
@@ -352,21 +352,21 @@ function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {
 
 	if ( version_compare( $GLOBALS['wp_version'], '5.7-alpha.1', '>' ) ) {
 		$css->set_selector( '.block-editor__container .edit-post-visual-editor' );
-		$css->add_property( 'background-color', blogpress_get_option( 'background_color' ) );
+		$css->add_property( 'background-color', webpress_get_option( 'background_color' ) );
 
 		$css->set_selector( 'body' );
 
 		if ( $color_settings['content_background_color'] ) {
 			$css->add_property( 'background-color', $color_settings['content_background_color'] );
 		} else {
-			$css->add_property( 'background-color', blogpress_get_option( 'background_color' ) );
+			$css->add_property( 'background-color', webpress_get_option( 'background_color' ) );
 		}
 	} else {
 		$css->set_selector( 'body' );
-		$css->add_property( 'background-color', blogpress_get_option( 'background_color' ) );
+		$css->add_property( 'background-color', webpress_get_option( 'background_color' ) );
 
 		if ( $color_settings['content_background_color'] ) {
-			$body_background = blogpress_get_option( 'background_color' );
+			$body_background = webpress_get_option( 'background_color' );
 			$content_background = $color_settings['content_background_color'];
 
 			$css->add_property( 'background', 'linear-gradient(' . $content_background . ',' . $content_background . '), linear-gradient(' . $body_background . ',' . $body_background . ')' );
@@ -378,7 +378,7 @@ function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {
 	if ( $color_settings['content_link_color'] ) {
 		$css->add_property( 'color', $color_settings['content_link_color'] );
 	} else {
-		$css->add_property( 'color', blogpress_get_option( 'link_color' ) );
+		$css->add_property( 'color', webpress_get_option( 'link_color' ) );
 	}
 
 	$css->set_selector( 'a:hover, a:focus, a:active' );
@@ -386,13 +386,13 @@ function blogpress_do_inline_block_editor_css( $for = 'block-content' ) {
 	if ( $color_settings['content_link_hover_color'] ) {
 		$css->add_property( 'color', $color_settings['content_link_hover_color'] );
 	} else {
-		$css->add_property( 'color', blogpress_get_option( 'link_color_hover' ) );
+		$css->add_property( 'color', webpress_get_option( 'link_color_hover' ) );
 	}
 
 	return $css->css_output();
 }
 
-add_filter( 'wp_theme_json_data_theme', 'blogpress_sync_theme_json_with_customizer' );
+add_filter( 'wp_theme_json_data_theme', 'webpress_sync_theme_json_with_customizer' );
 /**
  * Keep theme.json in step with the Customizer.
  *
@@ -408,13 +408,13 @@ add_filter( 'wp_theme_json_data_theme', 'blogpress_sync_theme_json_with_customiz
  * @param WP_Theme_JSON_Data $theme_json The theme.json data object.
  * @return WP_Theme_JSON_Data The updated data object.
  */
-function blogpress_sync_theme_json_with_customizer( $theme_json ) {
+function webpress_sync_theme_json_with_customizer( $theme_json ) {
 	$new_data = array(
 		'version'  => 3,
 		'settings' => array(),
 	);
 
-	$global_colors = blogpress_get_option( 'global_colors' );
+	$global_colors = webpress_get_option( 'global_colors' );
 
 	if ( ! empty( $global_colors ) && is_array( $global_colors ) ) {
 		$palette = array();
@@ -436,7 +436,7 @@ function blogpress_sync_theme_json_with_customizer( $theme_json ) {
 		}
 	}
 
-	$container_width = absint( blogpress_get_option( 'container_width' ) );
+	$container_width = absint( webpress_get_option( 'container_width' ) );
 
 	if ( $container_width ) {
 		$new_data['settings']['layout'] = array(

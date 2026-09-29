@@ -2,7 +2,7 @@
 /**
  * Customize API: Wrapper class.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 /**
@@ -10,7 +10,7 @@
  *
  * @see WP_Customize_Control
  */
-class BlogPress_Customize_Wrapper_Control extends WP_Customize_Control {
+class WebPress_Customize_Wrapper_Control extends WP_Customize_Control {
 	/**
 	 * Type.
 	 *
@@ -18,7 +18,7 @@ class BlogPress_Customize_Wrapper_Control extends WP_Customize_Control {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	public $type = 'blogpress-wrapper-control';
+	public $type = 'webpress-wrapper-control';
 
 	/**
 	 * Refresh the parameters passed to the JavaScript via JSON.
@@ -49,7 +49,7 @@ class BlogPress_Customize_Wrapper_Control extends WP_Customize_Control {
 	 */
 	public function render_content() {
 		$html_attributes = array(
-			'class' => 'blogpress-customize-control-wrapper',
+			'class' => 'webpress-customize-control-wrapper',
 			'id'    => $this->id,
 			'data-wrapper-type' => $this->choices['type'],
 		);

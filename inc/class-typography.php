@@ -2,7 +2,7 @@
 /**
  * This file handles typography on the front-end.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Handles all of our typography option output.
  */
-class BlogPress_Typography {
+class WebPress_Typography {
 	/**
 	 * Class instance.
 	 *
@@ -48,7 +48,7 @@ class BlogPress_Typography {
 	 * Build our Google Fonts URI.
 	 */
 	public static function get_google_fonts_uri() {
-		$fonts = blogpress_get_option( 'font_manager' );
+		$fonts = webpress_get_option( 'font_manager' );
 
 		if ( empty( $fonts ) ) {
 			return;
@@ -81,7 +81,7 @@ class BlogPress_Typography {
 			 * @param array $font     The full font definition being processed.
 			 * @return array The variants to request.
 			 */
-			$variants = apply_filters( 'blogpress_google_font_variants', $variants, $font );
+			$variants = apply_filters( 'webpress_google_font_variants', $variants, $font );
 
 			$name = str_replace( ' ', '+', $font['fontFamily'] );
 			$name = str_replace( '"', '', $name );
@@ -97,7 +97,7 @@ class BlogPress_Typography {
 			$font_args = array(
 				'family' => implode( '|', $data ),
 				'subset' => null,
-				'display' => blogpress_get_option( 'google_font_display' ),
+				'display' => webpress_get_option( 'google_font_display' ),
 			);
 
 			$google_fonts_uri = add_query_arg( $font_args, 'https://fonts.googleapis.com/css' );
@@ -114,7 +114,7 @@ class BlogPress_Typography {
 		 * @param string $google_fonts_uri The fonts URI, or an empty string if no Google Fonts are in use.
 		 * @return string The URI to enqueue.
 		 */
-		return apply_filters( 'blogpress_google_fonts_uri', $google_fonts_uri );
+		return apply_filters( 'webpress_google_fonts_uri', $google_fonts_uri );
 	}
 
 	/**
@@ -124,7 +124,7 @@ class BlogPress_Typography {
 		$google_fonts_uri = self::get_google_fonts_uri();
 
 		if ( $google_fonts_uri ) {
-			wp_enqueue_style( 'blogpress-google-fonts', $google_fonts_uri, array(), BLOGPRESS_VERSION );
+			wp_enqueue_style( 'webpress-google-fonts', $google_fonts_uri, array(), WEBPRESS_VERSION );
 		}
 	}
 
@@ -135,7 +135,7 @@ class BlogPress_Typography {
 	 * @param string $specific_selector Target a specific selector to get the CSS for.
 	 */
 	public static function get_css( $module = 'core', $specific_selector = '' ) {
-		$typography = blogpress_get_option( 'typography' );
+		$typography = webpress_get_option( 'typography' );
 
 		// Get data for a specific module so CSS can be compiled separately.
 		$typography = array_filter(
@@ -149,7 +149,7 @@ class BlogPress_Typography {
 			return '';
 		}
 
-		$css = new BlogPress_CSS();
+		$css = new WebPress_CSS();
 
 		$body_selector = 'body';
 		$paragraph_selector = 'p';
@@ -196,7 +196,7 @@ class BlogPress_Typography {
 				$css->add_property( 'margin-bottom', $options['marginBottom'], false, $options['marginBottomUnit'] );
 			}
 
-			$css->start_media_query( blogpress_get_media_query( 'tablet' ) );
+			$css->start_media_query( webpress_get_media_query( 'tablet' ) );
 
 			$css->set_selector( $selector );
 			$css->add_property( 'font-size', $options['fontSizeTablet'], false, $options['fontSizeUnit'] );
@@ -215,7 +215,7 @@ class BlogPress_Typography {
 
 			$css->stop_media_query();
 
-			$css->start_media_query( blogpress_get_media_query( 'mobile' ) );
+			$css->start_media_query( webpress_get_media_query( 'mobile' ) );
 
 			$css->set_selector( $selector );
 			$css->add_property( 'font-size', $options['fontSizeMobile'], false, $options['fontSizeUnit'] );
@@ -311,7 +311,7 @@ class BlogPress_Typography {
 			return $font_family;
 		}
 
-		$font_manager = blogpress_get_option( 'font_manager' );
+		$font_manager = webpress_get_option( 'font_manager' );
 
 		$font_families = array();
 		foreach ( (array) $font_manager as $key => $data ) {
@@ -331,7 +331,7 @@ class BlogPress_Typography {
 
 			$font_family = $font_family . ', ' . $font_family_args['googleFontCategory'];
 		} elseif ( 'System Default' === $font_family ) {
-			$font_family = blogpress_get_system_default_font();
+			$font_family = webpress_get_system_default_font();
 		}
 
 		return $font_family;
@@ -382,7 +382,7 @@ class BlogPress_Typography {
 				 * However, that filter prepends all selectors with `.editor-styles-wrapper`, which breaks the above
 				 * selector, as it appears above that element in the DOM.
 				 *
-				 * Related: https://github.com/tomusborne/blogpress/issues/472
+				 * Related: https://github.com/tomusborne/webpress/issues/472
 				 */
 				'wp-edit-blocks',
 				$html_typography
@@ -391,4 +391,4 @@ class BlogPress_Typography {
 	}
 }
 
-BlogPress_Typography::get_instance();
+WebPress_Typography::get_instance();

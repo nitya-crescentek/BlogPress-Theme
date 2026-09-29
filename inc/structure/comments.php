@@ -2,14 +2,14 @@
 /**
  * Comment structure.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! function_exists( 'blogpress_comment' ) ) {
+if ( ! function_exists( 'webpress_comment' ) ) {
 	/**
 	 * Template for comments and pingbacks.
 	 * Used as a callback by wp_list_comments() for displaying the comments.
@@ -18,28 +18,28 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 	 * @param array  $args The existing args.
 	 * @param int    $depth The thread depth.
 	 */
-	function blogpress_comment( $comment, $args, $depth ) {
+	function webpress_comment( $comment, $args, $depth ) {
 		$args['avatar_size'] = 50;
 
 		if ( 'pingback' === $comment->comment_type || 'trackback' === $comment->comment_type ) : ?>
 
 		<li id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
 			<div class="comment-body">
-				<?php esc_html_e( 'Pingback:', 'blogpress' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( __( 'Edit', 'blogpress' ), '<span class="edit-link">', '</span>' ); ?>
+				<?php esc_html_e( 'Pingback:', 'webpress' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( __( 'Edit', 'webpress' ), '<span class="edit-link">', '</span>' ); ?>
 			</div>
 
 		<?php else : ?>
 
 		<li id="comment-<?php comment_ID(); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
-			<article <?php blogpress_do_attr( 'comment-body', array(), array( 'comment-id' => get_comment_ID() ) ); ?>>
-				<footer <?php blogpress_do_attr( 'comment-meta' ); ?>>
+			<article <?php webpress_do_attr( 'comment-body', array(), array( 'comment-id' => get_comment_ID() ) ); ?>>
+				<footer <?php webpress_do_attr( 'comment-meta' ); ?>>
 					<?php
 					if ( 0 != $args['avatar_size'] ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual -- Arg may be string or int; loose compare is intentional.
 						echo get_avatar( $comment, $args['avatar_size'] );
 					}
 					?>
 					<div class="comment-author-info">
-						<div <?php blogpress_do_element_classes( 'comment-author' ); ?>>
+						<div <?php webpress_do_element_classes( 'comment-author' ); ?>>
 							<?php printf( '<cite itemprop="name" class="fn">%s</cite>', get_comment_author_link() ); ?>
 						</div>
 
@@ -54,7 +54,7 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 						 * @param WP_Comment $comment The comment being rendered.
 						 * @return bool Whether to show the comment date.
 						 */
-						if ( apply_filters( 'blogpress_show_comment_date', true, $comment ) ) :
+						if ( apply_filters( 'webpress_show_comment_date', true, $comment ) ) :
 							/**
 							 * Filters whether the comment date links to the comment permalink.
 							 *
@@ -64,7 +64,7 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 							 * @param WP_Comment $comment The comment being rendered.
 							 * @return bool Whether to link the date.
 							 */
-							$has_comment_date_link = apply_filters( 'blogpress_show_comment_date_link', true, $comment );
+							$has_comment_date_link = apply_filters( 'webpress_show_comment_date_link', true, $comment );
 
 							?>
 							<div class="entry-meta comment-metadata">
@@ -80,7 +80,7 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 										<?php
 											printf(
 												/* translators: 1: date, 2: time */
-												esc_html_x( '%1$s at %2$s', '1: date, 2: time', 'blogpress' ),
+												esc_html_x( '%1$s at %2$s', '1: date, 2: time', 'webpress' ),
 												esc_html( get_comment_date() ),
 												esc_html( get_comment_time() )
 											);
@@ -92,7 +92,7 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 								}
 
 								// The separator before the link is added in CSS.
-								edit_comment_link( __( 'Edit', 'blogpress' ), '<span class="edit-link">', '</span>' );
+								edit_comment_link( __( 'Edit', 'webpress' ), '<span class="edit-link">', '</span>' );
 								?>
 							</div>
 							<?php
@@ -101,7 +101,7 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 					</div>
 
 					<?php if ( '0' == $comment->comment_approved ) : // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- comment_approved may be string or int; loose compare is intentional. ?>
-						<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'blogpress' ); ?></p>
+						<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'webpress' ); ?></p>
 					<?php endif; ?>
 				</footer>
 
@@ -110,7 +110,7 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 
 					comment_text();
 
-					blogpress_do_comment_reply_link( $comment, $args, $depth );
+					webpress_do_comment_reply_link( $comment, $args, $depth );
 					?>
 				</div>
 			</article>
@@ -119,7 +119,7 @@ if ( ! function_exists( 'blogpress_comment' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_do_comment_reply_link' ) ) {
+if ( ! function_exists( 'webpress_do_comment_reply_link' ) ) {
 	/**
 	 * Add our comment reply link after the comment text.
 	 *
@@ -128,7 +128,7 @@ if ( ! function_exists( 'blogpress_do_comment_reply_link' ) ) {
 	 * @param array  $args The existing args.
 	 * @param int    $depth The thread depth.
 	 */
-	function blogpress_do_comment_reply_link( $comment, $args, $depth ) {
+	function webpress_do_comment_reply_link( $comment, $args, $depth ) {
 		comment_reply_link(
 			array_merge(
 				$args,
@@ -144,7 +144,7 @@ if ( ! function_exists( 'blogpress_do_comment_reply_link' ) ) {
 	}
 }
 
-add_filter( 'comment_form_defaults', 'blogpress_set_comment_form_defaults' );
+add_filter( 'comment_form_defaults', 'webpress_set_comment_form_defaults' );
 /**
  * Set the default settings for our comments.
  *
@@ -153,23 +153,23 @@ add_filter( 'comment_form_defaults', 'blogpress_set_comment_form_defaults' );
  * @param array $defaults The existing defaults.
  * @return array
  */
-function blogpress_set_comment_form_defaults( $defaults ) {
+function webpress_set_comment_form_defaults( $defaults ) {
 	$defaults['comment_field'] = sprintf(
 		'<p class="comment-form-comment"><label for="comment" class="screen-reader-text">%1$s</label><textarea id="comment" name="comment" cols="45" rows="8" required></textarea></p>',
-		esc_html__( 'Comment', 'blogpress' )
+		esc_html__( 'Comment', 'webpress' )
 	);
 
 	$defaults['comment_notes_before'] = '';
 	$defaults['comment_notes_after']  = '';
 	$defaults['id_form']              = 'commentform';
 	$defaults['id_submit']            = 'submit';
-	$defaults['title_reply']          = __( 'Leave a Comment', 'blogpress' );
-	$defaults['label_submit']         = __( 'Post Comment', 'blogpress' );
+	$defaults['title_reply']          = __( 'Leave a Comment', 'webpress' );
+	$defaults['label_submit']         = __( 'Post Comment', 'webpress' );
 
 	return $defaults;
 }
 
-add_filter( 'comment_form_default_fields', 'blogpress_filter_comment_fields' );
+add_filter( 'comment_form_default_fields', 'webpress_filter_comment_fields' );
 /**
  * Customizes the existing comment fields.
  *
@@ -177,13 +177,13 @@ add_filter( 'comment_form_default_fields', 'blogpress_filter_comment_fields' );
  * @param array $fields The existing fields.
  * @return array
  */
-function blogpress_filter_comment_fields( $fields ) {
+function webpress_filter_comment_fields( $fields ) {
 	$commenter = wp_get_current_commenter();
 	$required = get_option( 'require_name_email' );
 
 	$fields['author'] = sprintf(
 		'<label for="author" class="screen-reader-text">%1$s</label><input placeholder="%1$s%3$s" id="author" name="author" type="text" value="%2$s" size="30"%4$s />',
-		esc_html__( 'Name', 'blogpress' ),
+		esc_html__( 'Name', 'webpress' ),
 		esc_attr( $commenter['comment_author'] ),
 		$required ? ' *' : '',
 		$required ? ' required' : ''
@@ -191,7 +191,7 @@ function blogpress_filter_comment_fields( $fields ) {
 
 	$fields['email'] = sprintf(
 		'<label for="email" class="screen-reader-text">%1$s</label><input placeholder="%1$s%3$s" id="email" name="email" type="email" value="%2$s" size="30"%4$s />',
-		esc_html__( 'Email', 'blogpress' ),
+		esc_html__( 'Email', 'webpress' ),
 		esc_attr( $commenter['comment_author_email'] ),
 		$required ? ' *' : '',
 		$required ? ' required' : ''
@@ -199,21 +199,21 @@ function blogpress_filter_comment_fields( $fields ) {
 
 	$fields['url'] = sprintf(
 		'<label for="url" class="screen-reader-text">%1$s</label><input placeholder="%1$s" id="url" name="url" type="url" value="%2$s" size="30" />',
-		esc_html__( 'Website', 'blogpress' ),
+		esc_html__( 'Website', 'webpress' ),
 		esc_attr( $commenter['comment_author_url'] )
 	);
 
 	return $fields;
 }
 
-if ( ! function_exists( 'blogpress_do_comments_template' ) ) {
+if ( ! function_exists( 'webpress_do_comments_template' ) ) {
 	/**
 	 * Add the comments template to pages and single posts.
 	 *
 	 * @since 1.0.0
 	 * @param string $template The template we're targeting.
 	 */
-	function blogpress_do_comments_template( $template ) {
+	function webpress_do_comments_template( $template ) {
 		if ( 'single' === $template || 'page' === $template ) {
 			// If comments are open or we have at least one comment, load up the comment template.
 			// phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual -- Intentionally loose.

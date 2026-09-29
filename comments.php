@@ -4,10 +4,10 @@
  *
  * The area of the page that contains both current comments
  * and the comment form. The actual display of comments is
- * handled by a callback to blogpress_comment() which is
+ * handled by a callback to webpress_comment() which is
  * located in the inc/template-tags.php file.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -38,7 +38,7 @@ if ( post_password_required() ) {
 					'%1$s thoughts on &ldquo;%2$s&rdquo;',
 					$comments_number,
 					'comments title',
-					'blogpress'
+					'webpress'
 				)
 			),
 			number_format_i18n( $comments_number ),
@@ -53,9 +53,9 @@ if ( post_password_required() ) {
 		if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) :
 			?>
 			<nav id="comment-nav-above" class="comment-navigation" role="navigation">
-				<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'blogpress' ); ?></h2>
-				<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'blogpress' ) ); ?></div>
-				<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'blogpress' ) ); ?></div>
+				<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'webpress' ); ?></h2>
+				<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'webpress' ) ); ?></div>
+				<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'webpress' ) ); ?></div>
 			</nav><!-- #comment-nav-above -->
 		<?php endif; ?>
 
@@ -63,14 +63,14 @@ if ( post_password_required() ) {
 			<?php
 			/*
 			 * Loop through and list the comments. Tell wp_list_comments()
-			 * to use blogpress_comment() to format the comments.
+			 * to use webpress_comment() to format the comments.
 			 * If you want to override this in a child theme, then you can
-			 * define blogpress_comment() and that will be used instead.
-			 * See blogpress_comment() in inc/template-tags.php for more.
+			 * define webpress_comment() and that will be used instead.
+			 * See webpress_comment() in inc/template-tags.php for more.
 			 */
 			wp_list_comments(
 				array(
-					'callback' => 'blogpress_comment',
+					'callback' => 'webpress_comment',
 				)
 			);
 			?>
@@ -80,9 +80,9 @@ if ( post_password_required() ) {
 		if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) :
 			?>
 			<nav id="comment-nav-below" class="comment-navigation" role="navigation">
-				<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'blogpress' ); ?></h2>
-				<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'blogpress' ) ); ?></div>
-				<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'blogpress' ) ); ?></div>
+				<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'webpress' ); ?></h2>
+				<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'webpress' ) ); ?></div>
+				<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'webpress' ) ); ?></div>
 			</nav><!-- #comment-nav-below -->
 			<?php
 		endif;
@@ -92,7 +92,7 @@ if ( post_password_required() ) {
 	// phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual
 	if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
 		?>
-		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'blogpress' ); ?></p>
+		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'webpress' ); ?></p>
 		<?php
 	endif;
 

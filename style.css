@@ -1,20 +1,20 @@
 /*
-Theme Name: BlogPress
-Theme URI: https://blogpress.codesocials.com
+Theme Name: WebPress
+Theme URI: https://codesocials.com
 Author: Nitya
 Author URI: https://nitya.codesocials.com/
-Description: A lightweight, classic blogging theme built around the Customizer. BlogPress gives you 71 colour controls, dynamic typography, six sidebar layouts, six positions for the primary menu, and ten widget areas — all without a page builder. Its front-end CSS and JavaScript total roughly 7 KB gzipped on a default install. Fully responsive, RTL-ready and internationalised.
+Description: A lightweight, classic blogging theme built around the Customizer. WebPress gives you 71 colour controls, dynamic typography, six sidebar layouts, six positions for the primary menu, and ten widget areas — all without a page builder. Its front-end CSS and JavaScript total roughly 7 KB gzipped on a default install. Fully responsive, RTL-ready and internationalised.
 Version: 1.0.0
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: blogpress
+Text Domain: webpress
 Domain Path: /languages
 Tags: blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar, custom-colors, custom-logo, custom-menu, editor-style, featured-images, footer-widgets, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, wide-blocks
 
-BlogPress derives its template structure from GeneratePress (GPLv2 or later),
+WebPress derives its template structure from GeneratePress (GPLv2 or later),
 https://generatepress.com, which is itself based on Underscores http://underscores.me/,
 (C) 2012-2026 Automattic, Inc.
 

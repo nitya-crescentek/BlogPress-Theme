@@ -2,7 +2,7 @@
 # Tokens
 --------------------------------------------------------------*/
 #comments {
-	--bp-comment-accent: var(--blogpress-focus-ring, #1e73be);
+	--bp-comment-accent: var(--webpress-focus-ring, #1e73be);
 	--bp-comment-border: rgba(0, 0, 0, 0.08);
 	--bp-comment-border-strong: rgba(0, 0, 0, 0.14);
 	--bp-comment-surface: rgba(0, 0, 0, 0.022);
@@ -39,8 +39,8 @@ ol.comment-list {
 	padding: var(--bp-comment-pad);
 	background-color: var(--bp-comment-surface);
 	border: 1px solid var(--bp-comment-border);
-	border-radius: var(--blogpress-radius, 12px);
-	transition: border-color var(--blogpress-transition, 0.2s ease);
+	border-radius: var(--webpress-radius, 12px);
+	transition: border-color var(--webpress-transition, 0.2s ease);
 }
 
 .comment-body:hover {
@@ -132,7 +132,7 @@ ol.comment-list {
 	padding: 8px 14px;
 	font-size: 13px;
 	background-color: rgba(0, 0, 0, 0.04);
-	border-radius: var(--blogpress-radius-sm, 8px);
+	border-radius: var(--webpress-radius-sm, 8px);
 }
 
 /*--------------------------------------------------------------
@@ -164,7 +164,7 @@ ol.comment-list {
 	text-decoration: none;
 	background-color: rgba(0, 0, 0, 0.05);
 	border-radius: 999px;
-	transition: background-color var(--blogpress-transition, 0.2s ease);
+	transition: background-color var(--webpress-transition, 0.2s ease);
 }
 
 .comment-content .reply a:hover,
@@ -231,7 +231,7 @@ ol.comment-list {
 	padding: var(--bp-comment-pad);
 	background-color: var(--bp-comment-surface);
 	border: 1px solid var(--bp-comment-border);
-	border-radius: var(--blogpress-radius, 12px);
+	border-radius: var(--webpress-radius, 12px);
 }
 
 .comment .comment-respond {
@@ -321,13 +321,13 @@ ol.comment-list {
 
 .comment-form .submit {
 	font-weight: 600;
-	transition: background-color var(--blogpress-transition, 0.2s ease), box-shadow var(--blogpress-transition, 0.2s ease), transform var(--blogpress-transition, 0.2s ease);
+	transition: background-color var(--webpress-transition, 0.2s ease), box-shadow var(--webpress-transition, 0.2s ease), transform var(--webpress-transition, 0.2s ease);
 }
 
 @media (prefers-reduced-motion: no-preference) {
 	.comment-form .submit:hover {
 		transform: translateY(-1px);
-		box-shadow: var(--blogpress-shadow, 0 4px 12px rgba(0, 0, 0, 0.05));
+		box-shadow: var(--webpress-shadow, 0 4px 12px rgba(0, 0, 0, 0.05));
 	}
 }
 

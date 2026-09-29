@@ -1,10 +1,10 @@
 <?php
 /**
- * BlogPress.
+ * WebPress.
  *
  * Please do not make any edits to this file. All edits should be done in a child theme.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,18 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Set our theme version.
-define( 'BLOGPRESS_VERSION', '1.0.0' );
+define( 'WEBPRESS_VERSION', '1.0.0' );
 
-if ( ! function_exists( 'blogpress_setup' ) ) {
-	add_action( 'after_setup_theme', 'blogpress_setup' );
+if ( ! function_exists( 'webpress_setup' ) ) {
+	add_action( 'after_setup_theme', 'webpress_setup' );
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_setup() {
+	function webpress_setup() {
 		// Make theme available for translation.
-		load_theme_textdomain( 'blogpress', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'webpress', get_template_directory() . '/languages' );
 
 		// Add theme support for various features.
 		add_theme_support( 'automatic-feed-links' );
@@ -36,7 +36,7 @@ if ( ! function_exists( 'blogpress_setup' ) ) {
 		add_theme_support( 'align-wide' );
 		add_theme_support( 'responsive-embeds' );
 
-		$color_palette = blogpress_get_editor_color_palette();
+		$color_palette = webpress_get_editor_color_palette();
 
 		if ( ! empty( $color_palette ) ) {
 			add_theme_support( 'editor-color-palette', $color_palette );
@@ -55,13 +55,13 @@ if ( ! function_exists( 'blogpress_setup' ) ) {
 		// Register primary menu.
 		register_nav_menus(
 			array(
-				'primary' => __( 'Primary Menu', 'blogpress' ),
+				'primary' => __( 'Primary Menu', 'webpress' ),
 			)
 		);
 
 		/**
 		 * Set the content width to something large
-		 * We set a more accurate width in blogpress_smart_content_width()
+		 * We set a more accurate width in webpress_smart_content_width()
 		 */
 		global $content_width;
 		if ( ! isset( $content_width ) ) {

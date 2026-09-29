@@ -90,7 +90,7 @@
 					toggle.setAttribute( 'role', 'button' );
 					toggle.setAttribute( 'aria-expanded', 'false' );
 					toggle.setAttribute( 'aria-controls', subMenu.id );
-					toggle.setAttribute( 'aria-label', blogpressMenu.openSubMenuLabel );
+					toggle.setAttribute( 'aria-label', webpressMenu.openSubMenuLabel );
 				}
 			}
 		};
@@ -112,10 +112,10 @@
 		var setDropdownArrowAttributes = function( arrow ) {
 			if ( 'false' === arrow.getAttribute( 'aria-expanded' ) || ! arrow.getAttribute( 'aria-expanded' ) ) {
 				arrow.setAttribute( 'aria-expanded', 'true' );
-				arrow.setAttribute( 'aria-label', blogpressMenu.closeSubMenuLabel );
+				arrow.setAttribute( 'aria-label', webpressMenu.closeSubMenuLabel );
 			} else {
 				arrow.setAttribute( 'aria-expanded', 'false' );
-				arrow.setAttribute( 'aria-label', blogpressMenu.openSubMenuLabel );
+				arrow.setAttribute( 'aria-label', webpressMenu.openSubMenuLabel );
 			}
 		};
 
@@ -220,7 +220,7 @@
 					subMenu = closestLi.querySelector( '.children' );
 				}
 
-				if ( blogpressMenu.toggleOpenedSubMenus ) {
+				if ( webpressMenu.toggleOpenedSubMenus ) {
 					var siblings = getSiblings( closestLi );
 
 					for ( i = 0; i < siblings.length; i++ ) {

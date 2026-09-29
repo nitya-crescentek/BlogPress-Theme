@@ -2,37 +2,37 @@
 /**
  * This file handles the customizer fields for the top bar.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // No direct access, please.
 }
 
-BlogPress_Customize_Field::add_title(
-	'blogpress_top_bar_colors_title',
+WebPress_Customize_Field::add_title(
+	'webpress_top_bar_colors_title',
 	array(
-		'section' => 'blogpress_colors_section',
-		'title' => __( 'Top Bar', 'blogpress' ),
+		'section' => 'webpress_colors_section',
+		'title' => __( 'Top Bar', 'webpress' ),
 		'choices' => array(
 			'toggleId' => 'top-bar-colors',
 		),
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[top_bar_background_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[top_bar_background_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['top_bar_background_color'],
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 	),
 	array(
-		'label' => __( 'Background', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
-		'settings' => 'blogpress_settings[top_bar_background_color]',
-		'active_callback' => 'blogpress_is_top_bar_active',
+		'label' => __( 'Background', 'webpress' ),
+		'section' => 'webpress_colors_section',
+		'settings' => 'webpress_settings[top_bar_background_color]',
+		'active_callback' => 'webpress_is_top_bar_active',
 		'choices' => array(
 			'alpha' => true,
 			'toggleId' => 'top-bar-colors',
@@ -46,18 +46,18 @@ BlogPress_Customize_Field::add_field(
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[top_bar_text_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[top_bar_text_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['top_bar_text_color'],
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 	),
 	array(
-		'label' => __( 'Text', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
-		'active_callback' => 'blogpress_is_top_bar_active',
+		'label' => __( 'Text', 'webpress' ),
+		'section' => 'webpress_colors_section',
+		'active_callback' => 'webpress_is_top_bar_active',
 		'choices' => array(
 			'toggleId' => 'top-bar-colors',
 		),
@@ -70,10 +70,10 @@ BlogPress_Customize_Field::add_field(
 	)
 );
 
-BlogPress_Customize_Field::add_wrapper(
-	'blogpress_top_bar_link_wrapper',
+WebPress_Customize_Field::add_wrapper(
+	'webpress_top_bar_link_wrapper',
 	array(
-		'section' => 'blogpress_colors_section',
+		'section' => 'webpress_colors_section',
 		'choices' => array(
 			'type' => 'color',
 			'toggleId' => 'top-bar-colors',
@@ -85,21 +85,21 @@ BlogPress_Customize_Field::add_wrapper(
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[top_bar_link_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[top_bar_link_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['top_bar_link_color'],
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 	),
 	array(
-		'label' => __( 'Link', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
-		'active_callback' => 'blogpress_is_top_bar_active',
+		'label' => __( 'Link', 'webpress' ),
+		'section' => 'webpress_colors_section',
+		'active_callback' => 'webpress_is_top_bar_active',
 		'choices' => array(
 			'wrapper' => 'top_bar_link_color',
-			'tooltip' => __( 'Choose Initial Color', 'blogpress' ),
+			'tooltip' => __( 'Choose Initial Color', 'webpress' ),
 			'toggleId' => 'top-bar-colors',
 		),
 		'output' => array(
@@ -111,21 +111,21 @@ BlogPress_Customize_Field::add_field(
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[top_bar_link_color_hover]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[top_bar_link_color_hover]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['top_bar_link_color_hover'],
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 	),
 	array(
-		'label' => __( 'Link Hover', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
-		'active_callback' => 'blogpress_is_top_bar_active',
+		'label' => __( 'Link Hover', 'webpress' ),
+		'section' => 'webpress_colors_section',
+		'active_callback' => 'webpress_is_top_bar_active',
 		'choices' => array(
 			'wrapper' => 'top_bar_link_color_hover',
-			'tooltip' => __( 'Choose Hover Color', 'blogpress' ),
+			'tooltip' => __( 'Choose Hover Color', 'webpress' ),
 			'toggleId' => 'top-bar-colors',
 			'hideLabel' => true,
 		),

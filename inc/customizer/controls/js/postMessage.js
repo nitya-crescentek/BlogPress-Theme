@@ -1,6 +1,6 @@
-/* global blogpressPostMessageFields */
+/* global webpressPostMessageFields */
 /* eslint max-depth: off */
-var blogpressPostMessage = {
+var webpressPostMessage = {
 
 	/**
 	 * The fields.
@@ -45,7 +45,7 @@ var blogpressPostMessage = {
 		 */
 		addData( id, styles ) {
 			id = id.replace( '[', '-' ).replace( ']', '' );
-			blogpressPostMessage.styleTag.add( id );
+			webpressPostMessage.styleTag.add( id );
 			jQuery( '#bp-postmessage-' + id ).text( styles );
 		},
 	},
@@ -154,8 +154,8 @@ var blogpressPostMessage = {
 				value = window[ output.js_callback[ 0 ] ]( value, output.js_callback[ 1 ] );
 			}
 
-			// Apply the blogpressPostMessageStylesOutput filter.
-			styles = wp.hooks.applyFilters( 'blogpressPostMessageStylesOutput', styles, value, output, controlType );
+			// Apply the webpressPostMessageStylesOutput filter.
+			styles = wp.hooks.applyFilters( 'webpressPostMessageStylesOutput', styles, value, output, controlType );
 
 			if ( '' === styles ) {
 				switch ( controlType ) {
@@ -166,7 +166,7 @@ var blogpressPostMessage = {
 							if ( output.choice && key !== output.choice ) {
 								return;
 							}
-							processedValue = blogpressPostMessage.util.processValue( output, val );
+							processedValue = webpressPostMessage.util.processValue( output, val );
 
 							if ( '' === processedValue ) {
 								if ( 'background-color' === output.property ) {
@@ -184,7 +184,7 @@ var blogpressPostMessage = {
 						break;
 					default:
 						if ( 'kirki-image' === controlType ) {
-							value = ( ! _.isUndefined( value.url ) ) ? blogpressPostMessage.util.backgroundImageValue( value.url ) : blogpressPostMessage.util.backgroundImageValue( value );
+							value = ( ! _.isUndefined( value.url ) ) ? webpressPostMessage.util.backgroundImageValue( value.url ) : webpressPostMessage.util.backgroundImageValue( value );
 						}
 						if ( _.isObject( value ) ) {
 							styles += output.element + '{';
@@ -193,7 +193,7 @@ var blogpressPostMessage = {
 								if ( output.choice && key !== output.choice ) {
 									return;
 								}
-								processedValue = blogpressPostMessage.util.processValue( output, val );
+								processedValue = webpressPostMessage.util.processValue( output, val );
 								property = output.property ? output.property : key;
 
 								if ( '' === processedValue ) {
@@ -210,7 +210,7 @@ var blogpressPostMessage = {
 							} );
 							styles += '}';
 						} else {
-							processedValue = blogpressPostMessage.util.processValue( output, value );
+							processedValue = webpressPostMessage.util.processValue( output, value );
 							if ( '' === processedValue ) {
 								if ( 'background-color' === output.property ) {
 									processedValue = 'unset';
@@ -278,7 +278,7 @@ var blogpressPostMessage = {
 					value = val;
 				} );
 			}
-			value = blogpressPostMessage.util.processValue( output, value );
+			value = webpressPostMessage.util.processValue( output, value );
 
 			if ( output.attr ) {
 				jQuery( output.element ).attr( output.attr, value );
@@ -320,21 +320,21 @@ var blogpressPostMessage = {
 
 jQuery( document ).ready( function() {
 	var styles;
-	_.each( blogpressPostMessageFields, function( field ) {
+	_.each( webpressPostMessageFields, function( field ) {
 		wp.customize( field.settings, function( value ) {
 			value.bind( function( newVal ) {
 				styles = '';
 				_.each( field.js_vars, function( output ) {
-					output.function = ( ! output.function || 'undefined' === typeof blogpressPostMessage[ output.function ] ) ? 'css' : output.function;
+					output.function = ( ! output.function || 'undefined' === typeof webpressPostMessage[ output.function ] ) ? 'css' : output.function;
 					field.type = ( field.choices && field.choices.parent_type ) ? field.choices.parent_type : field.type;
 
 					if ( 'css' === output.function ) {
-						styles += blogpressPostMessage.css.fromOutput( output, newVal, field.type );
+						styles += webpressPostMessage.css.fromOutput( output, newVal, field.type );
 					} else {
-						blogpressPostMessage[ output.function ].fromOutput( output, newVal, field.type );
+						webpressPostMessage[ output.function ].fromOutput( output, newVal, field.type );
 					}
 				} );
-				blogpressPostMessage.styleTag.addData( field.settings, styles );
+				webpressPostMessage.styleTag.addData( field.settings, styles );
 			} );
 		} );
 	} );

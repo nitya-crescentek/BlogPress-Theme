@@ -2,23 +2,23 @@
 /**
  * This file handles the customizer fields for the Search Modal.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // No direct access, please.
 }
 
-BlogPress_Customize_Field::add_title(
-	'blogpress_search_modal_colors_title',
+WebPress_Customize_Field::add_title(
+	'webpress_search_modal_colors_title',
 	array(
-		'section' => 'blogpress_colors_section',
-		'title' => __( 'Search Modal', 'blogpress' ),
+		'section' => 'webpress_colors_section',
+		'title' => __( 'Search Modal', 'webpress' ),
 		'choices' => array(
 			'toggleId' => 'search-modal-colors',
 		),
 		'active_callback' => function() {
-			if ( blogpress_get_option( 'nav_search_modal' ) ) {
+			if ( webpress_get_option( 'nav_search_modal' ) ) {
 				return true;
 			}
 
@@ -27,17 +27,17 @@ BlogPress_Customize_Field::add_title(
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[search_modal_bg_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[search_modal_bg_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['search_modal_bg_color'],
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 		'transport' => 'postMessage',
 	),
 	array(
-		'label' => __( 'Field Background', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
+		'label' => __( 'Field Background', 'webpress' ),
+		'section' => 'webpress_colors_section',
 		'choices' => array(
 			'toggleId' => 'search-modal-colors',
 		),
@@ -50,17 +50,17 @@ BlogPress_Customize_Field::add_field(
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[search_modal_text_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[search_modal_text_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['search_modal_text_color'],
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 		'transport' => 'postMessage',
 	),
 	array(
-		'label' => __( 'Field Text', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
+		'label' => __( 'Field Text', 'webpress' ),
+		'section' => 'webpress_colors_section',
 		'choices' => array(
 			'toggleId' => 'search-modal-colors',
 		),
@@ -73,17 +73,17 @@ BlogPress_Customize_Field::add_field(
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[search_modal_overlay_bg_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[search_modal_overlay_bg_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['search_modal_overlay_bg_color'],
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 		'transport' => 'postMessage',
 	),
 	array(
-		'label' => __( 'Overlay Background', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
+		'label' => __( 'Overlay Background', 'webpress' ),
+		'section' => 'webpress_colors_section',
 		'choices' => array(
 			'toggleId' => 'search-modal-colors',
 		),

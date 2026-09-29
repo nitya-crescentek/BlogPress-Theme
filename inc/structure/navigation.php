@@ -2,51 +2,51 @@
 /**
  * Navigation elements.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! function_exists( 'blogpress_navigation_position' ) ) {
+if ( ! function_exists( 'webpress_navigation_position' ) ) {
 	/**
 	 * Build the navigation.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_navigation_position() {
-		blogpress_do_header_mobile_menu_toggle();
+	function webpress_navigation_position() {
+		webpress_do_header_mobile_menu_toggle();
 
 		/**
 		 * Fires before the primary navigation element is output.
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'blogpress_before_navigation' );
+		do_action( 'webpress_before_navigation' );
 		?>
-		<nav <?php blogpress_do_attr( 'navigation' ); ?>>
-			<div <?php blogpress_do_attr( 'inside-navigation' ); ?>>
+		<nav <?php webpress_do_attr( 'navigation' ); ?>>
+			<div <?php webpress_do_attr( 'inside-navigation' ); ?>>
 				<?php
 				/**
 				 * Fires inside the navigation container, before the menu.
 				 *
 				 * @since 1.0.0
 				 */
-				do_action( 'blogpress_inside_navigation' );
+				do_action( 'webpress_inside_navigation' );
 
-				blogpress_navigation_search();
-				blogpress_mobile_menu_search_icon();
+				webpress_navigation_search();
+				webpress_mobile_menu_search_icon();
 				?>
-				<button <?php blogpress_do_attr( 'menu-toggle' ); ?>>
+				<button <?php webpress_do_attr( 'menu-toggle' ); ?>>
 					<?php
 
-					blogpress_do_svg_icon( 'menu-bars', true );
+					webpress_do_svg_icon( 'menu-bars', true );
 
-					$mobile_menu_label = __( 'Menu', 'blogpress' );
+					$mobile_menu_label = __( 'Menu', 'webpress' );
 
 					/** This filter is documented in inc/structure/navigation.php */
-					$mobile_menu_label = apply_filters( 'blogpress_mobile_menu_label', $mobile_menu_label );
+					$mobile_menu_label = apply_filters( 'webpress_mobile_menu_label', $mobile_menu_label );
 
 					if ( $mobile_menu_label ) {
 						printf(
@@ -56,7 +56,7 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 					} else {
 						printf(
 							'<span class="screen-reader-text">%s</span>',
-							esc_html__( 'Menu', 'blogpress' )
+							esc_html__( 'Menu', 'webpress' )
 						);
 					}
 					?>
@@ -67,7 +67,7 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 				 *
 				 * @since 1.0.0
 				 */
-				do_action( 'blogpress_after_mobile_menu_button' );
+				do_action( 'webpress_after_mobile_menu_button' );
 
 				wp_nav_menu(
 					array(
@@ -76,12 +76,12 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 						'container_class' => 'main-nav',
 						'container_id' => 'primary-menu',
 						'menu_class' => '',
-						'fallback_cb' => 'blogpress_menu_fallback',
-						'items_wrap' => '<ul id="%1$s" class="%2$s ' . join( ' ', blogpress_get_element_classes( 'menu' ) ) . '">%3$s</ul>',
+						'fallback_cb' => 'webpress_menu_fallback',
+						'items_wrap' => '<ul id="%1$s" class="%2$s ' . join( ' ', webpress_get_element_classes( 'menu' ) ) . '">%3$s</ul>',
 					)
 				);
 
-				blogpress_do_menu_bar_item_container();
+				webpress_do_menu_bar_item_container();
 				?>
 			</div>
 		</nav>
@@ -91,33 +91,33 @@ if ( ! function_exists( 'blogpress_navigation_position' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'blogpress_after_navigation' );
+		do_action( 'webpress_after_navigation' );
 	}
 }
 
-if ( ! function_exists( 'blogpress_do_header_mobile_menu_toggle' ) ) {
+if ( ! function_exists( 'webpress_do_header_mobile_menu_toggle' ) ) {
 	/**
 	 * Build the mobile menu toggle in the header.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_do_header_mobile_menu_toggle() {
-		if ( ! blogpress_has_inline_mobile_toggle() ) {
+	function webpress_do_header_mobile_menu_toggle() {
+		if ( ! webpress_has_inline_mobile_toggle() ) {
 			return;
 		}
 		?>
-		<nav <?php blogpress_do_attr( 'mobile-menu-control-wrapper' ); ?>>
+		<nav <?php webpress_do_attr( 'mobile-menu-control-wrapper' ); ?>>
 			<?php
-			blogpress_do_menu_bar_item_container();
+			webpress_do_menu_bar_item_container();
 			?>
-			<button <?php blogpress_do_attr( 'menu-toggle', array( 'data-nav' => 'site-navigation' ) ); ?>>
+			<button <?php webpress_do_attr( 'menu-toggle', array( 'data-nav' => 'site-navigation' ) ); ?>>
 				<?php
 
-				blogpress_do_svg_icon( 'menu-bars', true );
+				webpress_do_svg_icon( 'menu-bars', true );
 
-				$mobile_menu_label = __( 'Menu', 'blogpress' );
+				$mobile_menu_label = __( 'Menu', 'webpress' );
 
-				if ( 'nav-float-right' === blogpress_get_navigation_location() || 'nav-float-left' === blogpress_get_navigation_location() ) {
+				if ( 'nav-float-right' === webpress_get_navigation_location() || 'nav-float-left' === webpress_get_navigation_location() ) {
 					$mobile_menu_label = '';
 				}
 
@@ -132,7 +132,7 @@ if ( ! function_exists( 'blogpress_do_header_mobile_menu_toggle' ) ) {
 				 * @param string $mobile_menu_label The button label. HTML is allowed.
 				 * @return string The label to display.
 				 */
-				$mobile_menu_label = apply_filters( 'blogpress_mobile_menu_label', $mobile_menu_label );
+				$mobile_menu_label = apply_filters( 'webpress_mobile_menu_label', $mobile_menu_label );
 
 				if ( $mobile_menu_label ) {
 					printf(
@@ -142,7 +142,7 @@ if ( ! function_exists( 'blogpress_do_header_mobile_menu_toggle' ) ) {
 				} else {
 					printf(
 						'<span class="screen-reader-text">%s</span>',
-						esc_html__( 'Menu', 'blogpress' )
+						esc_html__( 'Menu', 'webpress' )
 					);
 				}
 				?>
@@ -152,7 +152,7 @@ if ( ! function_exists( 'blogpress_do_header_mobile_menu_toggle' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_menu_fallback' ) ) {
+if ( ! function_exists( 'webpress_menu_fallback' ) ) {
 	/**
 	 * Menu fallback.
 	 *
@@ -160,14 +160,14 @@ if ( ! function_exists( 'blogpress_menu_fallback' ) ) {
 	 *
 	 * @param array $args Existing menu args.
 	 */
-	function blogpress_menu_fallback( $args ) {
-		$blogpress_settings = wp_parse_args(
-			get_option( 'blogpress_settings', array() ),
-			blogpress_get_defaults()
+	function webpress_menu_fallback( $args ) {
+		$webpress_settings = wp_parse_args(
+			get_option( 'webpress_settings', array() ),
+			webpress_get_defaults()
 		);
 		?>
 		<div id="primary-menu" class="main-nav">
-			<ul <?php blogpress_do_element_classes( 'menu' ); ?>>
+			<ul <?php webpress_do_element_classes( 'menu' ); ?>>
 				<?php
 				$args = array(
 					'sort_column' => 'menu_order',
@@ -183,7 +183,7 @@ if ( ! function_exists( 'blogpress_menu_fallback' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_add_navigation_after_header' ) ) {
+if ( ! function_exists( 'webpress_add_navigation_after_header' ) ) {
 	/**
 	 * Output the navigation below the header, if that is the chosen location.
 	 *
@@ -193,14 +193,14 @@ if ( ! function_exists( 'blogpress_add_navigation_after_header' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_add_navigation_after_header() {
-		if ( 'nav-below-header' === blogpress_get_navigation_location() ) {
-			blogpress_navigation_position();
+	function webpress_add_navigation_after_header() {
+		if ( 'nav-below-header' === webpress_get_navigation_location() ) {
+			webpress_navigation_position();
 		}
 	}
 }
 
-if ( ! function_exists( 'blogpress_add_navigation_before_header' ) ) {
+if ( ! function_exists( 'webpress_add_navigation_before_header' ) ) {
 	/**
 	 * Output the navigation above the header, if that is the chosen location.
 	 *
@@ -210,14 +210,14 @@ if ( ! function_exists( 'blogpress_add_navigation_before_header' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_add_navigation_before_header() {
-		if ( 'nav-above-header' === blogpress_get_navigation_location() ) {
-			blogpress_navigation_position();
+	function webpress_add_navigation_before_header() {
+		if ( 'nav-above-header' === webpress_get_navigation_location() ) {
+			webpress_navigation_position();
 		}
 	}
 }
 
-if ( ! function_exists( 'blogpress_add_navigation_float_right' ) ) {
+if ( ! function_exists( 'webpress_add_navigation_float_right' ) ) {
 	/**
 	 * Output the navigation floated beside the site branding, if that is the
 	 * chosen location. Covers both the float-right and float-left settings.
@@ -228,14 +228,14 @@ if ( ! function_exists( 'blogpress_add_navigation_float_right' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_add_navigation_float_right() {
-		if ( 'nav-float-right' === blogpress_get_navigation_location() || 'nav-float-left' === blogpress_get_navigation_location() ) {
-			blogpress_navigation_position();
+	function webpress_add_navigation_float_right() {
+		if ( 'nav-float-right' === webpress_get_navigation_location() || 'nav-float-left' === webpress_get_navigation_location() ) {
+			webpress_navigation_position();
 		}
 	}
 }
 
-if ( ! function_exists( 'blogpress_add_navigation_before_right_sidebar' ) ) {
+if ( ! function_exists( 'webpress_add_navigation_before_right_sidebar' ) ) {
 	/**
 	 * Output the navigation inside the right sidebar, if that is the chosen
 	 * location.
@@ -246,16 +246,16 @@ if ( ! function_exists( 'blogpress_add_navigation_before_right_sidebar' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_add_navigation_before_right_sidebar() {
-		if ( 'nav-right-sidebar' === blogpress_get_navigation_location() ) {
-			echo '<div class="blogpress-sidebar-nav">';
-				blogpress_navigation_position();
+	function webpress_add_navigation_before_right_sidebar() {
+		if ( 'nav-right-sidebar' === webpress_get_navigation_location() ) {
+			echo '<div class="webpress-sidebar-nav">';
+				webpress_navigation_position();
 			echo '</div>';
 		}
 	}
 }
 
-if ( ! function_exists( 'blogpress_add_navigation_before_left_sidebar' ) ) {
+if ( ! function_exists( 'webpress_add_navigation_before_left_sidebar' ) ) {
 	/**
 	 * Output the navigation inside the left sidebar, if that is the chosen
 	 * location.
@@ -266,10 +266,10 @@ if ( ! function_exists( 'blogpress_add_navigation_before_left_sidebar' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_add_navigation_before_left_sidebar() {
-		if ( 'nav-left-sidebar' === blogpress_get_navigation_location() ) {
-			echo '<div class="blogpress-sidebar-nav">';
-				blogpress_navigation_position();
+	function webpress_add_navigation_before_left_sidebar() {
+		if ( 'nav-left-sidebar' === webpress_get_navigation_location() ) {
+			echo '<div class="webpress-sidebar-nav">';
+				webpress_navigation_position();
 			echo '</div>';
 		}
 	}
@@ -298,7 +298,7 @@ if ( ! class_exists( 'Blogpress_Page_Walker' ) && class_exists( 'Walker_Page' ) 
 
 			if ( isset( $args['pages_with_children'][ $page->ID ] ) ) {
 				$css_class[] = 'menu-item-has-children';
-				$icon = blogpress_get_svg_icon( 'arrow' );
+				$icon = webpress_get_svg_icon( 'arrow' );
 				$button = '<span role="presentation" class="dropdown-menu-toggle">' . $icon . '</span>';
 			}
 
@@ -336,8 +336,8 @@ if ( ! class_exists( 'Blogpress_Page_Walker' ) && class_exists( 'Walker_Page' ) 
 	}
 }
 
-if ( ! function_exists( 'blogpress_dropdown_icon_to_menu_link' ) ) {
-	add_filter( 'nav_menu_item_title', 'blogpress_dropdown_icon_to_menu_link', 10, 4 );
+if ( ! function_exists( 'webpress_dropdown_icon_to_menu_link' ) ) {
+	add_filter( 'nav_menu_item_title', 'webpress_dropdown_icon_to_menu_link', 10, 4 );
 	/**
 	 * Add dropdown icon if menu item has children.
 	 *
@@ -349,17 +349,17 @@ if ( ! function_exists( 'blogpress_dropdown_icon_to_menu_link' ) ) {
 	 * @param int      $depth Depth of menu item.
 	 * @return string The menu item.
 	 */
-	function blogpress_dropdown_icon_to_menu_link( $title, $item, $args, $depth ) {
+	function webpress_dropdown_icon_to_menu_link( $title, $item, $args, $depth ) {
 		$role        = 'presentation';
 		$tabindex    = '';
 		$aria_label  = '';
 
-		if ( 'click-arrow' === blogpress_get_option( 'nav_dropdown_type' ) ) {
+		if ( 'click-arrow' === webpress_get_option( 'nav_dropdown_type' ) ) {
 			$role = 'button';
 			$tabindex = ' tabindex="0"';
 			$aria_label = sprintf(
 				' aria-label="%s"',
-				esc_attr__( 'Open Sub-Menu', 'blogpress' )
+				esc_attr__( 'Open Sub-Menu', 'webpress' )
 			);
 		}
 
@@ -372,28 +372,28 @@ if ( ! function_exists( 'blogpress_dropdown_icon_to_menu_link' ) ) {
 						if ( 0 !== $depth ) {
 							$arrow_direction = 'right';
 
-							if ( 'left' === blogpress_get_option( 'nav_dropdown_direction' ) ) {
+							if ( 'left' === webpress_get_option( 'nav_dropdown_direction' ) ) {
 								$arrow_direction = 'left';
 							}
 						}
 
-						if ( 'nav-left-sidebar' === blogpress_get_navigation_location() ) {
+						if ( 'nav-left-sidebar' === webpress_get_navigation_location() ) {
 							$arrow_direction = 'right';
 
-							if ( 'both-right' === blogpress_get_layout() ) {
+							if ( 'both-right' === webpress_get_layout() ) {
 								$arrow_direction = 'left';
 							}
 						}
 
-						if ( 'nav-right-sidebar' === blogpress_get_navigation_location() ) {
+						if ( 'nav-right-sidebar' === webpress_get_navigation_location() ) {
 							$arrow_direction = 'left';
 
-							if ( 'both-left' === blogpress_get_layout() ) {
+							if ( 'both-left' === webpress_get_layout() ) {
 								$arrow_direction = 'right';
 							}
 						}
 
-						if ( 'hover' !== blogpress_get_option( 'nav_dropdown_type' ) ) {
+						if ( 'hover' !== webpress_get_option( 'nav_dropdown_type' ) ) {
 							$arrow_direction = 'down';
 						}
 					}
@@ -408,7 +408,7 @@ if ( ! function_exists( 'blogpress_dropdown_icon_to_menu_link' ) ) {
 					 * @param WP_Post $item           The current menu item.
 					 * @return string The arrow direction to use.
 					 */
-					$arrow_direction = apply_filters( 'blogpress_dropdown_arrow_direction', $arrow_direction, $depth, $item );
+					$arrow_direction = apply_filters( 'webpress_dropdown_arrow_direction', $arrow_direction, $depth, $item );
 
 					if ( 'down' === $arrow_direction ) {
 						$arrow_direction = '';
@@ -416,7 +416,7 @@ if ( ! function_exists( 'blogpress_dropdown_icon_to_menu_link' ) ) {
 						$arrow_direction = '-' . $arrow_direction;
 					}
 
-					$icon = blogpress_get_svg_icon( 'arrow' . $arrow_direction );
+					$icon = webpress_get_svg_icon( 'arrow' . $arrow_direction );
 					$title = $title . '<span role="' . $role . '" class="dropdown-menu-toggle"' . $tabindex . $aria_label . '>' . $icon . '</span>';
 				}
 			}
@@ -426,7 +426,7 @@ if ( ! function_exists( 'blogpress_dropdown_icon_to_menu_link' ) ) {
 	}
 }
 
-add_filter( 'nav_menu_link_attributes', 'blogpress_set_menu_item_link_attributes', 10, 4 );
+add_filter( 'nav_menu_link_attributes', 'webpress_set_menu_item_link_attributes', 10, 4 );
 /**
  * Add attributes to the menu item link when using the Click - Menu Item option.
  *
@@ -438,12 +438,12 @@ add_filter( 'nav_menu_link_attributes', 'blogpress_set_menu_item_link_attributes
  * @param int      $depth The depth of the menu item.
  * @return array The menu item attributes.
  */
-function blogpress_set_menu_item_link_attributes( $atts, $item, $args, $depth ) {
+function webpress_set_menu_item_link_attributes( $atts, $item, $args, $depth ) {
 	if ( ! isset( $args->container_class ) || 'main-nav' !== $args->container_class ) {
 		return $atts;
 	}
 
-	if ( 'click' !== blogpress_get_option( 'nav_dropdown_type' ) ) {
+	if ( 'click' !== webpress_get_option( 'nav_dropdown_type' ) ) {
 		return $atts;
 	}
 
@@ -451,25 +451,25 @@ function blogpress_set_menu_item_link_attributes( $atts, $item, $args, $depth ) 
 		$atts['role'] = 'button';
 		$atts['aria-expanded'] = 'false';
 		$atts['aria-haspopup'] = 'true';
-		$atts['aria-label'] = esc_attr__( 'Open Sub-Menu', 'blogpress' );
+		$atts['aria-label'] = esc_attr__( 'Open Sub-Menu', 'webpress' );
 	}
 
 	return $atts;
 }
 
-if ( ! function_exists( 'blogpress_navigation_search' ) ) {
+if ( ! function_exists( 'webpress_navigation_search' ) ) {
 	/**
 	 * Add the search bar to the navigation.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_navigation_search() {
-		$blogpress_settings = wp_parse_args(
-			get_option( 'blogpress_settings', array() ),
-			blogpress_get_defaults()
+	function webpress_navigation_search() {
+		$webpress_settings = wp_parse_args(
+			get_option( 'webpress_settings', array() ),
+			webpress_get_defaults()
 		);
 
-		if ( 'enable' !== $blogpress_settings['nav_search'] ) {
+		if ( 'enable' !== $webpress_settings['nav_search'] ) {
 			return;
 		}
 
@@ -479,22 +479,22 @@ if ( ! function_exists( 'blogpress_navigation_search' ) ) {
 			</form>',
 			esc_url( home_url( '/' ) ),
 			esc_attr( get_search_query() ),
-			esc_attr_x( 'Search', 'label', 'blogpress' )
+			esc_attr_x( 'Search', 'label', 'webpress' )
 		);
 	}
 }
 
-if ( ! function_exists( 'blogpress_do_menu_bar_item_container' ) ) {
+if ( ! function_exists( 'webpress_do_menu_bar_item_container' ) ) {
 	/**
 	 * Add a container for menu bar items.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_do_menu_bar_item_container() {
-		if ( blogpress_has_menu_bar_items() ) {
+	function webpress_do_menu_bar_item_container() {
+		if ( webpress_has_menu_bar_items() ) {
 			echo '<div class="menu-bar-items">';
-				blogpress_do_navigation_search_button();
-				blogpress_do_search_modal_trigger();
+				webpress_do_navigation_search_button();
+				webpress_do_search_modal_trigger();
 
 				/**
 				 * Fires inside the menu bar items container, after the built-in items.
@@ -504,35 +504,35 @@ if ( ! function_exists( 'blogpress_do_menu_bar_item_container' ) ) {
 				 *
 				 * @since 1.0.0
 				 */
-				do_action( 'blogpress_menu_bar_items' );
+				do_action( 'webpress_menu_bar_items' );
 			echo '</div>';
 		}
 	}
 }
 
-if ( ! function_exists( 'blogpress_do_navigation_search_button' ) ) {
+if ( ! function_exists( 'webpress_do_navigation_search_button' ) ) {
 	/**
 	 * Add the navigation search button.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_do_navigation_search_button() {
-		if ( 'enable' !== blogpress_get_option( 'nav_search' ) ) {
+	function webpress_do_navigation_search_button() {
+		if ( 'enable' !== webpress_get_option( 'nav_search' ) ) {
 			return;
 		}
 
 		$search_item = sprintf(
 			'<span class="menu-bar-item search-item"><a aria-label="%1$s" href="#">%2$s</a></span>',
-			esc_attr__( 'Open Search Bar', 'blogpress' ),
-			blogpress_get_svg_icon( 'search', true ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
+			esc_attr__( 'Open Search Bar', 'webpress' ),
+			webpress_get_svg_icon( 'search', true ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
 		);
 
 		echo $search_item; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- No escaping needed.
 	}
 }
 
-if ( ! function_exists( 'blogpress_menu_search_icon' ) ) {
-	add_filter( 'wp_nav_menu_items', 'blogpress_menu_search_icon', 10, 2 );
+if ( ! function_exists( 'webpress_menu_search_icon' ) ) {
+	add_filter( 'wp_nav_menu_items', 'webpress_menu_search_icon', 10, 2 );
 	/**
 	 * Add search icon to primary menu if set.
 	 * Only used if using old float system.
@@ -543,16 +543,16 @@ if ( ! function_exists( 'blogpress_menu_search_icon' ) ) {
 	 * @param stdClass $args An object containing wp_nav_menu() arguments.
 	 * @return string The search icon menu item.
 	 */
-	function blogpress_menu_search_icon( $nav, $args ) {
-		$blogpress_settings = wp_parse_args(
-			get_option( 'blogpress_settings', array() ),
-			blogpress_get_defaults()
+	function webpress_menu_search_icon( $nav, $args ) {
+		$webpress_settings = wp_parse_args(
+			get_option( 'webpress_settings', array() ),
+			webpress_get_defaults()
 		);
 
 		return $nav;
 
 		// If the search icon isn't enabled, return the regular nav.
-		if ( 'enable' !== $blogpress_settings['nav_search'] ) {
+		if ( 'enable' !== $webpress_settings['nav_search'] ) {
 			return $nav;
 		}
 
@@ -560,34 +560,34 @@ if ( ! function_exists( 'blogpress_menu_search_icon' ) ) {
 		if ( isset( $args->theme_location ) && 'primary' === $args->theme_location ) {
 			$search_item = sprintf(
 				'<li class="search-item menu-item-align-right"><a aria-label="%1$s" href="#">%2$s</a></li>',
-				esc_attr__( 'Open Search Bar', 'blogpress' ),
-				blogpress_get_svg_icon( 'search', true ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
+				esc_attr__( 'Open Search Bar', 'webpress' ),
+				webpress_get_svg_icon( 'search', true ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in function.
 			);
 
 			return $nav . $search_item;
 		}
 
 		// Our primary menu isn't set, return the regular nav.
-		// In this case, the search icon is added to the blogpress_menu_fallback() function in navigation.php.
+		// In this case, the search icon is added to the webpress_menu_fallback() function in navigation.php.
 		return $nav;
 	}
 }
 
-if ( ! function_exists( 'blogpress_mobile_menu_search_icon' ) ) {
+if ( ! function_exists( 'webpress_mobile_menu_search_icon' ) ) {
 	/**
 	 * Add search icon to mobile menu bar.
 	 * Only used if using old float system.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_mobile_menu_search_icon() {
-		$blogpress_settings = wp_parse_args(
-			get_option( 'blogpress_settings', array() ),
-			blogpress_get_defaults()
+	function webpress_mobile_menu_search_icon() {
+		$webpress_settings = wp_parse_args(
+			get_option( 'webpress_settings', array() ),
+			webpress_get_defaults()
 		);
 
 		// If the search icon isn't enabled, return the regular nav.
-		if ( 'enable' !== $blogpress_settings['nav_search'] ) {
+		if ( 'enable' !== $webpress_settings['nav_search'] ) {
 			return;
 		}
 
@@ -597,8 +597,8 @@ if ( ! function_exists( 'blogpress_mobile_menu_search_icon' ) ) {
 		<div class="mobile-bar-items">
 			<?php?>
 			<span class="search-item">
-				<a aria-label="<?php esc_attr_e( 'Open Search Bar', 'blogpress' ); ?>" href="#">
-					<?php blogpress_do_svg_icon( 'search', true ); ?>
+				<a aria-label="<?php esc_attr_e( 'Open Search Bar', 'webpress' ); ?>" href="#">
+					<?php webpress_do_svg_icon( 'search', true ); ?>
 				</a>
 			</span>
 		</div>
@@ -606,7 +606,7 @@ if ( ! function_exists( 'blogpress_mobile_menu_search_icon' ) ) {
 	}
 }
 
-add_action( 'wp_footer', 'blogpress_clone_sidebar_navigation' );
+add_action( 'wp_footer', 'webpress_clone_sidebar_navigation' );
 /**
  * Clone our sidebar navigation and place it below the header.
  * This places our mobile menu in a more user-friendly location.
@@ -617,8 +617,8 @@ add_action( 'wp_footer', 'blogpress_clone_sidebar_navigation' );
  *
  * @since 1.0.0
  */
-function blogpress_clone_sidebar_navigation() {
-	if ( 'nav-left-sidebar' !== blogpress_get_navigation_location() && 'nav-right-sidebar' !== blogpress_get_navigation_location() ) {
+function webpress_clone_sidebar_navigation() {
+	if ( 'nav-left-sidebar' !== webpress_get_navigation_location() && 'nav-right-sidebar' !== webpress_get_navigation_location() ) {
 		return;
 	}
 
@@ -636,13 +636,13 @@ function blogpress_clone_sidebar_navigation() {
 				document.body.insertAdjacentHTML( "afterbegin", clone.outerHTML );
 			}
 		}',
-		wp_json_encode( __( 'Mobile Menu', 'blogpress' ) )
+		wp_json_encode( __( 'Mobile Menu', 'webpress' ) )
 	);
 
 	wp_print_inline_script_tag(
 		$script,
 		array(
-			'id' => 'blogpress-clone-sidebar-navigation',
+			'id' => 'webpress-clone-sidebar-navigation',
 		)
 	);
 }

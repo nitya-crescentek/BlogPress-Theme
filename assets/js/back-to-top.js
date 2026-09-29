@@ -3,18 +3,18 @@
 
 	// Feature Test
 	if ( 'querySelector' in document && 'addEventListener' in window ) {
-		var goTopBtn = document.querySelector( '.blogpress-back-to-top' );
+		var goTopBtn = document.querySelector( '.webpress-back-to-top' );
 
 		var trackScroll = function() {
 			var scrolled = window.pageYOffset;
 			var coords = goTopBtn.getAttribute( 'data-start-scroll' );
 
 			if ( scrolled > coords ) {
-				goTopBtn.classList.add( 'blogpress-back-to-top__show' );
+				goTopBtn.classList.add( 'webpress-back-to-top__show' );
 			}
 
 			if ( scrolled < coords ) {
-				goTopBtn.classList.remove( 'blogpress-back-to-top__show' );
+				goTopBtn.classList.remove( 'webpress-back-to-top__show' );
 			}
 		};
 
@@ -58,7 +58,7 @@
 			goTopBtn.addEventListener( 'click', function( e ) {
 				e.preventDefault();
 
-				if ( blogpressBackToTop.smooth ) {
+				if ( webpressBackToTop.smooth ) {
 					smoothScroll( document.body, goTopBtn.getAttribute( 'data-scroll-speed' ) || 400 );
 				} else {
 					window.scrollTo( 0, 0 );

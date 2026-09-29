@@ -2,35 +2,35 @@
 /**
  * This file handles the customizer fields for the header.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // No direct access, please.
 }
 
-BlogPress_Customize_Field::add_title(
-	'blogpress_header_colors_title',
+WebPress_Customize_Field::add_title(
+	'webpress_header_colors_title',
 	array(
-		'section' => 'blogpress_colors_section',
-		'title' => __( 'Header', 'blogpress' ),
+		'section' => 'webpress_colors_section',
+		'title' => __( 'Header', 'webpress' ),
 		'choices' => array(
 			'toggleId' => 'header-colors',
 		),
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[header_background_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[header_background_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['header_background_color'],
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 	),
 	array(
-		'label' => __( 'Background', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
+		'label' => __( 'Background', 'webpress' ),
+		'section' => 'webpress_colors_section',
 		'choices' => array(
 			'alpha' => true,
 			'toggleId' => 'header-colors',
@@ -44,17 +44,17 @@ BlogPress_Customize_Field::add_field(
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[header_text_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[header_text_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['header_text_color'],
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 	),
 	array(
-		'label' => __( 'Text', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
+		'label' => __( 'Text', 'webpress' ),
+		'section' => 'webpress_colors_section',
 		'choices' => array(
 			'toggleId' => 'header-colors',
 		),
@@ -67,10 +67,10 @@ BlogPress_Customize_Field::add_field(
 	)
 );
 
-BlogPress_Customize_Field::add_wrapper(
-	'blogpress_header_link_wrapper',
+WebPress_Customize_Field::add_wrapper(
+	'webpress_header_link_wrapper',
 	array(
-		'section' => 'blogpress_colors_section',
+		'section' => 'webpress_colors_section',
 		'choices' => array(
 			'type' => 'color',
 			'toggleId' => 'header-colors',
@@ -82,21 +82,21 @@ BlogPress_Customize_Field::add_wrapper(
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[header_link_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[header_link_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['header_link_color'],
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 	),
 	array(
-		'label' => __( 'Link', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
+		'label' => __( 'Link', 'webpress' ),
+		'section' => 'webpress_colors_section',
 		'choices' => array(
 			'toggleId' => 'header-colors',
 			'wrapper' => 'header_link_color',
-			'tooltip' => __( 'Choose Initial Color', 'blogpress' ),
+			'tooltip' => __( 'Choose Initial Color', 'webpress' ),
 		),
 		'output' => array(
 			array(
@@ -107,21 +107,21 @@ BlogPress_Customize_Field::add_field(
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[header_link_hover_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[header_link_hover_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['header_link_hover_color'],
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 	),
 	array(
-		'label' => __( 'Link Hover', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
+		'label' => __( 'Link Hover', 'webpress' ),
+		'section' => 'webpress_colors_section',
 		'choices' => array(
 			'toggleId' => 'header-colors',
 			'wrapper' => 'header_link_hover_color',
-			'tooltip' => __( 'Choose Hover Color', 'blogpress' ),
+			'tooltip' => __( 'Choose Hover Color', 'webpress' ),
 			'hideLabel' => true,
 		),
 		'output' => array(
@@ -133,17 +133,17 @@ BlogPress_Customize_Field::add_field(
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[site_title_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[site_title_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['site_title_color'],
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 	),
 	array(
-		'label' => __( 'Site Title', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
+		'label' => __( 'Site Title', 'webpress' ),
+		'section' => 'webpress_colors_section',
 		'choices' => array(
 			'toggleId' => 'header-colors',
 		),
@@ -156,17 +156,17 @@ BlogPress_Customize_Field::add_field(
 	)
 );
 
-BlogPress_Customize_Field::add_field(
-	'blogpress_settings[site_tagline_color]',
-	'BlogPress_Customize_Color_Control',
+WebPress_Customize_Field::add_field(
+	'webpress_settings[site_tagline_color]',
+	'WebPress_Customize_Color_Control',
 	array(
 		'default' => $color_defaults['site_tagline_color'],
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'blogpress_sanitize_rgba_color',
+		'sanitize_callback' => 'webpress_sanitize_rgba_color',
 	),
 	array(
-		'label' => __( 'Tagline', 'blogpress' ),
-		'section' => 'blogpress_colors_section',
+		'label' => __( 'Tagline', 'webpress' ),
+		'section' => 'webpress_colors_section',
 		'choices' => array(
 			'toggleId' => 'header-colors',
 		),

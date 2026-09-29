@@ -2,20 +2,20 @@
 /**
  * Add compatibility for some popular third party plugins.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-add_action( 'after_setup_theme', 'blogpress_setup_woocommerce' );
+add_action( 'after_setup_theme', 'webpress_setup_woocommerce' );
 /**
  * Set up WooCommerce
  *
  * @since 1.0.0
  */
-function blogpress_setup_woocommerce() {
+function webpress_setup_woocommerce() {
 	if ( ! class_exists( 'WooCommerce' ) ) {
 		return;
 	}
@@ -27,7 +27,7 @@ function blogpress_setup_woocommerce() {
 
 	/**
 	 * Image sizes and grid defaults so a fresh install looks right without
-	 * any setup. Runs after blogpress_setup(), so these arguments are added
+	 * any setup. Runs after webpress_setup(), so these arguments are added
 	 * to the existing woocommerce support.
 	 */
 	add_theme_support(
@@ -47,7 +47,7 @@ function blogpress_setup_woocommerce() {
 	remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 	remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
 	remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
-	add_action( 'woocommerce_sidebar', 'blogpress_construct_sidebars' );
+	add_action( 'woocommerce_sidebar', 'webpress_construct_sidebars' );
 }
 
 /**
@@ -55,35 +55,35 @@ function blogpress_setup_woocommerce() {
  *
  * @since 1.0.0
  */
-function blogpress_get_woocommerce_wrapper_tagname() {
+function webpress_get_woocommerce_wrapper_tagname() {
 	echo is_singular()
 		? 'article'
 		: 'div';
 }
 
-if ( ! function_exists( 'blogpress_woocommerce_start' ) ) {
-	add_action( 'woocommerce_before_main_content', 'blogpress_woocommerce_start', 10 );
+if ( ! function_exists( 'webpress_woocommerce_start' ) ) {
+	add_action( 'woocommerce_before_main_content', 'webpress_woocommerce_start', 10 );
 	/**
 	 * Add WooCommerce starting wrappers
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_woocommerce_start() {
+	function webpress_woocommerce_start() {
 		?>
-		<div <?php blogpress_do_attr( 'content' ); ?>>
-			<main <?php blogpress_do_attr( 'main' ); ?>>
+		<div <?php webpress_do_attr( 'content' ); ?>>
+			<main <?php webpress_do_attr( 'main' ); ?>>
 				<?php
 				/** This action is documented in content.php */
-				do_action( 'blogpress_before_content', 'woocommerce' );
+				do_action( 'webpress_before_content', 'woocommerce' );
 				?>
-				<<?php blogpress_get_woocommerce_wrapper_tagname(); ?> <?php blogpress_do_attr( 'woocommerce-content' ); ?>>
+				<<?php webpress_get_woocommerce_wrapper_tagname(); ?> <?php webpress_do_attr( 'woocommerce-content' ); ?>>
 					<div class="inside-article">
 						<?php
-						blogpress_featured_page_header_inside_single();
+						webpress_featured_page_header_inside_single();
 
 						$itemprop = '';
 
-						if ( 'microdata' === blogpress_get_schema_type() ) {
+						if ( 'microdata' === webpress_get_schema_type() ) {
 							$itemprop = ' itemprop="text"';
 						}
 						?>
@@ -92,25 +92,25 @@ if ( ! function_exists( 'blogpress_woocommerce_start' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_woocommerce_end' ) ) {
-	add_action( 'woocommerce_after_main_content', 'blogpress_woocommerce_end', 10 );
+if ( ! function_exists( 'webpress_woocommerce_end' ) ) {
+	add_action( 'woocommerce_after_main_content', 'webpress_woocommerce_end', 10 );
 	/**
 	 * Add WooCommerce ending wrappers
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_woocommerce_end() {
+	function webpress_woocommerce_end() {
 		?>
 						</div>
 						<?php
 						/** This action is documented in content.php */
-						do_action( 'blogpress_after_entry_content', 'woocommerce' );
+						do_action( 'webpress_after_entry_content', 'woocommerce' );
 						?>
 					</div>
-				</<?php blogpress_get_woocommerce_wrapper_tagname(); ?>>
+				</<?php webpress_get_woocommerce_wrapper_tagname(); ?>>
 				<?php
 				/** This action is documented in content.php */
-				do_action( 'blogpress_after_content', 'woocommerce' );
+				do_action( 'webpress_after_content', 'woocommerce' );
 				?>
 			</main>
 		</div>
@@ -118,19 +118,19 @@ if ( ! function_exists( 'blogpress_woocommerce_end' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_woocommerce_css' ) ) {
-	add_action( 'wp_enqueue_scripts', 'blogpress_woocommerce_css', 100 );
+if ( ! function_exists( 'webpress_woocommerce_css' ) ) {
+	add_action( 'wp_enqueue_scripts', 'webpress_woocommerce_css', 100 );
 	/**
 	 * Add WooCommerce CSS
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_woocommerce_css() {
+	function webpress_woocommerce_css() {
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
 
-		$mobile = blogpress_get_media_query( 'mobile' );
+		$mobile = webpress_get_media_query( 'mobile' );
 
 		$css = '.woocommerce .page-header-image-single {
 			display: none;
@@ -175,8 +175,8 @@ if ( ! function_exists( 'blogpress_woocommerce_css' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_woocommerce_loop_toolbar_open' ) ) {
-	add_action( 'woocommerce_before_shop_loop', 'blogpress_woocommerce_loop_toolbar_open', 19 );
+if ( ! function_exists( 'webpress_woocommerce_loop_toolbar_open' ) ) {
+	add_action( 'woocommerce_before_shop_loop', 'webpress_woocommerce_loop_toolbar_open', 19 );
 	/**
 	 * Open a wrapper around the result count and catalog ordering.
 	 *
@@ -185,25 +185,25 @@ if ( ! function_exists( 'blogpress_woocommerce_loop_toolbar_open' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_woocommerce_loop_toolbar_open() {
-		echo '<div class="blogpress-shop-toolbar">';
+	function webpress_woocommerce_loop_toolbar_open() {
+		echo '<div class="webpress-shop-toolbar">';
 	}
 }
 
-if ( ! function_exists( 'blogpress_woocommerce_loop_toolbar_close' ) ) {
-	add_action( 'woocommerce_before_shop_loop', 'blogpress_woocommerce_loop_toolbar_close', 31 );
+if ( ! function_exists( 'webpress_woocommerce_loop_toolbar_close' ) ) {
+	add_action( 'woocommerce_before_shop_loop', 'webpress_woocommerce_loop_toolbar_close', 31 );
 	/**
 	 * Close the result count and catalog ordering wrapper.
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_woocommerce_loop_toolbar_close() {
+	function webpress_woocommerce_loop_toolbar_close() {
 		echo '</div>';
 	}
 }
 
-if ( ! function_exists( 'blogpress_woocommerce_theme_css' ) ) {
-	add_action( 'wp_enqueue_scripts', 'blogpress_woocommerce_theme_css', 100 );
+if ( ! function_exists( 'webpress_woocommerce_theme_css' ) ) {
+	add_action( 'wp_enqueue_scripts', 'webpress_woocommerce_theme_css', 100 );
 	/**
 	 * Enqueue our WooCommerce stylesheet and the colors it can't know about.
 	 *
@@ -213,7 +213,7 @@ if ( ! function_exists( 'blogpress_woocommerce_theme_css' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_woocommerce_theme_css() {
+	function webpress_woocommerce_theme_css() {
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
@@ -235,16 +235,16 @@ if ( ! function_exists( 'blogpress_woocommerce_theme_css' ) ) {
 		}
 
 		wp_enqueue_style(
-			'blogpress-woocommerce',
+			'webpress-woocommerce',
 			get_template_directory_uri() . "/assets/css/components/woocommerce{$suffix}.css",
 			$deps,
-			BLOGPRESS_VERSION,
+			WEBPRESS_VERSION,
 			'all'
 		);
 
 		$settings = wp_parse_args(
-			get_option( 'blogpress_settings', array() ),
-			blogpress_get_color_defaults()
+			get_option( 'webpress_settings', array() ),
+			webpress_get_color_defaults()
 		);
 
 		$buttons = array(
@@ -269,7 +269,7 @@ if ( ! function_exists( 'blogpress_woocommerce_theme_css' ) ) {
 			$buttons_hover[] = $button . ':focus';
 		}
 
-		$css = new BlogPress_CSS();
+		$css = new WebPress_CSS();
 
 		$css->set_selector( implode( ',', $buttons ) );
 		$css->add_property( 'color', $settings['form_button_text_color'] );
@@ -280,19 +280,19 @@ if ( ! function_exists( 'blogpress_woocommerce_theme_css' ) ) {
 		$css->add_property( 'background-color', $settings['form_button_background_color_hover'] );
 
 		if ( $css->css_output() ) {
-			wp_add_inline_style( 'blogpress-woocommerce', $css->css_output() );
+			wp_add_inline_style( 'webpress-woocommerce', $css->css_output() );
 		}
 	}
 }
 
-if ( ! function_exists( 'blogpress_bbpress_css' ) ) {
-	add_action( 'wp_enqueue_scripts', 'blogpress_bbpress_css', 100 );
+if ( ! function_exists( 'webpress_bbpress_css' ) ) {
+	add_action( 'wp_enqueue_scripts', 'webpress_bbpress_css', 100 );
 	/**
 	 * Add bbPress CSS
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_bbpress_css() {
+	function webpress_bbpress_css() {
 		if ( ! class_exists( 'bbPress' ) ) {
 			return;
 		}
@@ -328,14 +328,14 @@ if ( ! function_exists( 'blogpress_bbpress_css' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_buddypress_css' ) ) {
-	add_action( 'wp_enqueue_scripts', 'blogpress_buddypress_css', 100 );
+if ( ! function_exists( 'webpress_buddypress_css' ) ) {
+	add_action( 'wp_enqueue_scripts', 'webpress_buddypress_css', 100 );
 	/**
 	 * Add BuddyPress CSS
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_buddypress_css() {
+	function webpress_buddypress_css() {
 		if ( ! class_exists( 'BuddyPress' ) ) {
 			return;
 		}
@@ -350,8 +350,8 @@ if ( ! function_exists( 'blogpress_buddypress_css' ) ) {
 	}
 }
 
-if ( ! function_exists( 'blogpress_beaver_builder_css' ) ) {
-	add_action( 'wp_enqueue_scripts', 'blogpress_beaver_builder_css', 100 );
+if ( ! function_exists( 'webpress_beaver_builder_css' ) ) {
+	add_action( 'wp_enqueue_scripts', 'webpress_beaver_builder_css', 100 );
 	/**
 	 * Add Beaver Builder CSS
 	 *
@@ -366,7 +366,7 @@ if ( ! function_exists( 'blogpress_beaver_builder_css' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function blogpress_beaver_builder_css() {
+	function webpress_beaver_builder_css() {
 		return;
 
 		$body_classes = get_body_class();
@@ -391,20 +391,20 @@ if ( ! function_exists( 'blogpress_beaver_builder_css' ) ) {
 					padding:0;
 				}';
 				$css = str_replace( array( "\r", "\n", "\t" ), '', $css );
-				wp_add_inline_style( 'blogpress-style', $css );
+				wp_add_inline_style( 'webpress-style', $css );
 			}
 		}
 	}
 }
 
-add_action( 'wp_enqueue_scripts', 'blogpress_do_third_party_plugin_css', 50 );
+add_action( 'wp_enqueue_scripts', 'webpress_do_third_party_plugin_css', 50 );
 /**
  * Add CSS for third-party plugins.
  *
  * @since 1.0.0
  */
-function blogpress_do_third_party_plugin_css() {
-	$css = new BlogPress_CSS();
+function webpress_do_third_party_plugin_css() {
+	$css = new WebPress_CSS();
 
 	if ( class_exists( 'Elementor\Plugin' ) ) {
 		$css->set_selector( '.elementor-template-full-width .site-content' );
@@ -412,6 +412,6 @@ function blogpress_do_third_party_plugin_css() {
 	}
 
 	if ( $css->css_output() ) {
-		wp_add_inline_style( 'blogpress-style', $css->css_output() );
+		wp_add_inline_style( 'webpress-style', $css->css_output() );
 	}
 }

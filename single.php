@@ -2,7 +2,7 @@
 /**
  * The Template for displaying all single posts.
  *
- * @package BlogPress
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -11,16 +11,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header(); ?>
 
-	<div <?php blogpress_do_attr( 'content' ); ?>>
-		<main <?php blogpress_do_attr( 'main' ); ?>>
+	<div <?php webpress_do_attr( 'content' ); ?>>
+		<main <?php webpress_do_attr( 'main' ); ?>>
 			<?php
 
-			if ( blogpress_has_default_loop() ) {
+			if ( webpress_has_default_loop() ) {
 				while ( have_posts() ) :
 
 					the_post();
 
-					blogpress_do_template_part( 'single' );
+					webpress_do_template_part( 'single' );
 
 				endwhile;
 			}
@@ -31,6 +31,6 @@ get_header(); ?>
 
 	<?php
 
-	blogpress_construct_sidebars();
+	webpress_construct_sidebars();
 
 	get_footer();
