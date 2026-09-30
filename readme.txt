@@ -73,13 +73,13 @@ with them automatically.
 
 = Translation and RTL =
 
-Fully internationalised with 373 translatable strings and a bundled .pot file, covering the PHP templates, the
+Fully internationalised with 366 translatable strings and a bundled .pot file, covering the PHP templates, the
 Customizer's React interface and the theme.json palette names. Ships with a right-to-left stylesheet for both the
 front end and the block editor.
 
 == Customizing WebPress ==
 
-WebPress is built to be extended from a child theme or a small plugin. It provides 35 action hooks and 29 filters,
+WebPress is built to be extended from a child theme or a small plugin. It provides 35 action hooks and 23 filters,
 so in most cases you can add or change output without editing or copying a template file.
 
 A full reference with arguments and examples is coming. The most useful hooks are listed here.
@@ -223,11 +223,11 @@ Yes. Each post and page has a Layout box in the editor sidebar where you can ove
 the number of footer widget columns.
 
 = How do I customize the theme without losing changes on update? =
-Use a child theme. WebPress provides 35 action hooks and 29 filters, and wraps its template functions in
+Use a child theme. WebPress provides 35 action hooks and 23 filters, and wraps its template functions in
 function_exists(), so most changes can be made without copying template files. See "Customizing WebPress" above.
 
 = Is WebPress translation ready? =
-Yes. It ships with a .pot file containing 373 strings in /languages/, and includes a right-to-left stylesheet.
+Yes. It ships with a .pot file containing 366 strings in /languages/, and includes a right-to-left stylesheet.
 
 == Copyright ==
 
@@ -251,11 +251,6 @@ http://underscores.me/
 
 = Bundled resources =
 
-Font Awesome 4.7.0 — assets/css/components/font-awesome.css
-Font License: SIL OFL 1.1 — http://scripts.sil.org/OFL
-Code License: MIT — http://opensource.org/licenses/mit-license.html
-Copyright (C) Dave Gandy — https://fontawesome.com
-
 selectWoo — inc/customizer/controls/js/selectWoo.min.js, inc/customizer/controls/css/selectWoo.min.css
 MIT License — https://github.com/woocommerce/selectWoo/blob/master/LICENSE.md
 Copyright (C) Automattic and select2 contributors
@@ -267,6 +262,15 @@ Copyright (C) Jed Watson
 TinyColor — compiled into assets/dist/customizer.js and assets/dist/block-editor.js
 MIT License — https://github.com/bgrins/TinyColor/blob/master/LICENSE
 Copyright (C) Brian Grinstead — http://briangrinstead.com
+
+React DnD (with its Redux dependency) — compiled into assets/dist/customizer.js
+MIT License — https://github.com/react-dnd/react-dnd/blob/main/LICENSE
+Copyright (C) Dan Abramov
+
+= Source code =
+
+The files in assets/dist/ are compiled. Their uncompiled source is available at:
+TODO-ADD-PUBLIC-REPOSITORY-URL-BEFORE-SUBMITTING
 
 == Changelog ==
 

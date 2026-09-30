@@ -2,7 +2,7 @@
 /**
  * Rest API functions
  *
- * @package BlogpressBlocks
+ * @package WebPress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class BlogpressBlocks_Rest
+ * Class WebPress_Rest
  */
 class WebPress_Rest extends WP_REST_Controller {
 	/**

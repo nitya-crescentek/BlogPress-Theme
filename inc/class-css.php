@@ -14,7 +14,7 @@ if ( ! class_exists( 'WebPress_CSS' ) ) {
 	 * Creates minified css via PHP.
 	 *
 	 * @author  Carlos Rios
-	 * Modified by Tom Usborne for WebPress
+	 * Modified by Tom Usborne for GeneratePress
 	 */
 	class WebPress_CSS {
 		/**

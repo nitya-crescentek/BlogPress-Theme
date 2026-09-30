@@ -9,14 +9,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Blogpress_Range_Slider_Control' ) ) {
+if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'WebPress_Range_Slider_Control' ) ) {
 	/**
 	 * Create a range slider control.
 	 * This control allows you to add responsive settings.
 	 *
 	 * @since 1.0.0
 	 */
-	class Blogpress_Range_Slider_Control extends WP_Customize_Control {
+	class WebPress_Range_Slider_Control extends WP_Customize_Control {
 		/**
 		 * The control type.
 		 *

@@ -382,7 +382,7 @@ class WebPress_Typography {
 				 * However, that filter prepends all selectors with `.editor-styles-wrapper`, which breaks the above
 				 * selector, as it appears above that element in the DOM.
 				 *
-				 * Related: https://github.com/tomusborne/webpress/issues/472
+				 * Related: https://github.com/tomusborne/generatepress/issues/472
 				 */
 				'wp-edit-blocks',
 				$html_typography

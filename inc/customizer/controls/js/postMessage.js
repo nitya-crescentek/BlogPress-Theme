@@ -131,7 +131,7 @@ var webpressPostMessage = {
 	css: {
 
 		/**
-		 * Blogpresss the CSS from the output (js_vars) parameter.
+		 * Generates the CSS from the output (js_vars) parameter.
 		 *
 		 * @since 1.0.0
 		 *

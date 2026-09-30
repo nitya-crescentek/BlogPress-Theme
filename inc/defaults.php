@@ -61,8 +61,6 @@ if ( ! function_exists( 'webpress_get_defaults' ) ) {
 			'link_color' => 'var(--accent)',
 			'link_color_hover' => 'var(--contrast)',
 			'link_color_visited' => '',
-			'font_awesome_essentials' => true,
-			'icons' => 'svg',
 			'dynamic_css_cache' => true,
 			'underline_links' => 'always',
 			'font_manager' => array(),

@@ -37,14 +37,6 @@ if ( ! function_exists( 'webpress_scripts' ) ) {
 
 		wp_enqueue_style( 'webpress-style', $dir_uri . "/assets/css/main{$suffix}.css", array(), WEBPRESS_VERSION, 'all' );
 
-		if ( 'font' === webpress_get_option( 'icons' ) ) {
-			wp_enqueue_style( 'webpress-font-icons', $dir_uri . "/assets/css/components/font-icons{$suffix}.css", array(), WEBPRESS_VERSION, 'all' );
-		}
-
-		if ( ! webpress_get_option( 'font_awesome_essentials' ) ) {
-			wp_enqueue_style( 'font-awesome', $dir_uri . "/assets/css/components/font-awesome{$suffix}.css", false, '4.7', 'all' );
-		}
-
 		if ( is_rtl() ) {
 			wp_enqueue_style( 'webpress-rtl', $dir_uri . "/assets/css/main-rtl{$suffix}.css", array(), WEBPRESS_VERSION, 'all' );
 		}

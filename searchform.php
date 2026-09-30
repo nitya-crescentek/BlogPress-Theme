@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying search forms in Blogpress
+ * The template for displaying search forms in WebPress
  *
  * @package WebPress
  */

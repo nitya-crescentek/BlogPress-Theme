@@ -253,10 +253,6 @@ if ( ! function_exists( 'webpress_get_svg_icon' ) ) {
 	 * @param bool   $replace Whether we're replacing an icon on action (click).
 	 */
 	function webpress_get_svg_icon( $icon, $replace = false ) {
-		if ( 'svg' !== webpress_get_option( 'icons' ) ) {
-			return;
-		}
-
 		$output = '';
 
 		if ( 'menu-bars' === $icon ) {
@@ -585,7 +581,7 @@ function webpress_has_menu_bar_items() {
 		return true;
 	}
 
-	return webpress_get_option( 'nav_search_modal' ) && 'svg' === webpress_get_option( 'icons' );
+	return (bool) webpress_get_option( 'nav_search_modal' );
 }
 
 if ( ! function_exists( 'webpress_do_template_part' ) ) {

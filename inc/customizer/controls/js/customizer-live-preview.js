@@ -43,68 +43,6 @@ function webpress_classes_live_update( id, classes, selector, prefix ) {
 	} );
 }
 
-function webpress_typography_live_update( id, selector, property, unit, media, settings ) {
-	settings = typeof settings !== 'undefined' ? settings : 'webpress_settings';
-	wp.customize( settings + '[' + id + ']', function( value ) {
-		value.bind( function( newval ) {
-			// Get our unit if applicable
-			unit = typeof unit !== 'undefined' ? unit : '';
-
-			var isTablet = ( 'tablet' == id.substring( 0, 6 ) ) ? true : false,
-				isMobile = ( 'mobile' == id.substring( 0, 6 ) ) ? true : false;
-
-			if ( isTablet ) {
-				if ( '' == wp.customize( settings + '[' + id + ']' ).get() ) {
-					var desktopID = id.replace( 'tablet_', '' );
-					newval = wp.customize( settings + '[' + desktopID + ']' ).get();
-				}
-			}
-
-			if ( isMobile ) {
-				if ( '' == wp.customize( settings + '[' + id + ']' ).get() ) {
-					var desktopID = id.replace( 'mobile_', '' );
-					newval = wp.customize( settings + '[' + desktopID + ']' ).get();
-				}
-			}
-
-			if ( 'buttons_font_size' == id && '' == wp.customize( 'webpress_settings[buttons_font_size]' ).get() ) {
-				newval = wp.customize( 'webpress_settings[body_font_size]' ).get();
-			}
-
-			// We're using a desktop value
-			if ( ! isTablet && ! isMobile ) {
-				var tabletValue = ( typeof wp.customize( settings + '[tablet_' + id + ']' ) !== 'undefined' ) ? wp.customize( settings + '[tablet_' + id + ']' ).get() : '',
-					mobileValue = ( typeof wp.customize( settings + '[mobile_' + id + ']' ) !== 'undefined' ) ? wp.customize( settings + '[mobile_' + id + ']' ).get() : '';
-
-				// The tablet setting exists, mobile doesn't
-				if ( '' !== tabletValue && '' == mobileValue ) {
-					media = webpress_live_preview.desktop + ', ' + webpress_live_preview.mobile;
-				}
-
-				// The tablet setting doesn't exist, mobile does
-				if ( '' == tabletValue && '' !== mobileValue ) {
-					media = webpress_live_preview.desktop + ', ' + webpress_live_preview.tablet;
-				}
-
-				// The tablet setting doesn't exist, neither does mobile
-				if ( '' == tabletValue && '' == mobileValue ) {
-					media = webpress_live_preview.desktop + ', ' + webpress_live_preview.tablet + ', ' + webpress_live_preview.mobile;
-				}
-			}
-
-			// Check if media query
-			media_query = typeof media !== 'undefined' ? 'media="' + media + '"' : '';
-
-			jQuery( 'head' ).append( '<style id="' + id + '" ' + media_query + '>' + selector + '{' + property + ':' + newval + unit + ';}</style>' );
-			setTimeout( function() {
-				jQuery( 'style#' + id ).not( ':last' ).remove();
-			}, 1000 );
-
-			setTimeout( "jQuery('body').trigger('webpress_spacing_updated');", 1000 );
-		} );
-	} );
-}
-
 ( function( $ ) {
 	// Update the site title in real time...
 	wp.customize( 'blogname', function( value ) {
@@ -146,43 +84,6 @@ function webpress_typography_live_update( id, selector, property, unit, media, s
 			jQuery( 'body' ).trigger( 'webpress_spacing_updated' );
 		} );
 	} );
-
-	/**
-	 * Live update for typography options.
-	 *
-	 * Body font size, weight and transform
-	 */
-	webpress_typography_live_update( 'body_font_size', 'body, button, input, select, textarea', 'font-size', 'px' );
-	webpress_typography_live_update( 'body_line_height', 'body', 'line-height', '' );
-	webpress_typography_live_update( 'paragraph_margin', 'p, .entry-content > [class*="wp-block-"]:not(:last-child)', 'margin-bottom', 'em' );
-	webpress_typography_live_update( 'body_font_weight', 'body, button, input, select, textarea', 'font-weight' );
-	webpress_typography_live_update( 'body_font_transform', 'body, button, input, select, textarea', 'text-transform' );
-
-	/**
-	 * H1 font size, weight and transform
-	 */
-	webpress_typography_live_update( 'heading_1_font_size', 'h1', 'font-size', 'px', webpress_live_preview.desktop );
-	webpress_typography_live_update( 'mobile_heading_1_font_size', 'h1', 'font-size', 'px', webpress_live_preview.mobile );
-	webpress_typography_live_update( 'heading_1_weight', 'h1', 'font-weight' );
-	webpress_typography_live_update( 'heading_1_transform', 'h1', 'text-transform' );
-	webpress_typography_live_update( 'heading_1_line_height', 'h1', 'line-height', 'em' );
-
-	/**
-	 * H2 font size, weight and transform
-	 */
-	webpress_typography_live_update( 'heading_2_font_size', 'h2', 'font-size', 'px', webpress_live_preview.desktop );
-	webpress_typography_live_update( 'mobile_heading_2_font_size', 'h2', 'font-size', 'px', webpress_live_preview.mobile );
-	webpress_typography_live_update( 'heading_2_weight', 'h2', 'font-weight' );
-	webpress_typography_live_update( 'heading_2_transform', 'h2', 'text-transform' );
-	webpress_typography_live_update( 'heading_2_line_height', 'h2', 'line-height', 'em' );
-
-	/**
-	 * H3 font size, weight and transform
-	 */
-	webpress_typography_live_update( 'heading_3_font_size', 'h3', 'font-size', 'px' );
-	webpress_typography_live_update( 'heading_3_weight', 'h3', 'font-weight' );
-	webpress_typography_live_update( 'heading_3_transform', 'h3', 'text-transform' );
-	webpress_typography_live_update( 'heading_3_line_height', 'h3', 'line-height', 'em' );
 
 	/**
 	 * Top bar width

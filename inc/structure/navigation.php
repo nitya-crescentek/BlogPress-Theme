@@ -172,7 +172,7 @@ if ( ! function_exists( 'webpress_menu_fallback' ) ) {
 				$args = array(
 					'sort_column' => 'menu_order',
 					'title_li' => '',
-					'walker' => new Blogpress_Page_Walker(),
+					'walker' => new WebPress_Page_Walker(),
 				);
 
 				wp_list_pages( $args );
@@ -275,14 +275,14 @@ if ( ! function_exists( 'webpress_add_navigation_before_left_sidebar' ) ) {
 	}
 }
 
-if ( ! class_exists( 'Blogpress_Page_Walker' ) && class_exists( 'Walker_Page' ) ) {
+if ( ! class_exists( 'WebPress_Page_Walker' ) && class_exists( 'Walker_Page' ) ) {
 	/**
 	 * Add current-menu-item to the current item if no theme location is set
 	 * This means we don't have to duplicate CSS properties for current_page_item and current-menu-item
 	 *
 	 * @since 1.0.0
 	 */
-	class Blogpress_Page_Walker extends Walker_Page {
+	class WebPress_Page_Walker extends Walker_Page {
 		/**
 		 * Start the element output.
 		 *

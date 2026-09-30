@@ -781,7 +781,7 @@ if ( ! function_exists( 'webpress_spacing_css' ) ) {
 }
 
 /**
- * Blogpresss any CSS that can't be cached (can change from page to page).
+ * Generates any CSS that can't be cached (can change from page to page).
  *
  * @since 1.0.0
  */

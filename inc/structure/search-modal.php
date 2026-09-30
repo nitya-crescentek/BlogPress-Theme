@@ -34,7 +34,7 @@ if ( ! function_exists( 'webpress_do_search_modal_trigger' ) ) {
 	 * Create the search modal trigger.
 	 */
 	function webpress_do_search_modal_trigger() {
-		if ( ! webpress_get_option( 'nav_search_modal' ) || 'svg' !== webpress_get_option( 'icons' ) ) {
+		if ( ! webpress_get_option( 'nav_search_modal' ) ) {
 			return;
 		}
 		?>
